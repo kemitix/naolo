@@ -15,6 +15,10 @@
     <artifactId>core</artifactId>
     <description>Business Use Cases</description>
 
+    <properties>
+        <pitest.skip>true</pitest.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>net.kemitix.naolo</groupId>

@@ -15,6 +15,10 @@
     <artifactId>entities</artifactId>
     <description>Core Business Objects</description>
 
+    <properties>
+        <pitest.skip>true</pitest.skip>
+    </properties>
+
     <dependencies>
         <!-- NONE! -->
     </dependencies>
