@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>net.kemitix</groupId>
+        <artifactId>kemitix-parent</artifactId>
+        <version>5.1.1</version>
+        <relativePath/>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.kemitix.naolo</groupId>
+    <artifactId>parent</artifactId>
+    <version>DEV-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <tiles-maven-plugin.version>2.11</tiles-maven-plugin.version>
+        <kemitix-tiles.version>0.9.0</kemitix-tiles.version>
+        <kemitix-checkstyle.version>4.1.1</kemitix-checkstyle.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.repaint.maven</groupId>
+                <artifactId>tiles-maven-plugin</artifactId>
+                <version>${tiles-maven-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <tiles>
+                        <tile>net.kemitix.tiles:all:${kemitix-tiles.version}</tile>
+                        <tile>net.kemitix.checkstyle:tile:${kemitix-checkstyle.version}</tile>
+                    </tiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
