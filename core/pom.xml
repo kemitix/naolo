@@ -12,11 +12,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>entities</artifactId>
-    <description>Core Business Objects</description>
+    <artifactId>core</artifactId>
+    <description>Business Use Cases</description>
 
     <dependencies>
-        <!-- NONE! -->
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>entities</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
