@@ -16,7 +16,7 @@
     <groupId>net.kemitix.naolo</groupId>
     <artifactId>naolo-root</artifactId>
     <version>DEV-SNAPSHOT</version>
-    <name>root</name>
+    <name>naolo</name>
 
     <properties>
         <maven.install.skip>true</maven.install.skip>
