@@ -10,6 +10,7 @@
         <module>entities</module>
         <module>core</module>
         <module>presenter-rest-spring</module>
+        <module>gateway-data-spring</module>
     </modules>
 
     <groupId>net.kemitix.naolo</groupId>
