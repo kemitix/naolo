@@ -161,7 +161,114 @@
 **** Pet Type
 
 
-*** Aggregate Roots
+*** Use Cases
 
-    Vets and Visit are the two Aggregate Roots. Pets and Owners can't exist in
-    the system without being associated with at least one Visit.
+    Each Use Case represents a single REST endpoint, from which another
+    application could provide a UI.
+
+**** Veterinarians
+
+***** List all Veterinarians
+
+      GET /vets
+
+***** Add a Veterinarian
+
+      POST /vet
+
+***** Get a Veterinarian
+
+      GET /vet/{id}
+
+***** Update a Veterinarian
+
+      POST /vet/{id}
+
+***** Remove a Veterinarian
+
+      DELETE /vet/{id}
+
+
+**** Visits
+
+***** List all Visits during period
+
+      GET /visits?from={date}&until={date}
+
+      Should include all fields from Visits, plus:
+
+****** Veterinarian.Name
+
+****** Pet.Name
+
+****** Pet.Type
+
+****** Owner.LastName
+
+****** Owner.Telephone
+
+
+***** Add a Visit
+
+      POST /visit
+
+      Should be able to create new Pets and Owners as needed. Should not be able
+      to create new Veterinarians.
+
+***** Get a Visit
+
+      GET /visit/{id}
+
+      Should return all fields for Visit, Veterinarian, Pet and Owner.
+
+***** Update a Visit
+
+      POST /visit/{id}
+
+      Should be able to update fields from Visit, Pet and Owner. Should not be
+      able to update fields for a Veterinarian, but can change which
+      Veterinarian the Visit is/was with.
+
+
+**** Owners
+
+***** Search for Owners by Surname
+
+      GET /owners?q={surname}
+
+      Should include all fields from Owner, plus a list of Pet.Name and Pet.Type
+      plus all the fields from Visit for the most recent Visit for each Pet.
+
+***** Get an Owner
+
+      GET /owner/{id}
+
+      Should include all the same fields as Searching for Owners by Surname.
+
+***** Update Owner
+
+      POST /owner/{id}
+
+      Should only be able to modify fields on an existing Owner.
+
+
+**** Pets
+
+***** Search for Pets by Owner
+
+      GET /pets?owner={ownerId}
+
+      Should include all fields from Pets and Owner, plus all fields from the
+      most recent Visit.
+
+***** Get a Pet
+      
+      GET /pet/{id}
+
+      Should include the same fields a Search for Pets by Owner.
+
+***** Update Pet
+
+      POST /pet/{id}
+
+      Should only be able to modify fields on an existing Pet.
