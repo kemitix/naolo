@@ -75,40 +75,40 @@
 *** Veterinarians
 
 
-    Id
-    Name
-    Speciality (optional)
+    * Id
+    * Name
+    * Speciality (optional)
 
 
 *** Owners
 
 
-    Id
-    First Name
-    Last Name
-    Street
-    City
-    Telephone Number
+    * Id
+    * First Name
+    * Last Name
+    * Street
+    * City
+    * Telephone Number
 
 
 *** Pets
 
 
-    Id
-    Name
-    Date-of-birth
-    Type (e.g. Dog, cat, etc)
-    Owner
+    * Id
+    * Name
+    * Date-of-birth
+    * Type (e.g. Dog, cat, etc)
+    * Owner
 
 
 *** Visits
 
 
-    Id
-    Pet
-    Veterinarian
-    Date
-    Description
+    * Id
+    * Pet
+    * Veterinarian
+    * Date
+    * Description
 
 
 ** Values
@@ -117,18 +117,18 @@
 *** Vet Specialisation
 
 
-    Radiology
-    Dentistry
-    Surgery
+    * Radiology
+    * Dentistry
+    * Surgery
 
 
 *** Pet Type
 
 
-    Dog
-    Cat
-    Snake
-    Other
+    * Dog
+    * Cat
+    * Snake
+    * Other
 
 
 ** Use Cases
@@ -168,11 +168,11 @@
 
      Should include all fields from Visits, plus:
 
-     Veterinarian.Name
-     Pet.Name
-     Pet.Type
-     Owner.LastName
-     Owner.Telephone
+     * Veterinarian.Name
+     * Pet.Name
+     * Pet.Type
+     * Owner.LastName
+     * Owner.Telephone
 
 
 **** Add a Visit
