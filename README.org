@@ -1,3 +1,79 @@
 * naolo
 
-Clean Architecture Example
+Clean Architecture Example of the Pet Clinic, providing alternative Presenters and Gateway implementations.
+
+** Module Dependencies
+
+   One of the most important aspects of a [[https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html][Clean Architecture]] is that your main
+   business code should not have a dependency upon any third-party code. e.g. a
+   Web Framework, or a Database. These aspects should be made available through
+   a plugin architecture. Your code provides a set of interfaces that these
+   plugins implement. The following diagrams show two different arrangements of
+   the project using different sets of plugins.
+
+*** Using Spring
+
+    A REST web interface is implemented using [[https://spring.io/projects/spring-hateoas][Spring HATEOAS]] and database
+    services using [[https://spring.io/projects/spring-data][Spring Data]]. These are provided as plugins using the
+    =presenter-rest-spring= and =gateway-data-spring= modules.
+
+    This configuration uses [[https://spring.io/projects/spring-boot][Spring Boot]] as its environment, via the
+    =run-spring-boot= module.
+
+   #+BEGIN_SRC dot :file doc/images/module-dependencies-spring.png
+     digraph naolo {
+       subgraph cluster_clean {
+         label="Clean";
+         "core" -> "entities";
+       }
+       subgraph cluster_presenter {
+         label="Presenter"
+         "presenter-rest-spring" -> "core";
+       }
+       subgraph cluster_gateway {
+         label="Gateway"
+         "gateway-data-spring" -> "core";
+       }
+       "presenter-rest-spring" -> "spring-rest";
+       "gateway-data-spring" -> "spring-data";
+       "run-spring-boot" -> "presenter-rest-spring";
+       "run-spring-boot" -> "gateway-data-spring";
+     }
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:doc/images/module-dependencies-spring.png]]
+
+*** Using JAX-RS and DeltaSpike Data
+
+    A REST web interface is implemented using [[https://jax-rs.github.io/apidocs/2.1/][JAX-RS]] and database services using
+    [[https://deltaspike.apache.org/documentation/data.html][DeltaSpike Data]]. These are provided as plugins using the
+    =presenter-rest-jaxrs= and =gateway-data-deltaspike= modules.
+
+    This configuration uses [[http://openwebbeans.apache.org/meecrowave/][Meecrowave]] as its environment, via the
+    =run-meecrowave= module.
+
+   #+BEGIN_SRC dot :file doc/images/module-dependencies-meecrowave.png
+     digraph naolo {
+       subgraph cluster_clean {
+         label="Clean";
+         "core" -> "entities";
+       }
+       subgraph cluster_presenter {
+         label="Presenter"
+         "presenter-rest-jaxrs" -> "core";
+       }
+       subgraph cluster_gateway {
+         label="Gateway"
+         "gateway-data-deltaspike" -> "core";
+       }
+       "presenter-rest-jaxrs" -> "jaxrs";
+       "gateway-data-deltaspike" -> "deltaspike-data";
+       "run-meecrowave" -> "presenter-rest-jaxrs";
+       "run-meecrowave" -> "gateway-data-deltaspike";
+     }
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:doc/images/module-dependencies-meecrowave.png]]
+
