@@ -1,0 +1,18 @@
+digraph meecrowave {
+    subgraph cluster_clean {
+    label="Clean";
+    "core" -> "entities";
+    }
+    subgraph cluster_presenter {
+    label="Presenter"
+    "presenter-rest-jaxrs" -> "core";
+    }
+    subgraph cluster_gateway {
+    label="Gateway"
+    "gateway-data-deltaspike" -> "core";
+    }
+    "presenter-rest-jaxrs" -> "jaxrs";
+    "gateway-data-deltaspike" -> "deltaspike-data";
+    "run-meecrowave" -> "presenter-rest-jaxrs";
+    "run-meecrowave" -> "gateway-data-deltaspike";
+}

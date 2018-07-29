@@ -20,29 +20,7 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
     This configuration uses [[https://spring.io/projects/spring-boot][Spring Boot]] as its environment, via the
     =run-spring-boot= module.
 
-   #+BEGIN_SRC dot :file doc/images/module-dependencies-spring.png
-     digraph naolo {
-       subgraph cluster_clean {
-         label="Clean";
-         "core" -> "entities";
-       }
-       subgraph cluster_presenter {
-         label="Presenter"
-         "presenter-rest-spring" -> "core";
-       }
-       subgraph cluster_gateway {
-         label="Gateway"
-         "gateway-data-spring" -> "core";
-       }
-       "presenter-rest-spring" -> "spring-rest";
-       "gateway-data-spring" -> "spring-data";
-       "run-spring-boot" -> "presenter-rest-spring";
-       "run-spring-boot" -> "gateway-data-spring";
-     }
-   #+END_SRC
-
-   #+RESULTS:
-   [[file:./doc/images/module-dependencies-spring.png]]
+   [[file:/kemitix/naolo/tree/master/doc/images/module-dependencies-spring.png]]
 
 *** Using JAX-RS and DeltaSpike Data
 
@@ -53,27 +31,6 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
     This configuration uses [[http://openwebbeans.apache.org/meecrowave/][Meecrowave]] as its environment, via the
     =run-meecrowave= module.
 
-   #+BEGIN_SRC dot :file doc/images/module-dependencies-meecrowave.png
-     digraph naolo {
-       subgraph cluster_clean {
-         label="Clean";
-         "core" -> "entities";
-       }
-       subgraph cluster_presenter {
-         label="Presenter"
-         "presenter-rest-jaxrs" -> "core";
-       }
-       subgraph cluster_gateway {
-         label="Gateway"
-         "gateway-data-deltaspike" -> "core";
-       }
-       "presenter-rest-jaxrs" -> "jaxrs";
-       "gateway-data-deltaspike" -> "deltaspike-data";
-       "run-meecrowave" -> "presenter-rest-jaxrs";
-       "run-meecrowave" -> "gateway-data-deltaspike";
-     }
-   #+END_SRC
-
    #+RESULTS:
-   [[file:./doc/images/module-dependencies-meecrowave.png]]
+   [[file:/kemitix/naolo/tree/master/doc/images/module-dependencies-meecrowave.png]]
 
