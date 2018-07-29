@@ -42,7 +42,7 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
    #+END_SRC
 
    #+RESULTS:
-   [[file:doc/images/module-dependencies-spring.png]]
+   [[file:./doc/images/module-dependencies-spring.png]]
 
 *** Using JAX-RS and DeltaSpike Data
 
@@ -75,5 +75,5 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
    #+END_SRC
 
    #+RESULTS:
-   [[file:doc/images/module-dependencies-meecrowave.png]]
+   [[file:./doc/images/module-dependencies-meecrowave.png]]
 
