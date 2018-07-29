@@ -11,6 +11,8 @@
         <module>core</module>
         <module>presenter-rest-spring</module>
         <module>gateway-data-spring</module>
+        <module>gateway-data-deltaspike</module>
+        <module>presenter-rest-jaxrs</module>
     </modules>
 
     <groupId>net.kemitix.naolo</groupId>
