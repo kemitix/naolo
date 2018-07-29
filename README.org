@@ -11,7 +11,13 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
    plugins implement. The following diagrams show two different arrangements of
    the project using different sets of plugins.
 
-*** Using Spring
+** Implementations
+
+   There are two implementations of the example provided, both based on the same
+   =core= and =entites= modules. Each provides a different implementation of the
+   =presenter-rest= and =gateway-data= plugins.
+
+*** Spring Boot, with Spring HATEOAS and Spring Data
 
     A REST web interface is implemented using [[https://spring.io/projects/spring-hateoas][Spring HATEOAS]] and database
     services using [[https://spring.io/projects/spring-data][Spring Data]]. These are provided as plugins using the
@@ -20,9 +26,15 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
     This configuration uses [[https://spring.io/projects/spring-boot][Spring Boot]] as its environment, via the
     =run-spring-boot= module.
 
-   [[file:/doc/images/module-dependencies-spring.png]]
+    [[file:/doc/images/module-dependencies-spring.png]]
 
-*** Using JAX-RS and DeltaSpike Data
+    The Spring version can be built and run from source using:
+
+    #+BEGIN_SRC bash
+    ./bin/spring-boot-run.sh
+    #+END_SRC
+
+*** Apache Meecrowave with JAX-RS and Apache DeltaSpike Data
 
     A REST web interface is implemented using [[https://jax-rs.github.io/apidocs/2.1/][JAX-RS]] and database services using
     [[https://deltaspike.apache.org/documentation/data.html][DeltaSpike Data]]. These are provided as plugins using the
@@ -31,5 +43,10 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
     This configuration uses [[http://openwebbeans.apache.org/meecrowave/][Meecrowave]] as its environment, via the
     =run-meecrowave= module.
 
-   [[file:/doc/images/module-dependencies-meecrowave.png]]
+    [[file:/doc/images/module-dependencies-meecrowave.png]]
 
+    The Meecrowave version can be built and run from source using:
+
+    #+BEGIN_SRC bash
+    ./bin/meecrowave-run.sh
+    #+END_SRC
