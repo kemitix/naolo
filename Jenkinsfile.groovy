@@ -9,6 +9,15 @@ pipeline {
             steps {
                 withMaven(maven: 'maven', jdk: 'JDK 1.8') {
                     sh "${mvn} clean compile checkstyle:checkstyle pmd:pmd test"
+                    // PMD to Jenkins
+                    pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+                }
+            }
+        }
+        stage('Report Coverage') {
+            when { expression { fileExists('target/site/jacoco/jacoco.xml') }}
+            steps {
+                withMaven(maven: 'maven', jdk: 'JDK 1.8') {
                     // Code Coverage to Codacy
                     sh "${mvn} jacoco:report com.gavinmogan:codacy-maven-plugin:coverage " +
                             "-DcoverageReportFile=target/site/jacoco/jacoco.xml " +
@@ -17,8 +26,13 @@ pipeline {
                             "-Dcommit=`git rev-parse HEAD`"
                     // Code Coverage to Jenkins
                     jacoco exclusionPattern: '**/*{Test|IT|Main|Application|Immutable}.class'
-                    // PMD to Jenkins
-                    pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+                }
+            }
+        }
+        stage('Report Checkstyle') {
+            when { expression { fileExists('**/target/checkstyle-result.xml')}}
+            steps {
+                withMaven(maven: 'maven', jdk: 'JDK 1.8') {
                     // Checkstyle to Jenkins
                     step([$class: 'hudson.plugins.checkstyle.CheckStylePublisher',
                           pattern: '**/target/checkstyle-result.xml',
