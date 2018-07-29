@@ -1,0 +1,19 @@
+digraph entities {
+
+    node [shape=record];
+
+    veterinarian:spec -> VetSpecialisation [taillabel="1",headlabel="*"];
+
+    pet:oid -> owner:id;
+
+    visit:pid -> pet:id;
+    pet:type -> PetType;
+
+    visit:vid -> veterinarian:id;
+
+    veterinarian [label="Verterinarian|{<id>id|name|<spec>specialisations}"]
+    visit [label="Visit|{<id>id|<pid>petId|<vid>vetId|date|description}"]
+    pet [label="Pet|{<id>id|name|date-of-birth|<type>type|<oid>ownerId}"]
+    owner [label="Owner|{<id>id|first name|last name|street|city|telephone}"]
+
+}

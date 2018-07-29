@@ -1,8 +1,11 @@
 * naolo
 
-Clean Architecture Example of the Pet Clinic, providing alternative Presenters and Gateway implementations.
+  Clean Architecture Example of the Pet Clinic, providing alternative Presenters and Gateway implementations.
 
-** Module Dependencies
+  * The original [[https://github.com/spring-projects/spring-petclinic][Spring PetClinic Sample Application]], which this project takes as its inspiration.
+
+
+** Clean Architecture and Plugins
 
    One of the most important aspects of a [[https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html][Clean Architecture]] is that your main
    business code should not have a dependency upon any third-party code. e.g. a
@@ -11,11 +14,13 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
    plugins implement. The following diagrams show two different arrangements of
    the project using different sets of plugins.
 
+
 ** Implementations
 
    There are two implementations of the example provided, both based on the same
    =core= and =entites= modules. Each provides a different implementation of the
    =presenter-rest= and =gateway-data= plugins.
+
 
 *** Spring Boot, with Spring HATEOAS and Spring Data
 
@@ -34,6 +39,7 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
     ./bin/spring-boot-run.sh
     #+END_SRC
 
+
 *** Apache Meecrowave with JAX-RS and Apache DeltaSpike Data
 
     A REST web interface is implemented using [[https://jax-rs.github.io/apidocs/2.1/][JAX-RS]] and database services using
@@ -50,3 +56,112 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
     #+BEGIN_SRC bash
     ./bin/meecrowave-run.sh
     #+END_SRC
+
+
+** Pet Clinic
+
+   Rather that attempt to implement the full website from the original example,
+   I will be focusing on providing the services as a REST endpoint, upon which
+   another application/service could be used to provide the website.
+
+
+*** Entities
+
+   The PetClinic has the following domain:
+
+   [[file:/doc/images/entities.png]]
+
+
+**** Veterinarians
+
+
+***** Id
+
+
+***** Name
+
+
+***** Speciality (optional)
+
+
+**** Owners
+
+
+***** Id
+
+
+***** First Name
+
+
+***** Last Name
+
+
+***** Street
+
+
+***** City
+
+
+***** Telephone Number
+
+
+**** Pets
+
+
+***** Id
+
+
+***** Name
+
+
+***** Date-of-birth
+
+
+***** Type
+
+      Dog, cat, etc
+
+
+***** Owner
+
+
+**** Visits
+
+
+***** Id
+
+
+***** Pet
+
+
+***** Veterinarian
+
+
+***** Date
+
+
+***** Description
+
+
+*** Values
+
+
+**** Vet Specialisation
+
+
+***** Radiology
+
+
+***** Dentistry
+
+
+***** Surgery
+
+
+**** Pet Type
+
+
+*** Aggregate Roots
+
+    Vets and Visit are the two Aggregate Roots. Pets and Owners can't exist in
+    the system without being associated with at least one Visit.
