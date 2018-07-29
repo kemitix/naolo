@@ -5,270 +5,237 @@
   * The original [[https://github.com/spring-projects/spring-petclinic][Spring PetClinic Sample Application]], which this project takes as its inspiration.
 
 
-** Clean Architecture and Plugins
+* Clean Architecture and Plugins
 
-   One of the most important aspects of a [[https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html][Clean Architecture]] is that your main
-   business code should not have a dependency upon any third-party code. e.g. a
-   Web Framework, or a Database. These aspects should be made available through
-   a plugin architecture. Your code provides a set of interfaces that these
-   plugins implement. The following diagrams show two different arrangements of
-   the project using different sets of plugins.
+  One of the most important aspects of a [[https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html][Clean Architecture]] is that your main
+  business code should not have a dependency upon any third-party code. e.g. a
+  Web Framework, or a Database. These aspects should be made available through a
+  plugin architecture. Your code provides a set of interfaces that these plugins
+  implement. The following diagrams show two different arrangements of the
+  project using different sets of plugins.
 
 
-** Implementations
+* Implementations
 
-   There are two implementations of the example provided, both based on the same
-   =core= and =entites= modules. Each provides a different implementation of the
-   =presenter-rest= and =gateway-data= plugins.
+  There are two implementations of the example provided, both based on the same
+  =core= and =entites= modules. Each provides a different implementation of the
+  =presenter-rest= and =gateway-data= plugins.
 
 
-*** Spring Boot, with Spring HATEOAS and Spring Data
+** Spring Boot, with Spring HATEOAS and Spring Data
 
-    A REST web interface is implemented using [[https://spring.io/projects/spring-hateoas][Spring HATEOAS]] and database
-    services using [[https://spring.io/projects/spring-data][Spring Data]]. These are provided as plugins using the
-    =presenter-rest-spring= and =gateway-data-spring= modules.
+   A REST web interface is implemented using [[https://spring.io/projects/spring-hateoas][Spring HATEOAS]] and database
+   services using [[https://spring.io/projects/spring-data][Spring Data]]. These are provided as plugins using the
+   =presenter-rest-spring= and =gateway-data-spring= modules.
 
-    This configuration uses [[https://spring.io/projects/spring-boot][Spring Boot]] as its environment, via the
-    =run-spring-boot= module.
+   This configuration uses [[https://spring.io/projects/spring-boot][Spring Boot]] as its environment, via the
+   =run-spring-boot= module.
 
-    [[file:/doc/images/module-dependencies-spring.png]]
+   [[file:/doc/images/module-dependencies-spring.png]]
 
-    The Spring version can be built and run from source using:
+   The Spring version can be built and run from source using:
 
-    #+BEGIN_SRC bash
-    ./bin/spring-boot-run.sh
-    #+END_SRC
+   #+BEGIN_SRC bash
+   ./bin/spring-boot-run.sh
+   #+END_SRC
 
 
-*** Apache Meecrowave with JAX-RS and Apache DeltaSpike Data
+** Apache Meecrowave with JAX-RS and Apache DeltaSpike Data
 
-    A REST web interface is implemented using [[https://jax-rs.github.io/apidocs/2.1/][JAX-RS]] and database services using
-    [[https://deltaspike.apache.org/documentation/data.html][DeltaSpike Data]]. These are provided as plugins using the
-    =presenter-rest-jaxrs= and =gateway-data-deltaspike= modules.
+   A REST web interface is implemented using [[https://jax-rs.github.io/apidocs/2.1/][JAX-RS]] and database services using
+   [[https://deltaspike.apache.org/documentation/data.html][DeltaSpike Data]]. These are provided as plugins using the
+   =presenter-rest-jaxrs= and =gateway-data-deltaspike= modules.
 
-    This configuration uses [[http://openwebbeans.apache.org/meecrowave/][Meecrowave]] as its environment, via the
-    =run-meecrowave= module.
+   This configuration uses [[http://openwebbeans.apache.org/meecrowave/][Meecrowave]] as its environment, via the
+   =run-meecrowave= module.
 
-    [[file:/doc/images/module-dependencies-meecrowave.png]]
+   [[file:/doc/images/module-dependencies-meecrowave.png]]
 
-    The Meecrowave version can be built and run from source using:
+   The Meecrowave version can be built and run from source using:
 
-    #+BEGIN_SRC bash
-    ./bin/meecrowave-run.sh
-    #+END_SRC
+   #+BEGIN_SRC bash
+   ./bin/meecrowave-run.sh
+   #+END_SRC
 
 
-** Pet Clinic
+* Pet Clinic
 
-   Rather that attempt to implement the full website from the original example,
-   I will be focusing on providing the services as a REST endpoint, upon which
-   another application/service could be used to provide the website.
+  Rather that attempt to implement the full website from the original example, I
+  will be focusing on providing the services as a REST endpoint, upon which
+  another application/service could be used to provide the website.
 
 
-*** Entities
+** Entities
 
-   The PetClinic has the following domain:
+  The PetClinic has the following domain:
 
-   [[file:/doc/images/entities.png]]
+  [[file:/doc/images/entities.png]]
 
 
-**** Veterinarians
+*** Veterinarians
 
 
-***** Id
+    Id
+    Name
+    Speciality (optional)
 
 
-***** Name
+*** Owners
 
 
-***** Speciality (optional)
+    Id
+    First Name
+    Last Name
+    Street
+    City
+    Telephone Number
 
 
-**** Owners
+*** Pets
 
 
-***** Id
+    Id
+    Name
+    Date-of-birth
+    Type (e.g. Dog, cat, etc)
+    Owner
 
 
-***** First Name
+*** Visits
 
 
-***** Last Name
+    Id
+    Pet
+    Veterinarian
+    Date
+    Description
 
 
-***** Street
+** Values
 
 
-***** City
+*** Vet Specialisation
 
 
-***** Telephone Number
+    Radiology
+    Dentistry
+    Surgery
 
 
-**** Pets
+*** Pet Type
 
 
-***** Id
+    Dog
+    Cat
+    Snake
+    Other
 
 
-***** Name
+** Use Cases
 
+   Each Use Case represents a single REST endpoint, from which another
+   application could provide a UI.
 
-***** Date-of-birth
 
+*** Veterinarians
 
-***** Type
+**** List all Veterinarians
 
-      Dog, cat, etc
+     =GET /vets=
 
+**** Add a Veterinarian
 
-***** Owner
+     =POST /vet=
 
+**** Get a Veterinarian
 
-**** Visits
+     =GET /vet/{id}=
 
+**** Update a Veterinarian
 
-***** Id
+     =POST /vet/{id}=
 
+**** Remove a Veterinarian
 
-***** Pet
+     =DELETE /vet/{id}=
 
 
-***** Veterinarian
+*** Visits
 
+**** List all Visits during period
 
-***** Date
+     =GET /visits?from={date}&until={date}=
 
+     Should include all fields from Visits, plus:
 
-***** Description
+     Veterinarian.Name
+     Pet.Name
+     Pet.Type
+     Owner.LastName
+     Owner.Telephone
 
 
-*** Values
+**** Add a Visit
 
+     =POST /visit=
 
-**** Vet Specialisation
+     Should be able to create new Pets and Owners as needed. Should not be able
+     to create new Veterinarians.
 
+**** Get a Visit
 
-***** Radiology
+     =GET /visit/{id}=
 
+     Should return all fields for Visit, Veterinarian, Pet and Owner.
 
-***** Dentistry
+**** Update a Visit
 
+     =POST /visit/{id}=
 
-***** Surgery
+     Should be able to update fields from Visit, Pet and Owner. Should not be
+     able to update fields for a Veterinarian, but can change which Veterinarian
+     the Visit is/was with.
 
 
-**** Pet Type
+*** Owners
 
+**** Search for Owners by Surname
 
-*** Use Cases
+     =GET /owners?q={surname}=
 
-    Each Use Case represents a single REST endpoint, from which another
-    application could provide a UI.
+     Should include all fields from Owner, plus a list of Pet.Name and Pet.Type
+     plus all the fields from Visit for the most recent Visit for each Pet.
 
-**** Veterinarians
+**** Get an Owner
 
-***** List all Veterinarians
+     =GET /owner/{id}=
 
-      GET /vets
+     Should include all the same fields as Searching for Owners by Surname.
 
-***** Add a Veterinarian
+**** Update Owner
 
-      POST /vet
+     =POST /owner/{id}=
 
-***** Get a Veterinarian
+     Should only be able to modify fields on an existing Owner.
 
-      GET /vet/{id}
 
-***** Update a Veterinarian
+*** Pets
 
-      POST /vet/{id}
+**** Search for Pets by Owner
 
-***** Remove a Veterinarian
+     =GET /pets?owner={ownerId}=
 
-      DELETE /vet/{id}
+     Should include all fields from Pets and Owner, plus all fields from the
+     most recent Visit.
 
-
-**** Visits
-
-***** List all Visits during period
-
-      GET /visits?from={date}&until={date}
-
-      Should include all fields from Visits, plus:
-
-****** Veterinarian.Name
-
-****** Pet.Name
-
-****** Pet.Type
-
-****** Owner.LastName
-
-****** Owner.Telephone
-
-
-***** Add a Visit
-
-      POST /visit
-
-      Should be able to create new Pets and Owners as needed. Should not be able
-      to create new Veterinarians.
-
-***** Get a Visit
-
-      GET /visit/{id}
-
-      Should return all fields for Visit, Veterinarian, Pet and Owner.
-
-***** Update a Visit
-
-      POST /visit/{id}
-
-      Should be able to update fields from Visit, Pet and Owner. Should not be
-      able to update fields for a Veterinarian, but can change which
-      Veterinarian the Visit is/was with.
-
-
-**** Owners
-
-***** Search for Owners by Surname
-
-      GET /owners?q={surname}
-
-      Should include all fields from Owner, plus a list of Pet.Name and Pet.Type
-      plus all the fields from Visit for the most recent Visit for each Pet.
-
-***** Get an Owner
-
-      GET /owner/{id}
-
-      Should include all the same fields as Searching for Owners by Surname.
-
-***** Update Owner
-
-      POST /owner/{id}
-
-      Should only be able to modify fields on an existing Owner.
-
-
-**** Pets
-
-***** Search for Pets by Owner
-
-      GET /pets?owner={ownerId}
-
-      Should include all fields from Pets and Owner, plus all fields from the
-      most recent Visit.
-
-***** Get a Pet
+**** Get a Pet
       
-      GET /pet/{id}
+     =GET /pet/{id}=
 
-      Should include the same fields a Search for Pets by Owner.
+     Should include the same fields a Search for Pets by Owner.
 
-***** Update Pet
+**** Update Pet
 
-      POST /pet/{id}
+     =POST /pet/{id}=
 
-      Should only be able to modify fields on an existing Pet.
+     Should only be able to modify fields on an existing Pet.
