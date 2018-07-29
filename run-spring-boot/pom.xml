@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>net.kemitix.naolo</groupId>
+        <artifactId>parent</artifactId>
+        <version>DEV-SNAPSHOT</version>
+        <relativePath>../parent</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>run-spring-boot</artifactId>
+    <description>Run Application using Spring Boot</description>
+
+    <properties>
+        <pitest.skip>true</pitest.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>presenter-rest-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>gateway-data-spring</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
