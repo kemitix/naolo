@@ -20,7 +20,7 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
     This configuration uses [[https://spring.io/projects/spring-boot][Spring Boot]] as its environment, via the
     =run-spring-boot= module.
 
-   [[file:/doc/images/module-dependencies-meecrowave.png]]
+   [[file:/doc/images/module-dependencies-spring.png]]
 
 *** Using JAX-RS and DeltaSpike Data
 
@@ -31,6 +31,5 @@ Clean Architecture Example of the Pet Clinic, providing alternative Presenters a
     This configuration uses [[http://openwebbeans.apache.org/meecrowave/][Meecrowave]] as its environment, via the
     =run-meecrowave= module.
 
-   #+RESULTS:
    [[file:/doc/images/module-dependencies-meecrowave.png]]
 
