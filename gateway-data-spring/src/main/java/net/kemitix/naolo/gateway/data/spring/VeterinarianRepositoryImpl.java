@@ -22,11 +22,13 @@
 package net.kemitix.naolo.gateway.data.spring;
 
 import net.kemitix.naolo.core.VeterinarianRepository;
+import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -57,7 +59,7 @@ class VeterinarianRepositoryImpl implements VeterinarianRepository {
 
     @Override
     public Stream<Veterinarian> findAll() {
-        return StreamSupport.stream(repository.findAll().spliterator(), false)
+        return repository.findAll().stream()
                 .map(fromJPA::convert);
     }
 
@@ -73,6 +75,18 @@ class VeterinarianRepositoryImpl implements VeterinarianRepository {
                     source.getId(),
                     source.getName(),
                     source.getSpecialisations());
+        }
+    }
+
+    @Component
+    static class ToJPA implements Converter<Veterinarian, VeterinarianJPA> {
+        @Override
+        public VeterinarianJPA convert(final Veterinarian source) {
+            return new VeterinarianJPA(
+                    source.getId(),
+                    source.getName(),
+                    source.getSpecialisations().stream()
+                            .map(Enum::toString).collect(Collectors.toSet()));
         }
     }
 }

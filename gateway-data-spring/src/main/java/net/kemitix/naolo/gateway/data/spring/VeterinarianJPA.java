@@ -24,6 +24,7 @@ package net.kemitix.naolo.gateway.data.spring;
 import net.kemitix.naolo.entities.VetSpecialisation;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -71,5 +72,20 @@ class VeterinarianJPA {
         return specialisations.stream()
                 .map(VetSpecialisation::valueOf)
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VeterinarianJPA that = (VeterinarianJPA) o;
+        return id == that.id &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(specialisations, that.specialisations);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, specialisations);
     }
 }
