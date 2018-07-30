@@ -44,7 +44,4 @@ public enum PetType {
         this.value = value;
     }
 
-    //public String getValue() {
-    //    return value;
-    //}
 }
