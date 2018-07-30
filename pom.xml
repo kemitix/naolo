@@ -15,6 +15,7 @@
         <module>presenter-rest-jaxrs</module>
         <module>run-spring-boot</module>
         <module>run-meecrowave</module>
+        <module>test</module>
     </modules>
 
     <groupId>net.kemitix.naolo</groupId>

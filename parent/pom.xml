@@ -62,6 +62,11 @@
                 <artifactId>gateway-data-deltaspike</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>net.kemitix.naolo</groupId>
+                <artifactId>test</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- testing -->
             <dependency>
