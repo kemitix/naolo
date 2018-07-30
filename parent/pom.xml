@@ -22,6 +22,8 @@
         <kemitix-tiles.version>0.9.0</kemitix-tiles.version>
         <kemitix-checkstyle.version>4.1.1</kemitix-checkstyle.version>
 
+        <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
+
         <junit.version>5.2.0</junit.version>
         <assertj.version>3.10.0</assertj.version>
         <mockito.version>2.20.1</mockito.version>
