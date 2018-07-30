@@ -21,7 +21,7 @@
 
 package net.kemitix.naolo.entities;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 /**
  * A Visit by a Pet with a Veterinarian.
@@ -33,28 +33,41 @@ public final class Visit {
     private final long id;
     private final long petId;
     private final long vetId;
-    private final LocalDateTime dateTime;
+    private final ZonedDateTime dateTime;
     private final String description;
 
+    private Visit(
+            final long id,
+            final long petId,
+            final long vetId,
+            final ZonedDateTime dateTime,
+            final String description
+    ) {
+        this.id = id;
+        this.petId = petId;
+        this.vetId = vetId;
+        this.dateTime = dateTime;
+        this.description = description;
+    }
+
     /**
-     * Constructor.
+     * Create a new Visit object.
      *
      * @param id the Visit ID
      * @param petId the Pet ID
      * @param vetId the Veterinarian ID
      * @param dateTime the Date and Time of the Visit
      * @param description the Description
+     * @return a new Visit
      */
-    public Visit(final long id,
-                 final long petId,
-                 final long vetId,
-                 final LocalDateTime dateTime,
-                 final String description) {
-        this.id = id;
-        this.petId = petId;
-        this.vetId = vetId;
-        this.dateTime = dateTime;
-        this.description = description;
+    public static Visit create(
+            final long id,
+            final long petId,
+            final long vetId,
+            final ZonedDateTime dateTime,
+            final String description
+    ) {
+        return new Visit(id, petId, vetId, dateTime, description);
     }
 
     public long getId() {
@@ -69,7 +82,7 @@ public final class Visit {
         return vetId;
     }
 
-    public LocalDateTime getDateTime() {
+    public ZonedDateTime getDateTime() {
         return dateTime;
     }
 

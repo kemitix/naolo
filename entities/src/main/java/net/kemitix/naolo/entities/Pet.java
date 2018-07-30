@@ -21,7 +21,7 @@
 
 package net.kemitix.naolo.entities;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 /**
  * The Pet.
@@ -32,29 +32,42 @@ public final class Pet {
 
     private final long id;
     private final String name;
-    private final LocalDateTime dateOfBirth;
+    private final ZonedDateTime dateOfBirth;
     private final PetType type;
     private final long ownerId;
 
+    private Pet(
+            final long id,
+            final String name,
+            final ZonedDateTime dateOfBirth,
+            final PetType type,
+            final long ownerId
+    ) {
+        this.id = id;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.type = type;
+        this.ownerId = ownerId;
+    }
+
     /**
-     * Constructor.
+     * Creates a new Pet object.
      *
      * @param id the Pet ID
      * @param name the Pets name
      * @param dateOfBirth the Pets Date of Birth
      * @param type the type of Pet
      * @param ownerId the Owners ID
+     * @return a new Pet
      */
-    public Pet(final long id,
-               final String name,
-               final LocalDateTime dateOfBirth,
-               final PetType type,
-               final long ownerId) {
-        this.id = id;
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.type = type;
-        this.ownerId = ownerId;
+    public static Pet create(
+            final long id,
+            final String name,
+            final ZonedDateTime dateOfBirth,
+            final PetType type,
+            final long ownerId
+    ) {
+        return new Pet(id, name, dateOfBirth, type, ownerId);
     }
 
     public long getId() {
@@ -65,7 +78,7 @@ public final class Pet {
         return name;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public ZonedDateTime getDateOfBirth() {
         return dateOfBirth;
     }
 

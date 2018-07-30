@@ -29,25 +29,34 @@ import java.util.Set;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-public final class Veterinarians {
+public final class Veterinarian {
 
     private final long id;
     private final String name;
     private final Set<VetSpecialisation> specialisations;
 
+    private Veterinarian(final long id,
+                        final String name,
+                        final Set<VetSpecialisation> specialisations) {
+        this.id = id;
+        this.name = name;
+        this.specialisations = new HashSet<>(specialisations);
+    }
+
     /**
-     * Constructor.
+     * Create a new Veterinarian object.
      *
      * @param id the Veterinarian ID
      * @param name the Veterinarians Name
      * @param specialisations the Specialisations of the Veterinarian
+     * @return a new Veterinarian
      */
-    public Veterinarians(final long id,
-                         final String name,
-                         final Set<VetSpecialisation> specialisations) {
-        this.id = id;
-        this.name = name;
-        this.specialisations = new HashSet<>(specialisations);
+    public static Veterinarian create(
+            final long id,
+            final String name,
+            final Set<VetSpecialisation> specialisations
+    ) {
+        return new Veterinarian(id, name, specialisations);
     }
 
     public long getId() {

@@ -35,8 +35,24 @@ public final class Owner {
     private final String city;
     private final String telephone;
 
+    private Owner(
+            final long id,
+            final String firstName,
+            final String lastName,
+            final String street,
+            final String city,
+            final String telephone
+    ) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.street = street;
+        this.city = city;
+        this.telephone = telephone;
+    }
+
     /**
-     * Constructor.
+     * Create a new Owner object.
      *
      * @param id the Owner ID
      * @param firstName the First Name
@@ -44,19 +60,17 @@ public final class Owner {
      * @param street the Street address
      * @param city the City address
      * @param telephone the Telephone number
+     * @return a new Owner
      */
-    public Owner(final long id,
-                 final String firstName,
-                 final String lastName,
-                 final String street,
-                 final String city,
-                 final String telephone) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.street = street;
-        this.city = city;
-        this.telephone = telephone;
+    public static Owner create(
+            final Long id,
+            final String firstName,
+            final String lastName,
+            final String street,
+            final String city,
+            final String telephone
+    ) {
+        return new Owner(id, firstName, lastName, street, city, telephone);
     }
 
     public long getId() {
