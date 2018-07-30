@@ -15,15 +15,8 @@ pipeline {
             }
         }
         stage('Report Coverage') {
-            when { expression { fileExists('target/site/jacoco/jacoco.xml') }}
             steps {
                 withMaven(maven: 'maven', jdk: 'JDK 1.8') {
-                    // Code Coverage to Codacy
-                    sh "${mvn} jacoco:report com.gavinmogan:codacy-maven-plugin:coverage " +
-                            "-DcoverageReportFile=target/site/jacoco/jacoco.xml " +
-                            "-DprojectToken=`$JENKINS_HOME/codacy/token` " +
-                            "-DapiToken=`$JENKINS_HOME/codacy/apitoken` " +
-                            "-Dcommit=`git rev-parse HEAD`"
                     // Code Coverage to Jenkins
                     jacoco exclusionPattern: '**/*{Test|IT|Main|Application|Immutable}.class'
                 }
