@@ -21,29 +21,28 @@
 
 package net.kemitix.naolo.run.spring;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import net.kemitix.naolo.core.VeterinarianRepository;
+import net.kemitix.naolo.core.VeterinariansListAll;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * Main class.
+ * Configure UseCases for Spring.
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@EnableJpaRepositories(basePackages = "net.kemitix.naolo.gateway.data")
-@EntityScan("net.kemitix.naolo.gateway.data")
-@SpringBootApplication(scanBasePackages = "net.kemitix.naolo")
-@SuppressWarnings("hideutilityclassconstructor")
-public class Main {
+@Configuration
+class UseCases {
 
     /**
-     * Main method.
+     * UseCase for List All Veterinarians.
      *
-     * @param args command line arguments
+     * @param veterinarianRepository the Veterinarian Repository
+     * @return the UseCase
      */
-    public static void main(final String[] args) {
-        SpringApplication.run(Main.class, args);
+    @Bean
+    VeterinariansListAll veterinariansListAll(final VeterinarianRepository veterinarianRepository) {
+        return VeterinariansListAll.create(veterinarianRepository);
     }
 
 }
