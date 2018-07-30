@@ -2,7 +2,6 @@ package net.kemitix.naolo.entities;
 
 import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
-import net.jqwik.api.Provide;
 
 import java.time.Instant;
 import java.time.ZoneId;

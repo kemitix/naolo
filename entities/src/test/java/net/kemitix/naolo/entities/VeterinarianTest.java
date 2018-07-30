@@ -2,7 +2,6 @@ package net.kemitix.naolo.entities;
 
 import net.jqwik.api.*;
 import org.assertj.core.api.WithAssertions;
-import org.junit.jupiter.api.Disabled;
 
 import java.util.Set;
 
