@@ -8,7 +8,6 @@ import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.test.StreamZipper;
 import org.assertj.core.api.WithAssertions;
-import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Set;
