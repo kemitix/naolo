@@ -1,4 +1,4 @@
-.jqwik-database
+*.jqwik-database*
 
 *.iml
 .idea/
