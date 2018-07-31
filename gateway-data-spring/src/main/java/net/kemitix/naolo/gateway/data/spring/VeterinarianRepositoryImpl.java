@@ -30,7 +30,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 /**
  * Spring Gateway Repository for Veterinarians.
@@ -74,10 +73,15 @@ class VeterinarianRepositoryImpl implements VeterinarianRepository {
             return Veterinarian.create(
                     source.getId(),
                     source.getName(),
-                    source.getSpecialisations());
+                    source.getSpecialisations().stream()
+                            .map(VetSpecialisation::valueOf)
+                            .collect(Collectors.toSet()));
         }
     }
 
+    /**
+     * Converts core entity type to VeterinarianJPA.
+     */
     @Component
     static class ToJPA implements Converter<Veterinarian, VeterinarianJPA> {
         @Override
@@ -86,7 +90,8 @@ class VeterinarianRepositoryImpl implements VeterinarianRepository {
                     source.getId(),
                     source.getName(),
                     source.getSpecialisations().stream()
-                            .map(Enum::toString).collect(Collectors.toSet()));
+                            .map(Enum::toString)
+                            .collect(Collectors.toSet()));
         }
     }
 }

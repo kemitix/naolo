@@ -21,12 +21,15 @@
 
 package net.kemitix.naolo.gateway.data.spring;
 
-import net.kemitix.naolo.entities.VetSpecialisation;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * JPA Entity for Veterinarian.
@@ -34,58 +37,17 @@ import java.util.stream.Collectors;
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
 @Entity
+@Getter
+@RequiredArgsConstructor
 class VeterinarianJPA {
 
     @Id
     @GeneratedValue
-    private final long id;
+    private final Long id;
+    @NonNull
     private final String name;
+    @NonNull
     @ElementCollection
     private final Set<String> specialisations;
 
-    /**
-     * Constructor.
-     *
-     * @param id the Veterinarian ID
-     * @param name the Veterinarian Name
-     * @param specialisations the Veterinarians Specialisations
-     */
-    VeterinarianJPA(
-            final long id,
-            final String name,
-            final Set<String> specialisations
-    ) {
-        this.id = id;
-        this.name = name;
-        this.specialisations = specialisations;
-    }
-
-    long getId() {
-        return id;
-    }
-
-    String getName() {
-        return name;
-    }
-
-    Set<VetSpecialisation> getSpecialisations() {
-        return specialisations.stream()
-                .map(VetSpecialisation::valueOf)
-                .collect(Collectors.toSet());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        VeterinarianJPA that = (VeterinarianJPA) o;
-        return id == that.id &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(specialisations, that.specialisations);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, specialisations);
-    }
 }
