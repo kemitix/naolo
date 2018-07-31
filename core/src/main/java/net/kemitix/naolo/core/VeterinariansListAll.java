@@ -31,7 +31,8 @@ import java.util.stream.Collectors;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-public final class VeterinariansListAll
+@SuppressWarnings("finalclass")
+public class VeterinariansListAll
         implements UseCase<VeterinariansListAll.Request, VeterinariansListAll.Response> {
 
     private static final Request REQUEST = new Request() {
@@ -39,7 +40,12 @@ public final class VeterinariansListAll
 
     private final VeterinarianRepository repository;
 
-    private VeterinariansListAll(final VeterinarianRepository repository) {
+    /**
+     * Constructor.
+     *
+     * @param repository the Veterinarian Repository
+     */
+    public VeterinariansListAll(final VeterinarianRepository repository) {
         this.repository = repository;
     }
 

@@ -24,15 +24,26 @@
 
         <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
 
+        <lombok.version>1.18.0</lombok.version>
+        <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
+        <deltaspike.version>1.8.2</deltaspike.version>
+        <javax.persistence.version>2.2</javax.persistence.version>
+        <hibernate.version>5.3.4.Final</hibernate.version>
+        <h2.version>1.4.197</h2.version>
+        <meecrowave.version>1.2.3</meecrowave.version>
+
         <junit.version>5.2.0</junit.version>
         <assertj.version>3.10.0</assertj.version>
         <mockito.version>2.20.1</mockito.version>
         <jqwik.version>0.8.14</jqwik.version>
-        <lombok.version>1.18.0</lombok.version>
+        <log4j.version>2.11.1</log4j.version>
     </properties>
 
     <dependencyManagement>
+
         <dependencies>
+
+            <!-- naolo -->
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
                 <artifactId>entities</artifactId>
@@ -69,18 +80,63 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
 
-            <!-- testing -->
+            <!-- logging -->
             <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>${assertj.version}</version>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-web</artifactId>
+                <version>${log4j.version}</version>
             </dependency>
+
+            <!-- Meecrowave -->
+            <dependency>
+                <groupId>org.apache.meecrowave</groupId>
+                <artifactId>meecrowave-specs-api</artifactId>
+                <version>${meecrowave.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.meecrowave</groupId>
+                <artifactId>meecrowave-core</artifactId>
+                <version>${meecrowave.version}</version>
+            </dependency>
+
+            <!-- DeltaSpike -->
+            <dependency>
+                <groupId>org.apache.deltaspike.distribution</groupId>
+                <artifactId>distributions-bom</artifactId>
+                <version>${deltaspike.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- JPA -->
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>javax.persistence-api</artifactId>
+                <version>${javax.persistence.version}</version>
+            </dependency>
+
+            <!-- Hibernate -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <!-- H2 Database -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+            </dependency>
+
+            <!-- testing -->
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -93,7 +149,11 @@
                 <artifactId>mockito-junit-jupiter</artifactId>
                 <version>${mockito.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+            </dependency>
             <dependency>
                 <groupId>net.jqwik</groupId>
                 <artifactId>jqwik</artifactId>
@@ -101,6 +161,7 @@
             </dependency>
 
         </dependencies>
+
     </dependencyManagement>
 
     <build>

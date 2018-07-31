@@ -9,7 +9,6 @@ import net.kemitix.naolo.core.VeterinariansListAll;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import org.assertj.core.api.WithAssertions;
-import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

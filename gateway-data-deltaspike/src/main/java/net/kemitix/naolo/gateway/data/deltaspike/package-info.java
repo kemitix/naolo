@@ -19,40 +19,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.presenter.rest.spring;
-
-import lombok.RequiredArgsConstructor;
-import net.kemitix.naolo.core.VeterinariansListAll;
-import net.kemitix.naolo.entities.Veterinarian;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-
-import static net.kemitix.naolo.core.VeterinariansListAll.request;
-
-/**
- * REST Controller for Veterinarians.
- *
- * @author Paul Campbell (pcampbell@kemitix.net)
- */
-@RestController
-@RequestMapping("/vets")
-@RequiredArgsConstructor
-public final class VeterinariansController {
-
-    private final VeterinariansListAll listAll;
-
-    /**
-     * List all Veterinarians endpoint.
-     *
-     * @return the respone
-     */
-    @GetMapping
-    ResponseEntity<List<Veterinarian>> allVets() {
-        return ResponseEntity.ok(listAll.invoke(request()).getAllVeterinarians());
-    }
-
-}
+package net.kemitix.naolo.gateway.data.deltaspike;

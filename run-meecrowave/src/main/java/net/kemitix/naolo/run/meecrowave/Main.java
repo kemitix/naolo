@@ -39,8 +39,12 @@ public class Main {
      * @param args command line arguments
      */
     public static void main(final String[] args) {
-        try (Meecrowave meecrowave = new Meecrowave().bake()) {
+        final Meecrowave.Builder builder = new Meecrowave.Builder()
+                .withPackages("net.kemitix.naolo")
+                .excludePackages("net.kemitix.core");
+        try (Meecrowave meecrowave = new Meecrowave(builder).bake()) {
             new Scanner(System.in).nextLine();
         }
     }
+
 }

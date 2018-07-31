@@ -20,10 +20,64 @@
     </properties>
 
     <dependencies>
+
+        <!-- naolo -->
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>core</artifactId>
         </dependency>
+
+        <!-- meecrowave -->
+        <dependency>
+            <groupId>org.apache.meecrowave</groupId>
+            <artifactId>meecrowave-specs-api</artifactId>
+        </dependency>
+
+        <!-- deltaspike -->
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-data-module-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-jpa-module-api</artifactId>
+        </dependency>
+
+        <!-- hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
+        <!-- JPA -->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+        </dependency>
+
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- logging -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+        </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

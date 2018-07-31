@@ -19,40 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.presenter.rest.spring;
+package net.kemitix.naolo.run.meecrowave;
 
-import lombok.RequiredArgsConstructor;
+import net.kemitix.naolo.core.VeterinarianRepository;
 import net.kemitix.naolo.core.VeterinariansListAll;
-import net.kemitix.naolo.entities.Veterinarian;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-import static net.kemitix.naolo.core.VeterinariansListAll.request;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
 
 /**
- * REST Controller for Veterinarians.
+ * Configure UseCases for Meecrowave.
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@RestController
-@RequestMapping("/vets")
-@RequiredArgsConstructor
-public final class VeterinariansController {
-
-    private final VeterinariansListAll listAll;
+@ApplicationScoped
+public class UseCases {
 
     /**
-     * List all Veterinarians endpoint.
+     * This implementation creates the List All Veterinarians Use Case.
      *
-     * @return the respone
+     * @param veterinariansRepository the repository for Veterinarians
+     * @return the Use Case
      */
-    @GetMapping
-    ResponseEntity<List<Veterinarian>> allVets() {
-        return ResponseEntity.ok(listAll.invoke(request()).getAllVeterinarians());
+    @Produces
+    public VeterinariansListAll veterinariansListAll(final VeterinarianRepository veterinariansRepository) {
+        return VeterinariansListAll.create(veterinariansRepository);
     }
 
 }

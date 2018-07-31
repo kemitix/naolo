@@ -19,17 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.presenter.rest.spring;
+package net.kemitix.naolo.presenter.rest.jaxrs;
 
-import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.VeterinariansListAll;
-import net.kemitix.naolo.entities.Veterinarian;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
+import java.util.Objects;
 
 import static net.kemitix.naolo.core.VeterinariansListAll.request;
 
@@ -38,21 +37,37 @@ import static net.kemitix.naolo.core.VeterinariansListAll.request;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@RestController
-@RequestMapping("/vets")
-@RequiredArgsConstructor
-public final class VeterinariansController {
+@Path("/vets")
+@ApplicationScoped
+public class VeterinariansController {
 
     private final VeterinariansListAll listAll;
+
+    /**
+     * Default constructor.
+     */
+    VeterinariansController() {
+        listAll = null;
+    }
+
+    /**
+     * CDI Constructor.
+     *
+     * @param listAll the UseCase for List All Veterinarians
+     */
+    @Inject
+    VeterinariansController(final VeterinariansListAll listAll) {
+        this.listAll = Objects.requireNonNull(listAll, "JAX-RS List All Veterinarians Use Case");
+    }
 
     /**
      * List all Veterinarians endpoint.
      *
      * @return the respone
      */
-    @GetMapping
-    ResponseEntity<List<Veterinarian>> allVets() {
-        return ResponseEntity.ok(listAll.invoke(request()).getAllVeterinarians());
+    @GET
+    public Response allVets() {
+        return Response.ok(listAll.invoke(request()).getAllVeterinarians()).build();
     }
 
 }

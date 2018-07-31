@@ -20,10 +20,30 @@
     </properties>
 
     <dependencies>
+
+        <!-- naolo -->
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>core</artifactId>
         </dependency>
+
+        <!-- meecrowave -->
+        <dependency>
+            <groupId>org.apache.meecrowave</groupId>
+            <artifactId>meecrowave-specs-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.meecrowave</groupId>
+            <artifactId>meecrowave-core</artifactId>
+        </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

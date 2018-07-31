@@ -19,40 +19,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.presenter.rest.spring;
+package net.kemitix.naolo.gateway.data.deltaspike;
 
-import lombok.RequiredArgsConstructor;
-import net.kemitix.naolo.core.VeterinariansListAll;
-import net.kemitix.naolo.entities.Veterinarian;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.List;
-
-import static net.kemitix.naolo.core.VeterinariansListAll.request;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * REST Controller for Veterinarians.
+ * JPA Entity for Veterinarian.
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@RestController
-@RequestMapping("/vets")
-@RequiredArgsConstructor
-public final class VeterinariansController {
+@Entity
+@Table(name = "veterinarians")
+@Setter
+@Getter
+@NoArgsConstructor
+class VeterinarianJPA {
 
-    private final VeterinariansListAll listAll;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    /**
-     * List all Veterinarians endpoint.
-     *
-     * @return the respone
-     */
-    @GetMapping
-    ResponseEntity<List<Veterinarian>> allVets() {
-        return ResponseEntity.ok(listAll.invoke(request()).getAllVeterinarians());
-    }
+    private String name;
+
+    @ElementCollection
+    @CollectionTable(name = "veterinarian_specialisations")
+    private final Set<String> specialisations = new HashSet<>();
 
 }
