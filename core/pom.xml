@@ -24,6 +24,11 @@
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>entities</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>test</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
