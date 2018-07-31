@@ -23,7 +23,6 @@ pipeline {
             }
         }
         stage('Report Checkstyle') {
-            when { expression { fileExists('**/target/checkstyle-result.xml')}}
             steps {
                 withMaven(maven: 'maven', jdk: 'JDK 1.8') {
                     // Checkstyle to Jenkins
