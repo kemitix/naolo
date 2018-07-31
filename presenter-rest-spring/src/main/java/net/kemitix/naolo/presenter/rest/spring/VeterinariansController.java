@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static net.kemitix.naolo.core.VeterinariansListAll.request;
+
 /**
  * REST Controller for Veterinarians.
  *
@@ -38,8 +40,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/vets")
 public final class VeterinariansController {
-
-    private static final VeterinariansListAll.Request LIST_ALL_REQUEST = new VeterinariansListAll.Request();
 
     private final VeterinariansListAll listAll;
 
@@ -59,7 +59,7 @@ public final class VeterinariansController {
      */
     @GetMapping
     ResponseEntity<List<Veterinarian>> allVets() {
-        return ResponseEntity.ok(listAll.invoke(LIST_ALL_REQUEST).getAllVeterinarians());
+        return ResponseEntity.ok(listAll.invoke(request()).getAllVeterinarians());
     }
 
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static net.kemitix.naolo.core.VeterinariansListAll.request;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -20,9 +21,7 @@ class VeterinariansListAllTest implements WithAssertions {
 
     private final VeterinarianRepository repository = mock(VeterinarianRepository.class);
 
-    private final VeterinariansListAll usecase = VeterinariansListAll.create(repository);
-
-    private final VeterinariansListAll.Request request = new VeterinariansListAll.Request();
+    private final VeterinariansListAll useCase = VeterinariansListAll.create(repository);
 
     @Property
     void listAll(
@@ -31,7 +30,7 @@ class VeterinariansListAllTest implements WithAssertions {
         //given
         given(repository.findAll()).willReturn(vets.stream());
         //when
-        final VeterinariansListAll.Response response = usecase.invoke(request);
+        final VeterinariansListAll.Response response = useCase.invoke(request());
         //then
         final Stream<Tuples.Tuple2<Veterinarian, Veterinarian>> zipped = StreamZipper.zip(vets, response.getAllVeterinarians(), Tuples::tuple);
         assertThat(zipped).hasSize(vets.size())

@@ -34,6 +34,9 @@ import java.util.stream.Collectors;
 public final class VeterinariansListAll
         implements UseCase<VeterinariansListAll.Request, VeterinariansListAll.Response> {
 
+    private static final Request REQUEST = new Request() {
+    };
+
     private final VeterinarianRepository repository;
 
     private VeterinariansListAll(final VeterinarianRepository repository) {
@@ -50,16 +53,35 @@ public final class VeterinariansListAll
         return new VeterinariansListAll(veterinarianRepository);
     }
 
+    /**
+     * Returns the empty request.
+     *
+     * @return the empty request object
+     */
+    public static Request request() {
+        return REQUEST;
+    }
+
+    /**
+     * Invoke the UseCase.
+     *
+     * <p>This implementation requires the parameter to be {@link #request()}.</p>
+     *
+     * @param request the result of {@link #request()}
+     * @return the Response
+     */
     @Override
     public Response invoke(final Request request) {
         return () -> repository.findAll().collect(Collectors.toList());
     }
 
     /**
-     * Request Parameter.
+     * Empty Request Parameter.
+     *
+     * <p>Use the {@link #request()} to obtain an instance.</p>
      */
-    public static class Request {
-        //no parameters
+    interface Request {
+
     }
 
     /**
