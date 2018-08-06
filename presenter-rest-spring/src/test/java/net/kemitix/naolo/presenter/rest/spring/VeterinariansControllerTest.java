@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -27,7 +28,7 @@ class VeterinariansControllerTest implements WithAssertions {
     @Property
     public void invokeListAll(
             @ForAll("vets") final List<Veterinarian> vets
-    ) {
+    ) throws ExecutionException, InterruptedException {
         //given
         given(repository.findAll()).willReturn(vets.stream());
         //when
@@ -38,7 +39,7 @@ class VeterinariansControllerTest implements WithAssertions {
     }
 
     @Provide
-    Arbitrary<List<Veterinarian>> vets() {
+    static Arbitrary<List<Veterinarian>> vets() {
         final LongArbitrary ids = Arbitraries.longs();
         final StringArbitrary names = Arbitraries.strings();
         final SizableArbitrary<Set<VetSpecialisation>> specialisations = Arbitraries.of(VetSpecialisation.class)

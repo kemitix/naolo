@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -38,7 +39,7 @@ class VeterinariansControllerTest implements WithAssertions {
     @SuppressWarnings("unchecked")
     void canGetAllVets(
             @ForAll("vets") final List<Veterinarian> vets
-    ) {
+    ) throws ExecutionException, InterruptedException {
         //given
         given(veterinarianRepository.findAll()).willReturn(vets.stream());
         //when

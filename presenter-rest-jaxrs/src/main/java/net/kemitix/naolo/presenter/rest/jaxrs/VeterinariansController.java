@@ -29,6 +29,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 import static net.kemitix.naolo.core.VeterinariansListAll.request;
 
@@ -64,10 +65,16 @@ public class VeterinariansController {
      * List all Veterinarians endpoint.
      *
      * @return the respone
+     * @throws ExecutionException   if there is an error completing the request
+     * @throws InterruptedException if there is an error completing the request
      */
     @GET
-    public Response allVets() {
-        return Response.ok(listAll.invoke(request()).getAllVeterinarians()).build();
+    public Response allVets() throws ExecutionException, InterruptedException {
+        return Response.ok(
+                listAll.invoke(request())
+                        .thenApply(VeterinariansListAll.Response::getAllVeterinarians)
+                        .get())
+                .build();
     }
 
 }

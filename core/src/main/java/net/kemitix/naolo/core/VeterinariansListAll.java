@@ -24,6 +24,7 @@ package net.kemitix.naolo.core;
 import net.kemitix.naolo.entities.Veterinarian;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -77,8 +78,8 @@ public class VeterinariansListAll
      * @return the Response
      */
     @Override
-    public Response invoke(final Request request) {
-        return () -> repository.findAll().collect(Collectors.toList());
+    public CompletableFuture<Response> invoke(final Request request) {
+        return CompletableFuture.supplyAsync(() -> () -> repository.findAll().collect(Collectors.toList()));
     }
 
     /**

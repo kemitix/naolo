@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static net.kemitix.naolo.core.VeterinariansListAll.request;
 
@@ -51,8 +52,10 @@ public final class VeterinariansController {
      * @return the respone
      */
     @GetMapping
-    ResponseEntity<List<Veterinarian>> allVets() {
-        return ResponseEntity.ok(listAll.invoke(request()).getAllVeterinarians());
+    ResponseEntity<List<Veterinarian>> allVets() throws ExecutionException, InterruptedException {
+        return ResponseEntity.ok(listAll.invoke(request())
+                .thenApply(VeterinariansListAll.Response::getAllVeterinarians)
+                .get());
     }
 
 }
