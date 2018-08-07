@@ -22,11 +22,9 @@
 package net.kemitix.naolo.gateway.data.spring;
 
 import net.kemitix.naolo.core.VeterinarianRepository;
-import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import org.springframework.stereotype.Repository;
 
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -63,9 +61,7 @@ class VeterinarianRepositoryImpl implements VeterinarianRepository {
         return Veterinarian.create(
                 source.getId(),
                 source.getName(),
-                source.getSpecialisations().stream()
-                        .map(VetSpecialisation::valueOf)
-                        .collect(Collectors.toSet()));
+                source.getSpecialisations());
     }
 
 }

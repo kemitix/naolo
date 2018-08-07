@@ -24,6 +24,7 @@ package net.kemitix.naolo.gateway.data.spring;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
+import net.kemitix.naolo.entities.VetSpecialisation;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -50,9 +51,10 @@ class VeterinarianJPA {
     @NonNull
     @ElementCollection
     @CollectionTable(name = "veterinarian_specialisations")
-    private final Set<String> specialisations;
+    @Enumerated(EnumType.STRING)
+    private Set<VetSpecialisation> specialisations = new HashSet<>();
 
-    public Set<String> getSpecialisations() {
+    public Set<VetSpecialisation> getSpecialisations() {
         return new HashSet<>(specialisations);
     }
 }

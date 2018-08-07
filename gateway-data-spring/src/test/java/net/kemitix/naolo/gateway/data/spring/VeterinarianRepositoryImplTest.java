@@ -49,9 +49,8 @@ class VeterinarianRepositoryImplTest implements WithAssertions {
     static Arbitrary<List<VeterinarianJPA>> jpaVets() {
         final LongArbitrary ids = Arbitraries.longs();
         final StringArbitrary names = Arbitraries.strings();
-        final Arbitrary<Set<String>> specialisations =
+        final Arbitrary<Set<VetSpecialisation>> specialisations =
                 Arbitraries.of(VetSpecialisation.class)
-                        .map(Enum::toString)
                         .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
         return Combinators.combine(ids, names, specialisations)
                 .as(VeterinarianJPA::new)
