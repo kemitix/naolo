@@ -23,10 +23,10 @@ package net.kemitix.naolo.gateway.data.spring;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.NonNull;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -36,20 +36,23 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "veterinarians")
-@Setter
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 class VeterinarianJPA {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private final Long id;
 
-    private String name;
+    @NonNull
+    private final String name;
 
+    @NonNull
     @ElementCollection
     @CollectionTable(name = "veterinarian_specialisations")
-    private Set<String> specialisations;
+    private final Set<String> specialisations;
 
+    public Set<String> getSpecialisations() {
+        return new HashSet<>(specialisations);
+    }
 }

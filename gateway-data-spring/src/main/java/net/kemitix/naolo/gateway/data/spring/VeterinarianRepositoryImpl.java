@@ -24,8 +24,6 @@ package net.kemitix.naolo.gateway.data.spring;
 import net.kemitix.naolo.core.VeterinarianRepository;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.stream.Collectors;
@@ -40,58 +38,34 @@ import java.util.stream.Stream;
 class VeterinarianRepositoryImpl implements VeterinarianRepository {
 
     private final VeterinarianRepositorySpring repository;
-    private final Converter<VeterinarianJPA, Veterinarian> fromJPA;
 
     /**
      * Constructor.
      *
      * @param repository the Spring Data repository
-     * @param fromJPA the converter from JPA to core entity
      */
     VeterinarianRepositoryImpl(
-            final VeterinarianRepositorySpring repository,
-            final Converter<VeterinarianJPA, Veterinarian> fromJPA
+            final VeterinarianRepositorySpring repository
     ) {
         this.repository = repository;
-        this.fromJPA = fromJPA;
     }
 
     @Override
     public Stream<Veterinarian> findAll() {
         return repository.findAll().stream()
-                .map(fromJPA::convert);
+                .map(VeterinarianRepositoryImpl::fromJPA);
     }
 
     /**
      * Converts VeterinarianJPA to core entity type.
      */
-    @Component
-    static class FromJPA implements Converter<VeterinarianJPA, Veterinarian> {
-
-        @Override
-        public Veterinarian convert(final VeterinarianJPA source) {
-            return Veterinarian.create(
-                    source.getId(),
-                    source.getName(),
-                    source.getSpecialisations().stream()
-                            .map(VetSpecialisation::valueOf)
-                            .collect(Collectors.toSet()));
-        }
+    private static Veterinarian fromJPA(final VeterinarianJPA source) {
+        return Veterinarian.create(
+                source.getId(),
+                source.getName(),
+                source.getSpecialisations().stream()
+                        .map(VetSpecialisation::valueOf)
+                        .collect(Collectors.toSet()));
     }
 
-    /**
-     * Converts core entity type to VeterinarianJPA.
-     */
-    @Component
-    static class ToJPA implements Converter<Veterinarian, VeterinarianJPA> {
-        @Override
-        public VeterinarianJPA convert(final Veterinarian source) {
-            return new VeterinarianJPA(
-                    source.getId(),
-                    source.getName(),
-                    source.getSpecialisations().stream()
-                            .map(Enum::toString)
-                            .collect(Collectors.toSet()));
-        }
-    }
 }

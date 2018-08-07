@@ -22,11 +22,8 @@ class VeterinarianRepositoryImplTest implements WithAssertions {
 
     private final VeterinarianRepositorySpring springRepo = mock(VeterinarianRepositorySpring.class);
 
-    private final VeterinarianRepositoryImpl.FromJPA fromJPA = new VeterinarianRepositoryImpl.FromJPA();
-    private final VeterinarianRepositoryImpl.ToJPA toJPA = new VeterinarianRepositoryImpl.ToJPA();
-
     private final VeterinarianRepository repository =
-            new VeterinarianRepositoryImpl(springRepo, fromJPA);
+            new VeterinarianRepositoryImpl(springRepo);
 
     @Property
     void canFindAllVeterinarians(@ForAll("jpaVets") final List<VeterinarianJPA> jpaVets) {
@@ -49,7 +46,7 @@ class VeterinarianRepositoryImplTest implements WithAssertions {
     }
 
     @Provide
-    Arbitrary<List<VeterinarianJPA>> jpaVets() {
+    static Arbitrary<List<VeterinarianJPA>> jpaVets() {
         final LongArbitrary ids = Arbitraries.longs();
         final StringArbitrary names = Arbitraries.strings();
         final Arbitrary<Set<String>> specialisations =
@@ -61,53 +58,53 @@ class VeterinarianRepositoryImplTest implements WithAssertions {
                 .list().ofMinSize(0).ofMaxSize(MAX_VETERINARIANS);
     }
 
-    @Property
-    void canConvertFromJpa(
-            @ForAll final Long id,
-            @ForAll final String name,
-            @ForAll("specialisationStrings") final Set<String> specialisations
-    ) {
-        //given
-        final VeterinarianJPA jpa = new VeterinarianJPA(id, name, specialisations);
-        //when
-        final Veterinarian result = fromJPA.convert(jpa);
-        //then
-        assertThat(result)
-                .returns(id, Veterinarian::getId)
-                .returns(name, Veterinarian::getName)
-                .returns(specialisations, v -> v.getSpecialisations().stream()
-                        .map(Enum::toString).collect(Collectors.toSet()));
-    }
-
-    @Property
-    void canConvertToJpa(
-            @ForAll final Long id,
-            @ForAll final String name,
-            @ForAll("specialisations") final Set<VetSpecialisation> specialisations
-    ) {
-        //given
-        final Veterinarian veterinarian = Veterinarian.create(id, name, specialisations);
-        //when
-        final VeterinarianJPA result = toJPA.convert(veterinarian);
-        //then
-        assertThat(result)
-                .returns(id, VeterinarianJPA::getId)
-                .returns(name, VeterinarianJPA::getName)
-                .returns(specialisations, s -> s.getSpecialisations().stream()
-                        .map(VetSpecialisation::valueOf).collect(Collectors.toSet()));
-    }
-
-    @Provide
-    Arbitrary<Set<String>> specialisationStrings() {
-        return Arbitraries.of(VetSpecialisation.class)
-                .set()
-                .ofMinSize(0).ofMaxSize(VetSpecialisation.values().length)
-                .map(v -> v.stream().map(Enum::toString).collect(Collectors.toSet()));
-    }
-
-    @Provide
-    Arbitrary<Set<VetSpecialisation>> specialisations() {
-        return Arbitraries.of(VetSpecialisation.class)
-                .set().ofMinSize(0).ofMaxSize(3);
-    }
+    //    @Property
+    //    void canConvertFromJpa(
+    //            @ForAll final Long id,
+    //            @ForAll final String name,
+    //            @ForAll("specialisationStrings") final Set<String> specialisations
+    //    ) {
+    //        //given
+    //        final VeterinarianJPA jpa = new VeterinarianJPA(id, name, specialisations);
+    //        //when
+    //        final Veterinarian result = fromJPA.convert(jpa);
+    //        //then
+    //        assertThat(result)
+    //                .returns(id, Veterinarian::getId)
+    //                .returns(name, Veterinarian::getName)
+    //                .returns(specialisations, v -> v.getSpecialisations().stream()
+    //                        .map(Enum::toString).collect(Collectors.toSet()));
+    //    }
+    //
+    //    @Property
+    //    void canConvertToJpa(
+    //            @ForAll final Long id,
+    //            @ForAll final String name,
+    //            @ForAll("specialisations") final Set<VetSpecialisation> specialisations
+    //    ) {
+    //        //given
+    //        final Veterinarian veterinarian = Veterinarian.create(id, name, specialisations);
+    //        //when
+    //        final VeterinarianJPA result = toJPA.convert(veterinarian);
+    //        //then
+    //        assertThat(result)
+    //                .returns(id, VeterinarianJPA::getId)
+    //                .returns(name, VeterinarianJPA::getName)
+    //                .returns(specialisations, s -> s.getSpecialisations().stream()
+    //                        .map(VetSpecialisation::valueOf).collect(Collectors.toSet()));
+    //    }
+    //
+    //    @Provide
+    //    static Arbitrary<Set<String>> specialisationStrings() {
+    //        return Arbitraries.of(VetSpecialisation.class)
+    //                .set()
+    //                .ofMinSize(0).ofMaxSize(VetSpecialisation.values().length)
+    //                .map(v -> v.stream().map(Enum::toString).collect(Collectors.toSet()));
+    //    }
+    //
+    //    @Provide
+    //    static Arbitrary<Set<VetSpecialisation>> specialisations() {
+    //        return Arbitraries.of(VetSpecialisation.class)
+    //                .set().ofMinSize(0).ofMaxSize(3);
+    //    }
 }
