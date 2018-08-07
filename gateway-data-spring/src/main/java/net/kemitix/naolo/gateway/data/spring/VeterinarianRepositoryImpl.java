@@ -21,10 +21,12 @@
 
 package net.kemitix.naolo.gateway.data.spring;
 
+import lombok.extern.log4j.Log4j2;
 import net.kemitix.naolo.core.VeterinarianRepository;
 import net.kemitix.naolo.entities.Veterinarian;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -32,6 +34,7 @@ import java.util.stream.Stream;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
+@Log4j2
 @Repository
 class VeterinarianRepositoryImpl implements VeterinarianRepository {
 
@@ -50,7 +53,9 @@ class VeterinarianRepositoryImpl implements VeterinarianRepository {
 
     @Override
     public Stream<Veterinarian> findAll() {
-        return repository.findAll().stream()
+        final List<VeterinarianJPA> all = repository.findAll();
+        log.info("findAll(): found {} veterinarians", all.size());
+        return all.stream()
                 .map(VeterinarianRepositoryImpl::fromJPA);
     }
 
