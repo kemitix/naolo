@@ -55,9 +55,10 @@ public final class VeterinariansController {
      */
     @GetMapping
     ResponseEntity<List<Veterinarian>> allVets() throws ExecutionException, InterruptedException {
-        return ResponseEntity.ok(listAll.invoke(request())
-                .thenApply(VeterinariansListAll.Response::getAllVeterinarians)
-                .get());
+        return ResponseEntity.ok(
+                listAll.invoke(request())
+                        .thenApply(VeterinariansListAll.Response::getAllVeterinarians)
+                        .get());
     }
 
 }
