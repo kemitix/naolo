@@ -43,7 +43,7 @@ class VeterinariansControllerTest implements WithAssertions {
         final LongArbitrary ids = Arbitraries.longs();
         final StringArbitrary names = Arbitraries.strings();
         final SizableArbitrary<Set<VetSpecialisation>> specialisations = Arbitraries.of(VetSpecialisation.class)
-                .set().ofMinSize(0).ofMaxSize(3);
+                .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
         return Combinators.combine(ids, names, specialisations)
                 .as(Veterinarian::create)
                 .list();

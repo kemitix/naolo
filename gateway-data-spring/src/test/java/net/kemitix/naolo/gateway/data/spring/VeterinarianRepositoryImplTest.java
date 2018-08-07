@@ -104,6 +104,6 @@ class VeterinarianRepositoryImplTest implements WithAssertions {
     //    @Provide
     //    static Arbitrary<Set<VetSpecialisation>> specialisations() {
     //        return Arbitraries.of(VetSpecialisation.class)
-    //                .set().ofMinSize(0).ofMaxSize(3);
+    //                .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
     //    }
 }

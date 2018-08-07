@@ -14,7 +14,7 @@ class VeterinarianJPATest implements WithAssertions {
         final Arbitrary<Long> ids = Arbitraries.longs();
         final Arbitrary<String> names = Arbitraries.strings();
         final Arbitrary<Set<VetSpecialisation>> specialisations = Arbitraries.of(VetSpecialisation.class)
-                .set().ofMinSize(0).ofMaxSize(3);
+                .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
         return Combinators.combine(ids, names, specialisations)
                 .as(VeterinarianJPA::new);
     }
@@ -22,13 +22,13 @@ class VeterinarianJPATest implements WithAssertions {
     @Provide
     static Arbitrary<Set<String>> stringSet() {
         return Arbitraries.strings()
-                .set().ofMinSize(0).ofMaxSize(3);
+                .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
     }
 
     @Provide
     static Arbitrary<Set<VetSpecialisation>> vetSpecialisations() {
         return Arbitraries.of(VetSpecialisation.class)
-                .set().ofMinSize(0).ofMaxSize(3);
+                .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
     }
 
     @Property

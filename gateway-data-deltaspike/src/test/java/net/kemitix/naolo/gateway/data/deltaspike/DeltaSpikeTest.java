@@ -34,7 +34,7 @@ class DeltaSpikeTest implements WithAssertions {
         final Arbitrary<Long> ids = Arbitraries.longs();
         final Arbitrary<String> names = Arbitraries.strings();
         final Arbitrary<Set<VetSpecialisation>> vetSpecialisations = Arbitraries.of(VetSpecialisation.class)
-                .set().ofMinSize(0).ofMaxSize(3);
+                .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
         return Combinators.combine(ids, names, vetSpecialisations)
                 .as((id, name, specialisations) -> {
                             final VeterinarianJPA veterinarianJPA = new VeterinarianJPA();
