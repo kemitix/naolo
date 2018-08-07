@@ -50,6 +50,8 @@ public final class VeterinariansController {
      * List all Veterinarians endpoint.
      *
      * @return the respone
+     * @throws ExecutionException   if there is an error completing the request
+     * @throws InterruptedException if there is an error completing the request
      */
     @GetMapping
     ResponseEntity<List<Veterinarian>> allVets() throws ExecutionException, InterruptedException {
