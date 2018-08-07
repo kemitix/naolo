@@ -21,14 +21,12 @@
 
 package net.kemitix.naolo.gateway.data.spring;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -37,17 +35,21 @@ import java.util.Set;
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
 @Entity
+@Table(name = "veterinarians")
+@Setter
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 class VeterinarianJPA {
 
     @Id
     @GeneratedValue
-    private final Long id;
-    @NonNull
-    private final String name;
-    @NonNull
+    private Long id;
+
+    private String name;
+
     @ElementCollection
-    private final Set<String> specialisations;
+    @CollectionTable(name = "veterinarian_specialisations")
+    private Set<String> specialisations;
 
 }
