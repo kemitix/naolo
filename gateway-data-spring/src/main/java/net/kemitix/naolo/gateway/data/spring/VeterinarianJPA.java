@@ -21,9 +21,7 @@
 
 package net.kemitix.naolo.gateway.data.spring;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NonNull;
+import lombok.*;
 import net.kemitix.naolo.entities.VetSpecialisation;
 
 import javax.persistence.*;
@@ -35,19 +33,20 @@ import java.util.Set;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
+@ToString
 @Entity
 @Table(name = "veterinarians")
+@Setter
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 class VeterinarianJPA {
 
     @Id
     @GeneratedValue
-    private final Long id;
-
+    private Long id;
     @NonNull
-    private final String name;
-
+    private String name;
     @NonNull
     @ElementCollection
     @CollectionTable(name = "veterinarian_specialisations")
