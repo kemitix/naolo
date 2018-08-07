@@ -3,6 +3,7 @@ package net.kemitix.naolo.gateway.data.spring;
 import net.jqwik.api.*;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import org.assertj.core.api.WithAssertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,6 +30,11 @@ class VeterinarianJPATest implements WithAssertions {
     static Arbitrary<Set<VetSpecialisation>> vetSpecialisations() {
         return Arbitraries.of(VetSpecialisation.class)
                 .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
+    }
+
+    @Test
+    void hasNoArgsConstructor() {
+        assertThat(new VeterinarianJPA()).isNotNull();
     }
 
     @Property
