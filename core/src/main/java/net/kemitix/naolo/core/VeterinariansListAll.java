@@ -25,7 +25,10 @@ import net.kemitix.naolo.entities.Veterinarian;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+import static java.lang.String.format;
 
 /**
  * Use-case to list all {@link Veterinarian}s.
@@ -35,6 +38,8 @@ import java.util.stream.Collectors;
 @SuppressWarnings("finalclass")
 public class VeterinariansListAll
         implements UseCase<VeterinariansListAll.Request, VeterinariansListAll.Response> {
+
+    private static final Logger log = Logger.getLogger(VeterinariansListAll.class.getName());
 
     private static final Request REQUEST = new Request() {
     };
@@ -79,7 +84,12 @@ public class VeterinariansListAll
      */
     @Override
     public CompletableFuture<Response> invoke(final Request request) {
-        return CompletableFuture.supplyAsync(() -> () -> repository.findAll().collect(Collectors.toList()));
+        log.info("invoke()");
+        return CompletableFuture.supplyAsync(() -> () -> {
+            final List<Veterinarian> veterinarians = repository.findAll().collect(Collectors.toList());
+            VeterinariansListAll.log.info(format("Found %d veterinarians", veterinarians.size()));
+            return veterinarians;
+        });
     }
 
     /**
