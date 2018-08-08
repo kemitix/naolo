@@ -28,19 +28,8 @@ package net.kemitix.naolo.entities;
  */
 public enum VetSpecialisation {
 
-    RADIOLOGY("Radiology"),
-    DENTISTRY("Dentistry"),
-    SURGERY("Surgery");
-
-    private final String value;
-
-    /**
-     * Constructor.
-     *
-     * @param value the text description for the specialisation
-     */
-    VetSpecialisation(final String value) {
-        this.value = value;
-    }
+    RADIOLOGY,
+    DENTISTRY,
+    SURGERY
 
 }

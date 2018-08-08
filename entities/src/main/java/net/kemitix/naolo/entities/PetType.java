@@ -28,20 +28,9 @@ package net.kemitix.naolo.entities;
  */
 public enum PetType {
 
-    DOG("Dog"),
-    CAT("Cat"),
-    SNAKE("Snake"),
-    OTHER("Other");
-
-    private final String value;
-
-    /**
-     * Constructor.
-     *
-     * @param value the text description for the type
-     */
-    PetType(final String value) {
-        this.value = value;
-    }
+    DOG,
+    CAT,
+    SNAKE,
+    OTHER;
 
 }
