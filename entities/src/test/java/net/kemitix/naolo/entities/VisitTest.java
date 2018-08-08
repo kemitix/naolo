@@ -1,6 +1,9 @@
 package net.kemitix.naolo.entities;
 
-import net.jqwik.api.*;
+import net.jqwik.api.Arbitrary;
+import net.jqwik.api.ForAll;
+import net.jqwik.api.Property;
+import net.jqwik.api.Provide;
 import org.assertj.core.api.WithAssertions;
 
 import java.time.ZonedDateTime;
