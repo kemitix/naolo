@@ -37,6 +37,7 @@
         <mockito.version>2.20.1</mockito.version>
         <jqwik.version>0.8.14</jqwik.version>
         <log4j.version>2.11.1</log4j.version>
+        <jaxb-api.version>2.3.0</jaxb-api.version>
     </properties>
 
     <dependencyManagement>
@@ -78,6 +79,13 @@
                 <groupId>net.kemitix.naolo</groupId>
                 <artifactId>test</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <!-- Java 9+ compatibility -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb-api.version}</version>
             </dependency>
 
             <!-- lombok -->

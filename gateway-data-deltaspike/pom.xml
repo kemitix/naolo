@@ -27,6 +27,12 @@
             <artifactId>core</artifactId>
         </dependency>
 
+        <!-- Java 9+ compatibility -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+
         <!-- meecrowave -->
         <dependency>
             <groupId>org.apache.meecrowave</groupId>
