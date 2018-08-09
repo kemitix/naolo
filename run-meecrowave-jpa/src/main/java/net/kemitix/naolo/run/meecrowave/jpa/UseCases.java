@@ -24,7 +24,6 @@ package net.kemitix.naolo.run.meecrowave.jpa;
 import net.kemitix.naolo.core.VeterinarianRepository;
 import net.kemitix.naolo.core.VeterinariansListAll;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
 /**
@@ -32,7 +31,6 @@ import javax.enterprise.inject.Produces;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@ApplicationScoped
 @SuppressWarnings("hideutilityclassconstructor")
 class UseCases {
 
