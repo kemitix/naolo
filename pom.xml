@@ -12,6 +12,7 @@
         <module>presenter-rest-spring</module>
         <module>gateway-data-spring</module>
         <module>gateway-data-deltaspike</module>
+        <module>gateway-data-jpa</module>
         <module>presenter-rest-jaxrs</module>
         <module>run-spring-boot</module>
         <module>run-meecrowave</module>
