@@ -66,8 +66,7 @@ class VeterinarianRepositoryImpl implements VeterinarianRepository {
     public Stream<Veterinarian> findAll() {
         return entityManager
                 .createNamedQuery(VeterinarianJPA.FIND_ALL_VETS, Veterinarian.class)
-                .getResultStream()
-                .peek(System.out::println);
+                .getResultStream();
     }
 
 }
