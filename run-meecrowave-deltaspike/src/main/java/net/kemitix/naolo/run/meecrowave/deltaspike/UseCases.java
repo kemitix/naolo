@@ -19,4 +19,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.run.meecrowave;
+package net.kemitix.naolo.run.meecrowave.deltaspike;
+
+import net.kemitix.naolo.core.VeterinarianRepository;
+import net.kemitix.naolo.core.VeterinariansListAll;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
+
+/**
+ * Configure UseCases for Meecrowave.
+ *
+ * @author Paul Campbell (pcampbell@kemitix.net)
+ */
+@ApplicationScoped
+@SuppressWarnings("hideutilityclassconstructor")
+public class UseCases {
+
+    /**
+     * This implementation creates the List All Veterinarians Use Case.
+     *
+     * @param veterinariansRepository the repository for Veterinarians
+     * @return the Use Case
+     */
+    @Produces
+    public static VeterinariansListAll veterinariansListAll(final VeterinarianRepository veterinariansRepository) {
+        return VeterinariansListAll.create(veterinariansRepository);
+    }
+
+}

@@ -15,7 +15,7 @@
         <module>gateway-data-jpa</module>
         <module>presenter-rest-jaxrs</module>
         <module>run-spring-boot</module>
-        <module>run-meecrowave</module>
+        <module>run-meecrowave-deltaspike</module>
         <module>test</module>
     </modules>
 

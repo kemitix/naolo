@@ -19,32 +19,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.run.meecrowave;
-
-import org.apache.meecrowave.Meecrowave;
-
-import java.util.Scanner;
-
-/**
- * Main class.
- *
- * @author Paul Campbell (pcampbell@kemitix.net)
- */
-@SuppressWarnings("hideutilityclassconstructor")
-public class Main {
-
-    /**
-     * Main method.
-     *
-     * @param args command line arguments
-     */
-    public static void main(final String[] args) {
-        final Meecrowave.Builder builder = new Meecrowave.Builder()
-                .withPackages("net.kemitix.naolo")
-                .excludePackages("net.kemitix.core");
-        try (Meecrowave meecrowave = new Meecrowave(builder).bake()) {
-            new Scanner(System.in).nextLine();
-        }
-    }
-
-}
+package net.kemitix.naolo.run.meecrowave.deltaspike;

@@ -19,31 +19,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.run.meecrowave;
+package net.kemitix.naolo.run.meecrowave.deltaspike;
 
-import net.kemitix.naolo.core.VeterinarianRepository;
-import net.kemitix.naolo.core.VeterinariansListAll;
+import org.apache.meecrowave.Meecrowave;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import java.util.Scanner;
 
 /**
- * Configure UseCases for Meecrowave.
+ * Main class.
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@ApplicationScoped
-public class UseCases {
+@SuppressWarnings("hideutilityclassconstructor")
+public class Main {
 
     /**
-     * This implementation creates the List All Veterinarians Use Case.
+     * Main method.
      *
-     * @param veterinariansRepository the repository for Veterinarians
-     * @return the Use Case
+     * @param args command line arguments
      */
-    @Produces
-    public VeterinariansListAll veterinariansListAll(final VeterinarianRepository veterinariansRepository) {
-        return VeterinariansListAll.create(veterinariansRepository);
+    public static void main(final String[] args) {
+        final Meecrowave.Builder builder = new Meecrowave.Builder()
+                .withPackages("net.kemitix.naolo")
+                .excludePackages("net.kemitix.core");
+        try (Meecrowave meecrowave = new Meecrowave(builder).bake()) {
+            new Scanner(System.in).nextLine();
+        }
     }
 
 }
