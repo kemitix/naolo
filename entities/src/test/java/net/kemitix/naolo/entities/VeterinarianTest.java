@@ -2,10 +2,31 @@ package net.kemitix.naolo.entities;
 
 import net.jqwik.api.*;
 import org.assertj.core.api.WithAssertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 class VeterinarianTest implements WithAssertions {
+
+    @Test
+    void hasDefaultConstructor() {
+        assertThat(new Veterinarian()).isNotNull();
+    }
+
+    @Property
+    void hasStringSpecialisationsConstructor(
+            @ForAll Long id,
+            @ForAll String name,
+            @ForAll("specialisation") Set<VetSpecialisation> specialisations
+    ) {
+        //given
+        final String specString = specialisations.stream().map(Enum::toString).collect(Collectors.joining(";"));
+        //when
+        final Veterinarian veterinarian = new Veterinarian(id, name, specString);
+        //then
+        assertThat(veterinarian.getSpecialisations()).containsExactlyElementsOf(specialisations);
+    }
 
     @Property
     void hasGetters(
@@ -23,7 +44,7 @@ class VeterinarianTest implements WithAssertions {
     }
 
     @Provide
-    Arbitrary<Set<VetSpecialisation>> specialisation() {
+    static Arbitrary<Set<VetSpecialisation>> specialisation() {
         return Arbitraries.of(VetSpecialisation.class)
                 .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
     }
