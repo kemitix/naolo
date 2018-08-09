@@ -129,16 +129,4 @@ class JPATest implements WithAssertions {
         assertThat(entityManagerA).isNotNull().isNotSameAs(entityManagerB);
     }
 
-    @Test
-    void canDisposeOfEntityManagers() {
-        //given
-        final EntityManagerFactory entityManagerFactory = EntityManagerProducer.entityManagerFactory();
-        final EntityManager entityManager = entityManagerFactory.createEntityManager();
-        assertThat(entityManager.isOpen()).isTrue();
-        //when
-        EntityManagerProducer.close(entityManager);
-        //then
-        assertThat(entityManager.isOpen()).isFalse();
-    }
-
 }
