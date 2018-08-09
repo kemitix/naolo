@@ -16,6 +16,7 @@
         <module>presenter-rest-jaxrs</module>
         <module>run-spring-boot</module>
         <module>run-meecrowave-deltaspike</module>
+        <module>run-meecrowave-jpa</module>
         <module>test</module>
     </modules>
 
