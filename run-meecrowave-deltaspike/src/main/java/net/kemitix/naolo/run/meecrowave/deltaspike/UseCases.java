@@ -34,7 +34,7 @@ import javax.enterprise.inject.Produces;
  */
 @ApplicationScoped
 @SuppressWarnings("hideutilityclassconstructor")
-public class UseCases {
+class UseCases {
 
     /**
      * This implementation creates the List All Veterinarians Use Case.

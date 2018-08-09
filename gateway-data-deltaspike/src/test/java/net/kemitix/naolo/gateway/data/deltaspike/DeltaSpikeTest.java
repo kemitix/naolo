@@ -24,9 +24,9 @@ class DeltaSpikeTest implements WithAssertions {
     @Test
     void defaultConstructorForEntityManagerProducer() {
         //when
-        final EntityManagerProducer entityManagerProducer = new EntityManagerProducer();
+        final EntityManagerHelper entityManagerHelper = new EntityManagerHelper();
         //then
-        assertThat(entityManagerProducer).isNotNull();
+        assertThat(entityManagerHelper).isNotNull();
     }
 
     @Provide
@@ -99,7 +99,7 @@ class DeltaSpikeTest implements WithAssertions {
     @Test
     void createEntityManagerFactory() {
         //when
-        final EntityManagerFactory entityManagerFactory = EntityManagerProducer.entityManagerFactory();
+        final EntityManagerFactory entityManagerFactory = EntityManagerHelper.entityManagerFactory();
         //then
         assertThat(entityManagerFactory).isNotNull();
     }
@@ -107,10 +107,10 @@ class DeltaSpikeTest implements WithAssertions {
     @Test
     void canCreateUniqueEntityManagers() {
         //given
-        final EntityManagerFactory entityManagerFactory = EntityManagerProducer.entityManagerFactory();
+        final EntityManagerFactory entityManagerFactory = EntityManagerHelper.entityManagerFactory();
         //when
-        final EntityManager entityManagerA = EntityManagerProducer.entityManager(entityManagerFactory);
-        final EntityManager entityManagerB = EntityManagerProducer.entityManager(entityManagerFactory);
+        final EntityManager entityManagerA = EntityManagerHelper.entityManager(entityManagerFactory);
+        final EntityManager entityManagerB = EntityManagerHelper.entityManager(entityManagerFactory);
         //then
         assertThat(entityManagerA).isNotNull().isNotSameAs(entityManagerB);
     }
@@ -118,11 +118,11 @@ class DeltaSpikeTest implements WithAssertions {
     @Test
     void canDisposeOfEntityManagers() {
         //given
-        final EntityManagerFactory entityManagerFactory = EntityManagerProducer.entityManagerFactory();
+        final EntityManagerFactory entityManagerFactory = EntityManagerHelper.entityManagerFactory();
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
         assertThat(entityManager.isOpen()).isTrue();
         //when
-        EntityManagerProducer.close(entityManager);
+        EntityManagerHelper.close(entityManager);
         //then
         assertThat(entityManager.isOpen()).isFalse();
     }

@@ -19,12 +19,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.gateway.data.deltaspike;
+package net.kemitix.naolo.gateway.data.jpa;
 
 import lombok.extern.log4j.Log4j2;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -38,9 +37,9 @@ import javax.persistence.Persistence;
 @Log4j2
 @ApplicationScoped
 @SuppressWarnings("hideutilityclassconstructor")
-public class EntityManagerProducer {
+public class EntityManagerHelper {
 
-    private static final String UNIT_NAME = EntityManagerProducer.class.getPackage().getName();
+    private static final String UNIT_NAME = EntityManagerHelper.class.getPackage().getName();
 
     /**
      * Producer for EntityManagerFactory.
@@ -66,13 +65,4 @@ public class EntityManagerProducer {
         return entityManagerFactory.createEntityManager();
     }
 
-    /**
-     * Closes the EntityManager.
-     *
-     * @param em the EntityManager to close
-     */
-    public static void close(@Disposes final EntityManager em) {
-        log.info("Close EntityManager");
-        em.close();
-    }
 }

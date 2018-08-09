@@ -13,7 +13,7 @@ import java.time.temporal.ChronoUnit;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-public class ArbitraryProviders {
+public class ArbitrariesHelper {
 
     /**
      * Generator of Arbitrary ZonedDataTime values.

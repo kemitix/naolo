@@ -19,15 +19,15 @@ import static java.util.Collections.singleton;
 
 class JPATest implements WithAssertions {
 
-    private final EntityManager entityManager = EntityManagerProducer.entityManagerFactory().createEntityManager();
+    private final EntityManager entityManager = EntityManagerHelper.entityManagerFactory().createEntityManager();
     private final VeterinarianRepositoryImpl veterinarianRepository = new VeterinarianRepositoryImpl(entityManager);
 
     @Test
     void defaultConstructorForEntityManagerProducer() {
         //when
-        final EntityManagerProducer entityManagerProducer = new EntityManagerProducer();
+        final EntityManagerHelper entityManagerHelper = new EntityManagerHelper();
         //then
-        assertThat(entityManagerProducer).isNotNull();
+        assertThat(entityManagerHelper).isNotNull();
     }
 
     @Provide
@@ -113,7 +113,7 @@ class JPATest implements WithAssertions {
     @Test
     void createEntityManagerFactory() {
         //when
-        final EntityManagerFactory entityManagerFactory = EntityManagerProducer.entityManagerFactory();
+        final EntityManagerFactory entityManagerFactory = EntityManagerHelper.entityManagerFactory();
         //then
         assertThat(entityManagerFactory).isNotNull();
     }
@@ -121,10 +121,10 @@ class JPATest implements WithAssertions {
     @Test
     void canCreateUniqueEntityManagers() {
         //given
-        final EntityManagerFactory entityManagerFactory = EntityManagerProducer.entityManagerFactory();
+        final EntityManagerFactory entityManagerFactory = EntityManagerHelper.entityManagerFactory();
         //when
-        final EntityManager entityManagerA = EntityManagerProducer.entityManager(entityManagerFactory);
-        final EntityManager entityManagerB = EntityManagerProducer.entityManager(entityManagerFactory);
+        final EntityManager entityManagerA = EntityManagerHelper.entityManager(entityManagerFactory);
+        final EntityManager entityManagerB = EntityManagerHelper.entityManager(entityManagerFactory);
         //then
         assertThat(entityManagerA).isNotNull().isNotSameAs(entityManagerB);
     }
