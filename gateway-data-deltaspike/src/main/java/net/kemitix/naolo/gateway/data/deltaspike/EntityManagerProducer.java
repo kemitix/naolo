@@ -48,6 +48,7 @@ public class EntityManagerProducer {
      * @return an EntityManagerFactory
      */
     @Produces
+    @ApplicationScoped
     public static EntityManagerFactory entityManagerFactory() {
         log.info("Create EntityManagerFactory");
         return Persistence.createEntityManagerFactory(UNIT_NAME);
