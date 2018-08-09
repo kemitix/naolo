@@ -40,13 +40,11 @@ import java.util.Set;
 @NamedNativeQueries({
         @NamedNativeQuery(
                 name = VeterinarianJPA.FIND_ALL_VETS,
-                query = "SELECT "
-                        + "    v.id, "
-                        + "    v.name, "
-                        + "    IFNULL(GROUP_CONCAT(vs.specialisations_value SEPARATOR ';'), '') specialisations\n"
-                        + "FROM veterinarians v\n"
-                        + "LEFT JOIN veterinarians_vet_specialisations vs ON vs.VeterinarianJPA_id = v.id\n"
-                        + "GROUP BY v.id, v.name\n"
+                query = "SELECT v.id, v.name, "
+                        + "IFNULL(GROUP_CONCAT(vs.specialisations_value SEPARATOR ';'), '') specialisations "
+                        + "FROM veterinarians v "
+                        + "LEFT JOIN veterinarians_vet_specialisations vs ON vs.VeterinarianJPA_id = v.id "
+                        + "GROUP BY v.id, v.name "
                         + "ORDER BY v.id",
                 resultSetMapping = VeterinarianJPA.VETERINARIAN_RESULT_MAPPER
         )})
