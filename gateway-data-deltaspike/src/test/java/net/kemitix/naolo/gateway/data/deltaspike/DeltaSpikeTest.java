@@ -3,6 +3,7 @@ package net.kemitix.naolo.gateway.data.deltaspike;
 import net.jqwik.api.*;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
+import net.kemitix.naolo.gateway.data.common.EntityManagerProducer;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,9 @@ import static org.mockito.Mockito.mock;
 
 class DeltaSpikeTest implements WithAssertions {
 
-    private final EntityManagerProducer entityManagerProducer = new EntityManagerProducer();
+    private final DataConfig dataConfig = new DataConfig();
+    private final String unitName = dataConfig.gatewayUnitName();
+    private final EntityManagerProducer entityManagerProducer = new EntityManagerProducer(unitName);
     private final EntityManagerFactory entityManagerFactory = entityManagerProducer.entityManagerFactory();
     private final EntityManager entityManager = entityManagerProducer.entityManager(entityManagerFactory);
     private final VeterinarianRepositoryDeltaSpike veterinarianRepositoryDeltaSpike =
@@ -104,16 +107,6 @@ class DeltaSpikeTest implements WithAssertions {
         final EntityManager entityManagerB = entityManagerProducer.entityManager(entityManagerFactory);
         //then
         assertThat(entityManagerA).isNotNull().isNotSameAs(entityManagerB);
-    }
-
-    @Test
-    void canDisposeOfEntityManagers() {
-        //given
-        assertThat(entityManager.isOpen()).isTrue();
-        //when
-        entityManagerProducer.close(entityManager);
-        //then
-        assertThat(entityManager.isOpen()).isFalse();
     }
 
 }

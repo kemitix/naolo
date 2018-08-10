@@ -12,8 +12,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>gateway-data-deltaspike</artifactId>
-    <description>Gateway Plugin for Data using DeltaSpike</description>
+    <artifactId>gateway-data-common</artifactId>
+    <description>Common elements for Gateway Plugins for Data</description>
 
     <properties>
         <pitest.skip>true</pitest.skip>
@@ -22,43 +22,16 @@
 
     <dependencies>
 
-        <!-- naolo -->
+        <!-- javax.enterprise.context -->
         <dependency>
-            <groupId>net.kemitix.naolo</groupId>
-            <artifactId>core</artifactId>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jcdi_2.0_spec</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.kemitix.naolo</groupId>
-            <artifactId>gateway-data-common</artifactId>
-        </dependency>
-
-        <!-- Java 9+ compatibility -->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-atinject_1.0_spec</artifactId>
         </dependency>
 
-        <!-- meecrowave -->
-        <dependency>
-            <groupId>org.apache.meecrowave</groupId>
-            <artifactId>meecrowave-specs-api</artifactId>
-        </dependency>
-
-        <!-- deltaspike -->
-        <dependency>
-            <groupId>org.apache.deltaspike.modules</groupId>
-            <artifactId>deltaspike-data-module-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.deltaspike.modules</groupId>
-            <artifactId>deltaspike-jpa-module-api</artifactId>
-        </dependency>
-
-        <!-- hibernate -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-        </dependency>
         <!-- JPA -->
         <dependency>
             <groupId>javax.persistence</groupId>

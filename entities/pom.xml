@@ -17,6 +17,7 @@
 
     <properties>
         <pitest.skip>true</pitest.skip>
+        <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
     </properties>
 
     <dependencies>

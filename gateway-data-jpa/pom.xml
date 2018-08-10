@@ -17,6 +17,7 @@
 
     <properties>
         <pitest.skip>true</pitest.skip>
+        <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
     </properties>
 
     <dependencies>
@@ -25,6 +26,10 @@
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>gateway-data-common</artifactId>
         </dependency>
 
         <!-- Java 9+ compatibility -->
@@ -38,16 +43,6 @@
             <groupId>org.apache.meecrowave</groupId>
             <artifactId>meecrowave-specs-api</artifactId>
         </dependency>
-
-        <!-- deltaspike -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.deltaspike.modules</groupId>-->
-        <!--<artifactId>deltaspike-data-module-api</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.deltaspike.modules</groupId>-->
-        <!--<artifactId>deltaspike-jpa-module-api</artifactId>-->
-        <!--</dependency>-->
 
         <!-- hibernate -->
         <dependency>
@@ -77,6 +72,7 @@
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>test</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>

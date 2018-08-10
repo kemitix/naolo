@@ -21,46 +21,28 @@
 
 package net.kemitix.naolo.gateway.data.jpa;
 
-import lombok.extern.log4j.Log4j2;
+import net.kemitix.naolo.gateway.data.common.GatewayPersistenceUnitName;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
- * Provides the EntityManager to DeltaSpike.
+ * Configuration for Data module.
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@Log4j2
-public class EntityManagerProducer {
-
-    private static final String UNIT_NAME = EntityManagerProducer.class.getPackage().getName();
+@ApplicationScoped
+public class DataConfig {
 
     /**
-     * Producer for EntityManagerFactory.
+     * Produces the Persistence Unit Name.
      *
-     * @return an EntityManagerFactory
+     * @return the Persistence Unit Name
      */
     @Produces
-    @ApplicationScoped
-    public EntityManagerFactory entityManagerFactory() {
-        log.info("Create EntityManagerFactory");
-        return Persistence.createEntityManagerFactory(UNIT_NAME);
-    }
-
-    /**
-     * Producer for EntityManager.
-     *
-     * @param entityManagerFactory an EntityManagerFactory
-     * @return an EntityManager
-     */
-    @Produces
-    public EntityManager entityManager(final EntityManagerFactory entityManagerFactory) {
-        log.info("Create EntityManager");
-        return entityManagerFactory.createEntityManager();
+    @GatewayPersistenceUnitName
+    public String gatewayUnitName() {
+        return getClass().getPackage().getName();
     }
 
 }
