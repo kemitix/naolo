@@ -31,7 +31,6 @@ import javax.enterprise.inject.Produces;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@SuppressWarnings("hideutilityclassconstructor")
 class UseCases {
 
     /**
@@ -41,7 +40,7 @@ class UseCases {
      * @return the Use Case
      */
     @Produces
-    public static VeterinariansListAll veterinariansListAll(final VeterinarianRepository veterinariansRepository) {
+    public VeterinariansListAll veterinariansListAll(final VeterinarianRepository veterinariansRepository) {
         return VeterinariansListAll.create(veterinariansRepository);
     }
 
