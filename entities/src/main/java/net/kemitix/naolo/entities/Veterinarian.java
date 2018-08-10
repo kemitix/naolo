@@ -21,8 +21,10 @@
 
 package net.kemitix.naolo.entities;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A Veterinarian.
@@ -31,11 +33,27 @@ import java.util.Set;
  */
 public final class Veterinarian {
 
-    private final long id;
+    private final Long id;
     private final String name;
     private final Set<VetSpecialisation> specialisations;
 
-    private Veterinarian(final long id,
+    /**
+     * Default Constructor.
+     */
+    public Veterinarian() {
+        id = null;
+        name = null;
+        specialisations = new HashSet<>();
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param id              the Veterinarian ID
+     * @param name            the Veterinarians Name
+     * @param specialisations the Specialisations of the Veterinarian
+     */
+    public Veterinarian(final long id,
                         final String name,
                         final Set<VetSpecialisation> specialisations) {
         this.id = id;
@@ -44,10 +62,27 @@ public final class Veterinarian {
     }
 
     /**
+     * Constructor parsing ';' delimited VetSpecialisation values.
+     *
+     * @param id              the Veterinarian ID
+     * @param name            the Veterinarians Name
+     * @param specialisations the Specialisations of the Veterinarian as a ';' delimited String
+     */
+    public Veterinarian(final long id,
+                        final String name,
+                        final String specialisations) {
+        this.id = id;
+        this.name = name;
+        this.specialisations = Arrays.stream(specialisations.split(";"))
+                .filter(s -> s.length() > 0)
+                .map(VetSpecialisation::valueOf).collect(Collectors.toSet());
+    }
+
+    /**
      * Create a new Veterinarian object.
      *
-     * @param id the Veterinarian ID
-     * @param name the Veterinarians Name
+     * @param id              the Veterinarian ID
+     * @param name            the Veterinarians Name
      * @param specialisations the Specialisations of the Veterinarian
      * @return a new Veterinarian
      */
@@ -70,4 +105,5 @@ public final class Veterinarian {
     public Set<VetSpecialisation> getSpecialisations() {
         return new HashSet<>(specialisations);
     }
+
 }

@@ -31,7 +31,7 @@ class VisitTest implements WithAssertions {
 
     @Provide
     static Arbitrary<ZonedDateTime> zonedDateTime() {
-        return ArbitraryProviders.zonedDateTime();
+        return ArbitrariesHelper.zonedDateTime();
     }
 
 }

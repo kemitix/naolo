@@ -12,7 +12,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>run-meecrowave</artifactId>
+    <artifactId>run-meecrowave-deltaspike</artifactId>
     <description>Run Application using Meecrowave</description>
 
     <properties>

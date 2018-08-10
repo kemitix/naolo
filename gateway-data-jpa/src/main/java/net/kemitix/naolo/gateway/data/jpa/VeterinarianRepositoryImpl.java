@@ -19,32 +19,54 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.run.meecrowave;
+package net.kemitix.naolo.gateway.data.jpa;
 
-import org.apache.meecrowave.Meecrowave;
+import net.kemitix.naolo.core.VeterinarianRepository;
+import net.kemitix.naolo.entities.Veterinarian;
 
-import java.util.Scanner;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
- * Main class.
+ * DeltaSpike Data Gateway Repository for Veterinarians.
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@SuppressWarnings("hideutilityclassconstructor")
-public class Main {
+@ApplicationScoped
+class VeterinarianRepositoryImpl implements VeterinarianRepository {
+
+    private final EntityManager entityManager;
 
     /**
-     * Main method.
-     *
-     * @param args command line arguments
+     * Default constructor.
      */
-    public static void main(final String[] args) {
-        final Meecrowave.Builder builder = new Meecrowave.Builder()
-                .withPackages("net.kemitix.naolo")
-                .excludePackages("net.kemitix.core");
-        try (Meecrowave meecrowave = new Meecrowave(builder).bake()) {
-            new Scanner(System.in).nextLine();
-        }
+    VeterinarianRepositoryImpl() {
+        entityManager = null;
+    }
+
+    /**
+     * CDI Constructor.
+     *
+     * @param entityManager the EntityManager
+     */
+    @Inject
+    VeterinarianRepositoryImpl(final EntityManager entityManager) {
+        this.entityManager = Objects.requireNonNull(entityManager, "EntityManager");
+    }
+
+    /**
+     * Find all Veterinarians.
+     *
+     * @return a Stream of Veterinarians
+     */
+    @Override
+    public Stream<Veterinarian> findAll() {
+        return entityManager
+                .createNamedQuery(VeterinarianJPA.FIND_ALL_VETS, Veterinarian.class)
+                .getResultStream();
     }
 
 }

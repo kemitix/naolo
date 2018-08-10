@@ -1,6 +1,7 @@
-package net.kemitix.naolo.gateway.data.deltaspike;
+package net.kemitix.naolo.gateway.data.jpa;
 
 import net.jqwik.api.*;
+import net.kemitix.naolo.core.VeterinarianRepository;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import org.assertj.core.api.WithAssertions;
@@ -8,55 +9,48 @@ import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptySet;
+import static java.util.Collections.singleton;
 
-class DeltaSpikeTest implements WithAssertions {
+class JPATest implements WithAssertions {
 
     private final EntityManagerProducer entityManagerProducer = new EntityManagerProducer();
     private final EntityManagerFactory entityManagerFactory = entityManagerProducer.entityManagerFactory();
     private final EntityManager entityManager = entityManagerProducer.entityManager(entityManagerFactory);
-    private final VeterinarianRepositoryDeltaSpike veterinarianRepositoryDeltaSpike =
-            mock(VeterinarianRepositoryDeltaSpike.class);
-    private final VeterinarianRepositoryImpl veterinarianRepository =
-            new VeterinarianRepositoryImpl(veterinarianRepositoryDeltaSpike);
+    private final VeterinarianRepository veterinarianRepository = new VeterinarianRepositoryImpl(entityManager);
 
     @Provide
     static Arbitrary<List<Tuples.Tuple2<VeterinarianJPA, Veterinarian>>> vetTuples() {
         final Arbitrary<Long> ids = Arbitraries.longs();
-        final Arbitrary<String> names = Arbitraries.strings();
+        final Arbitrary<String> names = Arbitraries.strings().alpha().ofLength(5);
         final Arbitrary<Set<VetSpecialisation>> vetSpecialisations = Arbitraries.of(VetSpecialisation.class)
                 .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
         return Combinators.combine(ids, names, vetSpecialisations)
                 .as((id, name, specialisations) -> {
-                            final VeterinarianJPA veterinarianJPA = new VeterinarianJPA();
-                            veterinarianJPA.setId(id);
-                            veterinarianJPA.setName(name);
-                            veterinarianJPA.getSpecialisations().addAll(
-                                    specialisations.stream()
-                                            .map(Enum::toString)
-                                            .collect(Collectors.toList())
-                            );
                             return Tuples.tuple(
-                                    veterinarianJPA,
+                                    new VeterinarianJPA(id, name, specialisations.stream()
+                                            .map(VetSpecialisationJPA::new)
+                                            .collect(Collectors.toSet())),
                                     Veterinarian.create(id, name, specialisations)
                             );
                         }
                 ).list().ofMinSize(0).ofMaxSize(100);
     }
 
-    @Property
-    void deltaSpikeTes(
-            @ForAll("vetTuples") List<Tuples.Tuple2<VeterinarianJPA, Veterinarian>> vetTuples
-    ) {
+    @Test
+    void canFindAllVets() {
         //given
-        final List<VeterinarianJPA> veterinarians =
-                vetTuples.stream().map(Tuples.Tuple2::get1).collect(Collectors.toList());
-        given(veterinarianRepositoryDeltaSpike.findAll()).willReturn(veterinarians.stream());
+        final List<Tuples.Tuple2<VeterinarianJPA, Veterinarian>> vetTuples = givenLoadedTuples().stream()
+                .map(t -> Tuples.tuple(
+                        new VeterinarianJPA(t.get1(), t.get2(), t.get3().stream().map(VetSpecialisationJPA::new).collect(Collectors.toSet())),
+                        new Veterinarian(t.get1(), t.get2(), t.get3())))
+                .collect(Collectors.toList());
         //when
         final List<Veterinarian> result = veterinarianRepository.findAll().collect(Collectors.toList());
         //then
@@ -83,6 +77,25 @@ class DeltaSpikeTest implements WithAssertions {
                                 .collect(Collectors.toList()));
     }
 
+    private static List<Tuples.Tuple3<Long, String, Set<VetSpecialisation>>> givenLoadedTuples() {
+        return asList(
+                Tuples.tuple(1L, "Conah Feeney", singleton(VetSpecialisation.RADIOLOGY)),
+                Tuples.tuple(2L, "Austin Santiago", singleton(VetSpecialisation.DENTISTRY)),
+                Tuples.tuple(3L, "Violet Holmes", asSet(asList(VetSpecialisation.DENTISTRY, VetSpecialisation.SURGERY))),
+                Tuples.tuple(4L, "Garin Charlton", singleton(VetSpecialisation.RADIOLOGY)),
+                Tuples.tuple(5L, "Danyl Wright", emptySet()),
+                Tuples.tuple(6L, "Savannah Sexton", singleton(VetSpecialisation.RADIOLOGY)),
+                Tuples.tuple(7L, "Hareem Sheppard", emptySet()),
+                Tuples.tuple(8L, "Livia Wilkins", emptySet()),
+                Tuples.tuple(9L, "Calum Langley", asSet(asList(VetSpecialisation.RADIOLOGY, VetSpecialisation.DENTISTRY, VetSpecialisation.SURGERY))),
+                Tuples.tuple(10L, "Rafael Mackenzie", emptySet())
+        );
+    }
+
+    private static <T> Set<T> asSet(final List<T> items) {
+        return new HashSet<>(items);
+    }
+
     @Test
     void veterinarianRepositoryImplDefaultConstructorIsInvalid() {
         //when
@@ -104,16 +117,6 @@ class DeltaSpikeTest implements WithAssertions {
         final EntityManager entityManagerB = entityManagerProducer.entityManager(entityManagerFactory);
         //then
         assertThat(entityManagerA).isNotNull().isNotSameAs(entityManagerB);
-    }
-
-    @Test
-    void canDisposeOfEntityManagers() {
-        //given
-        assertThat(entityManager.isOpen()).isTrue();
-        //when
-        entityManagerProducer.close(entityManager);
-        //then
-        assertThat(entityManager.isOpen()).isFalse();
     }
 
 }
