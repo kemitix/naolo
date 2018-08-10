@@ -1,6 +1,7 @@
 package net.kemitix.naolo.gateway.data.jpa;
 
 import net.jqwik.api.*;
+import net.kemitix.naolo.core.VeterinarianRepository;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import org.assertj.core.api.WithAssertions;
@@ -19,16 +20,10 @@ import static java.util.Collections.singleton;
 
 class JPATest implements WithAssertions {
 
-    private final EntityManager entityManager = EntityManagerHelper.entityManagerFactory().createEntityManager();
-    private final VeterinarianRepositoryImpl veterinarianRepository = new VeterinarianRepositoryImpl(entityManager);
-
-    @Test
-    void defaultConstructorForEntityManagerProducer() {
-        //when
-        final EntityManagerHelper entityManagerHelper = new EntityManagerHelper();
-        //then
-        assertThat(entityManagerHelper).isNotNull();
-    }
+    private final EntityManagerProducer entityManagerProducer = new EntityManagerProducer();
+    private final EntityManagerFactory entityManagerFactory = entityManagerProducer.entityManagerFactory();
+    private final EntityManager entityManager = entityManagerProducer.entityManager(entityManagerFactory);
+    private final VeterinarianRepository veterinarianRepository = new VeterinarianRepositoryImpl(entityManager);
 
     @Provide
     static Arbitrary<List<Tuples.Tuple2<VeterinarianJPA, Veterinarian>>> vetTuples() {
@@ -112,19 +107,14 @@ class JPATest implements WithAssertions {
 
     @Test
     void createEntityManagerFactory() {
-        //when
-        final EntityManagerFactory entityManagerFactory = EntityManagerHelper.entityManagerFactory();
-        //then
         assertThat(entityManagerFactory).isNotNull();
     }
 
     @Test
     void canCreateUniqueEntityManagers() {
-        //given
-        final EntityManagerFactory entityManagerFactory = EntityManagerHelper.entityManagerFactory();
         //when
-        final EntityManager entityManagerA = EntityManagerHelper.entityManager(entityManagerFactory);
-        final EntityManager entityManagerB = EntityManagerHelper.entityManager(entityManagerFactory);
+        final EntityManager entityManagerA = entityManagerProducer.entityManager(entityManagerFactory);
+        final EntityManager entityManagerB = entityManagerProducer.entityManager(entityManagerFactory);
         //then
         assertThat(entityManagerA).isNotNull().isNotSameAs(entityManagerB);
     }

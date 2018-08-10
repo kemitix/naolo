@@ -19,12 +19,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.gateway.data.deltaspike;
+package net.kemitix.naolo.gateway.data.jpa;
 
 import lombok.extern.log4j.Log4j2;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -36,11 +35,9 @@ import javax.persistence.Persistence;
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
 @Log4j2
-@ApplicationScoped
-@SuppressWarnings("hideutilityclassconstructor")
-public class EntityManagerHelper {
+public class EntityManagerProducer {
 
-    private static final String UNIT_NAME = EntityManagerHelper.class.getPackage().getName();
+    private static final String UNIT_NAME = EntityManagerProducer.class.getPackage().getName();
 
     /**
      * Producer for EntityManagerFactory.
@@ -49,7 +46,7 @@ public class EntityManagerHelper {
      */
     @Produces
     @ApplicationScoped
-    public static EntityManagerFactory entityManagerFactory() {
+    public EntityManagerFactory entityManagerFactory() {
         log.info("Create EntityManagerFactory");
         return Persistence.createEntityManagerFactory(UNIT_NAME);
     }
@@ -61,18 +58,9 @@ public class EntityManagerHelper {
      * @return an EntityManager
      */
     @Produces
-    public static EntityManager entityManager(final EntityManagerFactory entityManagerFactory) {
+    public EntityManager entityManager(final EntityManagerFactory entityManagerFactory) {
         log.info("Create EntityManager");
         return entityManagerFactory.createEntityManager();
     }
 
-    /**
-     * Closes the EntityManager.
-     *
-     * @param em the EntityManager to close
-     */
-    public static void close(@Disposes final EntityManager em) {
-        log.info("Close EntityManager");
-        em.close();
-    }
 }

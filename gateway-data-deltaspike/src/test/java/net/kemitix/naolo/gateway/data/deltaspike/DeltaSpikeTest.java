@@ -17,17 +17,13 @@ import static org.mockito.Mockito.mock;
 
 class DeltaSpikeTest implements WithAssertions {
 
+    private final EntityManagerProducer entityManagerProducer = new EntityManagerProducer();
+    private final EntityManagerFactory entityManagerFactory = entityManagerProducer.entityManagerFactory();
+    private final EntityManager entityManager = entityManagerProducer.entityManager(entityManagerFactory);
     private final VeterinarianRepositoryDeltaSpike veterinarianRepositoryDeltaSpike =
             mock(VeterinarianRepositoryDeltaSpike.class);
-    private final VeterinarianRepositoryImpl veterinarianRepository = new VeterinarianRepositoryImpl(veterinarianRepositoryDeltaSpike);
-
-    @Test
-    void defaultConstructorForEntityManagerProducer() {
-        //when
-        final EntityManagerHelper entityManagerHelper = new EntityManagerHelper();
-        //then
-        assertThat(entityManagerHelper).isNotNull();
-    }
+    private final VeterinarianRepositoryImpl veterinarianRepository =
+            new VeterinarianRepositoryImpl(veterinarianRepositoryDeltaSpike);
 
     @Provide
     static Arbitrary<List<Tuples.Tuple2<VeterinarianJPA, Veterinarian>>> vetTuples() {
@@ -98,19 +94,14 @@ class DeltaSpikeTest implements WithAssertions {
 
     @Test
     void createEntityManagerFactory() {
-        //when
-        final EntityManagerFactory entityManagerFactory = EntityManagerHelper.entityManagerFactory();
-        //then
         assertThat(entityManagerFactory).isNotNull();
     }
 
     @Test
     void canCreateUniqueEntityManagers() {
-        //given
-        final EntityManagerFactory entityManagerFactory = EntityManagerHelper.entityManagerFactory();
         //when
-        final EntityManager entityManagerA = EntityManagerHelper.entityManager(entityManagerFactory);
-        final EntityManager entityManagerB = EntityManagerHelper.entityManager(entityManagerFactory);
+        final EntityManager entityManagerA = entityManagerProducer.entityManager(entityManagerFactory);
+        final EntityManager entityManagerB = entityManagerProducer.entityManager(entityManagerFactory);
         //then
         assertThat(entityManagerA).isNotNull().isNotSameAs(entityManagerB);
     }
@@ -118,11 +109,9 @@ class DeltaSpikeTest implements WithAssertions {
     @Test
     void canDisposeOfEntityManagers() {
         //given
-        final EntityManagerFactory entityManagerFactory = EntityManagerHelper.entityManagerFactory();
-        final EntityManager entityManager = entityManagerFactory.createEntityManager();
         assertThat(entityManager.isOpen()).isTrue();
         //when
-        EntityManagerHelper.close(entityManager);
+        entityManagerProducer.close(entityManager);
         //then
         assertThat(entityManager.isOpen()).isFalse();
     }
