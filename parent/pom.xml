@@ -38,6 +38,8 @@
         <jqwik.version>0.8.14</jqwik.version>
         <log4j.version>2.11.1</log4j.version>
         <jaxb-api.version>2.3.0</jaxb-api.version>
+        <geronimo-jcdi_2.0_spec.version>1.0.1</geronimo-jcdi_2.0_spec.version>
+        <geronimo-atinject_1.0_spec.version>1.0</geronimo-atinject_1.0_spec.version>
     </properties>
 
     <dependencyManagement>
@@ -68,6 +70,11 @@
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
                 <artifactId>gateway-data-spring</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kemitix.naolo</groupId>
+                <artifactId>gateway-data-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -105,6 +112,18 @@
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-web</artifactId>
                 <version>${log4j.version}</version>
+            </dependency>
+
+            <!-- javax.enterprise.context -->
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-atinject_1.0_spec</artifactId>
+                <version>${geronimo-atinject_1.0_spec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-jcdi_2.0_spec</artifactId>
+                <version>${geronimo-jcdi_2.0_spec.version}</version>
             </dependency>
 
             <!-- Meecrowave -->

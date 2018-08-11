@@ -18,6 +18,7 @@
         <module>run-meecrowave-deltaspike</module>
         <module>run-meecrowave-jpa</module>
         <module>test</module>
+        <module>gateway-data-common</module>
     </modules>
 
     <groupId>net.kemitix.naolo</groupId>
