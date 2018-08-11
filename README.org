@@ -47,16 +47,41 @@
    =presenter-rest-jaxrs= and =gateway-data-deltaspike= modules.
 
    This configuration uses [[http://openwebbeans.apache.org/meecrowave/][Meecrowave]] as its environment, via the
-   =run-meecrowave= module.
+   =run-meecrowave-deltaspike= module.
 
-   [[file:/doc/images/module-dependencies-meecrowave.png]]
+   [[file:/doc/images/module-dependencies-meecrowave-deltaspike.png]]
 
-   The Meecrowave version can be built and run from source using:
+   This Meecrowave/JAX-RS/DeltaSpike version can be built and run from source using:
 
    #+BEGIN_SRC bash
-   ./bin/meecrowave-run.sh
+   ./bin/meecrowave-deltaspike-run.sh
    #+END_SRC
 
+
+** Apache Meecrowave with JAX-RS and pure JPA
+
+   A REST web interface is implemented using [[https://jax-rs.github.io/apidocs/2.1/][JAX-RS]] and database services using
+   pure [[http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html][JPA]]. These are provided as plugins using the =presenter-rest-jaxrs= and
+   =gateway-data-jpa= modules.
+
+   This configuration uses [[http://openwebbeans.apache.org/meecrowave/][Meecrowave]] as its environment, via the
+   =run-meecrowave-jpa= module.
+
+   [[file:/doc/images/module-dependencies-meecrowave-jpa.png]]
+
+   This Meecrowave/JAX-RS/JPA version can be built and run from source using:
+
+   #+BEGIN_SRC bash
+   ./bin/meecrowave-jpa-run.sh
+   #+END_SRC
+
+
+* Packages
+
+  The following shows the uses of each package for all implementations combined.
+  Each line represents a direct reference to a package.
+
+  [[file:/doc/images/digraph-all.png]]
 
 * Pet Clinic
 

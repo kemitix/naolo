@@ -11,8 +11,8 @@ digraph meecrowave {
     label="Gateway"
     "gateway-data-deltaspike" -> "core";
     }
-    "presenter-rest-jaxrs" -> "jaxrs";
+    "presenter-rest-jaxrs" -> "JAX-RS";
     "gateway-data-deltaspike" -> "deltaspike-data";
-    "run-meecrowave" -> "presenter-rest-jaxrs";
-    "run-meecrowave" -> "gateway-data-deltaspike";
+    "run-meecrowave-deltaspike" -> "presenter-rest-jaxrs";
+    "run-meecrowave-deltaspike" -> "gateway-data-deltaspike";
 }
