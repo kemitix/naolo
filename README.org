@@ -83,12 +83,21 @@
 
   [[file:/doc/images/digraph-all.png]]
 
+
 * Pet Clinic
 
   Rather that attempt to implement the full website from the original example, I
   will be focusing on providing the services as a REST endpoint, upon which
   another application/service could be used to provide the website.
 
+  In addition, as the existing Pet Clinic feels like a simple CRUD wrapper for a
+  database, I will implement a simple Visit Booking endpoint, which will find
+  available slots to schedule a Visit.
+
+** Current Status
+
+   Implementing the base CRUD-like Use Cases, and adding in the occasional new
+   implementation configuration.
 
 ** Entities
 
@@ -167,6 +176,33 @@
 **** List all Veterinarians
 
      =GET /vets=
+
+     #+BEGIN_SRC java
+       [
+        {
+            "id": 1,
+                "name": "Conah Feeney",
+                "specialisations": [
+                                    "RADIOLOGY"
+                                    ]
+                },
+        {
+            "id": 2,
+                "name": "Austin Santiago",
+                "specialisations": [
+                                    "DENTISTRY"
+                                    ]
+                },
+        {
+            "id": 3,
+                "name": "Violet Holmes",
+                "specialisations": [
+                                    "DENTISTRY",
+                                    "SURGERY"
+                                    ]
+                }
+        ]
+     #+END_SRC
 
 **** Add a Veterinarian
 
