@@ -18,7 +18,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <tiles-maven-plugin.version>2.11</tiles-maven-plugin.version>
+        <tiles-maven-plugin.version>2.12</tiles-maven-plugin.version>
         <kemitix-tiles.version>0.9.0</kemitix-tiles.version>
         <kemitix-checkstyle.version>4.1.1</kemitix-checkstyle.version>
 
