@@ -24,7 +24,7 @@
 
         <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
 
-        <lombok.version>1.18.0</lombok.version>
+        <lombok.version>1.18.2</lombok.version>
         <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
         <deltaspike.version>1.8.2</deltaspike.version>
         <javax.persistence.version>2.2</javax.persistence.version>
