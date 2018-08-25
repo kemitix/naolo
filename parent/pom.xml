@@ -18,23 +18,23 @@
     <packaging>pom</packaging>
 
     <properties>
-        <tiles-maven-plugin.version>2.11</tiles-maven-plugin.version>
+        <tiles-maven-plugin.version>2.12</tiles-maven-plugin.version>
         <kemitix-tiles.version>0.9.0</kemitix-tiles.version>
         <kemitix-checkstyle.version>4.1.1</kemitix-checkstyle.version>
 
         <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
 
-        <lombok.version>1.18.0</lombok.version>
+        <lombok.version>1.18.2</lombok.version>
         <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
         <deltaspike.version>1.8.2</deltaspike.version>
         <javax.persistence.version>2.2</javax.persistence.version>
-        <hibernate.version>5.3.4.Final</hibernate.version>
+        <hibernate.version>5.3.5.Final</hibernate.version>
         <h2.version>1.4.197</h2.version>
         <meecrowave.version>1.2.3</meecrowave.version>
 
         <junit.version>5.2.0</junit.version>
         <assertj.version>3.11.0</assertj.version>
-        <mockito.version>2.20.1</mockito.version>
+        <mockito.version>2.21.0</mockito.version>
         <jqwik.version>0.8.14</jqwik.version>
         <log4j.version>2.11.1</log4j.version>
         <jaxb-api.version>2.3.0</jaxb-api.version>
