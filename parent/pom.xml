@@ -37,7 +37,7 @@
         <mockito.version>2.22.0</mockito.version>
         <jqwik.version>0.8.15</jqwik.version>
         <log4j.version>2.11.1</log4j.version>
-        <jaxb-api.version>2.3.0</jaxb-api.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
         <geronimo-jcdi_2.0_spec.version>1.1</geronimo-jcdi_2.0_spec.version>
         <geronimo-atinject_1.0_spec.version>1.1</geronimo-atinject_1.0_spec.version>
     </properties>
