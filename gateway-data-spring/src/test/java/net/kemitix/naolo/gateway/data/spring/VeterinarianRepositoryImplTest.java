@@ -33,7 +33,7 @@ class VeterinarianRepositoryImplTest implements WithAssertions {
         final List<Veterinarian> result = repository.findAll().collect(Collectors.toList());
         //then
         assertThat(result).hasSize(jpaVets.size());
-        assertThat(StreamZipper.zip(jpaVets, result, Tuples::tuple))
+        assertThat(StreamZipper.zip(jpaVets, result, Tuple::of))
                 .allSatisfy(t -> {
                     final VeterinarianJPA jpa = t.get1();
                     final Veterinarian vet = t.get2();

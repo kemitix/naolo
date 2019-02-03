@@ -33,7 +33,8 @@ class VeterinariansListAllTest implements WithAssertions {
         //when
         final VeterinariansListAll.Response response = useCase.invoke(request()).get();
         //then
-        final Stream<Tuples.Tuple2<Veterinarian, Veterinarian>> zipped = StreamZipper.zip(vets, response.getAllVeterinarians(), Tuples::tuple);
+        final Stream<Tuple.Tuple2<Veterinarian, Veterinarian>> zipped =
+                StreamZipper.zip(vets, response.getAllVeterinarians(), Tuple::of);
         assertThat(zipped).hasSize(vets.size())
                 .allSatisfy(t -> {
                     final Veterinarian s = t.get1();

@@ -29,7 +29,7 @@ class DeltaSpikeTest implements WithAssertions {
             new VeterinarianRepositoryImpl(veterinarianRepositoryDeltaSpike);
 
     @Provide
-    static Arbitrary<List<Tuples.Tuple2<VeterinarianJPA, Veterinarian>>> vetTuples() {
+    static Arbitrary<List<Tuple.Tuple2<VeterinarianJPA, Veterinarian>>> vetTuples() {
         final Arbitrary<Long> ids = Arbitraries.longs();
         final Arbitrary<String> names = Arbitraries.strings();
         final Arbitrary<Set<VetSpecialisation>> vetSpecialisations = Arbitraries.of(VetSpecialisation.class)
@@ -44,7 +44,7 @@ class DeltaSpikeTest implements WithAssertions {
                                             .map(Enum::toString)
                                             .collect(Collectors.toList())
                             );
-                            return Tuples.tuple(
+                            return Tuple.of(
                                     veterinarianJPA,
                                     Veterinarian.create(id, name, specialisations)
                             );
@@ -54,11 +54,11 @@ class DeltaSpikeTest implements WithAssertions {
 
     @Property
     void deltaSpikeTes(
-            @ForAll("vetTuples") List<Tuples.Tuple2<VeterinarianJPA, Veterinarian>> vetTuples
+            @ForAll("vetTuples") List<Tuple.Tuple2<VeterinarianJPA, Veterinarian>> vetTuples
     ) {
         //given
         final List<VeterinarianJPA> veterinarians =
-                vetTuples.stream().map(Tuples.Tuple2::get1).collect(Collectors.toList());
+                vetTuples.stream().map(Tuple.Tuple2::get1).collect(Collectors.toList());
         given(veterinarianRepositoryDeltaSpike.findAll()).willReturn(veterinarians.stream());
         //when
         final List<Veterinarian> result = veterinarianRepository.findAll().collect(Collectors.toList());
@@ -67,21 +67,21 @@ class DeltaSpikeTest implements WithAssertions {
                 .extracting(Veterinarian::getId)
                 .containsExactlyElementsOf(
                         vetTuples.stream()
-                                .map(Tuples.Tuple2::get2)
+                                .map(Tuple.Tuple2::get2)
                                 .map(Veterinarian::getId)
                                 .collect(Collectors.toList()));
         assertThat(result)
                 .extracting(Veterinarian::getName)
                 .containsExactlyElementsOf(
                         vetTuples.stream()
-                                .map(Tuples.Tuple2::get2)
+                                .map(Tuple.Tuple2::get2)
                                 .map(Veterinarian::getName)
                                 .collect(Collectors.toList()));
         assertThat(result)
                 .extracting(Veterinarian::getSpecialisations)
                 .containsExactlyElementsOf(
                         vetTuples.stream()
-                                .map(Tuples.Tuple2::get2)
+                                .map(Tuple.Tuple2::get2)
                                 .map(Veterinarian::getSpecialisations)
                                 .collect(Collectors.toList()));
     }
