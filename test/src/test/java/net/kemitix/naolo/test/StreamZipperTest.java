@@ -2,7 +2,7 @@ package net.kemitix.naolo.test;
 
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
-import net.jqwik.api.Tuples;
+import net.jqwik.api.Tuple;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,14 +28,14 @@ class StreamZipperTest implements WithAssertions {
             @ForAll List<Integer> integers
     ) {
         //when
-        final List<Tuples.Tuple2<String, Integer>> zipped =
-                StreamZipper.zip(strings, integers, Tuples::tuple).collect(Collectors.toList());
+        final List<Tuple.Tuple2<String, Integer>> zipped =
+                StreamZipper.zip(strings, integers, Tuple::of).collect(Collectors.toList());
         //then
         assertThat(zipped)
-                .extracting(Tuples.Tuple2::get1)
+                .extracting(Tuple.Tuple2::get1)
                 .containsExactlyElementsOf(strings.subList(0, zipped.size()));
         assertThat(zipped)
-                .extracting(Tuples.Tuple2::get2)
+                .extracting(Tuple.Tuple2::get2)
                 .containsExactlyElementsOf(integers.subList(0, zipped.size()));
     }
 }
