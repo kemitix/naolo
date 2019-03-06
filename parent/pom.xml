@@ -30,7 +30,7 @@
         <javax.persistence.version>2.2</javax.persistence.version>
         <hibernate.version>5.4.1.Final</hibernate.version>
         <h2.version>1.4.198</h2.version>
-        <meecrowave.version>1.2.5</meecrowave.version>
+        <meecrowave.version>1.2.7</meecrowave.version>
 
         <junit.version>5.3.2</junit.version>
         <assertj.version>3.11.1</assertj.version>
