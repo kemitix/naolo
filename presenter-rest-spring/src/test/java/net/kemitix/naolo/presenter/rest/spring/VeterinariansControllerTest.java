@@ -26,7 +26,7 @@ class VeterinariansControllerTest implements WithAssertions {
     private final VeterinariansController controller = new VeterinariansController(veterinariansListAll);
 
     @Property
-    public void invokeListAll(
+    void invokeListAll(
             @ForAll("vets") final List<Veterinarian> vets
     ) throws ExecutionException, InterruptedException {
         //given
