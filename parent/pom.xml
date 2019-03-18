@@ -33,7 +33,7 @@
         <meecrowave.version>1.2.7</meecrowave.version>
 
         <junit.version>5.4.1</junit.version>
-        <assertj.version>3.12.1</assertj.version>
+        <assertj.version>3.12.2</assertj.version>
         <mockito.version>2.23.4</mockito.version>
         <jqwik.version>1.1.0</jqwik.version>
         <log4j.version>2.11.2</log4j.version>
