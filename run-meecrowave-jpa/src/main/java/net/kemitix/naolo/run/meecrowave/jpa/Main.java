@@ -23,6 +23,7 @@ package net.kemitix.naolo.run.meecrowave.jpa;
 
 import org.apache.meecrowave.Meecrowave;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -43,7 +44,7 @@ public class Main {
                 .withPackages("net.kemitix.naolo")
                 .excludePackages("net.kemitix.core");
         try (Meecrowave meecrowave = new Meecrowave(builder).bake()) {
-            new Scanner(System.in).nextLine();
+            new Scanner(System.in, StandardCharsets.UTF_8.name()).nextLine();
         }
     }
 

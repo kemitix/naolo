@@ -19,7 +19,7 @@
 
     <properties>
         <tiles-maven-plugin.version>2.13</tiles-maven-plugin.version>
-        <kemitix-tiles.version>0.9.0</kemitix-tiles.version>
+        <kemitix-maven-tiles.version>2.2.0</kemitix-maven-tiles.version>
         <kemitix-checkstyle.version>4.1.1</kemitix-checkstyle.version>
 
         <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
@@ -32,6 +32,7 @@
         <h2.version>1.4.199</h2.version>
         <meecrowave.version>1.2.7</meecrowave.version>
 
+        <spotbugs-annotations.version>3.1.12</spotbugs-annotations.version>
         <junit.version>5.4.1</junit.version>
         <assertj.version>3.12.2</assertj.version>
         <mockito.version>2.23.4</mockito.version>
@@ -168,6 +169,13 @@
                 <version>${h2.version}</version>
             </dependency>
 
+            <!-- Spotbugs Annotations -->
+            <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-annotations</artifactId>
+                <version>${spotbugs-annotations.version}</version>
+            </dependency>
+
             <!-- testing -->
             <dependency>
                 <groupId>org.junit</groupId>
@@ -205,7 +213,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <tiles>
-                        <tile>net.kemitix.tiles:all:${kemitix-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:all:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.checkstyle:tile:${kemitix-checkstyle.version}</tile>
                     </tiles>
                 </configuration>
