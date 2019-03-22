@@ -21,6 +21,7 @@
 
 package net.kemitix.naolo.gateway.data.jpa;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import net.kemitix.naolo.entities.Veterinarian;
@@ -69,6 +70,7 @@ class VeterinarianJPA {
     @GeneratedValue
     private Long id;
 
+    @SuppressFBWarnings("URF_UNREAD_FIELD")
     private String name;
 
     @ManyToMany

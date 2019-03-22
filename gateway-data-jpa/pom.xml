@@ -18,6 +18,7 @@
     <properties>
         <pitest.skip>true</pitest.skip>
         <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
+        <spotbugs-annotations.version>3.1.12</spotbugs-annotations.version>
     </properties>
 
     <dependencies>
@@ -59,6 +60,13 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <version>${spotbugs-annotations.version}</version>
             <scope>provided</scope>
         </dependency>
 
