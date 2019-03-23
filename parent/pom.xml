@@ -19,7 +19,7 @@
 
     <properties>
         <tiles-maven-plugin.version>2.13</tiles-maven-plugin.version>
-        <kemitix-maven-tiles.version>DEV-SNAPSHOT</kemitix-maven-tiles.version>
+        <kemitix-maven-tiles.version>2.3.0</kemitix-maven-tiles.version>
         <kemitix-checkstyle.version>4.1.1</kemitix-checkstyle.version>
         <scala-library.version>2.12.8</scala-library.version>
 
