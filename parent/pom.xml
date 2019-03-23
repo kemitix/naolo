@@ -19,7 +19,7 @@
 
     <properties>
         <tiles-maven-plugin.version>2.13</tiles-maven-plugin.version>
-        <kemitix-maven-tiles.version>2.2.0</kemitix-maven-tiles.version>
+        <kemitix-maven-tiles.version>2.3.0</kemitix-maven-tiles.version>
         <kemitix-checkstyle.version>4.1.1</kemitix-checkstyle.version>
 
         <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
