@@ -50,7 +50,7 @@ class JPATest implements WithAssertions {
         final List<Tuple.Tuple2<VeterinarianJPA, Veterinarian>> vetTuples = givenLoadedTuples().stream()
                 .map(t -> Tuple.of(
                         new VeterinarianJPA(t.get1(), t.get2(), t.get3().stream().map(VetSpecialisationJPA::new).collect(Collectors.toSet())),
-                        new Veterinarian(t.get1(), t.get2(), t.get3())))
+                        Veterinarian.create(t.get1(), t.get2(), t.get3())))
                 .collect(Collectors.toList());
         //when
         final List<Veterinarian> result = veterinarianRepository.findAll().collect(Collectors.toList());
