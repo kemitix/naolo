@@ -22,6 +22,11 @@
 
     <dependencies>
         <!-- NONE! -->
+        <!-- Scala -->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+        </dependency>
 
         <!-- Testing -->
         <dependency>

@@ -11,7 +11,7 @@ class VeterinarianTest implements WithAssertions {
 
     @Test
     void hasDefaultConstructor() {
-        assertThat(new Veterinarian()).isNotNull();
+        assertThat(Veterinarian.create()).isNotNull();
     }
 
     @Property
@@ -23,7 +23,7 @@ class VeterinarianTest implements WithAssertions {
         //given
         final String specString = specialisations.stream().map(Enum::toString).collect(Collectors.joining(";"));
         //when
-        final Veterinarian veterinarian = new Veterinarian(id, name, specString);
+        final Veterinarian veterinarian = Veterinarian.create(id, name, specString);
         //then
         assertThat(veterinarian.getSpecialisations()).containsExactlyElementsOf(specialisations);
     }

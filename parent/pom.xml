@@ -21,6 +21,7 @@
         <tiles-maven-plugin.version>2.13</tiles-maven-plugin.version>
         <kemitix-maven-tiles.version>2.3.0</kemitix-maven-tiles.version>
         <kemitix-checkstyle.version>4.1.1</kemitix-checkstyle.version>
+        <scala-library.version>2.12.8</scala-library.version>
 
         <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
 
@@ -46,6 +47,13 @@
     <dependencyManagement>
 
         <dependencies>
+
+            <!-- Scala -->
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${scala-library.version}</version>
+            </dependency>
 
             <!-- naolo -->
             <dependency>
@@ -213,7 +221,15 @@
                 <extensions>true</extensions>
                 <configuration>
                     <tiles>
-                        <tile>net.kemitix.tiles:all:${kemitix-maven-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:maven-plugins:${kemitix-maven-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:enforcer:${kemitix-maven-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:compiler-jdk-8:${kemitix-maven-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:pmd:${kemitix-maven-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:digraph:${kemitix-maven-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:testing:${kemitix-maven-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:coverage:${kemitix-maven-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:pitest:${kemitix-maven-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:scala-lang:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.checkstyle:tile:${kemitix-checkstyle.version}</tile>
                     </tiles>
                 </configuration>
