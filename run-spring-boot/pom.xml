@@ -18,7 +18,7 @@
     <properties>
         <pitest.skip>true</pitest.skip>
         <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
-        <spring-boot.version>2.1.3.RELEASE</spring-boot.version>
+        <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
     </properties>
 
     <dependencies>
