@@ -37,7 +37,7 @@
         <junit.version>5.4.2</junit.version>
         <assertj.version>3.12.2</assertj.version>
         <mockito.version>2.27.0</mockito.version>
-        <jqwik.version>1.1.2</jqwik.version>
+        <jqwik.version>1.1.3</jqwik.version>
         <log4j.version>2.11.2</log4j.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <geronimo-jcdi_2.0_spec.version>1.1</geronimo-jcdi_2.0_spec.version>
