@@ -30,7 +30,7 @@
         <deltaspike.version>1.9.1</deltaspike.version>
         <javax.persistence.version>2.2</javax.persistence.version>
         <hibernate.version>5.4.6.Final</hibernate.version>
-        <h2.version>1.4.199</h2.version>
+        <h2.version>1.4.200</h2.version>
         <meecrowave.version>1.2.8</meecrowave.version>
 
         <spotbugs-annotations.version>3.1.12</spotbugs-annotations.version>
