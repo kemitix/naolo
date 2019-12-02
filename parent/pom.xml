@@ -36,7 +36,7 @@
         <spotbugs-annotations.version>3.1.12</spotbugs-annotations.version>
         <junit.version>5.5.2</junit.version>
         <assertj.version>3.13.2</assertj.version>
-        <mockito.version>3.1.0</mockito.version>
+        <mockito.version>3.2.0</mockito.version>
         <jqwik.version>1.2.0</jqwik.version>
         <log4j.version>2.12.1</log4j.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
