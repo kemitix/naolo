@@ -9,12 +9,9 @@
         <module>parent</module>
         <module>entities</module>
         <module>core</module>
-        <module>presenter-rest-spring</module>
-        <module>gateway-data-spring</module>
         <module>gateway-data-deltaspike</module>
         <module>gateway-data-jpa</module>
         <module>presenter-rest-jaxrs</module>
-        <module>run-spring-boot</module>
         <module>run-meecrowave-deltaspike</module>
         <module>run-meecrowave-jpa</module>
         <module>test</module>
