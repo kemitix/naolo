@@ -78,7 +78,7 @@
             </dependency>
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
-                <artifactId>gateway-data-jpa</artifactId>
+                <artifactId>naolo-storage-spi</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

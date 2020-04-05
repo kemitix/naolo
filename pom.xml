@@ -9,7 +9,7 @@
         <module>parent</module>
         <module>entities</module>
         <module>core</module>
-        <module>gateway-data-jpa</module>
+        <module>storage-spi</module>
         <module>api</module>
         <module>gateway-data-common</module>
     </modules>

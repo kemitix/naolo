@@ -12,8 +12,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>gateway-data-jpa</artifactId>
-    <description>Gateway Plugin for Data using DeltaSpike</description>
+    <artifactId>naolo-storage-spi</artifactId>
+    <description>SPI definition for Storage plugins</description>
 
     <properties>
         <pitest.skip>true</pitest.skip>
