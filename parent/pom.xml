@@ -42,11 +42,17 @@
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <geronimo-jcdi_2.0_spec.version>1.1</geronimo-jcdi_2.0_spec.version>
         <geronimo-atinject_1.0_spec.version>1.1</geronimo-atinject_1.0_spec.version>
+        <jakartaee-api.version>8.0.0</jakartaee-api.version>
     </properties>
 
     <dependencyManagement>
 
         <dependencies>
+            <dependency>
+                <groupId>jakarta.platform</groupId>
+                <artifactId>jakarta.jakartaee-api</artifactId>
+                <version>${jakartaee-api.version}</version>
+            </dependency>
 
             <!-- Scala -->
             <dependency>
