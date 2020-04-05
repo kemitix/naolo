@@ -1,4 +1,4 @@
-package net.kemitix.naolo.test;
+package net.kemitix.naolo.core;
 
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;

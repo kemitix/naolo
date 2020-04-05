@@ -6,7 +6,6 @@ import net.jqwik.api.arbitraries.SizableArbitrary;
 import net.jqwik.api.arbitraries.StringArbitrary;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.test.StreamZipper;
 import org.assertj.core.api.WithAssertions;
 
 import java.util.List;
