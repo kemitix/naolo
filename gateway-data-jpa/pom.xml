@@ -69,10 +69,20 @@
             <artifactId>log4j-web</artifactId>
         </dependency>
 
-        <!-- testing -->
+        <!-- Testing -->
         <dependency>
-            <groupId>net.kemitix.naolo</groupId>
-            <artifactId>test</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.jqwik</groupId>
+            <artifactId>jqwik</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
