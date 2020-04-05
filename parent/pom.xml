@@ -78,11 +78,6 @@
             </dependency>
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
-                <artifactId>gateway-data-deltaspike</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.kemitix.naolo</groupId>
                 <artifactId>gateway-data-jpa</artifactId>
                 <version>${project.version}</version>
             </dependency>

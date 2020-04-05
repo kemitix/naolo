@@ -9,7 +9,6 @@
         <module>parent</module>
         <module>entities</module>
         <module>core</module>
-        <module>gateway-data-deltaspike</module>
         <module>gateway-data-jpa</module>
         <module>presenter-rest-jaxrs</module>
         <module>test</module>

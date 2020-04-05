@@ -38,12 +38,6 @@
             <artifactId>jaxb-api</artifactId>
         </dependency>
 
-        <!-- meecrowave -->
-        <dependency>
-            <groupId>org.apache.meecrowave</groupId>
-            <artifactId>meecrowave-specs-api</artifactId>
-        </dependency>
-
         <!-- hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
