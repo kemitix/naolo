@@ -10,14 +10,13 @@
         <module>entities</module>
         <module>core</module>
         <module>gateway-data-jpa</module>
-        <module>presenter-rest-jaxrs</module>
+        <module>api</module>
         <module>gateway-data-common</module>
     </modules>
 
     <groupId>net.kemitix.naolo</groupId>
     <artifactId>naolo-root</artifactId>
     <version>DEV-SNAPSHOT</version>
-    <name>naolo</name>
 
     <properties>
         <maven.install.skip>true</maven.install.skip>

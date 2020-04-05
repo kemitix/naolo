@@ -12,7 +12,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>presenter-rest-jaxrs</artifactId>
+    <artifactId>naolo-api</artifactId>
     <description>Presenter Plugin as REST using JAX-RS</description>
 
     <properties>
@@ -21,13 +21,6 @@
     </properties>
 
     <dependencies>
-
-        <!-- naolo -->
-        <dependency>
-            <groupId>net.kemitix.naolo</groupId>
-            <artifactId>core</artifactId>
-        </dependency>
-
         <!-- meecrowave -->
         <dependency>
             <groupId>org.apache.meecrowave</groupId>
@@ -36,6 +29,12 @@
         <dependency>
             <groupId>org.apache.meecrowave</groupId>
             <artifactId>meecrowave-core</artifactId>
+        </dependency>
+
+        <!-- naolo -->
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>core</artifactId>
         </dependency>
 
         <!-- Testing -->

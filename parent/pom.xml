@@ -68,7 +68,7 @@
             </dependency>
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
-                <artifactId>presenter-rest-jaxrs</artifactId>
+                <artifactId>naolo-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
