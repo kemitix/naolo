@@ -5,14 +5,14 @@
 
     <parent>
         <groupId>net.kemitix.naolo</groupId>
-        <artifactId>parent</artifactId>
+        <artifactId>naolo-parent</artifactId>
         <version>DEV-SNAPSHOT</version>
         <relativePath>../parent</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>core</artifactId>
+    <artifactId>naolo-core</artifactId>
     <description>Business Use Cases</description>
 
     <properties>
@@ -23,7 +23,7 @@
     <dependencies>
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
-            <artifactId>entities</artifactId>
+            <artifactId>naolo-entities</artifactId>
         </dependency>
 
         <!-- Testing -->

@@ -13,7 +13,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.kemitix.naolo</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>naolo-parent</artifactId>
     <version>DEV-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -58,12 +58,12 @@
             <!-- naolo -->
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
-                <artifactId>entities</artifactId>
+                <artifactId>naolo-entities</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
-                <artifactId>core</artifactId>
+                <artifactId>naolo-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
