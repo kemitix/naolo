@@ -12,6 +12,7 @@
         <module>storage-spi</module>
         <module>api</module>
         <module>gateway-data-common</module>
+        <module>runner-quarkus</module>
     </modules>
 
     <groupId>net.kemitix.naolo</groupId>
