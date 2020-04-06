@@ -19,25 +19,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.gateway.data.jpa;
-
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import net.kemitix.naolo.entities.VetSpecialisation;
-
-import javax.persistence.*;
-
-/**
- * @author Paul Campbell (pcampbell@kemitix.net)
- */
-@Entity
-@Table(name = "vet_specialisations")
-@NoArgsConstructor
-@AllArgsConstructor
-class VetSpecialisationJPA {
-
-    @Id
-    @Enumerated(EnumType.STRING)
-    private VetSpecialisation value;
-
-}
+package net.kemitix.naolo.storage.spi;
