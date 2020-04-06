@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.core.vets;
+package net.kemitix.naolo.storage.spi;
 
 import net.kemitix.naolo.entities.Veterinarian;
 

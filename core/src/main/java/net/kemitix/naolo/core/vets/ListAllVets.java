@@ -23,6 +23,7 @@ package net.kemitix.naolo.core.vets;
 
 import net.kemitix.naolo.core.UseCase;
 import net.kemitix.naolo.entities.Veterinarian;
+import net.kemitix.naolo.storage.spi.VetsRepository;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
