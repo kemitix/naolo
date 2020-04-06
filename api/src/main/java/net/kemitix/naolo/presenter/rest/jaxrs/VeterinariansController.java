@@ -21,7 +21,7 @@
 
 package net.kemitix.naolo.presenter.rest.jaxrs;
 
-import net.kemitix.naolo.core.VeterinariansListAll;
+import net.kemitix.naolo.core.vets.ListAllVets;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -31,7 +31,7 @@ import javax.ws.rs.core.Response;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
-import static net.kemitix.naolo.core.VeterinariansListAll.request;
+import static net.kemitix.naolo.core.vets.ListAllVets.request;
 
 /**
  * REST Controller for Veterinarians.
@@ -42,7 +42,7 @@ import static net.kemitix.naolo.core.VeterinariansListAll.request;
 @ApplicationScoped
 public class VeterinariansController {
 
-    private final VeterinariansListAll listAll;
+    private final ListAllVets listAll;
 
     /**
      * Default constructor.
@@ -57,7 +57,7 @@ public class VeterinariansController {
      * @param listAll the UseCase for List All Veterinarians
      */
     @Inject
-    VeterinariansController(final VeterinariansListAll listAll) {
+    VeterinariansController(final ListAllVets listAll) {
         this.listAll = Objects.requireNonNull(listAll, "JAX-RS List All Veterinarians Use Case");
     }
 
@@ -72,7 +72,7 @@ public class VeterinariansController {
     public Response allVets() throws ExecutionException, InterruptedException {
         return Response.ok(
                 listAll.invoke(request())
-                        .thenApply(VeterinariansListAll.Response::getAllVeterinarians)
+                        .thenApply(ListAllVets.Response::getAllVeterinarians)
                         .get())
                 .build();
     }

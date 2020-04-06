@@ -1,10 +1,10 @@
 package net.kemitix.naolo.presenter.rest.jaxrs;
 
 import net.jqwik.api.*;
-import net.kemitix.naolo.core.VeterinarianRepository;
-import net.kemitix.naolo.core.VeterinariansListAll;
+import net.kemitix.naolo.core.vets.ListAllVets;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
+import net.kemitix.naolo.storage.spi.VetsRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +24,18 @@ class VeterinariansControllerTest implements WithAssertions {
 
     private static final int MAX_VETERINARIANS = 100;
 
-    private final VeterinarianRepository veterinarianRepository = mock(VeterinarianRepository.class);
-    private final VeterinariansController controller = new VeterinariansController(new VeterinariansListAll(veterinarianRepository));
+    private final VetsRepository vetsRepository = mock(VetsRepository.class);
+    private final VeterinariansController controller = new VeterinariansController(new ListAllVets(vetsRepository));
+
+    @Provide
+    static Arbitrary<List<Veterinarian>> vets() {
+        final Arbitrary<Long> ids = Arbitraries.longs();
+        final Arbitrary<String> names = Arbitraries.strings();
+        final Arbitrary<Set<VetSpecialisation>> specialities = Arbitraries.of(VetSpecialisation.class)
+                .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
+        return Combinators.combine(ids, names, specialities)
+                .as(Veterinarian::create).list().ofMaxSize(MAX_VETERINARIANS);
+    }
 
     @Test
     void defaultConstructorForController() {
@@ -41,21 +51,11 @@ class VeterinariansControllerTest implements WithAssertions {
             @ForAll("vets") final List<Veterinarian> vets
     ) throws ExecutionException, InterruptedException {
         //given
-        given(veterinarianRepository.findAll()).willReturn(vets.stream());
+        given(vetsRepository.findAll()).willReturn(vets.stream());
         //when
         final Response response = controller.allVets();
         //then
         final List<Veterinarian> entity = (List<Veterinarian>) response.getEntity();
         assertThat(entity).hasSize(vets.size());
-    }
-
-    @Provide
-    static Arbitrary<List<Veterinarian>> vets() {
-        final Arbitrary<Long> ids = Arbitraries.longs();
-        final Arbitrary<String> names = Arbitraries.strings();
-        final Arbitrary<Set<VetSpecialisation>> specialities = Arbitraries.of(VetSpecialisation.class)
-                .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
-        return Combinators.combine(ids, names, specialities)
-                .as(Veterinarian::create).list().ofMaxSize(MAX_VETERINARIANS);
     }
 }

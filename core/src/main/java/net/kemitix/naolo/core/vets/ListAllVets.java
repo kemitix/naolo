@@ -19,8 +19,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.core;
+package net.kemitix.naolo.core.vets;
 
+import net.kemitix.naolo.core.UseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 
 import java.util.List;
@@ -32,32 +33,31 @@ import java.util.stream.Collectors;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@SuppressWarnings("finalclass")
-public class VeterinariansListAll
-        implements UseCase<VeterinariansListAll.Request, VeterinariansListAll.Response> {
+public class ListAllVets
+        implements UseCase<ListAllVets.Request, ListAllVets.Response> {
 
     private static final Request REQUEST = new Request() {
     };
 
-    private final VeterinarianRepository repository;
+    private final VetsRepository repository;
 
     /**
      * Constructor.
      *
      * @param repository the Veterinarian Repository
      */
-    public VeterinariansListAll(final VeterinarianRepository repository) {
+    public ListAllVets(final VetsRepository repository) {
         this.repository = repository;
     }
 
     /**
-     * Creates a new {@link VeterinariansListAll} use-case.
+     * Creates a new {@link ListAllVets} use-case.
      *
-     * @param veterinarianRepository the Veterinarian repository
+     * @param vetsRepository the Veterinarian repository
      * @return a new VeterinariansListAll use-case
      */
-    public static VeterinariansListAll create(final VeterinarianRepository veterinarianRepository) {
-        return new VeterinariansListAll(veterinarianRepository);
+    public static ListAllVets create(final VetsRepository vetsRepository) {
+        return new ListAllVets(vetsRepository);
     }
 
     /**
