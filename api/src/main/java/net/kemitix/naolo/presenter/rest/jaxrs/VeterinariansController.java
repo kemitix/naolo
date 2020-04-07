@@ -27,6 +27,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.concurrent.ExecutionException;
 
@@ -61,6 +63,7 @@ public class VeterinariansController {
      * @throws InterruptedException if there is an error completing the request
      */
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response allVets() throws ExecutionException, InterruptedException {
         return Response.ok(
                 listAll.invoke(request())
