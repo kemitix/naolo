@@ -8,6 +8,7 @@
         <groupId>net.kemitix.naolo</groupId>
         <artifactId>naolo-parent</artifactId>
         <version>DEV-SNAPSHOT</version>
+        <relativePath>../parent</relativePath>
     </parent>
 
     <artifactId>naolo-h2-storage-plugin</artifactId>
