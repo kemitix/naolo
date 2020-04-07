@@ -25,6 +25,7 @@ import net.kemitix.naolo.core.UseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VetsRepository;
 
+import javax.enterprise.context.Dependent;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -34,6 +35,7 @@ import java.util.stream.Collectors;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
+@Dependent
 public class ListAllVets
         implements UseCase<ListAllVets.Request, ListAllVets.Response> {
 
