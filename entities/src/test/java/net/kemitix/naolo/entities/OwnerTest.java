@@ -16,7 +16,14 @@ class OwnerTest implements WithAssertions {
             @ForAll final String telephone
     ) {
         //given
-        final Owner owner = Owner.create(id, firstName, lastName, street, city, telephone);
+        final Owner owner = Owner.builder()
+                .id(id)
+                .firstName(firstName)
+                .lastName(lastName)
+                .street(street)
+                .city(city)
+                .telephone(telephone)
+                .build();
         //then
         assertThat(owner)
                 .returns(id, Owner::getId)
