@@ -21,6 +21,13 @@
     </properties>
 
     <dependencies>
+        <!-- jakarta-ee -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- naolo -->
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
