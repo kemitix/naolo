@@ -96,6 +96,7 @@ public class ListAllVets
     /**
      * Response.
      */
+    @FunctionalInterface
     public interface Response {
 
         /**
