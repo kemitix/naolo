@@ -18,30 +18,19 @@
     <packaging>pom</packaging>
 
     <properties>
-        <tiles-maven-plugin.version>2.15</tiles-maven-plugin.version>
-        <kemitix-maven-tiles.version>2.3.0</kemitix-maven-tiles.version>
-        <kemitix-checkstyle.version>4.1.1</kemitix-checkstyle.version>
+        <tiles-maven-plugin.version>2.16</tiles-maven-plugin.version>
+        <kemitix-maven-tiles.version>2.5.0</kemitix-maven-tiles.version>
+        <kemitix-checkstyle.version>5.4.0</kemitix-checkstyle.version>
         <scala-library.version>2.12.8</scala-library.version>
 
-        <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
-
         <lombok.version>1.18.10</lombok.version>
-        <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
-        <deltaspike.version>1.9.1</deltaspike.version>
-        <javax.persistence.version>2.2</javax.persistence.version>
-        <hibernate.version>5.4.6.Final</hibernate.version>
         <h2.version>1.4.200</h2.version>
-        <meecrowave.version>1.2.9</meecrowave.version>
 
         <spotbugs-annotations.version>3.1.12</spotbugs-annotations.version>
         <junit.version>5.6.1</junit.version>
         <assertj.version>3.15.0</assertj.version>
         <mockito.version>3.3.0</mockito.version>
         <jqwik.version>1.2.6</jqwik.version>
-        <log4j.version>2.12.1</log4j.version>
-        <jaxb-api.version>2.3.1</jaxb-api.version>
-        <geronimo-jcdi_2.0_spec.version>1.1</geronimo-jcdi_2.0_spec.version>
-        <geronimo-atinject_1.0_spec.version>1.1</geronimo-atinject_1.0_spec.version>
         <jakartaee-api.version>8.0.0</jakartaee-api.version>
         <jersey.version>2.30.1</jersey.version>
     </properties>
@@ -89,13 +78,6 @@
                 <version>${project.version}</version>
             </dependency>
 
-<!--            &lt;!&ndash; Java 9+ compatibility &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>javax.xml.bind</groupId>-->
-<!--                <artifactId>jaxb-api</artifactId>-->
-<!--                <version>${jaxb-api.version}</version>-->
-<!--            </dependency>-->
-
             <!-- lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -103,59 +85,6 @@
                 <version>${lombok.version}</version>
             </dependency>
 
-<!--            &lt;!&ndash; logging &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.logging.log4j</groupId>-->
-<!--                <artifactId>log4j-web</artifactId>-->
-<!--                <version>${log4j.version}</version>-->
-<!--            </dependency>-->
-
-<!--            &lt;!&ndash; javax.enterprise.context &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.geronimo.specs</groupId>-->
-<!--                <artifactId>geronimo-atinject_1.0_spec</artifactId>-->
-<!--                <version>${geronimo-atinject_1.0_spec.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.geronimo.specs</groupId>-->
-<!--                <artifactId>geronimo-jcdi_2.0_spec</artifactId>-->
-<!--                <version>${geronimo-jcdi_2.0_spec.version}</version>-->
-<!--            </dependency>-->
-
-<!--            &lt;!&ndash; Meecrowave &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.meecrowave</groupId>-->
-<!--                <artifactId>meecrowave-specs-api</artifactId>-->
-<!--                <version>${meecrowave.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.meecrowave</groupId>-->
-<!--                <artifactId>meecrowave-core</artifactId>-->
-<!--                <version>${meecrowave.version}</version>-->
-<!--            </dependency>-->
-
-<!--            &lt;!&ndash; DeltaSpike &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.deltaspike.distribution</groupId>-->
-<!--                <artifactId>distributions-bom</artifactId>-->
-<!--                <version>${deltaspike.version}</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
-
-<!--            &lt;!&ndash; JPA &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>javax.persistence</groupId>-->
-<!--                <artifactId>javax.persistence-api</artifactId>-->
-<!--                <version>${javax.persistence.version}</version>-->
-<!--            </dependency>-->
-
-<!--            &lt;!&ndash; Hibernate &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>org.hibernate</groupId>-->
-<!--                <artifactId>hibernate-core</artifactId>-->
-<!--                <version>${hibernate.version}</version>-->
-<!--            </dependency>-->
 
             <!-- H2 Database - for testing only -->
             <dependency>

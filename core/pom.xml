@@ -27,6 +27,7 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- naolo -->
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>naolo-entities</artifactId>
