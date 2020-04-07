@@ -6,7 +6,6 @@ import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VetsRepository;
 import org.assertj.core.api.WithAssertions;
-import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -19,8 +18,7 @@ import static org.mockito.Mockito.mock;
 /**
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-
-class VeterinariansControllerTest implements WithAssertions {
+public class VeterinariansControllerTest implements WithAssertions {
 
     private static final int MAX_VETERINARIANS = 100;
 
@@ -28,7 +26,7 @@ class VeterinariansControllerTest implements WithAssertions {
     private final VeterinariansController controller = new VeterinariansController(new ListAllVets(vetsRepository));
 
     @Provide
-    static Arbitrary<List<Veterinarian>> vets() {
+    public static Arbitrary<List<Veterinarian>> vets() {
         final Arbitrary<Long> ids = Arbitraries.longs();
         final Arbitrary<String> names = Arbitraries.strings();
         final Arbitrary<Set<VetSpecialisation>> specialities = Arbitraries.of(VetSpecialisation.class)
@@ -37,17 +35,9 @@ class VeterinariansControllerTest implements WithAssertions {
                 .as(Veterinarian::create).list().ofMaxSize(MAX_VETERINARIANS);
     }
 
-    @Test
-    void defaultConstructorForController() {
-        //when
-        final VeterinariansController controller = new VeterinariansController();
-        //then
-        assertThat(controller).isNotNull();
-    }
-
     @Property
     @SuppressWarnings("unchecked")
-    void canGetAllVets(
+    public void canGetAllVets(
             @ForAll("vets") final List<Veterinarian> vets
     ) throws ExecutionException, InterruptedException {
         //given

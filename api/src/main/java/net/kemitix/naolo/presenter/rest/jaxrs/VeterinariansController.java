@@ -28,7 +28,6 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import static net.kemitix.naolo.core.vets.ListAllVets.request;
@@ -45,20 +44,13 @@ public class VeterinariansController {
     private final ListAllVets listAll;
 
     /**
-     * Default constructor.
-     */
-    VeterinariansController() {
-        listAll = null;
-    }
-
-    /**
      * CDI Constructor.
      *
      * @param listAll the UseCase for List All Veterinarians
      */
     @Inject
     VeterinariansController(final ListAllVets listAll) {
-        this.listAll = Objects.requireNonNull(listAll, "JAX-RS List All Veterinarians Use Case");
+        this.listAll = listAll;
     }
 
     /**
