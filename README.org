@@ -22,24 +22,6 @@
   =presenter-rest= and =gateway-data= plugins.
 
 
-** Spring Boot, with Spring HATEOAS and Spring Data
-
-   A REST web interface is implemented using [[https://spring.io/projects/spring-hateoas][Spring HATEOAS]] and database
-   services using [[https://spring.io/projects/spring-data][Spring Data]]. These are provided as plugins using the
-   =presenter-rest-spring= and =gateway-data-spring= modules.
-
-   This configuration uses [[https://spring.io/projects/spring-boot][Spring Boot]] as its environment, via the
-   =run-spring-boot= module.
-
-   [[file:/doc/images/module-dependencies-spring.png]]
-
-   The Spring version can be built and run from source using:
-
-   #+BEGIN_SRC bash
-   ./bin/spring-boot-run.sh
-   #+END_SRC
-
-
 ** Apache Meecrowave with JAX-RS and Apache DeltaSpike Data
 
    A REST web interface is implemented using [[https://jax-rs.github.io/apidocs/2.1/][JAX-RS]] and database services using

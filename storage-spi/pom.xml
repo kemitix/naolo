@@ -12,8 +12,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>naolo-core</artifactId>
-    <description>Business Use Cases</description>
+    <artifactId>naolo-storage-spi</artifactId>
+    <description>SPI definition for Storage plugins</description>
 
     <properties>
         <pitest.skip>true</pitest.skip>
@@ -21,6 +21,7 @@
     </properties>
 
     <dependencies>
+        <!-- jakarta-ee -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
@@ -32,9 +33,19 @@
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>naolo-entities</artifactId>
         </dependency>
+
+        <!-- lombok -->
         <dependency>
-            <groupId>net.kemitix.naolo</groupId>
-            <artifactId>naolo-storage-spi</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Spotbugs Annotations -->
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Testing -->
@@ -54,10 +65,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
 </project>

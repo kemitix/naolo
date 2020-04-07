@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
@@ -9,24 +9,20 @@
         <module>parent</module>
         <module>entities</module>
         <module>core</module>
-        <module>presenter-rest-spring</module>
-        <module>gateway-data-spring</module>
-        <module>gateway-data-deltaspike</module>
-        <module>gateway-data-jpa</module>
-        <module>presenter-rest-jaxrs</module>
-        <module>run-spring-boot</module>
-        <module>run-meecrowave-deltaspike</module>
-        <module>run-meecrowave-jpa</module>
-        <module>test</module>
-        <module>gateway-data-common</module>
+        <module>storage-spi</module>
+        <module>api</module>
+        <module>runner-quarkus</module>
+        <module>h2-storage-plugin</module>
     </modules>
 
     <groupId>net.kemitix.naolo</groupId>
     <artifactId>naolo-root</artifactId>
     <version>DEV-SNAPSHOT</version>
-    <name>naolo</name>
 
     <properties>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.tarket>${java.version}</maven.compiler.tarket>
         <maven.install.skip>true</maven.install.skip>
     </properties>
 </project>

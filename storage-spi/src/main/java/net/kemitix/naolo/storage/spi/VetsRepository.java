@@ -19,4 +19,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.entities;
+package net.kemitix.naolo.storage.spi;
+
+import net.kemitix.naolo.entities.Veterinarian;
+
+import java.util.stream.Stream;
+
+/**
+ * Repository for {@link Veterinarian}.
+ *
+ * @author Paul Campbell (pcampbell@kemitix.net)
+ */
+public interface VetsRepository {
+
+    /**
+     * Find all Veterinarians.
+     *
+     * @return a Stream of Veterinarians
+     */
+    Stream<Veterinarian> findAll();
+
+}
