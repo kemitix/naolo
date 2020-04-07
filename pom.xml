@@ -12,6 +12,7 @@
         <module>storage-spi</module>
         <module>api</module>
         <module>runner-quarkus</module>
+        <module>h2-storage-plugin</module>
     </modules>
 
     <groupId>net.kemitix.naolo</groupId>

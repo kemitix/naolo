@@ -77,6 +77,11 @@
                 <artifactId>naolo-storage-spi</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>net.kemitix.naolo</groupId>
+                <artifactId>naolo-h2-storage-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- lombok -->
             <dependency>
