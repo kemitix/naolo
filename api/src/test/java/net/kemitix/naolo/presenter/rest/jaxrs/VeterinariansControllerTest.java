@@ -4,7 +4,7 @@ import net.jqwik.api.*;
 import net.kemitix.naolo.core.vets.ListAllVets;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.VetsRepository;
+import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
 
 import javax.ws.rs.core.Response;
@@ -22,8 +22,8 @@ public class VeterinariansControllerTest implements WithAssertions {
 
     private static final int MAX_VETERINARIANS = 100;
 
-    private final VetsRepository vetsRepository = mock(VetsRepository.class);
-    private final VeterinariansController controller = new VeterinariansController(new ListAllVets(vetsRepository));
+    private final VeterinarianRepository veterinarianRepository = mock(VeterinarianRepository.class);
+    private final VeterinariansController controller = new VeterinariansController(new ListAllVets(veterinarianRepository));
 
     @Provide
     public static Arbitrary<List<Veterinarian>> vets() {
@@ -32,7 +32,14 @@ public class VeterinariansControllerTest implements WithAssertions {
         final Arbitrary<Set<VetSpecialisation>> specialities = Arbitraries.of(VetSpecialisation.class)
                 .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
         return Combinators.combine(ids, names, specialities)
-                .as(Veterinarian::create).list().ofMaxSize(MAX_VETERINARIANS);
+                .as((id, name, vetSpecs) ->
+                        Veterinarian.builder()
+                                .id(id)
+                                .name(name)
+                                .specialisations(vetSpecs)
+                                .build())
+                .list()
+                .ofMaxSize(MAX_VETERINARIANS);
     }
 
     @Property
@@ -41,7 +48,7 @@ public class VeterinariansControllerTest implements WithAssertions {
             @ForAll("vets") final List<Veterinarian> vets
     ) throws ExecutionException, InterruptedException {
         //given
-        given(vetsRepository.findAll()).willReturn(vets.stream());
+        given(veterinarianRepository.findAll()).willReturn(vets.stream());
         //when
         final Response response = controller.allVets();
         //then

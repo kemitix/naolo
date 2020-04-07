@@ -7,7 +7,7 @@ import net.jqwik.api.arbitraries.StringArbitrary;
 import net.kemitix.naolo.core.StreamZipper;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.VetsRepository;
+import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.mock;
 
 public class ListAllVetsTest implements WithAssertions {
 
-    private final VetsRepository repository = mock(VetsRepository.class);
+    private final VeterinarianRepository repository = mock(VeterinarianRepository.class);
 
     private final ListAllVets useCase = ListAllVets.create(repository);
 
@@ -32,7 +32,12 @@ public class ListAllVetsTest implements WithAssertions {
         final SizableArbitrary<Set<VetSpecialisation>> specialisations = Arbitraries.of(VetSpecialisation.class)
                 .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
         return Combinators.combine(ids, names, specialisations)
-                .as(Veterinarian::create)
+                .as((id, name, vetSpecs) ->
+                        Veterinarian.builder()
+                                .id(id)
+                                .name(name)
+                                .specialisations(vetSpecs)
+                                .build())
                 .list();
     }
 
