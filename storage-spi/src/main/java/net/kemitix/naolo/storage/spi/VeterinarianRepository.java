@@ -30,7 +30,7 @@ import java.util.stream.Stream;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-public interface VetsRepository {
+public interface VeterinarianRepository {
 
     /**
      * Find all Veterinarians.

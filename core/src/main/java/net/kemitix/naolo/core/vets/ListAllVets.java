@@ -23,7 +23,7 @@ package net.kemitix.naolo.core.vets;
 
 import net.kemitix.naolo.core.UseCase;
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.VetsRepository;
+import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 
 import javax.enterprise.context.Dependent;
 import java.util.List;
@@ -42,25 +42,25 @@ public class ListAllVets
     private static final Request REQUEST = new Request() {
     };
 
-    private final VetsRepository repository;
+    private final VeterinarianRepository repository;
 
     /**
      * Constructor.
      *
      * @param repository the Veterinarian Repository
      */
-    public ListAllVets(final VetsRepository repository) {
+    public ListAllVets(final VeterinarianRepository repository) {
         this.repository = repository;
     }
 
     /**
      * Creates a new {@link ListAllVets} use-case.
      *
-     * @param vetsRepository the Veterinarian repository
+     * @param veterinarianRepository the Veterinarian repository
      * @return a new VeterinariansListAll use-case
      */
-    public static ListAllVets create(final VetsRepository vetsRepository) {
-        return new ListAllVets(vetsRepository);
+    public static ListAllVets create(final VeterinarianRepository veterinarianRepository) {
+        return new ListAllVets(veterinarianRepository);
     }
 
     /**
