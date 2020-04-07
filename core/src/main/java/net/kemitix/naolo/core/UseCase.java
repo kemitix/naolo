@@ -21,8 +21,6 @@
 
 package net.kemitix.naolo.core;
 
-import java.util.concurrent.CompletableFuture;
-
 /**
  * Interface for UseCases.
  *
@@ -37,6 +35,6 @@ public interface UseCase<T, R> {
      * @param request the Request
      * @return the Response
      */
-    CompletableFuture<R> invoke(T request);
+    R invoke(T request);
 
 }

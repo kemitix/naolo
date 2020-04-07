@@ -27,7 +27,6 @@ import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 
 import javax.enterprise.context.Dependent;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -81,10 +80,8 @@ public class ListAllVets
      * @return the Response
      */
     @Override
-    public CompletableFuture<Response> invoke(final Request request) {
-        return CompletableFuture.supplyAsync(() -> () -> {
-            return repository.findAll().collect(Collectors.toList());
-        });
+    public Response invoke(final Request request) {
+        return () -> repository.findAll().collect(Collectors.toList());
     }
 
     /**

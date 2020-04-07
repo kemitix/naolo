@@ -64,8 +64,7 @@ public class VeterinariansController {
     public Response allVets() throws ExecutionException, InterruptedException {
         return Response.ok(
                 listAll.invoke(request())
-                        .thenApply(ListAllVets.Response::getAllVeterinarians)
-                        .get())
+                        .getAllVeterinarians())
                 .build();
     }
 
