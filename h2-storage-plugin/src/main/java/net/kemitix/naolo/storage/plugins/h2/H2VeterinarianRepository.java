@@ -31,11 +31,12 @@ public class H2VeterinarianRepository
     }
 
     private Function<VeterinarianJPA, Veterinarian> jpaToEntity() {
-        return jpa -> Veterinarian.create()
-                .withId(jpa.getId())
-                .withName(jpa.getName())
-                .withSpecialisations(
+        return jpa -> Veterinarian.builder()
+                .id(jpa.getId())
+                .name(jpa.getName())
+                .specialisations(
                         VetSpecialisation.parse(
-                                jpa.getSpecialisations()));
+                                jpa.getSpecialisations()))
+                .build();
     }
 }
