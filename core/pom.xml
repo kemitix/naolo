@@ -18,6 +18,8 @@
     <properties>
         <pitest.skip>true</pitest.skip>
         <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
+        <jacoco-class-instruction-covered-ratio>0</jacoco-class-instruction-covered-ratio>
+        <jacoco-class-line-covered-ratio>0.66</jacoco-class-line-covered-ratio>
     </properties>
 
     <dependencies>
@@ -57,6 +59,10 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 

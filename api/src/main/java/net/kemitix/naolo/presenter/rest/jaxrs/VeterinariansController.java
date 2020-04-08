@@ -21,13 +21,13 @@
 
 package net.kemitix.naolo.presenter.rest.jaxrs;
 
+import net.kemitix.naolo.core.vets.AddVet;
 import net.kemitix.naolo.core.vets.ListAllVets;
+import net.kemitix.naolo.entities.Veterinarian;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.concurrent.ExecutionException;
@@ -44,15 +44,21 @@ import static net.kemitix.naolo.core.vets.ListAllVets.request;
 public class VeterinariansController {
 
     private final ListAllVets listAll;
+    private final AddVet addVet;
 
     /**
      * CDI Constructor.
      *
      * @param listAll the UseCase for List All Veterinarians
+     * @param addVet
      */
     @Inject
-    VeterinariansController(final ListAllVets listAll) {
+    VeterinariansController(
+            final ListAllVets listAll,
+            final AddVet addVet
+    ) {
         this.listAll = listAll;
+        this.addVet = addVet;
     }
 
     /**
@@ -68,6 +74,18 @@ public class VeterinariansController {
         return Response.ok(
                 listAll.invoke(request())
                         .getAllVeterinarians())
+                .build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response add(final Veterinarian veterinarian) {
+        final AddVet.Response response = addVet.invoke(AddVet.Request.builder()
+                .veterinarian(veterinarian)
+                .build());
+        return Response.ok()
+                .entity(response.getVeterinarian())
                 .build();
     }
 

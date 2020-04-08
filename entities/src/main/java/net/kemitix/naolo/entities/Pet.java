@@ -1,14 +1,14 @@
 package net.kemitix.naolo.entities;
 
-import lombok.Builder;
-import lombok.Value;
-import lombok.With;
+import lombok.*;
 
 import java.time.ZonedDateTime;
 
-@Value
-@Builder
 @With
+@Builder
+@Value
+@NoArgsConstructor(force = true, access = AccessLevel.PACKAGE)
+@AllArgsConstructor
 public class Pet {
     Long id;
     String name;

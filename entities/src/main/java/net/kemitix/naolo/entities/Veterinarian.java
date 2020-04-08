@@ -1,14 +1,14 @@
 package net.kemitix.naolo.entities;
 
-import lombok.Builder;
-import lombok.Value;
-import lombok.With;
+import lombok.*;
 
 import java.util.Set;
 
 @With
-@Value
 @Builder
+@Value
+@NoArgsConstructor(force = true, access = AccessLevel.PACKAGE)
+@AllArgsConstructor
 public class Veterinarian {
     Long id;
     String name;

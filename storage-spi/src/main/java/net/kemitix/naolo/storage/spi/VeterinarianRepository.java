@@ -39,4 +39,11 @@ public interface VeterinarianRepository {
      */
     Stream<Veterinarian> findAll();
 
+    /**
+     * Adds a new Veterinarian.
+     *
+     * @param veterinarian the vet to add
+     * @return the added vet
+     */
+    Veterinarian add(Veterinarian veterinarian);
 }
