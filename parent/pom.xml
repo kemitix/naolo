@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.kemitix</groupId>
         <artifactId>kemitix-parent</artifactId>
-        <version>5.2.0</version>
+        <version>5.3.0</version>
         <relativePath/>
     </parent>
 
@@ -25,7 +25,7 @@
         <lombok.version>1.18.12</lombok.version>
         <h2.version>1.4.200</h2.version>
 
-        <spotbugs-annotations.version>3.1.12</spotbugs-annotations.version>
+        <spotbugs-annotations.version>4.0.1</spotbugs-annotations.version>
         <junit.version>5.6.1</junit.version>
         <assertj.version>3.15.0</assertj.version>
         <mockito.version>3.3.3</mockito.version>
