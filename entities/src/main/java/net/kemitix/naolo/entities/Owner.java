@@ -1,13 +1,13 @@
 package net.kemitix.naolo.entities;
 
 
-import lombok.Builder;
-import lombok.Value;
-import lombok.With;
+import lombok.*;
 
 @With
-@Value
 @Builder
+@Value
+@NoArgsConstructor(force = true, access = AccessLevel.PACKAGE)
+@AllArgsConstructor
 public class Owner {
     Long id;
     String firstName;

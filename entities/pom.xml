@@ -17,6 +17,7 @@
 
     <properties>
         <pitest.skip>true</pitest.skip>
+        <jacoco-class-instruction-covered-ratio>0</jacoco-class-instruction-covered-ratio>
         <digraph-dependency.basePackage>net.kemitix.naolo</digraph-dependency.basePackage>
     </properties>
 
@@ -26,6 +27,23 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.jqwik</groupId>
+            <artifactId>jqwik</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 </project>
