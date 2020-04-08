@@ -8,6 +8,7 @@ import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.stream.Stream;
 
 @ApplicationScoped
@@ -32,10 +33,22 @@ public class H2VeterinarianRepository
     public Stream<Veterinarian> findAll() {
         return entityManager
                 .createQuery(
-                        "Select v From VeterinarianJPA v Order By v.name",
+                        "Select v " +
+                                "From VeterinarianJPA v " +
+                                "Order By v.name",
                         VeterinarianJPA.class)
                 .getResultStream()
                 .map(jpaToEntity);
+    }
+
+    @Transactional
+    @Override
+    public Veterinarian add(final Veterinarian veterinarian) {
+        return entityToJpa
+                .andThen(entityManager::merge)
+                .andThen(VeterinarianJPA::getId)
+                .andThen(veterinarian::withId)
+                .apply(veterinarian);
     }
 
 }
