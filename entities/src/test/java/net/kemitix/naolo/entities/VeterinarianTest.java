@@ -35,5 +35,14 @@ public class VeterinarianTest
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
         assertThat(allArgs).isEqualTo(builder);
+        assertThat(allArgs.getId()).isEqualTo(id);
+        assertThat(allArgs.getName()).isEqualTo(name);
+        assertThat(allArgs.getSpecialisations()).isEqualTo(specialisations);
+        assertThat(allArgs.toString())
+                .isEqualTo(
+                        "Veterinarian(" +
+                                "id=23, " +
+                                "name=Name, " +
+                                "specialisations=[RADIOLOGY])");
     }
 }
