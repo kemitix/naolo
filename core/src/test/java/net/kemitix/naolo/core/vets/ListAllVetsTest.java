@@ -48,7 +48,7 @@ public class ListAllVetsTest implements WithAssertions {
         //given
         given(repository.findAll()).willReturn(vets.stream());
         //when
-        final ListAllVets.Response response = useCase.invoke(request()).get();
+        final ListAllVets.Response response = useCase.invoke(request());
         //then
         final Stream<Tuple.Tuple2<Veterinarian, Veterinarian>> zipped =
                 StreamZipper.zip(vets, response.getAllVeterinarians(), Tuple::of);

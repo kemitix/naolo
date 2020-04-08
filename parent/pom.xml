@@ -21,7 +21,6 @@
         <tiles-maven-plugin.version>2.16</tiles-maven-plugin.version>
         <kemitix-maven-tiles.version>2.5.0</kemitix-maven-tiles.version>
         <kemitix-checkstyle.version>5.4.0</kemitix-checkstyle.version>
-        <scala-library.version>2.13.1</scala-library.version>
 
         <lombok.version>1.18.12</lombok.version>
         <h2.version>1.4.200</h2.version>
@@ -42,13 +41,6 @@
                 <groupId>jakarta.platform</groupId>
                 <artifactId>jakarta.jakartaee-api</artifactId>
                 <version>${jakartaee-api.version}</version>
-            </dependency>
-
-            <!-- Scala -->
-            <dependency>
-                <groupId>org.scala-lang</groupId>
-                <artifactId>scala-library</artifactId>
-                <version>${scala-library.version}</version>
             </dependency>
 
             <!-- naolo -->
@@ -154,7 +146,6 @@
                         <tile>net.kemitix.tiles:testing:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.tiles:coverage:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.tiles:pitest:${kemitix-maven-tiles.version}</tile>
-                        <tile>net.kemitix.tiles:scala-lang:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.checkstyle:tile:${kemitix-checkstyle.version}</tile>
                     </tiles>
                 </configuration>
