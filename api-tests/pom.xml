@@ -9,7 +9,7 @@
         <relativePath>../parent</relativePath>
     </parent>
 
-    <artifactId>api-tests</artifactId>
+    <artifactId>naolo-api-tests</artifactId>
 
     <dependencies>
         <dependency>
