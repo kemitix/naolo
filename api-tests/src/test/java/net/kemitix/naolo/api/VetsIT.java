@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static net.kemitix.naolo.api.JsonMatcher.jsonArray;
+import static net.kemitix.naolo.api.JsonMatcher.jsonObject;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
@@ -46,15 +48,13 @@ public class VetsIT {
                 .post(PATH)
                 .then()
                 .statusCode(200)
-                .body(new JsonMatcher<>(
-                        addedVet));
+                .body(jsonObject(addedVet));
         // now we have a vet
         given()
                 .when().get(PATH)
                 .then()
                 .statusCode(200)
-                .body(new JsonMatcher<>(
-                        vetList));
+                .body(jsonArray(vetList));
     }
 
 }
