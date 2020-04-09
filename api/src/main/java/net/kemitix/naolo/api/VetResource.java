@@ -73,7 +73,7 @@ public class VetResource {
     public Response allVets() throws ExecutionException, InterruptedException {
         return Response.ok(
                 listAll.invoke(request())
-                        .getAllVeterinarians())
+                        .getVeterinarians())
                 .build();
     }
 

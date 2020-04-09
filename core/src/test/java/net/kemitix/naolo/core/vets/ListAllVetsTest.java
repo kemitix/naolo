@@ -12,7 +12,6 @@ import org.assertj.core.api.WithAssertions;
 
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.stream.Stream;
 
 import static net.kemitix.naolo.core.vets.ListAllVets.request;
@@ -44,14 +43,14 @@ public class ListAllVetsTest implements WithAssertions {
     @Property
     public void listAll(
             @ForAll("vets") final List<Veterinarian> vets
-    ) throws ExecutionException, InterruptedException {
+    ) {
         //given
         given(repository.findAll()).willReturn(vets.stream());
         //when
         final ListAllVets.Response response = useCase.invoke(request());
         //then
         final Stream<Tuple.Tuple2<Veterinarian, Veterinarian>> zipped =
-                StreamZipper.zip(vets, response.getAllVeterinarians(), Tuple::of);
+                StreamZipper.zip(vets, response.getVeterinarians(), Tuple::of);
         assertThat(zipped).hasSize(vets.size())
                 .allSatisfy(t -> {
                     final Veterinarian s = t.get1();
