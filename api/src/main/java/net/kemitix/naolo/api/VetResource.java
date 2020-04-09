@@ -21,12 +21,12 @@
 
 package net.kemitix.naolo.api;
 
+import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.vets.AddVet;
 import net.kemitix.naolo.core.vets.ListAllVets;
 import net.kemitix.naolo.entities.Veterinarian;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -41,25 +41,11 @@ import static net.kemitix.naolo.core.vets.ListAllVets.request;
  */
 @Path("/vets")
 @ApplicationScoped
+@RequiredArgsConstructor
 public class VetResource {
 
     private final ListAllVets listAll;
     private final AddVet addVet;
-
-    /**
-     * CDI Constructor.
-     *
-     * @param listAll the UseCase for List All Veterinarians
-     * @param addVet
-     */
-    @Inject
-    VetResource(
-            final ListAllVets listAll,
-            final AddVet addVet
-    ) {
-        this.listAll = listAll;
-        this.addVet = addVet;
-    }
 
     /**
      * List all Veterinarians endpoint.
