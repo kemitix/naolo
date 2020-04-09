@@ -32,11 +32,10 @@ public class ListAllVetsTest implements WithAssertions {
                 .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
         return Combinators.combine(ids, names, specialisations)
                 .as((id, name, vetSpecs) ->
-                        Veterinarian.builder()
-                                .id(id)
-                                .name(name)
-                                .specialisations(vetSpecs)
-                                .build())
+                        new Veterinarian()
+                                .withId(id)
+                                .withName(name)
+                                .withSpecialisations(vetSpecs))
                 .list();
     }
 

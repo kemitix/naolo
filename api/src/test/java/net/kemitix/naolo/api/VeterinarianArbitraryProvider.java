@@ -33,10 +33,9 @@ public class VeterinarianArbitraryProvider
         return Collections.singleton(
                 Combinators.combine(ids, names, specialities)
                         .as((id, name, vetSpecs) ->
-                                Veterinarian.builder()
-                                        .id(id)
-                                        .name(name)
-                                        .specialisations(vetSpecs)
-                                        .build()));
+                                new Veterinarian()
+                                        .withId(id)
+                                        .withName(name)
+                                        .withSpecialisations(vetSpecs)));
     }
 }

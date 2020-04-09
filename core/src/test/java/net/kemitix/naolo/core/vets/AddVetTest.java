@@ -41,10 +41,11 @@ implements WithAssertions {
     @DisplayName("When invoked the vet is added")
     public void invokeAddsVet() {
         //given
-        final Veterinarian vet = Veterinarian.builder()
-                .name("name")
-                .specialisations(Collections.singleton(VetSpecialisation.RADIOLOGY))
-                .build();
+        final Veterinarian vet =
+                new Veterinarian()
+                        .withName("name")
+                        .withSpecialisations(Collections.singleton(
+                                VetSpecialisation.RADIOLOGY));
         final AddVet.Request request =
                 AddVet.Request.builder()
                         .veterinarian(vet)

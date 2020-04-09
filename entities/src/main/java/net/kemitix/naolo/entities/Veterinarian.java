@@ -9,7 +9,6 @@ import java.util.Set;
 @NamedQuery(name = Veterinarian.FIND_ALL,
         query = "Select v From Veterinarian v Order By v.name")
 @With
-@Builder
 @Getter
 @ToString
 @EqualsAndHashCode

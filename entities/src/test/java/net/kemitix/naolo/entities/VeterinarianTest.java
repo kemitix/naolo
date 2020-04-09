@@ -26,15 +26,8 @@ public class VeterinarianTest
                         .withId(id)
                         .withName(name)
                         .withSpecialisations(specialisations);
-        final Veterinarian builder =
-                Veterinarian.builder()
-                        .id(id)
-                        .name(name)
-                        .specialisations(specialisations)
-                        .build();
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
-        assertThat(allArgs).isEqualTo(builder);
         assertThat(allArgs.getId()).isEqualTo(id);
         assertThat(allArgs.getName()).isEqualTo(name);
         assertThat(allArgs.getSpecialisations()).isEqualTo(specialisations);
