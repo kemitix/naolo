@@ -9,6 +9,7 @@ import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class VeterinarianArbitraryProvider
@@ -25,9 +26,9 @@ public class VeterinarianArbitraryProvider
     ) {
         final Arbitrary<Long> ids = Arbitraries.longs();
         final Arbitrary<String> names = Arbitraries.strings();
-        final Arbitrary<Set<VetSpecialisation>> specialities =
+        final Arbitrary<List<VetSpecialisation>> specialities =
                 Arbitraries.of(VetSpecialisation.class)
-                        .set()
+                        .list()
                         .ofMinSize(0)
                         .ofMaxSize(VetSpecialisation.values().length);
         return Collections.singleton(

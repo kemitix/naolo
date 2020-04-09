@@ -44,8 +44,9 @@ implements WithAssertions {
         final Veterinarian vet =
                 new Veterinarian()
                         .withName("name")
-                        .withSpecialisations(Collections.singleton(
-                                VetSpecialisation.RADIOLOGY));
+                        .withSpecialisations(
+                                Collections.singletonList(
+                                        VetSpecialisation.RADIOLOGY));
         final AddVet.Request request =
                 AddVet.Request.builder()
                         .veterinarian(vet)

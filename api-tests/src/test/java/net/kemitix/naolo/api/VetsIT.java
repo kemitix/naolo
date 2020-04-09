@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-public class VetsTests {
+public class VetsIT {
 
     private static final String PATH = "/vets";
 
@@ -46,12 +46,15 @@ public class VetsTests {
                 .post(PATH)
                 .then()
                 .statusCode(200)
-                .body(is(addedVet.encode()));
+                .body(new JsonMatcher<>(
+                        addedVet));
         // now we have a vet
         given()
                 .when().get(PATH)
                 .then()
                 .statusCode(200)
-                .body(is(vetList.encode()));
+                .body(new JsonMatcher<>(
+                        vetList));
     }
+
 }

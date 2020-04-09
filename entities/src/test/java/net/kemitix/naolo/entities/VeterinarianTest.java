@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
-import java.util.Set;
+import java.util.List;
 
 public class VeterinarianTest
         implements WithAssertions {
@@ -16,8 +16,8 @@ public class VeterinarianTest
         //given
         final long id = 23L;
         final String name = "Name";
-        final Set<VetSpecialisation> specialisations =
-                Collections.singleton(VetSpecialisation.RADIOLOGY);
+        final List<VetSpecialisation> specialisations =
+                Collections.singletonList(VetSpecialisation.RADIOLOGY);
         //when
         final Veterinarian allArgs =
                 new Veterinarian(id, name, specialisations);

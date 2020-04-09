@@ -3,7 +3,7 @@ package net.kemitix.naolo.entities;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @NamedQuery(name = Veterinarian.FIND_ALL,
@@ -25,5 +25,5 @@ public class Veterinarian {
             name = "vet_specialisation",
             joinColumns = @JoinColumn(name = "vet_id"))
     @Column(name = "specialisation_id")
-    Set<VetSpecialisation> specialisations;
+    List<VetSpecialisation> specialisations;
 }

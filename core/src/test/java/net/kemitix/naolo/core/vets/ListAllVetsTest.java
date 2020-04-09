@@ -11,7 +11,6 @@ import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static net.kemitix.naolo.core.vets.ListAllVets.request;
@@ -28,8 +27,11 @@ public class ListAllVetsTest implements WithAssertions {
     public static Arbitrary<List<Veterinarian>> vets() {
         final LongArbitrary ids = Arbitraries.longs();
         final StringArbitrary names = Arbitraries.strings();
-        final SizableArbitrary<Set<VetSpecialisation>> specialisations = Arbitraries.of(VetSpecialisation.class)
-                .set().ofMinSize(0).ofMaxSize(VetSpecialisation.values().length);
+        final SizableArbitrary<List<VetSpecialisation>> specialisations =
+                Arbitraries.of(VetSpecialisation.class)
+                        .list()
+                        .ofMinSize(0)
+                        .ofMaxSize(VetSpecialisation.values().length);
         return Combinators.combine(ids, names, specialisations)
                 .as((id, name, vetSpecs) ->
                         new Veterinarian()
