@@ -1,7 +1,7 @@
 package net.kemitix.naolo.core.vets;
 
 import lombok.Builder;
-import lombok.Value;
+import lombok.Getter;
 import lombok.With;
 import lombok.extern.java.Log;
 import net.kemitix.naolo.core.UseCase;
@@ -31,14 +31,14 @@ public class AddVet
                 .build();
     }
 
-    @Value
+    @Getter
     @With
     @Builder
     public static class Request {
         Veterinarian veterinarian;
     }
 
-    @Value
+    @Getter
     @With
     @Builder
     public static class Response {

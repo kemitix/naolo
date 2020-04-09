@@ -1,0 +1,39 @@
+package net.kemitix.naolo.api;
+
+import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import org.hamcrest.CustomMatcher;
+
+class JsonMatcher<T> extends CustomMatcher<T> {
+
+    private final JsonObject expectedObject;
+    private final JsonArray expectedArray;
+    private final boolean isObject;
+
+    public JsonMatcher(
+            final JsonObject expected
+    ) {
+        super(expected.encode());
+        isObject = true;
+        expectedObject = expected;
+        expectedArray = null;
+    }
+
+    public JsonMatcher(
+            final JsonArray expected
+    ) {
+        super(expected.encode());
+        isObject = false;
+        expectedObject = null;
+        expectedArray = expected;
+    }
+
+    @Override
+    public boolean matches(final Object actual) {
+        return Json.decodeValue((String) actual)
+                .equals(isObject
+                        ? expectedObject
+                        : expectedArray);
+    }
+}

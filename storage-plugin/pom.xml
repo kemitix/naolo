@@ -11,7 +11,7 @@
         <relativePath>../parent</relativePath>
     </parent>
 
-    <artifactId>naolo-h2-storage-plugin</artifactId>
+    <artifactId>naolo-storage-plugin</artifactId>
 
     <properties>
         <pitest.skip>true</pitest.skip>
@@ -23,15 +23,16 @@
             <artifactId>jakarta.jakartaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <scope>provided</scope>
+            <type>pom</type>
+        </dependency>
 
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>naolo-storage-spi</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
         </dependency>
     </dependencies>
 

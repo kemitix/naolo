@@ -21,6 +21,9 @@
 
 package net.kemitix.naolo.core.vets;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.With;
 import net.kemitix.naolo.core.UseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
@@ -53,16 +56,6 @@ public class ListAllVets
     }
 
     /**
-     * Creates a new {@link ListAllVets} use-case.
-     *
-     * @param veterinarianRepository the Veterinarian repository
-     * @return a new VeterinariansListAll use-case
-     */
-    public static ListAllVets create(final VeterinarianRepository veterinarianRepository) {
-        return new ListAllVets(veterinarianRepository);
-    }
-
-    /**
      * Returns the empty request.
      *
      * @return the empty request object
@@ -81,31 +74,21 @@ public class ListAllVets
      */
     @Override
     public Response invoke(final Request request) {
-        return () -> repository.findAll().collect(Collectors.toList());
+        return Response.builder()
+                .veterinarians(
+                        repository.findAll()
+                                .collect(Collectors.toList()))
+                .build();
     }
 
-    /**
-     * Empty Request Parameter.
-     *
-     * <p>Use the {@link #request()} to obtain an instance.</p>
-     */
-    interface Request {
-
+    @Getter
+    @With
+    @Builder
+    public static class Response {
+        List<Veterinarian> veterinarians;
     }
 
-    /**
-     * Response.
-     */
-    @FunctionalInterface
-    public interface Response {
-
-        /**
-         * The list of all Veterinarians.
-         *
-         * @return the list of all Veterinarians
-         */
-        List<Veterinarian> getAllVeterinarians();
-
+    public static class Request {
     }
 
 }

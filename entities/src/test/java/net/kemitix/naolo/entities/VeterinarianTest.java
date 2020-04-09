@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
-import java.util.Set;
+import java.util.List;
 
 public class VeterinarianTest
         implements WithAssertions {
@@ -16,8 +16,8 @@ public class VeterinarianTest
         //given
         final long id = 23L;
         final String name = "Name";
-        final Set<VetSpecialisation> specialisations =
-                Collections.singleton(VetSpecialisation.RADIOLOGY);
+        final List<VetSpecialisation> specialisations =
+                Collections.singletonList(VetSpecialisation.RADIOLOGY);
         //when
         final Veterinarian allArgs =
                 new Veterinarian(id, name, specialisations);
@@ -26,15 +26,8 @@ public class VeterinarianTest
                         .withId(id)
                         .withName(name)
                         .withSpecialisations(specialisations);
-        final Veterinarian builder =
-                Veterinarian.builder()
-                        .id(id)
-                        .name(name)
-                        .specialisations(specialisations)
-                        .build();
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
-        assertThat(allArgs).isEqualTo(builder);
         assertThat(allArgs.getId()).isEqualTo(id);
         assertThat(allArgs.getName()).isEqualTo(name);
         assertThat(allArgs.getSpecialisations()).isEqualTo(specialisations);

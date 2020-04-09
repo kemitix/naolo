@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.presenter.rest.jaxrs;
+package net.kemitix.naolo.api;
 
 import net.kemitix.naolo.core.vets.AddVet;
 import net.kemitix.naolo.core.vets.ListAllVets;
@@ -41,7 +41,7 @@ import static net.kemitix.naolo.core.vets.ListAllVets.request;
  */
 @Path("/vets")
 @ApplicationScoped
-public class VeterinariansController {
+public class VetResource {
 
     private final ListAllVets listAll;
     private final AddVet addVet;
@@ -53,7 +53,7 @@ public class VeterinariansController {
      * @param addVet
      */
     @Inject
-    VeterinariansController(
+    VetResource(
             final ListAllVets listAll,
             final AddVet addVet
     ) {
@@ -73,7 +73,7 @@ public class VeterinariansController {
     public Response allVets() throws ExecutionException, InterruptedException {
         return Response.ok(
                 listAll.invoke(request())
-                        .getAllVeterinarians())
+                        .getVeterinarians())
                 .build();
     }
 

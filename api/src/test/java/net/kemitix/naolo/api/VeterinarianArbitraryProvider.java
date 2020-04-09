@@ -1,4 +1,4 @@
-package net.kemitix.naolo.presenter.rest.jaxrs;
+package net.kemitix.naolo.api;
 
 import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
@@ -9,6 +9,7 @@ import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class VeterinarianArbitraryProvider
@@ -25,18 +26,17 @@ public class VeterinarianArbitraryProvider
     ) {
         final Arbitrary<Long> ids = Arbitraries.longs();
         final Arbitrary<String> names = Arbitraries.strings();
-        final Arbitrary<Set<VetSpecialisation>> specialities =
+        final Arbitrary<List<VetSpecialisation>> specialities =
                 Arbitraries.of(VetSpecialisation.class)
-                        .set()
+                        .list()
                         .ofMinSize(0)
                         .ofMaxSize(VetSpecialisation.values().length);
         return Collections.singleton(
                 Combinators.combine(ids, names, specialities)
                         .as((id, name, vetSpecs) ->
-                                Veterinarian.builder()
-                                        .id(id)
-                                        .name(name)
-                                        .specialisations(vetSpecs)
-                                        .build()));
+                                new Veterinarian()
+                                        .withId(id)
+                                        .withName(name)
+                                        .withSpecialisations(vetSpecs)));
     }
 }

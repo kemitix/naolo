@@ -1,4 +1,4 @@
-package net.kemitix.naolo.presenter.rest.jaxrs;
+package net.kemitix.naolo.api;
 
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
@@ -20,12 +20,12 @@ import static org.mockito.Mockito.mock;
 /**
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-public class VeterinariansControllerTest implements WithAssertions {
+public class VetResourceTest implements WithAssertions {
 
     private final VeterinarianRepository veterinarianRepository =
             mock(VeterinarianRepository.class);
-    private final VeterinariansController controller =
-            new VeterinariansController(
+    private final VetResource controller =
+            new VetResource(
                     new ListAllVets(veterinarianRepository),
                     new AddVet(veterinarianRepository));
     private final Long nextId = new Random().nextLong();
