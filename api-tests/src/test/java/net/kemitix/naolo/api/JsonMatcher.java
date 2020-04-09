@@ -29,6 +29,14 @@ class JsonMatcher<T> extends CustomMatcher<T> {
         expectedArray = expected;
     }
 
+    public static JsonMatcher<Object> jsonArray(final JsonArray vetList) {
+        return new JsonMatcher<>(vetList);
+    }
+
+    public static JsonMatcher<Object> jsonObject(final JsonObject addedVet) {
+        return new JsonMatcher<>(addedVet);
+    }
+
     @Override
     public boolean matches(final Object actual) {
         return Json.decodeValue((String) actual)

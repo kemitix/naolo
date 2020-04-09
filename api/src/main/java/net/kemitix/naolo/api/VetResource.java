@@ -21,45 +21,35 @@
 
 package net.kemitix.naolo.api;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import net.kemitix.naolo.core.vets.AddVet;
+import net.kemitix.naolo.core.vets.GetVet;
 import net.kemitix.naolo.core.vets.ListAllVets;
 import net.kemitix.naolo.entities.Veterinarian;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.concurrent.ExecutionException;
-
-import static net.kemitix.naolo.core.vets.ListAllVets.request;
 
 /**
  * REST Controller for Veterinarians.
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@Path("/vets")
+@Log
+@Path("vets")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
+@RequiredArgsConstructor
 public class VetResource {
 
     private final ListAllVets listAll;
     private final AddVet addVet;
-
-    /**
-     * CDI Constructor.
-     *
-     * @param listAll the UseCase for List All Veterinarians
-     * @param addVet
-     */
-    @Inject
-    VetResource(
-            final ListAllVets listAll,
-            final AddVet addVet
-    ) {
-        this.listAll = listAll;
-        this.addVet = addVet;
-    }
+    private final GetVet getVet;
 
     /**
      * List all Veterinarians endpoint.
@@ -69,24 +59,43 @@ public class VetResource {
      * @throws InterruptedException if there is an error completing the request
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public Response allVets() throws ExecutionException, InterruptedException {
+        log.info("GET /vets");
         return Response.ok(
-                listAll.invoke(request())
+                listAll.invoke(ListAllVets.request())
                         .getVeterinarians())
                 .build();
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public Response add(final Veterinarian veterinarian) {
-        final AddVet.Response response = addVet.invoke(AddVet.Request.builder()
-                .veterinarian(veterinarian)
-                .build());
+        log.info(String.format("POST /vets (%s - %s)",
+                veterinarian.getId(), veterinarian.getName()));
+        final AddVet.Response response =
+                addVet.invoke(AddVet.Request.builder()
+                        .veterinarian(veterinarian)
+                        .build());
         return Response.ok()
                 .entity(response.getVeterinarian())
                 .build();
+    }
+
+
+    @GET
+    @Path("{id}")
+    public Response get(@PathParam("id") final Long id) {
+        log.info(String.format("GET /vets/%d", id));
+        return getVet.invoke(
+                GetVet.Request.builder()
+                        .id(id)
+                        .build())
+                .getVeterinarian().map(v ->
+                        Response.ok()
+                                .entity(v)
+                                .build())
+                .orElseGet(() ->
+                        Response.status(Response.Status.NOT_FOUND)
+                                .build());
     }
 
 }

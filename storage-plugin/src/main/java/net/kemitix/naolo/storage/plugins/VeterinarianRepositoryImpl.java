@@ -1,4 +1,4 @@
-package net.kemitix.naolo.storage.plugins.h2;
+package net.kemitix.naolo.storage.plugins;
 
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
@@ -6,15 +6,16 @@ import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @ApplicationScoped
-public class H2VeterinarianRepository
+public class VeterinarianRepositoryImpl
         implements VeterinarianRepository {
 
     private final EntityManager entityManager;
 
-    public H2VeterinarianRepository(
+    public VeterinarianRepositoryImpl(
             final EntityManager entityManager
     ) {
         this.entityManager = entityManager;
@@ -31,8 +32,15 @@ public class H2VeterinarianRepository
     @Override
     public Veterinarian add(final Veterinarian veterinarian) {
         final Veterinarian merged = entityManager.merge(veterinarian);
+        entityManager.persist(merged);
         final Long id = merged.getId();
         return veterinarian.withId(id);
+    }
+
+    @Override
+    public Optional<Veterinarian> find(final long id) {
+        return Optional.ofNullable(
+                entityManager.find(Veterinarian.class, id));
     }
 
 }

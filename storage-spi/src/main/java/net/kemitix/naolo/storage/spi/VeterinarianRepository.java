@@ -23,6 +23,7 @@ package net.kemitix.naolo.storage.spi;
 
 import net.kemitix.naolo.entities.Veterinarian;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -46,4 +47,12 @@ public interface VeterinarianRepository {
      * @return the added vet
      */
     Veterinarian add(Veterinarian veterinarian);
+
+    /**
+     * Finds a Veterinarian for the id.
+     *
+     * @param id the id of the vet to find
+     * @return an Optional containing the vet if found, empty otherwise.
+     */
+    Optional<Veterinarian> find(long id);
 }

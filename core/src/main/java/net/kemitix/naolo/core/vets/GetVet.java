@@ -2,44 +2,37 @@ package net.kemitix.naolo.core.vets;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.With;
-import lombok.extern.java.Log;
+import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.UseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 
 import javax.enterprise.context.Dependent;
+import java.util.Optional;
 
-@Log
 @Dependent
-public class AddVet
-        implements UseCase<AddVet.Request, AddVet.Response> {
-    private final VeterinarianRepository repository;
+@RequiredArgsConstructor
+public class GetVet
+        implements UseCase<GetVet.Request, GetVet.Response> {
 
-    public AddVet(final VeterinarianRepository repository) {
-        this.repository = repository;
-    }
+    private final VeterinarianRepository repository;
 
     @Override
     public Response invoke(final Request request) {
         return Response.builder()
                 .veterinarian(
-                        repository.add(
-                                request.getVeterinarian()))
+                        repository.find(request.id))
                 .build();
     }
 
-    @Getter
-    @With
     @Builder
-    public static class Request {
-        Veterinarian veterinarian;
+    public static class Request{
+        private final long id;
     }
 
     @Getter
-    @With
     @Builder
     public static class Response {
-        Veterinarian veterinarian;
+        private final Optional<Veterinarian> veterinarian;
     }
 }
