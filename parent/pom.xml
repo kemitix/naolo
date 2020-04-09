@@ -80,7 +80,7 @@
             </dependency>
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
-                <artifactId>naolo-h2-storage-plugin</artifactId>
+                <artifactId>naolo-storage-plugin</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
