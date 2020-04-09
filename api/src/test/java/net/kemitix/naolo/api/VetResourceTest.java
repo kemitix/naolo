@@ -5,18 +5,17 @@ import net.jqwik.api.Property;
 import net.kemitix.naolo.core.vets.AddVet;
 import net.kemitix.naolo.core.vets.GetVet;
 import net.kemitix.naolo.core.vets.ListAllVets;
+import net.kemitix.naolo.core.vets.UpdateVet;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -34,15 +33,9 @@ public class VetResourceTest implements WithAssertions {
             new VetResource(
                     new ListAllVets(repository),
                     new AddVet(repository),
-                    new GetVet(repository));
+                    new GetVet(repository),
+                    new UpdateVet(repository));
     private final Long id = new Random().nextLong();
-    private final Veterinarian vet =
-            new Veterinarian(
-                    id,
-                    "name",
-                    Collections.singletonList(
-                            VetSpecialisation.RADIOLOGY)
-    );
 
     @Property
     @SuppressWarnings("unchecked")
@@ -77,37 +70,97 @@ public class VetResourceTest implements WithAssertions {
                 .isNotNull();
     }
 
-    @Test
-    @DisplayName("Get a Vet that exists")
-    public void getExistingVet() {
-        //given
-        given(repository.find(id)).willReturn(Optional.of(vet));
-        //when
-        final Response response = resource.get(id);
-        //then
-        assertThat(response.getStatus())
-                .as("Status Code 200")
-                .isEqualTo(200);
-        assertThat(response.hasEntity())
-                .as("Vet found")
-                .isTrue();
-        final Veterinarian entity =
-                (Veterinarian) response.getEntity();
-        assertThat(entity)
-                .as("Found the Veterinarian")
-                .isEqualTo(vet);
-    }
+    @Nested
+    @DisplayName("Get a Vet")
+    public class GetVetTests {
+        private final Veterinarian vet =
+                new Veterinarian(
+                        id,
+                        "name",
+                        Collections.singletonList(
+                                VetSpecialisation.RADIOLOGY)
+                );
+        @Test
+        @DisplayName("Get a Vet that exists")
+        public void getExistingVet() {
+            //given
+            given(repository.find(id)).willReturn(Optional.of(vet));
+            //when
+            final Response response = resource.get(id);
+            //then
+            assertThat(response.getStatus())
+                    .as("Status Code 200")
+                    .isEqualTo(200);
+            assertThat(response.hasEntity())
+                    .as("Vet found")
+                    .isTrue();
+            final Veterinarian entity =
+                    (Veterinarian) response.getEntity();
+            assertThat(entity)
+                    .as("Found the Veterinarian")
+                    .isEqualTo(vet);
+        }
 
-    @Test
-    @DisplayName("Get a Vet that does not exist")
-    public void getMissingVet() {
-        //given
-        given(repository.find(id)).willReturn(Optional.empty());
-        //when
-        final Response response = resource.get(id);
-        //then
-        assertThat(response.getStatus())
-                .as("Status Code 404")
-                .isEqualTo(404);
+        @Test
+        @DisplayName("Get a Vet that does not exist")
+        public void getMissingVet() {
+            //given
+            given(repository.find(id)).willReturn(Optional.empty());
+            //when
+            final Response response = resource.get(id);
+            //then
+            assertThat(response.getStatus())
+                    .as("Status Code 404")
+                    .isEqualTo(404);
+        }
+    }
+    @Nested
+    @DisplayName("Update a Vet")
+    public class UpdateVetTests {
+        private final Veterinarian expectedVet =
+                new Veterinarian()
+                        .withId(id)
+                        .withName("update name")
+                        .withSpecialisations(Arrays.asList(
+                                VetSpecialisation.DENTISTRY,
+                                VetSpecialisation.SURGERY));
+        @Test
+        @DisplayName("That exists")
+        public void UpdateVetThatExists() {
+            //given
+            given(repository.update(expectedVet))
+                    .willReturn(Optional.of(expectedVet));
+            //when
+            final Response response =
+                    resource.update(id, expectedVet);
+            //then
+            assertThat(response.getStatus())
+                    .as("Status Code 200")
+                    .isEqualTo(200);
+            assertThat(response.hasEntity())
+                    .as("Vet found")
+                    .isTrue();
+            final Veterinarian entity =
+                    (Veterinarian) response.getEntity();
+            assertThat(entity)
+                    .as("Returned the Veterinarian")
+                    .isEqualTo(expectedVet);
+
+        }
+
+        @Test
+        @DisplayName("That does not exist")
+        public void UpdateMissingVet() {
+            //given
+            given(repository.update(expectedVet))
+                    .willReturn(Optional.empty());
+            //when
+            final Response response =
+                    resource.update(id, expectedVet);
+            //then
+            assertThat(response.getStatus())
+                    .as("Status Code 404")
+                    .isEqualTo(404);
+        }
     }
 }

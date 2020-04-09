@@ -26,7 +26,9 @@ import lombok.extern.java.Log;
 import net.kemitix.naolo.core.vets.AddVet;
 import net.kemitix.naolo.core.vets.GetVet;
 import net.kemitix.naolo.core.vets.ListAllVets;
+import net.kemitix.naolo.core.vets.UpdateVet;
 import net.kemitix.naolo.entities.Veterinarian;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
@@ -50,6 +52,7 @@ public class VetResource {
     private final ListAllVets listAll;
     private final AddVet addVet;
     private final GetVet getVet;
+    private final UpdateVet updateVet;
 
     /**
      * List all Veterinarians endpoint.
@@ -98,4 +101,23 @@ public class VetResource {
                                 .build());
     }
 
+    @PUT
+    @Path("{id}")
+    public Response update(
+            @PathParam("id") final long id,
+            @RequestBody final Veterinarian veterinarian
+    ) {
+        log.info(String.format("PUT /vets/%d", id));
+        return updateVet.invoke(
+                UpdateVet.Request.builder()
+                        .veterinarian(veterinarian)
+                        .build())
+                .getVeterinarian().map(v ->
+                        Response.ok()
+                                .entity(v)
+                                .build())
+                .orElseGet(() ->
+                        Response.status(Response.Status.NOT_FOUND)
+                                .build());
+    }
 }

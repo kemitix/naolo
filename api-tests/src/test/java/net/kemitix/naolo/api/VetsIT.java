@@ -35,6 +35,11 @@ public class VetsIT {
         final JsonArray vetList =
                 new JsonArray()
                         .add(addedVet);
+        final JsonObject updatedVet =
+                addedVet.copy()
+                        .put("name", "new name")
+                        .put("specialisations", new JsonArray()
+                                .add("SURGERY"));
         // start with no vets
         given()
                 .when().get(PATH)
@@ -62,6 +67,21 @@ public class VetsIT {
                 .then()
                 .statusCode(200)
                 .body(jsonObject(addedVet));
+        // update the vet
+        given()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(updatedVet.encode())
+                .put("/vets/" + id)
+                .then()
+                .statusCode(200)
+                .body(jsonObject(updatedVet));
+        // fetch our updated vet
+        given()
+                .when().get("/vets/" + id)
+                .then()
+                .statusCode(200)
+                .body(jsonObject(updatedVet));
     }
 
 }

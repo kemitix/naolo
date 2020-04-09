@@ -1,5 +1,6 @@
 package net.kemitix.naolo.storage.plugins;
 
+import lombok.extern.java.Log;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 
@@ -9,6 +10,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+@Log
 @ApplicationScoped
 public class VeterinarianRepositoryImpl
         implements VeterinarianRepository {
@@ -23,6 +25,7 @@ public class VeterinarianRepositoryImpl
 
     @Override
     public Stream<Veterinarian> findAll() {
+        log.info("find all");
         return entityManager
                 .createNamedQuery(Veterinarian.FIND_ALL, Veterinarian.class)
                 .getResultStream();
@@ -34,13 +37,25 @@ public class VeterinarianRepositoryImpl
         final Veterinarian merged = entityManager.merge(veterinarian);
         entityManager.persist(merged);
         final Long id = merged.getId();
+        log.info(String.format("added %d", id));
         return veterinarian.withId(id);
     }
 
     @Override
     public Optional<Veterinarian> find(final long id) {
+        log.info(String.format("find %d", id));
         return Optional.ofNullable(
                 entityManager.find(Veterinarian.class, id));
+    }
+
+    @Transactional
+    @Override
+    public Optional<Veterinarian> update(final Veterinarian veterinarian) {
+        final Long id = veterinarian.getId();
+        log.info(String.format("update %d", id));
+        return Optional.ofNullable(
+                entityManager.find(Veterinarian.class, id))
+                .map(e -> entityManager.merge(veterinarian));
     }
 
 }
