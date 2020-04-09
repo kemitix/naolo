@@ -24,8 +24,8 @@ public class VetsTests {
                         .put("id", 0)
                         .put("name", "Vets Name")
                         .put("specialisations", new JsonArray()
-                                .add("RADIOLOGY")
-                                .add("DENTISTRY"));
+                                .add("DENTISTRY")
+                                .add("RADIOLOGY"));
         final JsonObject addedVet =
                 newVet.copy()
                         .put("id", 1);
