@@ -1,4 +1,4 @@
-package net.kemitix.naolo.storage.plugins.h2;
+package net.kemitix.naolo.storage.plugins;
 
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
@@ -9,12 +9,12 @@ import javax.transaction.Transactional;
 import java.util.stream.Stream;
 
 @ApplicationScoped
-public class H2VeterinarianRepository
+public class VeterinarianRepositoryImpl
         implements VeterinarianRepository {
 
     private final EntityManager entityManager;
 
-    public H2VeterinarianRepository(
+    public VeterinarianRepositoryImpl(
             final EntityManager entityManager
     ) {
         this.entityManager = entityManager;
