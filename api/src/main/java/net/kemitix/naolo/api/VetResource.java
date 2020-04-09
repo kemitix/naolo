@@ -22,6 +22,7 @@
 package net.kemitix.naolo.api;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import net.kemitix.naolo.core.vets.AddVet;
 import net.kemitix.naolo.core.vets.GetVet;
 import net.kemitix.naolo.core.vets.ListAllVets;
@@ -38,7 +39,8 @@ import java.util.concurrent.ExecutionException;
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@Path("/vets")
+@Log
+@Path("vets")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
@@ -58,6 +60,7 @@ public class VetResource {
      */
     @GET
     public Response allVets() throws ExecutionException, InterruptedException {
+        log.info("GET /vets");
         return Response.ok(
                 listAll.invoke(ListAllVets.request())
                         .getVeterinarians())
@@ -66,9 +69,12 @@ public class VetResource {
 
     @POST
     public Response add(final Veterinarian veterinarian) {
-        final AddVet.Response response = addVet.invoke(AddVet.Request.builder()
-                .veterinarian(veterinarian)
-                .build());
+        log.info(String.format("POST /vets (%s - %s)",
+                veterinarian.getId(), veterinarian.getName()));
+        final AddVet.Response response =
+                addVet.invoke(AddVet.Request.builder()
+                        .veterinarian(veterinarian)
+                        .build());
         return Response.ok()
                 .entity(response.getVeterinarian())
                 .build();
@@ -76,8 +82,9 @@ public class VetResource {
 
 
     @GET
-    @Path("/{id}")
-    public Response get(@QueryParam("id") final Long id) {
+    @Path("{id}")
+    public Response get(@PathParam("id") final Long id) {
+        log.info(String.format("GET /vets/%d", id));
         return getVet.invoke(
                 GetVet.Request.builder()
                         .id(id)

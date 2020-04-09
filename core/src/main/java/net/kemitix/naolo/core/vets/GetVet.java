@@ -7,8 +7,10 @@ import net.kemitix.naolo.core.UseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 
+import javax.enterprise.context.Dependent;
 import java.util.Optional;
 
+@Dependent
 @RequiredArgsConstructor
 public class GetVet
         implements UseCase<GetVet.Request, GetVet.Response> {

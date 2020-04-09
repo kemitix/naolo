@@ -28,9 +28,10 @@ public class VetsIT {
                         .put("specialisations", new JsonArray()
                                 .add("DENTISTRY")
                                 .add("RADIOLOGY"));
+        final int id = 1;
         final JsonObject addedVet =
                 newVet.copy()
-                        .put("id", 1);
+                        .put("id", id);
         final JsonArray vetList =
                 new JsonArray()
                         .add(addedVet);
@@ -55,6 +56,12 @@ public class VetsIT {
                 .then()
                 .statusCode(200)
                 .body(jsonArray(vetList));
+        // fetch our singular vet
+        given()
+                .when().get("/vets/" + id)
+                .then()
+                .statusCode(200)
+                .body(jsonObject(addedVet));
     }
 
 }

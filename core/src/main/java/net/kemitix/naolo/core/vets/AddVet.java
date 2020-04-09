@@ -22,12 +22,10 @@ public class AddVet
 
     @Override
     public Response invoke(final Request request) {
-        final Veterinarian veterinarian = request.getVeterinarian();
-        log.info("in : " + veterinarian.toString());
-        final Veterinarian added = repository.add(veterinarian);
-        log.info("out: " + added);
         return Response.builder()
-                .veterinarian(added)
+                .veterinarian(
+                        repository.add(
+                                request.getVeterinarian()))
                 .build();
     }
 
