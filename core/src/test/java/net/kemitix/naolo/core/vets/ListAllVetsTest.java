@@ -22,7 +22,7 @@ public class ListAllVetsTest implements WithAssertions {
 
     private final VeterinarianRepository repository = mock(VeterinarianRepository.class);
 
-    private final ListAllVets useCase = ListAllVets.create(repository);
+    private final ListAllVets useCase = new ListAllVets(repository);
 
     @Provide
     public static Arbitrary<List<Veterinarian>> vets() {

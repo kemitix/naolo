@@ -56,16 +56,6 @@ public class ListAllVets
     }
 
     /**
-     * Creates a new {@link ListAllVets} use-case.
-     *
-     * @param veterinarianRepository the Veterinarian repository
-     * @return a new VeterinariansListAll use-case
-     */
-    public static ListAllVets create(final VeterinarianRepository veterinarianRepository) {
-        return new ListAllVets(veterinarianRepository);
-    }
-
-    /**
      * Returns the empty request.
      *
      * @return the empty request object
