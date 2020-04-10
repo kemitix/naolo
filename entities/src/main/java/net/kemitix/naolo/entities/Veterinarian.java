@@ -17,7 +17,7 @@ import java.util.List;
 public class Veterinarian {
     public static final String FIND_ALL = "Veterinarian.FindAll";
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     Long id;
     String name;
     @ElementCollection(targetClass = VetSpecialisation.class)
