@@ -4,6 +4,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -44,7 +45,7 @@ public class VetsIT {
         given()
                 .when().get(PATH)
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body(is(empty));
         // add one
         given()
@@ -53,19 +54,18 @@ public class VetsIT {
                 .body(newVet.encode())
                 .post(PATH)
                 .then()
-                .statusCode(200)
-                .body(jsonObject(addedVet));
+                .statusCode(HttpStatus.SC_CREATED);
         // now we have a vet
         given()
                 .when().get(PATH)
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body(jsonArray(vetList));
         // fetch our singular vet
         given()
                 .when().get("/vets/" + id)
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body(jsonObject(addedVet));
         // update the vet
         given()
@@ -74,7 +74,7 @@ public class VetsIT {
                 .body(updatedVet.encode())
                 .put("/vets/" + id)
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body(jsonObject(updatedVet));
         // fetch our updated vet
         given()

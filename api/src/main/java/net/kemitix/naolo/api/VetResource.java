@@ -34,7 +34,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 
 /**
@@ -51,7 +50,6 @@ import java.net.URI;
 public class VetResource {
 
     public static final Response NOT_FOUND = Response.status(Response.Status.NOT_FOUND).build();
-    private final UriInfo uriInfo;
     private final ListAllVets listAll;
     private final AddVet addVet;
     private final GetVet getVet;
@@ -83,9 +81,8 @@ public class VetResource {
         final Long id =
                 response.getVeterinarian()
                         .getId();
-        final URI location =
-                uriInfo.getBaseUri()
-                        .resolve(String.format("/vets/%d", id));
+        final URI location = URI.create(String.format(
+                "/vets/%d", id));
         return Response.created(location).build();
     }
 
