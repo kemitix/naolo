@@ -3,6 +3,14 @@ package net.kemitix.naolo.entities;
 
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+
+@Entity
+@NamedQuery(name = Owner.FIND_ALL,
+        query = "Select o from Owner o order by o.lastName, o.firstName")
 @With
 @Getter
 @ToString
@@ -10,6 +18,9 @@ import lombok.*;
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
 public class Owner {
+    public static final String FIND_ALL = "Owner.FindAll";
+    @Id
+    @GeneratedValue
     Long id;
     String firstName;
     String lastName;
