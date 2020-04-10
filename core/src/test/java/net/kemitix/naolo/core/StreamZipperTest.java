@@ -1,12 +1,12 @@
 package net.kemitix.naolo.core;
 
-import net.jqwik.api.ForAll;
-import net.jqwik.api.Property;
 import net.jqwik.api.Tuple;
 import org.assertj.core.api.WithAssertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,12 +22,12 @@ class StreamZipperTest implements WithAssertions {
                 .hasCauseInstanceOf(UnsupportedOperationException.class);
     }
 
-    @Property
-    void pairItems(
-            @ForAll List<String> strings,
-            @ForAll List<Integer> integers
-    ) {
+    @Test
+    @DisplayName("Pair two lists together")
+    void pairItems() {
         //when
+        final List<String> strings = Arrays.asList("One", "Two", "Three");
+        final List<Integer> integers = Arrays.asList(3, 2, 1);
         final List<Tuple.Tuple2<String, Integer>> zipped =
                 StreamZipper.zip(strings, integers, Tuple::of).collect(Collectors.toList());
         //then
