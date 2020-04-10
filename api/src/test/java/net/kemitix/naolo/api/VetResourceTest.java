@@ -2,6 +2,7 @@ package net.kemitix.naolo.api;
 
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
+import net.jqwik.api.lifecycle.BeforeProperty;
 import net.kemitix.naolo.core.vets.AddVet;
 import net.kemitix.naolo.core.vets.GetVet;
 import net.kemitix.naolo.core.vets.ListAllVets;
@@ -10,13 +11,17 @@ import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -29,19 +34,29 @@ public class VetResourceTest implements WithAssertions {
 
     private final VeterinarianRepository repository =
             mock(VeterinarianRepository.class);
-    private final VetResource resource =
-            new VetResource(
-                    new ListAllVets(repository),
-                    new AddVet(repository),
-                    new GetVet(repository),
-                    new UpdateVet(repository));
-    private final Long id = new Random().nextLong();
+        private final Long id = new Random().nextLong();
+    @Mock
+    private UriInfo uriInfo;
+    private VetResource resource;
+
+    @BeforeProperty
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        resource =
+                new VetResource(
+                        uriInfo,
+                        new ListAllVets(repository),
+                        new AddVet(repository),
+                        new GetVet(repository),
+                        new UpdateVet(repository));
+    }
 
     @Property
     @SuppressWarnings("unchecked")
     public void canGetAllVets(
             @ForAll final List<Veterinarian> vets
-    ) throws ExecutionException, InterruptedException {
+    ) {
         //given
         given(repository.findAll()).willReturn(vets.stream());
         //when
@@ -61,13 +76,13 @@ public class VetResourceTest implements WithAssertions {
                 .willAnswer(call ->
                         ((Veterinarian) call.getArgument(0))
                                 .withId(id));
+        final URI baseUri = URI.create("https://localhost:1234/");
+        given(uriInfo.getBaseUri()).willReturn(baseUri);
         //when
         final Response response = resource.add(vet);
         //then
-        assertThat(response.hasEntity()).isTrue();
-        assertThat(((Veterinarian) response.getEntity()))
-                .extracting(Veterinarian::getId)
-                .isNotNull();
+        final URI location = response.getLocation();
+        assertThat(location).isEqualTo(baseUri.resolve("/vets/" + id));
     }
 
     @Nested
