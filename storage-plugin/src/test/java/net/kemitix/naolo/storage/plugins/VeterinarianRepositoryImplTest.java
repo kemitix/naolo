@@ -23,12 +23,12 @@ public class VeterinarianRepositoryImplTest
 
     private final Veterinarian unmanagedVet = new Veterinarian();
     private final Veterinarian managedVet = new Veterinarian();
+    private final long id = new Random().nextLong();
     @Mock
     private EntityManager entityManager;
     private VeterinarianRepository repository;
     @Mock
     private TypedQuery<Veterinarian> query;
-    private final long id = new Random().nextLong();
 
     @BeforeEach
     public void setUp() {
@@ -71,5 +71,20 @@ public class VeterinarianRepositoryImplTest
         final Optional<Veterinarian> result = repository.find(id);
         //then
         assertThat(result).contains(managedVet);
+    }
+
+    @Test
+    @DisplayName("Update a Vet")
+    public void updateVet() {
+        //given
+        final Veterinarian vet = new Veterinarian().withId(id);
+        given(entityManager.find(Veterinarian.class, id))
+                .willReturn(vet);
+        given(entityManager.merge(vet))
+                .willReturn(vet);
+        //when
+        final Optional<Veterinarian> result = repository.update(vet);
+        //then
+        assertThat(result).contains(vet);
     }
 }

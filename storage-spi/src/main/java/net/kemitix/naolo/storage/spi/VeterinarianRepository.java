@@ -55,4 +55,6 @@ public interface VeterinarianRepository {
      * @return an Optional containing the vet if found, empty otherwise.
      */
     Optional<Veterinarian> find(long id);
+
+    Optional<Veterinarian> update(Veterinarian veterinarian);
 }

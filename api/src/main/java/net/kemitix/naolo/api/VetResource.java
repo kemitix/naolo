@@ -26,13 +26,15 @@ import lombok.extern.java.Log;
 import net.kemitix.naolo.core.vets.AddVet;
 import net.kemitix.naolo.core.vets.GetVet;
 import net.kemitix.naolo.core.vets.ListAllVets;
+import net.kemitix.naolo.core.vets.UpdateVet;
 import net.kemitix.naolo.entities.Veterinarian;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.concurrent.ExecutionException;
+import java.net.URI;
 
 /**
  * REST Controller for Veterinarians.
@@ -47,37 +49,41 @@ import java.util.concurrent.ExecutionException;
 @RequiredArgsConstructor
 public class VetResource {
 
+    public static final Response NOT_FOUND = Response.status(Response.Status.NOT_FOUND).build();
     private final ListAllVets listAll;
     private final AddVet addVet;
     private final GetVet getVet;
+    private final UpdateVet updateVet;
+
 
     /**
      * List all Veterinarians endpoint.
      *
      * @return the respone
-     * @throws ExecutionException   if there is an error completing the request
-     * @throws InterruptedException if there is an error completing the request
      */
     @GET
-    public Response allVets() throws ExecutionException, InterruptedException {
+    public Response allVets() {
         log.info("GET /vets");
-        return Response.ok(
-                listAll.invoke(ListAllVets.request())
-                        .getVeterinarians())
-                .build();
+        final ListAllVets.Request request = ListAllVets.request();
+        final ListAllVets.Response response = listAll.invoke(request);
+        return entityOk(response.getVeterinarians());
     }
 
     @POST
     public Response add(final Veterinarian veterinarian) {
         log.info(String.format("POST /vets (%s - %s)",
                 veterinarian.getId(), veterinarian.getName()));
-        final AddVet.Response response =
-                addVet.invoke(AddVet.Request.builder()
+        final AddVet.Request request =
+                AddVet.Request.builder()
                         .veterinarian(veterinarian)
-                        .build());
-        return Response.ok()
-                .entity(response.getVeterinarian())
-                .build();
+                        .build();
+        final AddVet.Response response = addVet.invoke(request);
+        final Long id =
+                response.getVeterinarian()
+                        .getId();
+        final URI location = URI.create(String.format(
+                "/vets/%d", id));
+        return Response.created(location).build();
     }
 
 
@@ -85,17 +91,36 @@ public class VetResource {
     @Path("{id}")
     public Response get(@PathParam("id") final Long id) {
         log.info(String.format("GET /vets/%d", id));
-        return getVet.invoke(
+        final GetVet.Request request =
                 GetVet.Request.builder()
                         .id(id)
-                        .build())
-                .getVeterinarian().map(v ->
-                        Response.ok()
-                                .entity(v)
-                                .build())
-                .orElseGet(() ->
-                        Response.status(Response.Status.NOT_FOUND)
-                                .build());
+                        .build();
+        final GetVet.Response response = getVet.invoke(request);
+        return response
+                .getVeterinarian()
+                .map(this::entityOk)
+                .orElseGet(() -> NOT_FOUND);
     }
 
+    private Response entityOk(final Object entity) {
+        return Response.ok().entity(entity).build();
+    }
+
+    @PUT
+    @Path("{id}")
+    public Response update(
+            @PathParam("id") final long id,
+            @RequestBody final Veterinarian veterinarian
+    ) {
+        log.info(String.format("PUT /vets/%d", id));
+        final UpdateVet.Request request =
+                UpdateVet.Request.builder()
+                        .veterinarian(veterinarian)
+                        .build();
+        final UpdateVet.Response response = updateVet.invoke(request);
+        return response
+                .getVeterinarian()
+                .map(this::entityOk)
+                .orElseGet(() -> NOT_FOUND);
+    }
 }
