@@ -35,9 +35,13 @@ public class GetVetTest
         //given
         given(repository.find(id))
                 .willReturn(Optional.of(vet));
+        final GetVet.Request request =
+                GetVet.Request.builder()
+                        .id(id)
+                        .build();
         //when
         final GetVet.Response result =
-                useCase.invoke(GetVet.Request.builder().id(id).build());
+                useCase.invoke(request);
         //then
         assertThat(result.getVeterinarian())
                 .contains(vet);

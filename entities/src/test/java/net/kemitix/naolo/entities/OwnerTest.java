@@ -30,16 +30,20 @@ public class OwnerTest
                         .withLastName(lastName)
                         .withStreet(street)
                         .withCity(city);
-        final Owner builder =
-                Owner.builder()
-                        .id(id)
-                        .firstName(firstName)
-                        .lastName(lastName)
-                        .street(street)
-                        .city(city)
-                        .build();
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
-        assertThat(allArgs).isEqualTo(builder);
+        assertThat(allArgs.getId()).isEqualTo(id);
+        assertThat(allArgs.getFirstName()).isEqualTo(firstName);
+        assertThat(allArgs.getLastName()).isEqualTo(lastName);
+        assertThat(allArgs.getStreet()).isEqualTo(street);
+        assertThat(allArgs.getCity()).isEqualTo(city);
+        assertThat(allArgs.toString())
+                .isEqualTo(
+                        "Owner(" +
+                                "id=23, " +
+                                "firstName=First Name, " +
+                                "lastName=Last Name, " +
+                                "street=Street, " +
+                                "city=City)");
     }
 }

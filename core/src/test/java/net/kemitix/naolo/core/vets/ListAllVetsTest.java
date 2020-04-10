@@ -9,7 +9,11 @@ import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -41,11 +45,21 @@ public class ListAllVetsTest implements WithAssertions {
                 .list();
     }
 
-    @Property
-    public void listAll(
-            @ForAll("vets") final List<Veterinarian> vets
-    ) {
+    @Test
+    @DisplayName("List all Vets")
+    public void listAll() {
         //given
+        final List<Veterinarian> vets = Arrays.asList(
+                new Veterinarian().withId(42L).withName("Name 1")
+                        .withSpecialisations(Collections.singletonList(
+                                VetSpecialisation.RADIOLOGY
+                        )),
+                new Veterinarian().withId(22L).withName("Name 2")
+                        .withSpecialisations(Arrays.asList(
+                                VetSpecialisation.DENTISTRY,
+                                VetSpecialisation.SURGERY
+                        ))
+                );
         given(repository.findAll()).willReturn(vets.stream());
         //when
         final ListAllVets.Response response = useCase.invoke(request());
