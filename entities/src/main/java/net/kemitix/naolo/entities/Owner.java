@@ -4,9 +4,10 @@ package net.kemitix.naolo.entities;
 import lombok.*;
 
 @With
-@Builder
-@Value
-@NoArgsConstructor(force = true, access = AccessLevel.PACKAGE)
+@Getter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 public class Owner {
     Long id;
