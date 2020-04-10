@@ -35,9 +35,7 @@ public class RemoveVetTest
                 RemoveVet.Request.builder()
                         .id(id).build();
         final Veterinarian vet = new Veterinarian();
-        final Optional<Veterinarian> foundVet =
-                Optional.of(vet);
-        given(repository.remove(id)).willReturn(foundVet);
+        given(repository.remove(id)).willReturn(Optional.of(vet));
         //when
         final RemoveVet.Response response =
                 removeVet.invoke(request);

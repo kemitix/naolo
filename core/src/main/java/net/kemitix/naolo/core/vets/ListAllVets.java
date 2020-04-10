@@ -23,7 +23,6 @@ package net.kemitix.naolo.core.vets;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.With;
 import net.kemitix.naolo.core.UseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
@@ -82,13 +81,14 @@ public class ListAllVets
     }
 
     @Getter
-    @With
     @Builder
     public static class Response {
         List<Veterinarian> veterinarians;
     }
 
     public static class Request {
+        private Request() {
+        }
     }
 
 }
