@@ -2,7 +2,6 @@ package net.kemitix.naolo.core.vets;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.With;
 import lombok.extern.java.Log;
 import net.kemitix.naolo.core.UseCase;
 import net.kemitix.naolo.entities.Veterinarian;
@@ -25,21 +24,18 @@ public class AddVet
         return Response.builder()
                 .veterinarian(
                         repository.add(
-                                request.getVeterinarian()))
+                                request.veterinarian))
                 .build();
     }
 
-    @Getter
-    @With
     @Builder
     public static class Request {
-        Veterinarian veterinarian;
+        private final Veterinarian veterinarian;
     }
 
     @Getter
-    @With
     @Builder
     public static class Response {
-        Veterinarian veterinarian;
+        private final Veterinarian veterinarian;
     }
 }
