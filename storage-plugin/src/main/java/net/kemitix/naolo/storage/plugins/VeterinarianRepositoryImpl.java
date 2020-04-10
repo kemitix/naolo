@@ -58,4 +58,16 @@ public class VeterinarianRepositoryImpl
                 .map(e -> entityManager.merge(veterinarian));
     }
 
+    @Transactional
+    @Override
+    public Optional<Veterinarian> remove(final long id) {
+        log.info(String.format("remove %d", id));
+        return Optional.ofNullable(
+                entityManager.find(Veterinarian.class, id))
+                .map(e -> {
+                    entityManager.remove(e);
+                    return e;
+                });
+    }
+
 }

@@ -2,10 +2,7 @@ package net.kemitix.naolo.api;
 
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
-import net.kemitix.naolo.core.vets.AddVet;
-import net.kemitix.naolo.core.vets.GetVet;
-import net.kemitix.naolo.core.vets.ListAllVets;
-import net.kemitix.naolo.core.vets.UpdateVet;
+import net.kemitix.naolo.core.vets.*;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
@@ -14,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.*;
@@ -35,7 +33,8 @@ public class VetResourceTest implements WithAssertions {
                         new ListAllVets(repository),
                         new AddVet(repository),
                         new GetVet(repository),
-                        new UpdateVet(repository));
+                        new UpdateVet(repository),
+                        new RemoveVet(repository));
 
     @Property
     @SuppressWarnings("unchecked")
@@ -159,6 +158,39 @@ public class VetResourceTest implements WithAssertions {
             assertThat(response.getStatus())
                     .as("Status Code 404")
                     .isEqualTo(404);
+        }
+    }
+    @Nested
+    @DisplayName("Remove a Vet")
+    public class RemoveVetTests {
+        @Test
+        @DisplayName("That exists")
+        public void removeExistingVet() {
+            //given
+            final Veterinarian vet = new Veterinarian();
+            given(repository.remove(id))
+                    .willReturn(Optional.of(vet));
+            //when
+            final Response response =
+                    resource.remove(id);
+            //then
+            assertThat(response.getStatus())
+                    .as("Status Code 200")
+                    .isEqualTo(HttpServletResponse.SC_OK);
+        }
+
+        @Test
+        @DisplayName("That does not exist")
+        public void removeMissingVet() {
+            //given
+            given(repository.find(id)).willReturn(Optional.empty());
+            //when
+            final Response response =
+                    resource.remove(id);
+            //then
+            assertThat(response.getStatus())
+                    .as("Status Code 404")
+                    .isEqualTo(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }

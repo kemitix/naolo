@@ -80,8 +80,19 @@ public class VetsIT {
         given()
                 .when().get("/vets/" + id)
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body(jsonObject(updatedVet));
+        // delete the vet
+        given()
+                .when().delete("/vets/" + id)
+                .then()
+                .statusCode(HttpStatus.SC_OK);
+        // finish with no vets
+        given()
+                .when().get(PATH)
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .body(is(empty));
     }
 
 }

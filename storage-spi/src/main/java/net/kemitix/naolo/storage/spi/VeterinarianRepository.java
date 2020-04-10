@@ -57,4 +57,6 @@ public interface VeterinarianRepository {
     Optional<Veterinarian> find(long id);
 
     Optional<Veterinarian> update(Veterinarian veterinarian);
+
+    Optional<Veterinarian> remove(long id);
 }

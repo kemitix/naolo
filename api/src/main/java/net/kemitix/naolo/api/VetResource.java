@@ -23,10 +23,7 @@ package net.kemitix.naolo.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import net.kemitix.naolo.core.vets.AddVet;
-import net.kemitix.naolo.core.vets.GetVet;
-import net.kemitix.naolo.core.vets.ListAllVets;
-import net.kemitix.naolo.core.vets.UpdateVet;
+import net.kemitix.naolo.core.vets.*;
 import net.kemitix.naolo.entities.Veterinarian;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
@@ -54,7 +51,7 @@ public class VetResource {
     private final AddVet addVet;
     private final GetVet getVet;
     private final UpdateVet updateVet;
-
+    private final RemoveVet removeVet;
 
     /**
      * List all Veterinarians endpoint.
@@ -99,7 +96,7 @@ public class VetResource {
         return response
                 .getVeterinarian()
                 .map(this::entityOk)
-                .orElseGet(() -> NOT_FOUND);
+                .orElse(NOT_FOUND);
     }
 
     private Response entityOk(final Object entity) {
@@ -121,6 +118,19 @@ public class VetResource {
         return response
                 .getVeterinarian()
                 .map(this::entityOk)
-                .orElseGet(() -> NOT_FOUND);
+                .orElse(NOT_FOUND);
+    }
+
+    @DELETE
+    @Path("{id}")
+    public Response remove(@PathParam("id") final long id) {
+        log.info(String.format("DELETE /vets/%d", id));
+        final RemoveVet.Request request = RemoveVet.Request.builder()
+                .id(id).build();
+        final RemoveVet.Response response = removeVet.invoke(request);
+        return response
+                .getVeterinarian()
+                .map(e -> Response.ok().build())
+                .orElse(NOT_FOUND);
     }
 }
