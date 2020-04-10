@@ -87,4 +87,17 @@ public class VeterinarianRepositoryImplTest
         //then
         assertThat(result).contains(vet);
     }
+
+    @Test
+    @DisplayName("Remove a Vet")
+    public void removeVet() {
+        //given
+        given(entityManager.find(Veterinarian.class, id))
+                .willReturn(managedVet);
+        //when
+        final Optional<Veterinarian> result = repository.remove(id);
+        //then
+        verify(entityManager).remove(managedVet);
+        assertThat(result).contains(managedVet);
+    }
 }
