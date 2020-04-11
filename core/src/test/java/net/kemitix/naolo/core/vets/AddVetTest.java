@@ -42,10 +42,7 @@ public class AddVetTest
                         .withName(name)
                         .withSpecialisations(specialisations);
         final long nextId = 42;
-        given(repository.add(vet))
-                .willAnswer(call ->
-                        ((Veterinarian) call.getArgument(0))
-                                .withId(nextId));
+        given(repository.add(vet)).willReturn(vet.withId(nextId));
         final AddVet.Request request =
                 AddVet.Request.builder()
                         .veterinarian(vet)

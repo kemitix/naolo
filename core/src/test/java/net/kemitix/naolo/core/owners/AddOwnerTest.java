@@ -5,20 +5,29 @@ import net.kemitix.naolo.storage.spi.OwnerRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
 public class AddOwnerTest
         implements WithAssertions {
 
+    private final OwnerRepository repository;
+    private final AddOwner addOwner;
+
+    public AddOwnerTest(@Mock final OwnerRepository repository) {
+        this.repository = repository;
+        addOwner = new AddOwner(repository);
+    }
+
     @Test
     @DisplayName("Add an Owner")
-    public void addOwners() {
+    public void addOwner() {
         //given
-        final OwnerRepository repository = mock(OwnerRepository.class);
-        final AddOwner addOwner = new AddOwner(repository);
         final String firstName = "first name";
         final String lastName = "last name";
         final String city = "city";
@@ -30,10 +39,7 @@ public class AddOwnerTest
                         .withCity(city)
                         .withStreet(street);
         final long nextId = 42;
-        given(repository.add(owner))
-                .willAnswer(call ->
-                        ((Owner) call.getArgument(0))
-                                .withId(nextId));
+        given(repository.add(owner)).willReturn(owner.withId(nextId));
         final AddOwner.Request request =
                 AddOwner.Request.builder()
                         .owner(owner)
