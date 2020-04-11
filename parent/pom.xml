@@ -23,7 +23,6 @@
         <kemitix-checkstyle.version>5.4.0</kemitix-checkstyle.version>
 
         <jakartaee-api.version>8.0.0</jakartaee-api.version>
-        <microprofile.version>3.3</microprofile.version>
 
         <lombok.version>1.18.12</lombok.version>
 
@@ -44,12 +43,6 @@
                 <groupId>jakarta.platform</groupId>
                 <artifactId>jakarta.jakartaee-api</artifactId>
                 <version>${jakartaee-api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse.microprofile</groupId>
-                <artifactId>microprofile</artifactId>
-                <version>${microprofile.version}</version>
-                <type>pom</type>
             </dependency>
 
             <!-- naolo -->

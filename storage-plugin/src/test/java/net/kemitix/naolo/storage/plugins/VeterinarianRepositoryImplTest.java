@@ -3,11 +3,11 @@ package net.kemitix.naolo.storage.plugins;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -18,22 +18,23 @@ import java.util.stream.Stream;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
 public class VeterinarianRepositoryImplTest
         implements WithAssertions {
 
     private final Veterinarian unmanagedVet = new Veterinarian();
     private final Veterinarian managedVet = new Veterinarian();
     private final long id = new Random().nextLong();
-    @Mock
-    private EntityManager entityManager;
-    private VeterinarianRepository repository;
-    @Mock
-    private TypedQuery<Veterinarian> query;
+    private final EntityManager entityManager;
+    private final VeterinarianRepository repository;
+    private final TypedQuery<Veterinarian> query;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
+    public VeterinarianRepositoryImplTest(
+            @Mock final EntityManager entityManager,
+            @Mock final TypedQuery<Veterinarian> query
+    ) {
+        this.entityManager = entityManager;
+        this.query = query;
         repository = new VeterinarianRepositoryImpl(entityManager);
     }
 

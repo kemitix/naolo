@@ -1,7 +1,5 @@
 package net.kemitix.naolo.api;
 
-import net.jqwik.api.ForAll;
-import net.jqwik.api.Property;
 import net.kemitix.naolo.core.vets.*;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
@@ -10,6 +8,9 @@ import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
@@ -18,44 +19,47 @@ import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
+@ExtendWith(MockitoExtension.class)
 public class VetResourceTest implements WithAssertions {
 
-    private final VeterinarianRepository repository =
-            mock(VeterinarianRepository.class);
-        private final Long id = new Random().nextLong();
-    private final VetResource resource =
+    private final VeterinarianRepository repository;
+    private final Long id = new Random().nextLong();
+    private final VetResource resource;
+
+    public VetResourceTest(@Mock final VeterinarianRepository repository) {
+        this.repository = repository;
+        resource =
                 new VetResource(
                         new ListAllVets(repository),
                         new AddVet(repository),
                         new GetVet(repository),
                         new UpdateVet(repository),
                         new RemoveVet(repository));
+    }
 
-    @Property
-    @SuppressWarnings("unchecked")
-    public void canGetAllVets(
-            @ForAll final List<Veterinarian> vets
-    ) {
+    @Test
+    @DisplayName("Get All Vets")
+    public void canGetAllVets() {
         //given
+        final List<Veterinarian> vets = Arrays.asList(
+                new Veterinarian().withName("bob"),
+                new Veterinarian().withName("sam"));
         given(repository.findAll()).willReturn(vets.stream());
         //when
         final Response response = resource.allVets();
         //then
-        final List<Veterinarian> entity =
-                (List<Veterinarian>) response.getEntity();
-        assertThat(entity).hasSize(vets.size());
+        assertThat(response.getEntity()).isEqualTo(vets);
     }
 
-    @Property
-    public void canAddVet(
-            @ForAll final Veterinarian vet
-    ) {
+    @Test
+    @DisplayName("Add a Vet")
+    public void canAddVet() {
         //given
+        final Veterinarian vet = new Veterinarian().withId(id);
         given(repository.add(any(Veterinarian.class)))
                 .willAnswer(call ->
                         ((Veterinarian) call.getArgument(0))

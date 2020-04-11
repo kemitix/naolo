@@ -1,16 +1,16 @@
 package net.kemitix.naolo.core.vets;
 
-import net.jqwik.api.*;
-import net.jqwik.api.arbitraries.LongArbitrary;
-import net.jqwik.api.arbitraries.SizableArbitrary;
-import net.jqwik.api.arbitraries.StringArbitrary;
 import net.kemitix.naolo.core.StreamZipper;
+import net.kemitix.naolo.core.Tuple;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,30 +19,16 @@ import java.util.stream.Stream;
 
 import static net.kemitix.naolo.core.vets.ListAllVets.request;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
+@ExtendWith(MockitoExtension.class)
 public class ListAllVetsTest implements WithAssertions {
 
-    private final VeterinarianRepository repository = mock(VeterinarianRepository.class);
+    private final VeterinarianRepository repository;
+    private final ListAllVets listAllVets;
 
-    private final ListAllVets useCase = new ListAllVets(repository);
-
-    @Provide
-    public static Arbitrary<List<Veterinarian>> vets() {
-        final LongArbitrary ids = Arbitraries.longs();
-        final StringArbitrary names = Arbitraries.strings();
-        final SizableArbitrary<List<VetSpecialisation>> specialisations =
-                Arbitraries.of(VetSpecialisation.class)
-                        .list()
-                        .ofMinSize(0)
-                        .ofMaxSize(VetSpecialisation.values().length);
-        return Combinators.combine(ids, names, specialisations)
-                .as((id, name, vetSpecs) ->
-                        new Veterinarian()
-                                .withId(id)
-                                .withName(name)
-                                .withSpecialisations(vetSpecs))
-                .list();
+    public ListAllVetsTest(@Mock final VeterinarianRepository repository) {
+        this.repository = repository;
+        listAllVets = new ListAllVets(repository);
     }
 
     @Test
@@ -62,9 +48,9 @@ public class ListAllVetsTest implements WithAssertions {
                 );
         given(repository.findAll()).willReturn(vets.stream());
         //when
-        final ListAllVets.Response response = useCase.invoke(request());
+        final ListAllVets.Response response = listAllVets.invoke(request());
         //then
-        final Stream<Tuple.Tuple2<Veterinarian, Veterinarian>> zipped =
+        final Stream<Tuple<Veterinarian, Veterinarian>> zipped =
                 StreamZipper.zip(vets, response.getVeterinarians(), Tuple::of);
         assertThat(zipped).hasSize(vets.size())
                 .allSatisfy(t -> {

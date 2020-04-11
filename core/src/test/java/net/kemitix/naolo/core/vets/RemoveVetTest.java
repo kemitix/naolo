@@ -3,28 +3,27 @@ package net.kemitix.naolo.core.vets;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 import java.util.Random;
 
 import static org.mockito.BDDMockito.given;
 
+@ExtendWith(MockitoExtension.class)
 public class RemoveVetTest
         implements WithAssertions {
 
     private final long id = new Random().nextLong();
-    @Mock
-    private VeterinarianRepository repository;
-    private RemoveVet removeVet;
+    private final VeterinarianRepository repository;
+    private final RemoveVet removeVet;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
+    public RemoveVetTest(@Mock final VeterinarianRepository repository) {
+        this.repository = repository;
         removeVet = new RemoveVet(repository);
     }
 
