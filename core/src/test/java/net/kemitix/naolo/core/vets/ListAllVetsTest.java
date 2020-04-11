@@ -1,10 +1,7 @@
 package net.kemitix.naolo.core.vets;
 
-import net.jqwik.api.*;
-import net.jqwik.api.arbitraries.LongArbitrary;
-import net.jqwik.api.arbitraries.SizableArbitrary;
-import net.jqwik.api.arbitraries.StringArbitrary;
 import net.kemitix.naolo.core.StreamZipper;
+import net.kemitix.naolo.core.Tuple;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
@@ -27,24 +24,6 @@ public class ListAllVetsTest implements WithAssertions {
 
     private final ListAllVets useCase = new ListAllVets(repository);
 
-    @Provide
-    public static Arbitrary<List<Veterinarian>> vets() {
-        final LongArbitrary ids = Arbitraries.longs();
-        final StringArbitrary names = Arbitraries.strings();
-        final SizableArbitrary<List<VetSpecialisation>> specialisations =
-                Arbitraries.of(VetSpecialisation.class)
-                        .list()
-                        .ofMinSize(0)
-                        .ofMaxSize(VetSpecialisation.values().length);
-        return Combinators.combine(ids, names, specialisations)
-                .as((id, name, vetSpecs) ->
-                        new Veterinarian()
-                                .withId(id)
-                                .withName(name)
-                                .withSpecialisations(vetSpecs))
-                .list();
-    }
-
     @Test
     @DisplayName("List all Vets")
     public void listAll() {
@@ -64,7 +43,7 @@ public class ListAllVetsTest implements WithAssertions {
         //when
         final ListAllVets.Response response = useCase.invoke(request());
         //then
-        final Stream<Tuple.Tuple2<Veterinarian, Veterinarian>> zipped =
+        final Stream<Tuple<Veterinarian, Veterinarian>> zipped =
                 StreamZipper.zip(vets, response.getVeterinarians(), Tuple::of);
         assertThat(zipped).hasSize(vets.size())
                 .allSatisfy(t -> {
