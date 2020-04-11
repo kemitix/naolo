@@ -2,10 +2,7 @@ package net.kemitix.naolo.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -28,5 +25,6 @@ public class Pet
     String name;
     ZonedDateTime dateOfBirth;
     PetType type;
+    @ManyToOne
     Owner owner;
 }
