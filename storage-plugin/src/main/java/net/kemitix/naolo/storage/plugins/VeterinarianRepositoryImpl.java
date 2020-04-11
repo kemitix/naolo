@@ -35,10 +35,9 @@ public class VeterinarianRepositoryImpl
     @Override
     public Veterinarian add(final Veterinarian veterinarian) {
         final Veterinarian merged = entityManager.merge(veterinarian);
-        entityManager.persist(merged);
         final Long id = merged.getId();
         log.info(String.format("added %d", id));
-        return veterinarian.withId(id);
+        return merged;
     }
 
     @Override

@@ -27,15 +27,17 @@ public class VeterinarianRepositoryImplTest
     private final long id = new Random().nextLong();
     private final EntityManager entityManager;
     private final VeterinarianRepository repository;
-    private final TypedQuery<Veterinarian> query;
+    private final TypedQuery<Veterinarian> allVetsQuery;
+    private final Stream<Veterinarian> allVetsStream;
 
     public VeterinarianRepositoryImplTest(
             @Mock final EntityManager entityManager,
-            @Mock final TypedQuery<Veterinarian> query
-    ) {
+            @Mock final TypedQuery<Veterinarian> allVetsQuery,
+            @Mock final Stream<Veterinarian> allVetsStream) {
         this.entityManager = entityManager;
-        this.query = query;
         repository = new VeterinarianRepositoryImpl(entityManager);
+        this.allVetsQuery = allVetsQuery;
+        this.allVetsStream = allVetsStream;
     }
 
     @Test
@@ -44,11 +46,12 @@ public class VeterinarianRepositoryImplTest
         //given
         given(entityManager
                 .createNamedQuery(Veterinarian.FIND_ALL, Veterinarian.class))
-                .willReturn(query);
+                .willReturn(allVetsQuery);
+        given(allVetsQuery.getResultStream()).willReturn(allVetsStream);
         //when
         final Stream<Veterinarian> result = repository.findAll();
         //then
-        verify(query).getResultStream();
+        assertThat(result).isSameAs(allVetsStream);
     }
 
     @Test
@@ -59,7 +62,7 @@ public class VeterinarianRepositoryImplTest
         //when
         final Veterinarian result = repository.add(unmanagedVet);
         //then
-        verify(entityManager).persist(managedVet);
+        assertThat(result).isSameAs(managedVet);
     }
 
     @Test
