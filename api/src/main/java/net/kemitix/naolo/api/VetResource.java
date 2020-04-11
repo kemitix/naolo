@@ -45,7 +45,8 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class VetResource {
 
-    public static final Response NOT_FOUND = Response.status(Response.Status.NOT_FOUND).build();
+    public static final Response NOT_FOUND =
+            Response.status(Response.Status.NOT_FOUND).build();
     private final ListAllVets listAll;
     private final AddVet addVet;
     private final GetVet getVet;

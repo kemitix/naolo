@@ -54,11 +54,9 @@ public class ListAllVetsTest implements WithAssertions {
                 StreamZipper.zip(vets, response.getVeterinarians(), Tuple::of);
         assertThat(zipped).hasSize(vets.size())
                 .allSatisfy(t -> {
-                    final Veterinarian s = t.get1();
-                    final Veterinarian r = t.get2();
-                    assertThat(r.getId()).isEqualTo(s.getId());
-                    assertThat(r.getName()).isEqualTo(s.getName());
-                    assertThat(r.getSpecialisations()).isEqualTo(s.getSpecialisations());
+                    final Veterinarian expected = t.get1();
+                    final Veterinarian result = t.get2();
+                    assertThat(expected).isEqualTo(result);
                 });
     }
 }
