@@ -17,11 +17,14 @@ import java.time.ZonedDateTime;
 @EqualsAndHashCode
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
-public class Pet {
+public class Pet
+        implements HasId {
+
     public static final String FIND_ALL = "Pet.FindAll";
+
     @Id
     @GeneratedValue
-    Long id;
+    long id;
     String name;
     ZonedDateTime dateOfBirth;
     PetType type;

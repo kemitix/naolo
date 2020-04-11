@@ -17,11 +17,14 @@ import javax.persistence.NamedQuery;
 @EqualsAndHashCode
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
-public class Owner {
+public class Owner
+        implements HasId {
+
     public static final String FIND_ALL = "Owner.FindAll";
+
     @Id
     @GeneratedValue
-    Long id;
+    long id;
     String firstName;
     String lastName;
     String street;
