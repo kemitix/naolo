@@ -1,5 +1,6 @@
 package net.kemitix.naolo.storage.plugins;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.entities.HasId;
 import net.kemitix.naolo.storage.spi.EntityRepository;
@@ -9,6 +10,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+@NoArgsConstructor(force = true)
 @RequiredArgsConstructor
 public abstract class AbstractEntityRepository<T>
         implements EntityRepository<T> {
