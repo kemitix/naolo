@@ -37,16 +37,16 @@ public class PetTest
                         .withDateOfBirth(dateOfBirth)
                         .withType(type)
                         .withOwner(owner);
-        final Pet builder =
-                Pet.builder()
-                        .id(id)
-                        .name(name)
-                        .dateOfBirth(dateOfBirth)
-                        .type(type)
-                        .owner(owner)
-                        .build();
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
-        assertThat(allArgs).isEqualTo(builder);
+        assertThat(allArgs.getId()).isEqualTo(id);
+        assertThat(allArgs.getName()).isEqualTo(name);
+        assertThat(allArgs.getDateOfBirth()).isEqualTo(dateOfBirth);
+        assertThat(allArgs.getType()).isEqualTo(type);
+        assertThat(allArgs.getOwner()).isEqualTo(owner);
+        assertThat(allArgs.toString())
+                .isEqualTo(String.format(
+                        "Pet(id=%d, name=%s, dateOfBirth=%s, type=%s, owner=%s)",
+                        id, name, dateOfBirth, type, owner));
     }
 }
