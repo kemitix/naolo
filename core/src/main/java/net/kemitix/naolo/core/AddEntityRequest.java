@@ -2,10 +2,8 @@ package net.kemitix.naolo.core;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class AddEntityRequest<T> {

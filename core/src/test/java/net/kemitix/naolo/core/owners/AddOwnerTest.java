@@ -1,5 +1,6 @@
 package net.kemitix.naolo.core.owners;
 
+import net.kemitix.naolo.core.AddEntityRequest;
 import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.storage.spi.OwnerRepository;
 import org.assertj.core.api.WithAssertions;
@@ -40,14 +41,11 @@ public class AddOwnerTest
                         .withStreet(street);
         final long nextId = 42;
         given(repository.add(owner)).willReturn(owner.withId(nextId));
-        final AddOwner.Request request =
-                AddOwner.Request.builder()
-                        .owner(owner)
-                        .build();
+        final var request = AddEntityRequest.create(owner);
         //when
-        final AddOwner.Response response = addOwner.invoke(request);
+        final var response = addOwner.invoke(request);
         //then
-        assertThat(response.getOwner().getId()).isEqualTo(nextId);
+        assertThat(response.getEntity().getId()).isEqualTo(nextId);
         verify(repository).add(owner);
     }
 }

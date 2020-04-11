@@ -1,5 +1,6 @@
 package net.kemitix.naolo.core.vets;
 
+import net.kemitix.naolo.core.AddEntityRequest;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
@@ -43,14 +44,11 @@ public class AddVetTest
                         .withSpecialisations(specialisations);
         final long nextId = 42;
         given(repository.add(vet)).willReturn(vet.withId(nextId));
-        final AddVet.Request request =
-                AddVet.Request.builder()
-                        .veterinarian(vet)
-                        .build();
+        final var request = AddEntityRequest.create(vet);
         //when
-        final AddVet.Response response = addVet.invoke(request);
+        final var response = addVet.invoke(request);
         //then
-        assertThat(response.getVeterinarian().getId()).isEqualTo(nextId);
+        assertThat(response.getEntity().getId()).isEqualTo(nextId);
         verify(repository).add(vet);
     }
 }
