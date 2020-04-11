@@ -25,7 +25,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import net.kemitix.naolo.core.vets.*;
 import net.kemitix.naolo.entities.Veterinarian;
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
@@ -107,7 +106,7 @@ public class VetResource {
     @Path("{id}")
     public Response update(
             @PathParam("id") final long id,
-            @RequestBody final Veterinarian veterinarian
+            final Veterinarian veterinarian
     ) {
         log.info(String.format("PUT /vets/%d", id));
         final UpdateVet.Request request =
