@@ -1,53 +1,32 @@
 package net.kemitix.naolo.storage.plugins;
 
-import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.storage.spi.OwnerRepository;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 @Dependent
-@RequiredArgsConstructor
-public class OwnerRepositoryImpl implements OwnerRepository {
-    private final EntityManager entityManager;
+public class OwnerRepositoryImpl
+        extends AbstractEntityRepository<Owner> {
 
-    @Transactional
-    @Override
-    public Owner add(final Owner owner) {
-        return entityManager.merge(owner);
-    }
-
-    @Override
-    public Optional<Owner> find(final long id) {
-        return Optional.ofNullable(entityManager.find(Owner.class, id));
+    public OwnerRepositoryImpl(final EntityManager entityManager) {
+        super(entityManager);
     }
 
     @Override
     public Stream<Owner> findAll() {
-        return entityManager
-                .createNamedQuery(Owner.FIND_ALL, Owner.class)
-                .getResultStream();
+        return findAll(Owner.FIND_ALL, Owner.class);
     }
 
-    @Transactional
     @Override
-    public Optional<Owner> remove(final long id) {
-        return find(id).map(owner -> {
-            entityManager.remove(owner);
-            return owner;
-        });
+    public Optional<Owner> find(final long id) {
+        return find(id, Owner.class);
     }
 
-    @Transactional
     @Override
-    public Optional<Owner> update(final Owner owner) {
-        return Optional.ofNullable(
-                entityManager.find(Owner.class, owner.getId()))
-                .map(m -> entityManager.merge(owner));
-
+    public Optional<Owner> update(final Owner entity) {
+        return update(entity, Owner.class);
     }
 }
