@@ -4,11 +4,11 @@ import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,6 +17,7 @@ import java.util.Optional;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
 public class UpdateVetTest
         implements WithAssertions {
 
@@ -33,14 +34,13 @@ public class UpdateVetTest
                     .withSpecialisations(Arrays.asList(
                             VetSpecialisation.DENTISTRY,
                             VetSpecialisation.SURGERY));
-    @Mock
-    private VeterinarianRepository repository;
-    private UpdateVet useCase;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        useCase = new UpdateVet(repository);
+    private final VeterinarianRepository repository;
+    private final UpdateVet updateVet;
+
+    public UpdateVetTest(@Mock final VeterinarianRepository repository) {
+        this.repository = repository;
+        updateVet = new UpdateVet(repository);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class UpdateVetTest
                 .withName(expectedVet.getName())
                 .withSpecialisations(expectedVet.getSpecialisations());
         final UpdateVet.Response response =
-                useCase.invoke(
+                updateVet.invoke(
                         UpdateVet.Request.builder()
                                 .veterinarian(updatedVet)
                                 .build());

@@ -8,6 +8,9 @@ import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,13 +19,17 @@ import java.util.stream.Stream;
 
 import static net.kemitix.naolo.core.vets.ListAllVets.request;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
+@ExtendWith(MockitoExtension.class)
 public class ListAllVetsTest implements WithAssertions {
 
-    private final VeterinarianRepository repository = mock(VeterinarianRepository.class);
+    private final VeterinarianRepository repository;
+    private final ListAllVets listAllVets;
 
-    private final ListAllVets useCase = new ListAllVets(repository);
+    public ListAllVetsTest(@Mock final VeterinarianRepository repository) {
+        this.repository = repository;
+        listAllVets = new ListAllVets(repository);
+    }
 
     @Test
     @DisplayName("List all Vets")
@@ -41,7 +48,7 @@ public class ListAllVetsTest implements WithAssertions {
                 );
         given(repository.findAll()).willReturn(vets.stream());
         //when
-        final ListAllVets.Response response = useCase.invoke(request());
+        final ListAllVets.Response response = listAllVets.invoke(request());
         //then
         final Stream<Tuple<Veterinarian, Veterinarian>> zipped =
                 StreamZipper.zip(vets, response.getVeterinarians(), Tuple::of);
