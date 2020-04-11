@@ -23,6 +23,8 @@ package net.kemitix.naolo.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import net.kemitix.naolo.core.AddEntityRequest;
+import net.kemitix.naolo.core.AddEntityResponse;
 import net.kemitix.naolo.core.vets.*;
 import net.kemitix.naolo.entities.Veterinarian;
 
@@ -70,14 +72,10 @@ public class VetResource {
     public Response add(final Veterinarian veterinarian) {
         log.info(String.format("POST /vets (%s - %s)",
                 veterinarian.getId(), veterinarian.getName()));
-        final AddVet.Request request =
-                AddVet.Request.builder()
-                        .veterinarian(veterinarian)
-                        .build();
-        final AddVet.Response response = addVet.invoke(request);
-        final Long id =
-                response.getVeterinarian()
-                        .getId();
+        final AddEntityRequest<Veterinarian> request =
+                AddEntityRequest.create(veterinarian);
+        final AddEntityResponse<Veterinarian> response = addVet.invoke(request);
+        final Long id = response.getEntity().getId();
         final URI location = URI.create(String.format(
                 "/vets/%d", id));
         return Response.created(location).build();

@@ -30,7 +30,9 @@ public class VetResourceTest implements WithAssertions {
     private final Long id = new Random().nextLong();
     private final VetResource resource;
 
-    public VetResourceTest(@Mock final VeterinarianRepository repository) {
+    public VetResourceTest(
+            @Mock final VeterinarianRepository repository
+    ) {
         this.repository = repository;
         resource =
                 new VetResource(

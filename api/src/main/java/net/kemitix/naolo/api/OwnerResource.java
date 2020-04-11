@@ -2,6 +2,7 @@ package net.kemitix.naolo.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import net.kemitix.naolo.core.AddEntityRequest;
 import net.kemitix.naolo.core.owners.*;
 import net.kemitix.naolo.entities.Owner;
 
@@ -52,10 +53,9 @@ public class OwnerResource {
     public Response add(final Owner owner) {
         log.info(String.format("POST /owners (%s - %s, %s)",
                 owner.getId(), owner.getLastName(), owner.getFirstName()));
-        final var request = AddOwner.Request.builder()
-                .owner(owner).build();
+        final var request = AddEntityRequest.create(owner);
         final var response = addOwner.invoke(request);
-        final var id = response.getOwner().getId();
+        final var id = response.getEntity().getId();
         final var location = URI.create(String.format(
                 "/owners/%d", id));
         return Response.created(location).build();
