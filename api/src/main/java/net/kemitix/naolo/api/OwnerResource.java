@@ -18,10 +18,8 @@ import java.net.URI;
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 @RequiredArgsConstructor
-public class OwnerResource {
-
-    private static final Response NOT_FOUND =
-            Response.status(Response.Status.NOT_FOUND).build();
+public class OwnerResource
+        implements EntityResource<Owner> {
 
     private final ListAllOwners listAllOwners;
     private final AddOwner addOwner;
@@ -29,26 +27,29 @@ public class OwnerResource {
     private final UpdateOwner updateOwner;
     private final RemoveOwner removeOwner;
 
+    @Override
     @GET
-    public Response allOwners() {
+    public Response all() {
         log.info("GET /owners");
         final var request = ListAllOwners.request();
         final var response = listAllOwners.invoke(request);
         return entityOk(response.getOwners());
     }
 
+    @Override
     @GET
     @Path("{id}")
-    public Response getOwner(@PathParam("id") final long id) {
+    public Response get(@PathParam("id") final long id) {
         log.info("GET /owners/" + id);
         final var request = GetOwner.Request.builder()
                 .id(id).build();
         final var response = getOwner.invoke(request);
         return response.getOwner()
                 .map(this::entityOk)
-                .orElse(NOT_FOUND);
+                .orElse(EntityResource.NOT_FOUND);
     }
 
+    @Override
     @POST
     public Response add(final Owner owner) {
         log.info(String.format("POST /owners (%s - %s, %s)",
@@ -61,6 +62,7 @@ public class OwnerResource {
         return Response.created(location).build();
     }
 
+    @Override
     @PUT
     @Path("{id}")
     public Response update(
@@ -73,9 +75,10 @@ public class OwnerResource {
         final var response = updateOwner.invoke(request);
         return response.getOwner()
                 .map(this::entityOk)
-                .orElse(NOT_FOUND);
+                .orElse(EntityResource.NOT_FOUND);
     }
 
+    @Override
     @DELETE
     @Path("{id}")
     public Response remove(@PathParam("id") final long id) {
@@ -85,10 +88,7 @@ public class OwnerResource {
         final var response = removeOwner.invoke(request);
         return response.getOwner()
                 .map(e -> Response.ok().build())
-                .orElse(NOT_FOUND);
+                .orElse(EntityResource.NOT_FOUND);
     }
 
-    private Response entityOk(final Object entity) {
-        return Response.ok().entity(entity).build();
-    }
 }

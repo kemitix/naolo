@@ -39,7 +39,7 @@ public class OwnerResourceTest
                         ().withFirstName("sam"));
         given(repository.findAll()).willReturn(owners.stream());
         //when
-        final Response response = resource.allOwners();
+        final Response response = resource.all();
         //then
         assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_OK);
         assertThat(response.getEntity()).isEqualTo(owners);
@@ -71,7 +71,7 @@ public class OwnerResourceTest
         given(repository.find(id))
                 .willReturn(Optional.of(owner));
         //when
-        final Response response = resource.getOwner(id);
+        final Response response = resource.get(id);
         //then
         assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_OK);
         assertThat(response.getEntity()).isEqualTo(owner);
@@ -85,7 +85,7 @@ public class OwnerResourceTest
         given(repository.find(id))
                 .willReturn(Optional.empty());
         //when
-        final Response response = resource.getOwner(id);
+        final Response response = resource.get(id);
         //then
         assertThat(response.getStatus())
                 .isEqualTo(HttpServletResponse.SC_NOT_FOUND);
