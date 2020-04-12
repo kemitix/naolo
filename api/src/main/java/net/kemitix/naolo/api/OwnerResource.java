@@ -10,7 +10,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
 
 @Log
 @Path("owners")
@@ -56,9 +55,7 @@ public class OwnerResource
                 owner.getId(), owner.getLastName(), owner.getFirstName()));
         final var request = AddEntityRequest.create(owner);
         final var response = addOwner.invoke(request);
-        final var id = response.getEntity().getId();
-        final var location = URI.create(String.format(
-                "/owners/%d", id));
+        final var location = location("/owners", response.getEntity());
         return Response.created(location).build();
     }
 

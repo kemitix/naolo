@@ -76,9 +76,7 @@ public class VetResource
         final AddEntityRequest<Veterinarian> request =
                 AddEntityRequest.create(veterinarian);
         final AddEntityResponse<Veterinarian> response = addVet.invoke(request);
-        final Long id = response.getEntity().getId();
-        final URI location = URI.create(String.format(
-                "/vets/%d", id));
+        final URI location = location("/vets", response.getEntity());
         return Response.created(location).build();
     }
 
