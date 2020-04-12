@@ -3,29 +3,35 @@ package net.kemitix.naolo.core.owners;
 import net.kemitix.naolo.core.StreamZipper;
 import net.kemitix.naolo.core.Tuple;
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.storage.spi.OwnerRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
-public class ListAllOwnersTest
+@ExtendWith(MockitoExtension.class)
+public class ListOwnersTest
         implements WithAssertions {
 
-    private final OwnerRepository repository =
-            mock(OwnerRepository.class);
-    private final ListAllOwners listAllOwners =
-            new ListAllOwners(repository);
+    private final EntityRepository<Owner> repository;
+    private final ListOwners listOwners;
+
+    public ListOwnersTest(@Mock final EntityRepository<Owner> repository) {
+        this.repository = repository;
+        listOwners = new ListOwners(repository);
+    }
 
     @Test
-    @DisplayName("List All Owners")
-    public void listAllOwners() {
+    @DisplayName("List Owners")
+    public void listOwners() {
         //given
         final List<Owner> owners = Arrays.asList(
                 new Owner().withId(43L).withFirstName("bob")
@@ -36,12 +42,12 @@ public class ListAllOwnersTest
                         .withCity("city 2")
         );
         given(repository.findAll()).willReturn(owners.stream());
-        final ListAllOwners.Request request = ListAllOwners.request();
+        final var request = ListOwners.request();
         //when
-        final ListAllOwners.Response response = listAllOwners.invoke(request);
+        final var response = listOwners.invoke(request);
         //then
         final Stream<Tuple<Owner, Owner>> zipped =
-                StreamZipper.zip(owners, response.getOwners(), Tuple::of);
+                StreamZipper.zip(owners, response.getEntities(), Tuple::of);
         assertThat(zipped).hasSize(owners.size())
         .allSatisfy(t -> {
             final Owner expected = t.get1();
