@@ -1,6 +1,8 @@
 package net.kemitix.naolo.core;
 
-public interface AddEntityUseCase<T>
+import net.kemitix.naolo.entities.HasId;
+
+public interface AddEntityUseCase<T extends HasId>
         extends EntityUseCase<T, AddEntityRequest<T>, AddEntityResponse<T>> {
 
     @Override

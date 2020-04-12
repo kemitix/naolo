@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class AddEntityRequest<T>
-        implements EntityUseCaseRequest<T> {
+        implements SingleEntityRequest<T> {
 
     private final T entity;
 

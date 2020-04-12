@@ -1,8 +1,10 @@
 package net.kemitix.naolo.core;
 
+import net.kemitix.naolo.entities.HasId;
+
 import java.util.stream.Collectors;
 
-public interface ListEntityUseCase<T>
+public interface ListEntityUseCase<T extends HasId>
         extends EntityUseCase<T, ListEntityRequest<T>, ListEntityResponse<T>> {
 
     @Override

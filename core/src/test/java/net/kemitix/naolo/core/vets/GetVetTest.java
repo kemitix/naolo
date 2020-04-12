@@ -1,7 +1,9 @@
 package net.kemitix.naolo.core.vets;
 
+import net.kemitix.naolo.core.GetEntityRequest;
+import net.kemitix.naolo.core.GetEntityResponse;
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.VeterinarianRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,10 +22,10 @@ public class GetVetTest
 
     private final long id = new Random().nextLong();
     private final Veterinarian vet = new Veterinarian();
-    private final VeterinarianRepository repository;
+    private final EntityRepository<Veterinarian> repository;
     private final GetVet useCase;
 
-    public GetVetTest(@Mock final VeterinarianRepository repository) {
+    public GetVetTest(@Mock final EntityRepository<Veterinarian> repository) {
         this.repository = repository;
         useCase = new GetVet(repository);
     }
@@ -34,15 +36,13 @@ public class GetVetTest
         //given
         given(repository.find(id))
                 .willReturn(Optional.of(vet));
-        final GetVet.Request request =
-                GetVet.Request.builder()
-                        .id(id)
-                        .build();
+        final GetEntityRequest<Veterinarian> request =
+                GetVet.request(id);
         //when
-        final GetVet.Response result =
+        final GetEntityResponse<Veterinarian> result =
                 useCase.invoke(request);
         //then
-        assertThat(result.getVeterinarian())
+        assertThat(result.getEntity())
                 .contains(vet);
     }
 
@@ -52,11 +52,10 @@ public class GetVetTest
         //given
         given(repository.find(id))
                 .willReturn(Optional.empty());
+        final var request = GetVet.request(id);
         //when
-        final GetVet.Response result =
-                useCase.invoke(GetVet.Request.builder().id(id).build());
+        final var result = useCase.invoke(request);
         //then
-        assertThat(result.getVeterinarian())
-                .isEmpty();
+        assertThat(result.getEntity()).isEmpty();
     }
 }

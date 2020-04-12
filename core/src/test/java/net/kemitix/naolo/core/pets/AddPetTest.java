@@ -50,6 +50,7 @@ public class AddPetTest
         //when
         final AddEntityResponse<Pet> response = addPet.invoke(request);
         //then
-        assertThat(response.getEntity().getId()).isEqualTo(nextId);
+        assertThat(response.getEntity().getId())
+                .isEqualTo(nextId);
     }
 }

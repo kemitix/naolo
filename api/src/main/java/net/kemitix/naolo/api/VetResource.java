@@ -86,13 +86,10 @@ public class VetResource
     @Path("{id}")
     public Response get(@PathParam("id") final long id) {
         log.info(String.format("GET /vets/%d", id));
-        final GetVet.Request request =
-                GetVet.Request.builder()
-                        .id(id)
-                        .build();
-        final GetVet.Response response = getVet.invoke(request);
+        final var request = GetVet.request(id);
+        final var response = getVet.invoke(request);
         return response
-                .getVeterinarian()
+                .getEntity()
                 .map(this::entityOk)
                 .orElse(NOT_FOUND);
     }

@@ -6,6 +6,9 @@ import net.kemitix.naolo.storage.spi.OwnerRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
@@ -15,19 +18,24 @@ import java.util.Optional;
 import java.util.Random;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
+@ExtendWith(MockitoExtension.class)
 public class OwnerResourceTest
         implements WithAssertions {
 
-    private final OwnerRepository repository = mock(OwnerRepository.class);
-    private final OwnerResource resource =
-            new OwnerResource(
-                    new ListAllOwners(repository),
-                    new AddOwner(repository),
-                    new GetOwner(repository),
-                    new UpdateOwner(repository),
-                    new RemoveOwner(repository));
+    private final OwnerRepository repository;
+    private final OwnerResource resource;
+
+    public OwnerResourceTest(@Mock final OwnerRepository repository) {
+        this.repository = repository;
+        resource =
+                new OwnerResource(
+                        new ListAllOwners(repository),
+                        new AddOwner(repository),
+                        new GetOwner(repository),
+                        new UpdateOwner(repository),
+                        new RemoveOwner(repository));
+    }
 
     @Test
     @DisplayName("get all owners - 200 ok")
