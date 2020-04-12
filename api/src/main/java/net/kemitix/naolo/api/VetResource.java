@@ -48,7 +48,7 @@ import java.net.URI;
 public class VetResource
         implements EntityResource<Veterinarian> {
 
-    private final ListAllVets listAll;
+    private final ListVets listAll;
     private final AddVet addVet;
     private final GetVet getVet;
     private final UpdateVet updateVet;
@@ -63,9 +63,9 @@ public class VetResource
     @GET
     public Response all() {
         log.info("GET /vets");
-        final ListAllVets.Request request = ListAllVets.request();
-        final ListAllVets.Response response = listAll.invoke(request);
-        return entityOk(response.getVeterinarians());
+        final var request = ListVets.request();
+        final var response = listAll.invoke(request);
+        return entityOk(response.getEntities());
     }
 
     @Override

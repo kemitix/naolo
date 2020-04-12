@@ -21,14 +21,15 @@
 
 package net.kemitix.naolo.core.vets;
 
-import lombok.Builder;
 import lombok.Getter;
-import net.kemitix.naolo.core.UseCase;
+import lombok.RequiredArgsConstructor;
+import net.kemitix.naolo.core.ListEntityRequest;
+import net.kemitix.naolo.core.ListEntityResponse;
+import net.kemitix.naolo.core.ListEntityUseCase;
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.VeterinarianRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.Dependent;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -37,58 +38,19 @@ import java.util.stream.Collectors;
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
 @Dependent
-public class ListAllVets
-        implements UseCase<ListAllVets.Request, ListAllVets.Response> {
-
-    private static final Request REQUEST = new Request() {
-    };
-
-    private final VeterinarianRepository repository;
-
-    /**
-     * Constructor.
-     *
-     * @param repository the Veterinarian Repository
-     */
-    public ListAllVets(final VeterinarianRepository repository) {
-        this.repository = repository;
-    }
-
-    /**
-     * Returns the empty request.
-     *
-     * @return the empty request object
-     */
-    public static Request request() {
-        return REQUEST;
-    }
-
-    /**
-     * Invoke the UseCase.
-     *
-     * <p>This implementation requires the parameter to be {@link #request()}.</p>
-     *
-     * @param request the result of {@link #request()}
-     * @return the Response
-     */
-    @Override
-    public Response invoke(final Request request) {
-        return Response.builder()
-                .veterinarians(
-                        repository.findAll()
-                                .collect(Collectors.toList()))
-                .build();
-    }
+@RequiredArgsConstructor
+public class ListVets
+        implements ListEntityUseCase<Veterinarian> {
 
     @Getter
-    @Builder
-    public static class Response {
-        List<Veterinarian> veterinarians;
+    private final EntityRepository<Veterinarian> repository;
+
+    public static ListEntityRequest<Veterinarian> request() {
+        return ListEntityRequest.create();
     }
 
-    public static class Request {
-        private Request() {
-        }
+    @Override
+    public ListEntityResponse<Veterinarian> invoke(final ListEntityRequest<Veterinarian> request) {
+        return () -> repository.findAll().collect(Collectors.toList());
     }
-
 }

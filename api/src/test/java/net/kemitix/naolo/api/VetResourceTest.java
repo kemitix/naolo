@@ -36,7 +36,7 @@ public class VetResourceTest implements WithAssertions {
         this.repository = repository;
         resource =
                 new VetResource(
-                        new ListAllVets(repository),
+                        new ListVets(repository),
                         new AddVet(repository),
                         new GetVet(repository),
                         new UpdateVet(repository),
