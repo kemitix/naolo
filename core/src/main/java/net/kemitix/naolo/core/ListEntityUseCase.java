@@ -1,13 +1,9 @@
 package net.kemitix.naolo.core;
 
-import net.kemitix.naolo.storage.spi.EntityRepository;
-
 import java.util.stream.Collectors;
 
 public interface ListEntityUseCase<T>
-        extends UseCase<ListEntityRequest<T>, ListEntityResponse<T>> {
-
-    EntityRepository<T> getRepository();
+        extends EntityUseCase<T, ListEntityRequest<T>, ListEntityResponse<T>> {
 
     @Override
     default ListEntityResponse<T> invoke(

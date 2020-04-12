@@ -4,7 +4,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class ListEntityRequest<T> {
+public class ListEntityRequest<T>
+        implements EntityUseCaseRequest<T> {
 
     public static final ListEntityRequest<?> REQUEST =
             new ListEntityRequest<>();
