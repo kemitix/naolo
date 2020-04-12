@@ -32,8 +32,7 @@ public class GetPetTest
     @DisplayName("Get a Pet that exists")
     public void getExistingPet() {
         //given
-        given(repository.find(id))
-                .willReturn(Optional.of(pet));
+        given(repository.find(id)).willReturn(Optional.of(pet));
         final var request = GetPet.request(id);
         //when
         final var response = useCase.invoke(request);
@@ -45,8 +44,7 @@ public class GetPetTest
     @DisplayName("Get a Vet that does not exist")
     public void getMissingVet() {
         //given
-        given(repository.find(id))
-                .willReturn(Optional.empty());
+        given(repository.find(id)).willReturn(Optional.empty());
         final var request = GetPet.request(id);
         //when
         final var response = useCase.invoke(request);

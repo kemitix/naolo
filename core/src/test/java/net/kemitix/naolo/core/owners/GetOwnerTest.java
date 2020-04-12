@@ -1,7 +1,7 @@
 package net.kemitix.naolo.core.owners;
 
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.storage.spi.OwnerRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,10 +20,10 @@ public class GetOwnerTest
 
     private final long id = new Random().nextLong();
     private final Owner owner = new Owner();
-    private final OwnerRepository repository;
+    private final EntityRepository<Owner> repository;
     private final GetOwner getOwner;
 
-    public GetOwnerTest(@Mock final OwnerRepository repository) {
+    public GetOwnerTest(@Mock final EntityRepository<Owner> repository) {
         this.repository = repository;
         getOwner = new GetOwner(repository);
     }
@@ -32,8 +32,7 @@ public class GetOwnerTest
     @DisplayName("Get a Vet that exists")
     public void getExistingVet() {
         //given
-        given(repository.find(id))
-                .willReturn(Optional.of(owner));
+        given(repository.find(id)).willReturn(Optional.of(owner));
         final var request = GetOwner.request(id);
         //when
         final var response = getOwner.invoke(request);
@@ -45,8 +44,7 @@ public class GetOwnerTest
     @DisplayName("Get an Owner that does not exist")
     public void getMissingOwner() {
         //given
-        given(repository.find(id))
-                .willReturn(Optional.empty());
+        given(repository.find(id)).willReturn(Optional.empty());
         final var request = GetOwner.request(id);
         //when
         final var response = getOwner.invoke(request);

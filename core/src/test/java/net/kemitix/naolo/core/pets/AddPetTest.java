@@ -47,7 +47,6 @@ public class AddPetTest
         //when
         final var response = addPet.invoke(request);
         //then
-        assertThat(response.getEntity().getId())
-                .isEqualTo(nextId);
+        assertThat(response.getEntity().getId()).isEqualTo(nextId);
     }
 }

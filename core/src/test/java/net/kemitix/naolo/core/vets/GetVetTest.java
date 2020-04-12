@@ -1,7 +1,5 @@
 package net.kemitix.naolo.core.vets;
 
-import net.kemitix.naolo.core.GetEntityRequest;
-import net.kemitix.naolo.core.GetEntityResponse;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
@@ -34,24 +32,19 @@ public class GetVetTest
     @DisplayName("Get a Vet that exists")
     public void getExistingVet() {
         //given
-        given(repository.find(id))
-                .willReturn(Optional.of(vet));
-        final GetEntityRequest<Veterinarian> request =
-                GetVet.request(id);
+        given(repository.find(id)).willReturn(Optional.of(vet));
+        final var request = GetVet.request(id);
         //when
-        final GetEntityResponse<Veterinarian> result =
-                useCase.invoke(request);
+        final var result = useCase.invoke(request);
         //then
-        assertThat(result.getEntity())
-                .contains(vet);
+        assertThat(result.getEntity()).contains(vet);
     }
 
     @Test
     @DisplayName("Get a Vet that does not exist")
     public void getMissingVet() {
         //given
-        given(repository.find(id))
-                .willReturn(Optional.empty());
+        given(repository.find(id)).willReturn(Optional.empty());
         final var request = GetVet.request(id);
         //when
         final var result = useCase.invoke(request);

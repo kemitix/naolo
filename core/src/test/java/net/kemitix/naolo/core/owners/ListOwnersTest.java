@@ -48,11 +48,12 @@ public class ListOwnersTest
         //then
         final Stream<Tuple<Owner, Owner>> zipped =
                 StreamZipper.zip(owners, response.getEntities(), Tuple::of);
-        assertThat(zipped).hasSize(owners.size())
-        .allSatisfy(t -> {
-            final Owner expected = t.get1();
-            final Owner result = t.get2();
-            assertThat(expected).isEqualTo(result);
-        });
+        assertThat(zipped)
+                .hasSize(owners.size())
+                .allSatisfy(t -> {
+                    final Owner expected = t.get1();
+                    final Owner result = t.get2();
+                    assertThat(expected).isEqualTo(result);
+                });
     }
 }

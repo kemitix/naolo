@@ -60,11 +60,12 @@ public class ListPetsTest
         //then
         final Stream<Tuple<Pet, Pet>> zipped =
                 StreamZipper.zip(pets, response.getEntities(), Tuple::of);
-        assertThat(zipped).hasSize(pets.size())
-        .allSatisfy(t -> {
-            final Pet expected = t.get1();
-            final Pet result = t.get2();
-            assertThat(expected).isEqualTo(result);
-        });
+        assertThat(zipped)
+                .hasSize(pets.size())
+                .allSatisfy(t -> {
+                    final Pet expected = t.get1();
+                    final Pet result = t.get2();
+                    assertThat(expected).isEqualTo(result);
+                });
     }
 }

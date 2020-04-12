@@ -52,7 +52,8 @@ public class ListVetsTest implements WithAssertions {
         //then
         final Stream<Tuple<Veterinarian, Veterinarian>> zipped =
                 StreamZipper.zip(vets, response.getEntities(), Tuple::of);
-        assertThat(zipped).hasSize(vets.size())
+        assertThat(zipped)
+                .hasSize(vets.size())
                 .allSatisfy(t -> {
                     final Veterinarian expected = t.get1();
                     final Veterinarian result = t.get2();
