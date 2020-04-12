@@ -45,10 +45,9 @@ import java.net.URI;
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 @RequiredArgsConstructor
-public class VetResource {
+public class VetResource
+        implements EntityResource<Veterinarian> {
 
-    public static final Response NOT_FOUND =
-            Response.status(Response.Status.NOT_FOUND).build();
     private final ListAllVets listAll;
     private final AddVet addVet;
     private final GetVet getVet;
@@ -60,14 +59,16 @@ public class VetResource {
      *
      * @return the respone
      */
+    @Override
     @GET
-    public Response allVets() {
+    public Response all() {
         log.info("GET /vets");
         final ListAllVets.Request request = ListAllVets.request();
         final ListAllVets.Response response = listAll.invoke(request);
         return entityOk(response.getVeterinarians());
     }
 
+    @Override
     @POST
     public Response add(final Veterinarian veterinarian) {
         log.info(String.format("POST /vets (%s - %s)",
@@ -82,9 +83,10 @@ public class VetResource {
     }
 
 
+    @Override
     @GET
     @Path("{id}")
-    public Response get(@PathParam("id") final Long id) {
+    public Response get(@PathParam("id") final long id) {
         log.info(String.format("GET /vets/%d", id));
         final GetVet.Request request =
                 GetVet.Request.builder()
@@ -97,10 +99,7 @@ public class VetResource {
                 .orElse(NOT_FOUND);
     }
 
-    private Response entityOk(final Object entity) {
-        return Response.ok().entity(entity).build();
-    }
-
+    @Override
     @PUT
     @Path("{id}")
     public Response update(
@@ -119,6 +118,7 @@ public class VetResource {
                 .orElse(NOT_FOUND);
     }
 
+    @Override
     @DELETE
     @Path("{id}")
     public Response remove(@PathParam("id") final long id) {

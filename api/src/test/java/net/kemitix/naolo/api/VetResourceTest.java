@@ -52,7 +52,7 @@ public class VetResourceTest implements WithAssertions {
                 new Veterinarian().withName("sam"));
         given(repository.findAll()).willReturn(vets.stream());
         //when
-        final Response response = resource.allVets();
+        final Response response = resource.all();
         //then
         assertThat(response.getEntity()).isEqualTo(vets);
     }
