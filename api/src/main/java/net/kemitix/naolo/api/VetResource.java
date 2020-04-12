@@ -23,8 +23,6 @@ package net.kemitix.naolo.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import net.kemitix.naolo.core.AddEntityRequest;
-import net.kemitix.naolo.core.AddEntityResponse;
 import net.kemitix.naolo.core.vets.*;
 import net.kemitix.naolo.entities.Veterinarian;
 
@@ -73,9 +71,8 @@ public class VetResource
     public Response add(final Veterinarian veterinarian) {
         log.info(String.format("POST /vets (%s - %s)",
                 veterinarian.getId(), veterinarian.getName()));
-        final AddEntityRequest<Veterinarian> request =
-                AddEntityRequest.create(veterinarian);
-        final AddEntityResponse<Veterinarian> response = addVet.invoke(request);
+        final var request = AddVet.request(veterinarian);
+        final var response = addVet.invoke(request);
         final URI location = location("/vets", response.getEntity());
         return Response.created(location).build();
     }
@@ -102,13 +99,10 @@ public class VetResource
             final Veterinarian veterinarian
     ) {
         log.info(String.format("PUT /vets/%d", id));
-        final UpdateVet.Request request =
-                UpdateVet.Request.builder()
-                        .veterinarian(veterinarian)
-                        .build();
-        final UpdateVet.Response response = updateVet.invoke(request);
+        final var request = UpdateVet.request(veterinarian);
+        final var response = updateVet.invoke(request);
         return response
-                .getVeterinarian()
+                .getEntity()
                 .map(this::entityOk)
                 .orElse(NOT_FOUND);
     }
@@ -118,11 +112,10 @@ public class VetResource
     @Path("{id}")
     public Response remove(@PathParam("id") final long id) {
         log.info(String.format("DELETE /vets/%d", id));
-        final RemoveVet.Request request = RemoveVet.Request.builder()
-                .id(id).build();
-        final RemoveVet.Response response = removeVet.invoke(request);
+        final var request = RemoveVet.request(id);
+        final var response = removeVet.invoke(request);
         return response
-                .getVeterinarian()
+                .getEntity()
                 .map(e -> Response.ok().build())
                 .orElse(NOT_FOUND);
     }

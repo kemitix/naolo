@@ -2,7 +2,6 @@ package net.kemitix.naolo.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import net.kemitix.naolo.core.AddEntityRequest;
 import net.kemitix.naolo.core.owners.*;
 import net.kemitix.naolo.entities.Owner;
 
@@ -20,7 +19,7 @@ import javax.ws.rs.core.Response;
 public class OwnerResource
         implements EntityResource<Owner> {
 
-    private final ListAllOwners listAllOwners;
+    private final ListOwners listOwners;
     private final AddOwner addOwner;
     private final GetOwner getOwner;
     private final UpdateOwner updateOwner;
@@ -30,9 +29,9 @@ public class OwnerResource
     @GET
     public Response all() {
         log.info("GET /owners");
-        final var request = ListAllOwners.request();
-        final var response = listAllOwners.invoke(request);
-        return entityOk(response.getOwners());
+        final var request = ListOwners.request();
+        final var response = listOwners.invoke(request);
+        return entityOk(response.getEntities());
     }
 
     @Override
@@ -40,10 +39,9 @@ public class OwnerResource
     @Path("{id}")
     public Response get(@PathParam("id") final long id) {
         log.info("GET /owners/" + id);
-        final var request = GetOwner.Request.builder()
-                .id(id).build();
+        final var request = GetOwner.request(id);
         final var response = getOwner.invoke(request);
-        return response.getOwner()
+        return response.getEntity()
                 .map(this::entityOk)
                 .orElse(EntityResource.NOT_FOUND);
     }
@@ -53,7 +51,7 @@ public class OwnerResource
     public Response add(final Owner owner) {
         log.info(String.format("POST /owners (%s - %s, %s)",
                 owner.getId(), owner.getLastName(), owner.getFirstName()));
-        final var request = AddEntityRequest.create(owner);
+        final var request = AddOwner.request(owner);
         final var response = addOwner.invoke(request);
         final var location = location("/owners", response.getEntity());
         return Response.created(location).build();
@@ -67,10 +65,9 @@ public class OwnerResource
             final Owner owner
     ) {
         log.info(String.format("PUT /owners/%d", id));
-        final var request = UpdateOwner.Request.builder()
-                .owner(owner).build();
+        final var request = UpdateOwner.request(owner);
         final var response = updateOwner.invoke(request);
-        return response.getOwner()
+        return response.getEntity()
                 .map(this::entityOk)
                 .orElse(EntityResource.NOT_FOUND);
     }
@@ -80,10 +77,9 @@ public class OwnerResource
     @Path("{id}")
     public Response remove(@PathParam("id") final long id) {
         log.info(String.format("DELETE /owners/%d", id));
-        final var request = RemoveOwner.Request.builder()
-                .id(id).build();
+        final var request = RemoveOwner.request(id);
         final var response = removeOwner.invoke(request);
-        return response.getOwner()
+        return response.getEntity()
                 .map(e -> Response.ok().build())
                 .orElse(EntityResource.NOT_FOUND);
     }

@@ -1,10 +1,9 @@
 package net.kemitix.naolo.api;
 
-import net.kemitix.naolo.core.pets.AddPet;
+import net.kemitix.naolo.core.pets.*;
 import net.kemitix.naolo.entities.Pet;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,16 +30,15 @@ public class PetResourceTest
         this.repository = repository;
         resource =
                 new PetResource(
-//                        new ListAllPets(repository),
-                        new AddPet(repository)//,
-//                        new GetPet(repository),
-//                        new UpdatePet(repository),
-//                        new RemovePet(repository)
+                        new ListPets(repository),
+                        new AddPet(repository),
+                        new GetPet(repository),
+                        new UpdatePet(repository),
+                        new RemovePet(repository)
                 );
     }
 
     @Test
-    @Disabled
     @DisplayName("get all pets - 200 ok")
     public void getAllPets() {
         //given
@@ -73,14 +71,12 @@ public class PetResourceTest
     }
 
     @Test
-    @Disabled
     @DisplayName("Get a Pet that exists")
     public void getExistingPet() {
         //given
         final long id = new Random().nextLong();
         final Pet pet = new Pet().withId(id);
-        given(repository.find(id))
-                .willReturn(Optional.of(pet));
+        given(repository.find(id)).willReturn(Optional.of(pet));
         //when
         final Response response = resource.get(id);
         //then
@@ -89,7 +85,6 @@ public class PetResourceTest
     }
 
     @Test
-    @Disabled
     @DisplayName("Get a Pet that does not exist")
     public void getMissingPet() {
         //given
@@ -104,7 +99,6 @@ public class PetResourceTest
     }
 
     @Test
-    @Disabled
     @DisplayName("Update a Pet that exists")
     public void updateExistingPet() {
         //given
@@ -120,7 +114,6 @@ public class PetResourceTest
     }
 
     @Test
-    @Disabled
     @DisplayName("Update a Pet that does not exist")
     public void updateMissingPet() {
         //given
@@ -136,7 +129,6 @@ public class PetResourceTest
     }
 
     @Test
-    @Disabled
     @DisplayName("Remove a Pet that exists")
     public void removeExistingPet() {
         //given
@@ -150,7 +142,6 @@ public class PetResourceTest
     }
 
     @Test
-    @Disabled
     @DisplayName("Remove a Pet that does not exist")
     public void removeMissingPet() {
         //given

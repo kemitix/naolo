@@ -30,7 +30,7 @@ public class OwnerResourceTest
         this.repository = repository;
         resource =
                 new OwnerResource(
-                        new ListAllOwners(repository),
+                        new ListOwners(repository),
                         new AddOwner(repository),
                         new GetOwner(repository),
                         new UpdateOwner(repository),
