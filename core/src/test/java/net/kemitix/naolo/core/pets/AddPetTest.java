@@ -1,7 +1,5 @@
 package net.kemitix.naolo.core.pets;
 
-import net.kemitix.naolo.core.AddEntityRequest;
-import net.kemitix.naolo.core.AddEntityResponse;
 import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.entities.Pet;
 import net.kemitix.naolo.entities.PetType;
@@ -45,10 +43,9 @@ public class AddPetTest
                 .withOwner(owner);
         final long nextId = new Random().nextLong();
         given(repository.add(pet)).willReturn(pet.withId(nextId));
-        final AddEntityRequest<Pet> request =
-                AddEntityRequest.create(pet);
+        final var request = AddPet.request(pet);
         //when
-        final AddEntityResponse<Pet> response = addPet.invoke(request);
+        final var response = addPet.invoke(request);
         //then
         assertThat(response.getEntity().getId())
                 .isEqualTo(nextId);

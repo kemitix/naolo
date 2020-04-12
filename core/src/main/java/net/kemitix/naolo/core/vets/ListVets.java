@@ -24,13 +24,11 @@ package net.kemitix.naolo.core.vets;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.ListEntityRequest;
-import net.kemitix.naolo.core.ListEntityResponse;
 import net.kemitix.naolo.core.ListEntityUseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.Dependent;
-import java.util.stream.Collectors;
 
 /**
  * Use-case to list all {@link Veterinarian}s.
@@ -47,10 +45,5 @@ public class ListVets
 
     public static ListEntityRequest<Veterinarian> request() {
         return ListEntityRequest.create();
-    }
-
-    @Override
-    public ListEntityResponse<Veterinarian> invoke(final ListEntityRequest<Veterinarian> request) {
-        return () -> repository.findAll().collect(Collectors.toList());
     }
 }

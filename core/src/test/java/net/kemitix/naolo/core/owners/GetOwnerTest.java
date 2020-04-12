@@ -3,29 +3,28 @@ package net.kemitix.naolo.core.owners;
 import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.storage.spi.OwnerRepository;
 import org.assertj.core.api.WithAssertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 import java.util.Random;
 
 import static org.mockito.BDDMockito.given;
 
+@ExtendWith(MockitoExtension.class)
 public class GetOwnerTest
         implements WithAssertions {
 
     private final long id = new Random().nextLong();
     private final Owner owner = new Owner();
-    @Mock
-    private OwnerRepository repository;
-    private GetOwner getOwner;
+    private final OwnerRepository repository;
+    private final GetOwner getOwner;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
+    public GetOwnerTest(@Mock final OwnerRepository repository) {
+        this.repository = repository;
         getOwner = new GetOwner(repository);
     }
 
@@ -35,15 +34,11 @@ public class GetOwnerTest
         //given
         given(repository.find(id))
                 .willReturn(Optional.of(owner));
-        final GetOwner.Request request =
-                GetOwner.Request.builder()
-                        .id(id)
-                        .build();
+        final var request = GetOwner.request(id);
         //when
-        final GetOwner.Response response = getOwner.invoke(request);
+        final var response = getOwner.invoke(request);
         //then
-        assertThat(response.getOwner())
-                .contains(owner);
+        assertThat(response.getEntity()).contains(owner);
     }
 
     @Test
@@ -52,14 +47,10 @@ public class GetOwnerTest
         //given
         given(repository.find(id))
                 .willReturn(Optional.empty());
-        final GetOwner.Request request =
-                GetOwner.Request.builder()
-                        .id(id)
-                        .build();
+        final var request = GetOwner.request(id);
         //when
-        final GetOwner.Response response = getOwner.invoke(request);
+        final var response = getOwner.invoke(request);
         //then
-        assertThat(response.getOwner())
-                .isEmpty();
+        assertThat(response.getEntity()).isEmpty();
     }
 }

@@ -53,14 +53,10 @@ public class UpdateVetTest
         final Veterinarian updatedVet = originalVet
                 .withName(expectedVet.getName())
                 .withSpecialisations(expectedVet.getSpecialisations());
-        final UpdateVet.Response response =
-                updateVet.invoke(
-                        UpdateVet.Request.builder()
-                                .veterinarian(updatedVet)
-                                .build());
+        final var request = UpdateVet.request(updatedVet);
+        final var response = updateVet.invoke(request);
         //then
+        assertThat(response.getEntity()).contains(expectedVet);
         verify(repository).update(expectedVet);
-        assertThat(response.getVeterinarian())
-                .contains(expectedVet);
     }
 }

@@ -3,7 +3,6 @@ package net.kemitix.naolo.core.vets;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.GetEntityRequest;
-import net.kemitix.naolo.core.GetEntityResponse;
 import net.kemitix.naolo.core.GetEntityUseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.EntityRepository;
@@ -19,14 +18,6 @@ public class GetVet
     private final EntityRepository<Veterinarian> repository;
 
     public static GetEntityRequest<Veterinarian> request(final long id) {
-        return new GetEntityRequest<>(id);
+        return GetEntityRequest.create(id);
     }
-
-    @Override
-    public GetEntityResponse<Veterinarian> invoke(
-            final GetEntityRequest<Veterinarian> request
-    ) {
-        return () -> repository.find(request.getId());
-    }
-
 }

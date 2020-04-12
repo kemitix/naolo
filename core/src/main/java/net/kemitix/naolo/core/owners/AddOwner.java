@@ -2,6 +2,7 @@ package net.kemitix.naolo.core.owners;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import net.kemitix.naolo.core.AddEntityRequest;
 import net.kemitix.naolo.core.AddEntityUseCase;
 import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.storage.spi.EntityRepository;
@@ -16,4 +17,7 @@ public class AddOwner
     @Getter
     private final EntityRepository<Owner> repository;
 
+    public static AddEntityRequest<Owner> request(final Owner owner) {
+        return AddEntityRequest.create(owner);
+    }
 }
