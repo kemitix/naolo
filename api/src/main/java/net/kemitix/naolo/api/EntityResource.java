@@ -1,9 +1,12 @@
 package net.kemitix.naolo.api;
 
+import net.kemitix.naolo.entities.HasId;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 
-public interface EntityResource<T> {
+public interface EntityResource<T extends HasId> {
     Response NOT_FOUND =
             Response.status(Response.Status.NOT_FOUND).build();
 
@@ -13,6 +16,15 @@ public interface EntityResource<T> {
 
     @GET
     Response all();
+
+    default URI location(
+            final String path,
+            final T entity
+    ) {
+        final Long id = entity.getId();
+        return URI.create(String.format(
+                path + "/%d", id));
+    }
 
     @GET
     @Path("{id}")
