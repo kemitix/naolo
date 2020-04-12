@@ -7,7 +7,8 @@ public interface AddEntityUseCase<T extends HasId>
 
     @Override
     default AddEntityResponse<T> invoke(final AddEntityRequest<T> request) {
-        return () -> getRepository().add(request.getEntity());
+        final T added = getRepository().add(request.getEntity());
+        return () -> added;
     }
 
 }
