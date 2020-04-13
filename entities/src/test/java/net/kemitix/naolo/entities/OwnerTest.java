@@ -30,8 +30,15 @@ public class OwnerTest
                         .withLastName(lastName)
                         .withStreet(street)
                         .withCity(city);
+        final Owner noArgsSetters = new Owner();
+        noArgsSetters.setId(id);
+        noArgsSetters.setFirstName(firstName);
+        noArgsSetters.setLastName(lastName);
+        noArgsSetters.setStreet(street);
+        noArgsSetters.setCity(city);
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
+        assertThat(allArgs).isEqualTo(noArgsSetters);
         assertThat(allArgs.getId()).isEqualTo(id);
         assertThat(allArgs.getFirstName()).isEqualTo(firstName);
         assertThat(allArgs.getLastName()).isEqualTo(lastName);
