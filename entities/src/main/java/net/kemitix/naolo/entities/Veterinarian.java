@@ -5,6 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
+@EntityListeners({
+        JPAActivityListener.class
+})
 @Entity
 @NamedQuery(name = Veterinarian.FIND_ALL,
         query = "Select v From Veterinarian v Order By v.name")
