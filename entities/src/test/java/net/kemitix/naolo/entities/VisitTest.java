@@ -32,8 +32,15 @@ public class VisitTest
                         .withVeterinarian(veterinarian)
                         .withDateTime(dateTime)
                         .withDescription(description);
+        final Visit noArgsSetters = new Visit();
+        noArgsSetters.setId(id);
+        noArgsSetters.setPet(pet);
+        noArgsSetters.setVeterinarian(veterinarian);
+        noArgsSetters.setDateTime(dateTime);
+        noArgsSetters.setDescription(description);
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
+        assertThat(allArgs).isEqualTo(noArgsSetters);
         assertThat(allArgs.getId()).isEqualTo(id);
         assertThat(allArgs.getPet()).isEqualTo(pet);
         assertThat(allArgs.getVeterinarian()).isEqualTo(veterinarian);
