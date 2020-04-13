@@ -34,7 +34,7 @@ public class Visit
     @ManyToOne
     Veterinarian veterinarian;
 
-    @JsonbDateFormat("yyyy-MM-dd hh:mm")
+    @JsonbDateFormat("yyyy-MM-dd HH:mm")
     LocalDateTime dateTime;
 
     String description;
