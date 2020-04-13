@@ -84,6 +84,11 @@ public class AbstractIT {
                 .get("/owners").then();
     }
 
+    protected ValidatableResponse listAllVisits() {
+        return given()
+                .get("/visits").then();
+    }
+
     protected long getIdFromLocationHeader(final ValidatableResponse addResponse) {
         return Long.parseLong(
                 URI.create(addResponse
@@ -100,6 +105,18 @@ public class AbstractIT {
                 .put("lastName", "Owners Last Name")
                 .put("street", "Owners Street Address")
                 .put("city", "Owners City");
+    }
+
+    protected JsonObject createVisit(
+            final JsonObject addedPet,
+            final JsonObject addedVet
+    ) {
+        return new JsonObject()
+                .put("id", 0)
+                .put("dateTime", "2020-04-13 18:00")
+                .put("pet", addedPet)
+                .put("veterinarian", addedVet)
+                .put("description", "a visit to the vet");
     }
 
     protected ValidatableResponse listAllPets() {
@@ -131,6 +148,12 @@ public class AbstractIT {
                 .then();
     }
 
+    protected ValidatableResponse deleteVisit(final long id) {
+        return given()
+                .when().delete("/visits/" + id)
+                .then();
+    }
+
     protected ValidatableResponse updateVet(
             final JsonObject updatedVet,
             final long id
@@ -143,9 +166,28 @@ public class AbstractIT {
                 .then();
     }
 
+    protected ValidatableResponse updateVisit(
+            final JsonObject updatedVisit,
+            final long id
+    ) {
+        return given()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(updatedVisit.encode())
+                .put("/visits/" + id)
+                .then();
+    }
+
     protected ValidatableResponse getVet(final long id) {
         return given()
                 .when().get("/vets/" + id)
+                .then();
+    }
+
+
+    protected ValidatableResponse getVisit(final long id) {
+        return given()
+                .when().get("/visits/" + id)
                 .then();
     }
 
@@ -155,6 +197,15 @@ public class AbstractIT {
                 .contentType(ContentType.JSON)
                 .body(newVet.encode())
                 .post("/vets")
+                .then();
+    }
+
+    protected ValidatableResponse addVisit(final JsonObject newVisit) {
+        return given()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(newVisit.encode())
+                .post("/visits")
                 .then();
     }
 
