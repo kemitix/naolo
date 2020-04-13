@@ -23,7 +23,9 @@ public class Veterinarian
     @GeneratedValue
     long id;
     String name;
-    @ElementCollection(targetClass = VetSpecialisation.class)
+    @ElementCollection(
+            targetClass = VetSpecialisation.class,
+            fetch = FetchType.EAGER)
     @CollectionTable(
             name = "vet_specialisation",
             joinColumns = @JoinColumn(name = "vet_id"))
