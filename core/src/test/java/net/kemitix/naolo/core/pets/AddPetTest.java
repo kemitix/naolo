@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Random;
 
 import static org.mockito.BDDMockito.given;
@@ -33,7 +33,7 @@ public class AddPetTest
     public void addPet() {
         //given
         final String name = "Pet's name";
-        final ZonedDateTime dateOfBirth = ZonedDateTime.now();
+        final LocalDate dateOfBirth = LocalDate.now();
         final PetType type = PetType.DOG;
         final Owner owner = new Owner();
         final Pet pet = new Pet()

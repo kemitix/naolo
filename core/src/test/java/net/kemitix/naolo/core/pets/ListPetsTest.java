@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -42,13 +42,13 @@ public class ListPetsTest
         final List<Pet> pets = Arrays.asList(
                 new Pet().withId(43L).withName("rover")
                         .withDateOfBirth(
-                                ZonedDateTime.now()
+                                LocalDate.now()
                                         .minus(4, YEARS))
                         .withType(PetType.DOG)
                         .withOwner(new Owner()),
                 new Pet().withId(23L).withName("dougal")
                         .withDateOfBirth(
-                                ZonedDateTime.now()
+                                LocalDate.now()
                                         .minus(5, YEARS))
                         .withType(PetType.CAT)
                         .withOwner(new Owner())
