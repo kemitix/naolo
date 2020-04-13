@@ -53,7 +53,6 @@ public class PetsIT {
                         .split("/")[2];
         final var addedOwner = newOwner.copy()
                 .put("id", Long.valueOf(ownerId));
-
         // now add the pet
         final JsonObject newPet =
                 new JsonObject()
@@ -74,13 +73,12 @@ public class PetsIT {
         final JsonObject addedPet=
                 newPet.copy()
                         .put("id", id);
-        System.out.println("Added Pet - okay - " + id);
+
         // get the pet
         getPet(id)
                 .statusCode(SC_OK)
                 .contentType(ContentType.JSON)
                 .body(jsonObject(addedPet));
-        System.out.println("Get Pet - okay");
         // list all pets - we have one
         final JsonArray petList=
                 new JsonArray()
