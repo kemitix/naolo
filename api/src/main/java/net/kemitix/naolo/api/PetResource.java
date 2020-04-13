@@ -1,8 +1,7 @@
 package net.kemitix.naolo.api;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import net.kemitix.naolo.core.pets.*;
+import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.Pet;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -10,77 +9,68 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
 
 @Log
-@Path("pets")
+@Path(PetResource.PATH)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
-@RequiredArgsConstructor
 public class PetResource
-        implements EntityResource<Pet> {
+        extends EntityResource<Pet> {
 
-    private final ListPets listPets;
-    private final AddPet addPet;
-    private final GetPet getPet;
-    private final UpdatePet updatePet;
-    private final RemovePet removePet;
+    public static final String PATH = "pets";
 
-    @Override
-    @GET
-    public Response all() {
-        log.info("GET /pets");
-        final var request = ListPets.request();
-        final var response = listPets.invoke(request);
-        return entityOk(response.getEntities());
+    protected PetResource(
+            final ListEntityUseCase<Pet> listAll,
+            final AddEntityUseCase<Pet> addEntity,
+            final GetEntityUseCase<Pet> getEntity,
+            final UpdateEntityUseCase<Pet> updateEntity,
+            final RemoveEntityUseCase<Pet> removeEntity
+    ) {
+        super(listAll, addEntity, getEntity, updateEntity, removeEntity);
     }
 
+    @GET
     @Override
-    @Transactional
-    @POST
-    public Response add(final Pet pet) {
-        log.info("POST /pets");
-        final var request = AddPet.request(pet);
-        final var response = addPet.invoke(request);
-        final URI location = location("/pets", response.getEntity());
-        return Response.created(location).build();    }
+    public Response all() {
+        return doAll();
+    }
 
-    @Override
     @GET
     @Path("{id}")
-    public Response get(final long id) {
-        log.info("GET /pets/" + id);
-        final var request = GetPet.request(id);
-        final var response = getPet.invoke(request);
-        return response.getEntity()
-                .map(this::entityOk)
-                .orElse(NOT_FOUND);
+    @Override
+    public Response get(@PathParam("id") final long id) {
+        return doGet(id);
     }
 
-    @Override
+    @POST
     @Transactional
+    @Override
+    public Response add(final Pet entity) {
+        return doAdd(entity);
+    }
+
     @PUT
     @Path("{id}")
-    public Response update(final long id, final Pet pet) {
-        log.info("PUT /pets/" + id);
-        final var request = UpdatePet.request(pet);
-        final var response = updatePet.invoke(request);
-        return response.getEntity()
-                .map(this::entityOk)
-                .orElse(NOT_FOUND);
+    @Transactional
+    @Override
+    public Response update(
+            @PathParam("id") final long id,
+            final Pet entity
+    ) {
+        return doUpdate(entity);
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Transactional
+    @Override
+    public Response remove(@PathParam("id") final long id) {
+        return doRemove(id);
     }
 
     @Override
-    @Transactional
-    @DELETE
-    @Path("{id}")
-    public Response remove(final long id) {
-        log.info("DELETE /pets/" + id);
-        final var request = RemovePet.request(id);
-        final var response = removePet.invoke(request);
-        return response.getEntity()
-                .map(this::entityOk)
-                .orElse(NOT_FOUND);
+    protected String getPath() {
+        return PATH;
     }
 }

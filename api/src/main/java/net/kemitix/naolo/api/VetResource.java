@@ -21,16 +21,14 @@
 
 package net.kemitix.naolo.api;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import net.kemitix.naolo.core.vets.*;
+import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.Veterinarian;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
 
 /**
  * REST Controller for Veterinarians.
@@ -38,85 +36,63 @@ import java.net.URI;
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
 @Log
-@Path("vets")
+@Path(VetResource.PATH)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
-@RequiredArgsConstructor
 public class VetResource
-        implements EntityResource<Veterinarian> {
+        extends EntityResource<Veterinarian> {
 
-    private final ListVets listAll;
-    private final AddVet addVet;
-    private final GetVet getVet;
-    private final UpdateVet updateVet;
-    private final RemoveVet removeVet;
+    public static final String PATH = "vets";
 
-    /**
-     * List all Veterinarians endpoint.
-     *
-     * @return the respone
-     */
-    @Override
+    public VetResource(
+            final ListEntityUseCase<Veterinarian> listAll,
+            final AddEntityUseCase<Veterinarian> addEntity,
+            final GetEntityUseCase<Veterinarian> getEntity,
+            final UpdateEntityUseCase<Veterinarian> updateEntity,
+            final RemoveEntityUseCase<Veterinarian> removeEntity
+    ) {
+        super(listAll, addEntity, getEntity, updateEntity, removeEntity);
+    }
+
     @GET
+    @Override
     public Response all() {
-        log.info("GET /vets");
-        final var request = ListVets.request();
-        final var response = listAll.invoke(request);
-        return entityOk(response.getEntities());
+        return doAll();
     }
 
-    @Override
-    @POST
-    public Response add(final Veterinarian veterinarian) {
-        log.info(String.format("POST /vets (%s - %s)",
-                veterinarian.getId(), veterinarian.getName()));
-        final var request = AddVet.request(veterinarian);
-        final var response = addVet.invoke(request);
-        final URI location = location("/vets", response.getEntity());
-        return Response.created(location).build();
-    }
-
-
-    @Override
     @GET
     @Path("{id}")
+    @Override
     public Response get(@PathParam("id") final long id) {
-        log.info(String.format("GET /vets/%d", id));
-        final var request = GetVet.request(id);
-        final var response = getVet.invoke(request);
-        return response
-                .getEntity()
-                .map(this::entityOk)
-                .orElse(NOT_FOUND);
+        return doGet(id);
     }
 
+    @POST
     @Override
+    public Response add(final Veterinarian entity) {
+        return doAdd(entity);
+    }
+
     @PUT
     @Path("{id}")
+    @Override
     public Response update(
             @PathParam("id") final long id,
-            final Veterinarian veterinarian
+            final Veterinarian entity
     ) {
-        log.info(String.format("PUT /vets/%d", id));
-        final var request = UpdateVet.request(veterinarian);
-        final var response = updateVet.invoke(request);
-        return response
-                .getEntity()
-                .map(this::entityOk)
-                .orElse(NOT_FOUND);
+        return doUpdate(entity);
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Override
+    public Response remove(@PathParam("id") final long id) {
+        return doRemove(id);
     }
 
     @Override
-    @DELETE
-    @Path("{id}")
-    public Response remove(@PathParam("id") final long id) {
-        log.info(String.format("DELETE /vets/%d", id));
-        final var request = RemoveVet.request(id);
-        final var response = removeVet.invoke(request);
-        return response
-                .getEntity()
-                .map(e -> Response.ok().build())
-                .orElse(NOT_FOUND);
+    protected String getPath() {
+        return PATH;
     }
 }
