@@ -2,8 +2,9 @@ package net.kemitix.naolo.entities;
 
 import lombok.*;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 @Entity
 @NamedQuery(name = Pet.FIND_ALL,
@@ -23,8 +24,11 @@ public class Pet
     @GeneratedValue
     long id;
     String name;
-    ZonedDateTime dateOfBirth;
+    @JsonbDateFormat("yyyy-MM-dd")
+    LocalDate dateOfBirth;
     PetType type;
+
     @ManyToOne
     Owner owner;
 }
+
