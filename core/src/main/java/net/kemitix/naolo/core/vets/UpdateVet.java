@@ -7,9 +7,9 @@ import net.kemitix.naolo.core.UpdateEntityUseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 
-@Dependent
+@ApplicationScoped
 @RequiredArgsConstructor
 public class UpdateVet
         implements UpdateEntityUseCase<Veterinarian> {

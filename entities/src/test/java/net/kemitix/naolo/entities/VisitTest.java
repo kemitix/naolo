@@ -4,9 +4,7 @@ import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 public class VisitTest
         implements WithAssertions {
@@ -17,10 +15,7 @@ public class VisitTest
         final long id = 23L;
         final Pet pet = new Pet();
         final Veterinarian veterinarian = new Veterinarian();
-        final ZonedDateTime dateTime =
-                Instant.now()
-                        .atZone(ZoneId.systemDefault())
-                        .withFixedOffsetZone();
+        final LocalDateTime dateTime = LocalDateTime.now();
         final String description = "Description";
         //when
         final Visit allArgs =
@@ -37,16 +32,16 @@ public class VisitTest
                         .withVeterinarian(veterinarian)
                         .withDateTime(dateTime)
                         .withDescription(description);
-        final Visit builder =
-                Visit.builder()
-                        .id(id)
-                        .pet(pet)
-                        .veterinarian(veterinarian)
-                        .dateTime(dateTime)
-                        .description(description)
-                        .build();
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
-        assertThat(allArgs).isEqualTo(builder);
+        assertThat(allArgs.getId()).isEqualTo(id);
+        assertThat(allArgs.getPet()).isEqualTo(pet);
+        assertThat(allArgs.getVeterinarian()).isEqualTo(veterinarian);
+        assertThat(allArgs.getDateTime()).isEqualTo(dateTime);
+        assertThat(allArgs.getDescription()).isEqualTo(description);
+        assertThat(allArgs.toString()).isEqualTo(String.format(
+                "Visit(id=%d, pet=%s, veterinarian=%s, dateTime=%s, " +
+                        "description=%s)",
+                id, pet, veterinarian, dateTime, description));
     }
 }

@@ -1,24 +1,25 @@
-package net.kemitix.naolo.core.owners;
+package net.kemitix.naolo.core.visits;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.GetEntityRequest;
 import net.kemitix.naolo.core.GetEntityUseCase;
-import net.kemitix.naolo.entities.Owner;
+import net.kemitix.naolo.entities.Visit;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
+@Getter
 @RequiredArgsConstructor
-public class GetOwner
-        implements GetEntityUseCase<Owner> {
+public class GetVisit
+        implements GetEntityUseCase<Visit> {
 
-    @Getter
-    private final EntityRepository<Owner> repository;
+    private final EntityRepository<Visit> repository;
 
     @Override
-    public GetEntityRequest<Owner> request(final long id) {
+    public GetEntityRequest<Visit> request(final long id) {
         return GetEntityRequest.create(id);
     }
+
 }

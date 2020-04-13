@@ -1,24 +1,24 @@
-package net.kemitix.naolo.core.pets;
+package net.kemitix.naolo.core.visits;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.ListEntityRequest;
 import net.kemitix.naolo.core.ListEntityUseCase;
-import net.kemitix.naolo.entities.Pet;
+import net.kemitix.naolo.entities.Visit;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
+@Getter
 @RequiredArgsConstructor
-public class ListPets
-        implements ListEntityUseCase<Pet> {
+public class ListVisit
+        implements ListEntityUseCase<Visit> {
 
-    @Getter
-    private final EntityRepository<Pet> repository;
+    private final EntityRepository<Visit> repository;
 
     @Override
-    public ListEntityRequest<Pet> request() {
+    public ListEntityRequest<Visit> request() {
         return ListEntityRequest.create();
     }
 

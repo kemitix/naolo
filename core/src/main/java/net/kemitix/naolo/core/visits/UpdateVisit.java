@@ -1,24 +1,25 @@
-package net.kemitix.naolo.core.pets;
+package net.kemitix.naolo.core.visits;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.UpdateEntityRequest;
 import net.kemitix.naolo.core.UpdateEntityUseCase;
-import net.kemitix.naolo.entities.Pet;
+import net.kemitix.naolo.entities.Visit;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
+@Getter
 @RequiredArgsConstructor
-public class UpdatePet
-        implements UpdateEntityUseCase<Pet> {
+public class UpdateVisit
+        implements UpdateEntityUseCase<Visit> {
 
-    @Getter
-    private final EntityRepository<Pet> repository;
+    private final EntityRepository<Visit> repository;
 
     @Override
-    public UpdateEntityRequest<Pet> request(final Pet pet) {
-        return UpdateEntityRequest.create(pet);
+    public UpdateEntityRequest<Visit> request(final Visit entity) {
+        return UpdateEntityRequest.create(entity);
     }
+
 }
