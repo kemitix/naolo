@@ -3,11 +3,11 @@ package net.kemitix.naolo.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 
+@EntityListeners({
+        JPAActivityListener.class
+})
 @Entity
 @NamedQuery(name = Owner.FIND_ALL,
         query = "Select o from Owner o order by o.lastName, o.firstName")

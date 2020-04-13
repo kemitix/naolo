@@ -3,8 +3,12 @@ package net.kemitix.naolo.entities;
 
 import lombok.*;
 
+import javax.persistence.EntityListeners;
 import java.time.ZonedDateTime;
 
+@EntityListeners({
+        JPAActivityListener.class
+})
 @With
 @Builder
 @Value
