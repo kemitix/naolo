@@ -29,7 +29,7 @@
         <h2.version>1.4.200</h2.version>
 
         <spotbugs-annotations.version>4.0.1</spotbugs-annotations.version>
-        <junit.version>5.6.1</junit.version>
+        <junit.version>5.6.2</junit.version>
         <assertj.version>3.15.0</assertj.version>
         <mockito.version>3.3.3</mockito.version>
         <jqwik.version>1.2.6</jqwik.version>
