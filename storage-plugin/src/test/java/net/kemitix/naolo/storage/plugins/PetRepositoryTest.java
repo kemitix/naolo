@@ -40,12 +40,6 @@ public class PetRepositoryTest
         this.allPetsStream = allPetsStream;
     }
 
-    @Test
-    @DisplayName("Bean requires no-args constructor")
-    public void noArgsConstructor() {
-        assertThat(new PetRepository())
-                .isInstanceOf(EntityRepository.class);
-    }
 
     @Test
     @DisplayName("List All invokes named query")
@@ -63,7 +57,7 @@ public class PetRepositoryTest
     }
 
     @Test
-    @DisplayName("Adding an Pet")
+    @DisplayName("Adding a Pet")
     public void addPet() {
         //given
         given(entityManager.merge(unmanagedPet)).willReturn(managedPet);

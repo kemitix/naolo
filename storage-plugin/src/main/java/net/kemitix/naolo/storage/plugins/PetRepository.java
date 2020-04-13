@@ -1,6 +1,5 @@
 package net.kemitix.naolo.storage.plugins;
 
-import lombok.NoArgsConstructor;
 import net.kemitix.naolo.entities.Pet;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -9,7 +8,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 @ApplicationScoped
-@NoArgsConstructor
 public class PetRepository
         extends AbstractEntityRepository<Pet>{
 
