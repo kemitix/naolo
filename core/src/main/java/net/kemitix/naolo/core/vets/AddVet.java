@@ -17,7 +17,8 @@ public class AddVet
     @Getter
     private final EntityRepository<Veterinarian> repository;
 
-    public static AddEntityRequest<Veterinarian> request(
+    @Override
+    public AddEntityRequest<Veterinarian> request(
             final Veterinarian veterinarian
     ) {
         return AddEntityRequest.create(veterinarian);

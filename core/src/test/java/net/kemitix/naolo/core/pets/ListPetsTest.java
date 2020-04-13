@@ -54,7 +54,7 @@ public class ListPetsTest
                         .withOwner(new Owner())
         );
         given(repository.findAll()).willReturn(pets.stream());
-        final ListEntityRequest<Pet> request = ListPets.request();
+        final ListEntityRequest<Pet> request = listPets.request();
         //when
         final ListEntityResponse<Pet> response = listPets.invoke(request);
         //then

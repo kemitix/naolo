@@ -17,7 +17,8 @@ public class ListPets
     @Getter
     private final EntityRepository<Pet> repository;
 
-    public static ListEntityRequest<Pet> request() {
+    @Override
+    public ListEntityRequest<Pet> request() {
         return ListEntityRequest.create();
     }
 

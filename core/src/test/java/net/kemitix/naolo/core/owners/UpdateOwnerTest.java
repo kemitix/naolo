@@ -47,7 +47,7 @@ public class UpdateOwnerTest
         //given
         given(repository.update(updatedOwner))
                 .willReturn(Optional.of(updatedOwner));
-        final var request = UpdateOwner.request(updatedOwner);
+        final var request = updateOwner.request(updatedOwner);
         //when
         final var response = updateOwner.invoke(request);
         //then

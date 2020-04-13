@@ -13,4 +13,5 @@ public interface RemoveEntityUseCase<T extends HasId>
         return () -> removed;
     }
 
+    RemoveEntityRequest<T> request(long id);
 }

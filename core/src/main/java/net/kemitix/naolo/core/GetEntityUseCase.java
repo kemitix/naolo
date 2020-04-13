@@ -12,4 +12,5 @@ public interface GetEntityUseCase<T extends HasId>
         return () -> getRepository().find(request.getId());
     }
 
+    GetEntityRequest<T> request(long id);
 }

@@ -17,7 +17,8 @@ public class GetOwner
     @Getter
     private final EntityRepository<Owner> repository;
 
-    public static GetEntityRequest<Owner> request(final long id) {
+    @Override
+    public GetEntityRequest<Owner> request(final long id) {
         return GetEntityRequest.create(id);
     }
 }

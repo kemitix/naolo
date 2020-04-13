@@ -43,7 +43,8 @@ public class ListVets
     @Getter
     private final EntityRepository<Veterinarian> repository;
 
-    public static ListEntityRequest<Veterinarian> request() {
+    @Override
+    public ListEntityRequest<Veterinarian> request() {
         return ListEntityRequest.create();
     }
 }

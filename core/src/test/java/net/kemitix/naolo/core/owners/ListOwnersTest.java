@@ -42,7 +42,7 @@ public class ListOwnersTest
                         .withCity("city 2")
         );
         given(repository.findAll()).willReturn(owners.stream());
-        final var request = ListOwners.request();
+        final var request = listOwners.request();
         //when
         final var response = listOwners.invoke(request);
         //then

@@ -34,7 +34,7 @@ public class RemoveOwnerTest
         //given
         final Owner owner = new Owner();
         given(repository.remove(id)).willReturn(Optional.of(owner));
-        final var request = RemoveOwner.request(id);
+        final var request = removeOwner.request(id);
         //when
         final var response = removeOwner.invoke(request);
         //then
@@ -46,7 +46,7 @@ public class RemoveOwnerTest
     @DisplayName("Remove an Owner that does not exist")
     public void removeMissingOwner() {
         //given
-        final var request = RemoveOwner.request(id);
+        final var request = removeOwner.request(id);
         given(repository.remove(id)).willReturn(Optional.empty());
         //when
         final var response = removeOwner.invoke(request);

@@ -12,4 +12,6 @@ public interface UpdateEntityUseCase<T extends HasId>
         final Optional<T> updated = getRepository().update(request.getEntity());
         return () -> updated;
     }
+
+    UpdateEntityRequest<T> request(T entity);
 }

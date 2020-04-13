@@ -43,7 +43,7 @@ public class AddVetTest
                         .withSpecialisations(specialisations);
         final long nextId = 42;
         given(repository.add(vet)).willReturn(vet.withId(nextId));
-        final var request = AddVet.request(vet);
+        final var request = addVet.request(vet);
         //when
         final var response = addVet.invoke(request);
         //then

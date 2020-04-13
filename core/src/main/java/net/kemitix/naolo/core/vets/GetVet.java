@@ -17,7 +17,8 @@ public class GetVet
     @Getter
     private final EntityRepository<Veterinarian> repository;
 
-    public static GetEntityRequest<Veterinarian> request(final long id) {
+    @Override
+    public GetEntityRequest<Veterinarian> request(final long id) {
         return GetEntityRequest.create(id);
     }
 }

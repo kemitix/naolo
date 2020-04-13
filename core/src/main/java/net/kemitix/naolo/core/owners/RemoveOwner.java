@@ -17,7 +17,8 @@ public class RemoveOwner
     @Getter
     private final EntityRepository<Owner> repository;
 
-    public static RemoveEntityRequest<Owner> request(final long id) {
+    @Override
+    public RemoveEntityRequest<Owner> request(final long id) {
         return RemoveEntityRequest.create(id);
     }
 

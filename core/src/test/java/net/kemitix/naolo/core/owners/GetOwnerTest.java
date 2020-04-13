@@ -33,7 +33,7 @@ public class GetOwnerTest
     public void getExistingVet() {
         //given
         given(repository.find(id)).willReturn(Optional.of(owner));
-        final var request = GetOwner.request(id);
+        final var request = getOwner.request(id);
         //when
         final var response = getOwner.invoke(request);
         //then
@@ -45,7 +45,7 @@ public class GetOwnerTest
     public void getMissingOwner() {
         //given
         given(repository.find(id)).willReturn(Optional.empty());
-        final var request = GetOwner.request(id);
+        final var request = getOwner.request(id);
         //when
         final var response = getOwner.invoke(request);
         //then

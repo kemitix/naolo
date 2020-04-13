@@ -46,7 +46,7 @@ public class ListVetsTest implements WithAssertions {
                         ))
                 );
         given(repository.findAll()).willReturn(vets.stream());
-        final var request = ListVets.request();
+        final var request = listVets.request();
         //when
         final var response = listVets.invoke(request);
         //then

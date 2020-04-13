@@ -40,7 +40,7 @@ public class UpdatePetTest {
         //given
         given(repository.update(updatedPet))
                 .willReturn(Optional.of(updatedPet));
-        final var request = UpdatePet.request(updatedPet);
+        final var request = updatePet.request(updatedPet);
         //when
         final var response = updatePet.invoke(request);
         //then

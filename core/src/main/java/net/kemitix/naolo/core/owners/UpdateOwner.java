@@ -17,7 +17,8 @@ public class UpdateOwner
     @Getter
     private final EntityRepository<Owner> repository;
 
-    public static UpdateEntityRequest<Owner> request(final Owner owner) {
+    @Override
+    public UpdateEntityRequest<Owner> request(final Owner owner) {
         return UpdateEntityRequest.create(owner);
     }
 }

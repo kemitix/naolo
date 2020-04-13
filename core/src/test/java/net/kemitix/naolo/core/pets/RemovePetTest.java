@@ -34,7 +34,7 @@ public class RemovePetTest
         //given
         final Pet pet = new Pet();
         given(repository.remove(id)).willReturn(Optional.of(pet));
-        final var request = RemovePet.request(id);
+        final var request = removePet.request(id);
         //when
         final var response = removePet.invoke(request);
         //then
@@ -47,7 +47,7 @@ public class RemovePetTest
     public void removeMissingPet() {
         //given
         given(repository.remove(id)).willReturn(Optional.empty());
-        final var request = RemovePet.request(id);
+        final var request = removePet.request(id);
         //when
         final var response = removePet.invoke(request);
         //then

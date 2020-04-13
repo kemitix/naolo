@@ -21,11 +21,11 @@ public class GetVetTest
     private final long id = new Random().nextLong();
     private final Veterinarian vet = new Veterinarian();
     private final EntityRepository<Veterinarian> repository;
-    private final GetVet useCase;
+    private final GetVet getVet;
 
     public GetVetTest(@Mock final EntityRepository<Veterinarian> repository) {
         this.repository = repository;
-        useCase = new GetVet(repository);
+        getVet = new GetVet(repository);
     }
 
     @Test
@@ -33,9 +33,9 @@ public class GetVetTest
     public void getExistingVet() {
         //given
         given(repository.find(id)).willReturn(Optional.of(vet));
-        final var request = GetVet.request(id);
+        final var request = getVet.request(id);
         //when
-        final var result = useCase.invoke(request);
+        final var result = getVet.invoke(request);
         //then
         assertThat(result.getEntity()).contains(vet);
     }
@@ -45,9 +45,9 @@ public class GetVetTest
     public void getMissingVet() {
         //given
         given(repository.find(id)).willReturn(Optional.empty());
-        final var request = GetVet.request(id);
+        final var request = getVet.request(id);
         //when
-        final var result = useCase.invoke(request);
+        final var result = getVet.invoke(request);
         //then
         assertThat(result.getEntity()).isEmpty();
     }

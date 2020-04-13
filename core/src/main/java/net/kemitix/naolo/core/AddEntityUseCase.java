@@ -11,4 +11,5 @@ public interface AddEntityUseCase<T extends HasId>
         return () -> added;
     }
 
+    AddEntityRequest<T> request(T entity);
 }

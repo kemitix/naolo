@@ -40,7 +40,7 @@ public class AddOwnerTest
                         .withStreet(street);
         final long nextId = 42;
         given(repository.add(owner)).willReturn(owner.withId(nextId));
-        final var request = AddOwner.request(owner);
+        final var request = addOwner.request(owner);
         //when
         final var response = addOwner.invoke(request);
         //then

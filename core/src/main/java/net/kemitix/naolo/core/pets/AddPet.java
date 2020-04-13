@@ -17,7 +17,8 @@ public class AddPet
     @Getter
     private final EntityRepository<Pet> repository;
 
-    public static AddEntityRequest<Pet> request(final Pet pet) {
+    @Override
+    public AddEntityRequest<Pet> request(final Pet pet) {
         return AddEntityRequest.create(pet);
     }
 }

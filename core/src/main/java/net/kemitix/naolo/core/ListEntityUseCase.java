@@ -13,4 +13,6 @@ public interface ListEntityUseCase<T extends HasId>
     ) {
         return () -> getRepository().findAll().collect(Collectors.toList());
     }
+
+    ListEntityRequest<T> request();
 }

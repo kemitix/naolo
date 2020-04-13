@@ -17,7 +17,8 @@ public class RemoveVet
     @Getter
     private final EntityRepository<Veterinarian> repository;
 
-    public static RemoveEntityRequest<Veterinarian> request(final long id) {
+    @Override
+    public RemoveEntityRequest<Veterinarian> request(final long id) {
         return RemoveEntityRequest.create(id);
     }
 

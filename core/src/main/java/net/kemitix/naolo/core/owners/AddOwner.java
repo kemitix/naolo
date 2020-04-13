@@ -17,7 +17,8 @@ public class AddOwner
     @Getter
     private final EntityRepository<Owner> repository;
 
-    public static AddEntityRequest<Owner> request(final Owner owner) {
+    @Override
+    public AddEntityRequest<Owner> request(final Owner owner) {
         return AddEntityRequest.create(owner);
     }
 }

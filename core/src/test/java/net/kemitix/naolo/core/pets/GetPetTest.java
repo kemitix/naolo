@@ -21,11 +21,11 @@ public class GetPetTest
     private final long id = new Random().nextLong();
     private final Pet pet = new Pet();
     private final EntityRepository<Pet> repository;
-    private final GetPet useCase;
+    private final GetPet getPet;
 
     public GetPetTest(@Mock final EntityRepository<Pet> repository) {
         this.repository = repository;
-        useCase = new GetPet(repository);
+        getPet = new GetPet(repository);
     }
 
     @Test
@@ -33,9 +33,9 @@ public class GetPetTest
     public void getExistingPet() {
         //given
         given(repository.find(id)).willReturn(Optional.of(pet));
-        final var request = GetPet.request(id);
+        final var request = getPet.request(id);
         //when
-        final var response = useCase.invoke(request);
+        final var response = getPet.invoke(request);
         //then
         assertThat(response.getEntity()).contains(pet);
     }
@@ -45,9 +45,9 @@ public class GetPetTest
     public void getMissingVet() {
         //given
         given(repository.find(id)).willReturn(Optional.empty());
-        final var request = GetPet.request(id);
+        final var request = getPet.request(id);
         //when
-        final var response = useCase.invoke(request);
+        final var response = getPet.invoke(request);
         //then
         assertThat(response.getEntity()).isEmpty();
     }

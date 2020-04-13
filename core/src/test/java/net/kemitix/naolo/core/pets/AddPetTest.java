@@ -43,7 +43,7 @@ public class AddPetTest
                 .withOwner(owner);
         final long nextId = new Random().nextLong();
         given(repository.add(pet)).willReturn(pet.withId(nextId));
-        final var request = AddPet.request(pet);
+        final var request = addPet.request(pet);
         //when
         final var response = addPet.invoke(request);
         //then

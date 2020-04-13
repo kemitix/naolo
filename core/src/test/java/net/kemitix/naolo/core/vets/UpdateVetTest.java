@@ -53,7 +53,7 @@ public class UpdateVetTest
         final Veterinarian updatedVet = originalVet
                 .withName(expectedVet.getName())
                 .withSpecialisations(expectedVet.getSpecialisations());
-        final var request = UpdateVet.request(updatedVet);
+        final var request = updateVet.request(updatedVet);
         final var response = updateVet.invoke(request);
         //then
         assertThat(response.getEntity()).contains(expectedVet);

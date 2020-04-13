@@ -17,7 +17,8 @@ public class ListOwners
     @Getter
     private final EntityRepository<Owner> repository;
 
-    public static ListEntityRequest<Owner> request() {
+    @Override
+    public ListEntityRequest<Owner> request() {
         return ListEntityRequest.create();
     }
 }

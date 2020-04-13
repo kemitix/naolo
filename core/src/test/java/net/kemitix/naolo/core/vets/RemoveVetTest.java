@@ -34,7 +34,7 @@ public class RemoveVetTest
         //given
         final Veterinarian vet = new Veterinarian();
         given(repository.remove(id)).willReturn(Optional.of(vet));
-        final var request= RemoveVet.request(id);
+        final var request= removeVet.request(id);
         //when
         final var response = removeVet.invoke(request);
         //then
@@ -46,7 +46,7 @@ public class RemoveVetTest
     public void removeMissingVet() {
         //given
         given(repository.remove(id)).willReturn(Optional.empty());
-        final var request= RemoveVet.request(id);
+        final var request= removeVet.request(id);
         //when
         final var response = removeVet.invoke(request);
         //then

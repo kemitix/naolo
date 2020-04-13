@@ -17,7 +17,8 @@ public class GetPet
     @Getter
     private final EntityRepository<Pet> repository;
 
-    public static GetEntityRequest<Pet> request(final long id) {
+    @Override
+    public GetEntityRequest<Pet> request(final long id) {
         return GetEntityRequest.create(id);
     }
 
