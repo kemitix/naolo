@@ -21,10 +21,6 @@
 
 package net.kemitix.naolo.entities;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 /**
  * Specialisations of Veterinarians.
  *
@@ -34,12 +30,6 @@ public enum VetSpecialisation {
 
     RADIOLOGY,
     DENTISTRY,
-    SURGERY;
+    SURGERY
 
-    public static Set<VetSpecialisation> parse(final String specialisations) {
-        return Arrays.stream(specialisations.split(";"))
-                .filter(s -> !s.isBlank())
-                .map(s -> VetSpecialisation.valueOf(s))
-                .collect(Collectors.toSet());
-    }
 }
