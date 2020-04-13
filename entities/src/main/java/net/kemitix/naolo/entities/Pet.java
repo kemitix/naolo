@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @NamedQuery(name = Pet.FIND_ALL,
         query = "select p from Pet p order by p.name")
 @With
+@Setter
 @Getter
 @ToString
 @EqualsAndHashCode
