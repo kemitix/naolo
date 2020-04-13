@@ -62,7 +62,7 @@ public class VisitResource
     @DELETE
     @Path("{id}")
     @Override
-    public Response remove(final long id) {
+    public Response remove(@PathParam("id") final long id) {
         return doRemove(id);
     }
 
