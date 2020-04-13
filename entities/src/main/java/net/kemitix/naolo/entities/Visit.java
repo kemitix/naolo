@@ -3,21 +3,39 @@ package net.kemitix.naolo.entities;
 
 import lombok.*;
 
-import javax.persistence.EntityListeners;
-import java.time.ZonedDateTime;
+import javax.json.bind.annotation.JsonbDateFormat;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @EntityListeners({
         JPAActivityListener.class
 })
+@Entity
+@NamedQuery(name = Visit.FIND_ALL,
+        query = "select v from Visit v order by v.dateTime")
 @With
-@Builder
-@Value
-@NoArgsConstructor(force = true, access = AccessLevel.PACKAGE)
+@Getter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
-public class Visit {
-    Long id;
+public class Visit
+        implements HasId {
+
+    public static final String FIND_ALL = "Visit.FindAll";
+
+    @Id
+    @GeneratedValue
+    long id;
+
+    @ManyToOne
     Pet pet;
+
+    @ManyToOne
     Veterinarian veterinarian;
-    ZonedDateTime dateTime;
+
+    @JsonbDateFormat("yyyy-MM-dd hh:mm")
+    LocalDateTime dateTime;
+
     String description;
 }
