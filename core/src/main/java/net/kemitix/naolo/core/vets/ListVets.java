@@ -28,14 +28,14 @@ import net.kemitix.naolo.core.ListEntityUseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  * Use-case to list all {@link Veterinarian}s.
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
-@Dependent
+@ApplicationScoped
 @RequiredArgsConstructor
 public class ListVets
         implements ListEntityUseCase<Veterinarian> {

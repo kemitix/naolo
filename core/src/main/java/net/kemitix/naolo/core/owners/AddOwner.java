@@ -7,9 +7,9 @@ import net.kemitix.naolo.core.AddEntityUseCase;
 import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 
-@Dependent
+@ApplicationScoped
 @RequiredArgsConstructor
 public class AddOwner
         implements AddEntityUseCase<Owner> {

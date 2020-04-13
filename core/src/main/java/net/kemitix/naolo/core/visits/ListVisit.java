@@ -7,6 +7,9 @@ import net.kemitix.naolo.core.ListEntityUseCase;
 import net.kemitix.naolo.entities.Visit;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 @Getter
 @RequiredArgsConstructor
 public class ListVisit
