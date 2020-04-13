@@ -9,3 +9,6 @@ graphs:
 
 domain:
 	dot -T png doc/entities.dot > doc/images/entities.png
+
+run-dev:
+	mvn -pl runner-quarkus quarkus:dev
