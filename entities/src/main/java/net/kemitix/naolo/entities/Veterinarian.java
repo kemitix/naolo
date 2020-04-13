@@ -14,13 +14,18 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
-public class Veterinarian {
+public class Veterinarian
+        implements HasId {
+
     public static final String FIND_ALL = "Veterinarian.FindAll";
+
     @Id
     @GeneratedValue
-    Long id;
+    long id;
     String name;
-    @ElementCollection(targetClass = VetSpecialisation.class)
+    @ElementCollection(
+            targetClass = VetSpecialisation.class,
+            fetch = FetchType.EAGER)
     @CollectionTable(
             name = "vet_specialisation",
             joinColumns = @JoinColumn(name = "vet_id"))

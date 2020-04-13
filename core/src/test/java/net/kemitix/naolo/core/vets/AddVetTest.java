@@ -42,18 +42,12 @@ public class AddVetTest
                         .withName(name)
                         .withSpecialisations(specialisations);
         final long nextId = 42;
-        given(repository.add(vet))
-                .willAnswer(call ->
-                        ((Veterinarian) call.getArgument(0))
-                                .withId(nextId));
-        final AddVet.Request request =
-                AddVet.Request.builder()
-                        .veterinarian(vet)
-                        .build();
+        given(repository.add(vet)).willReturn(vet.withId(nextId));
+        final var request = addVet.request(vet);
         //when
-        final AddVet.Response response = addVet.invoke(request);
+        final var response = addVet.invoke(request);
         //then
-        assertThat(response.getVeterinarian().getId()).isEqualTo(nextId);
+        assertThat(response.getEntity().getId()).isEqualTo(nextId);
         verify(repository).add(vet);
     }
 }

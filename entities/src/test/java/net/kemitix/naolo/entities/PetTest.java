@@ -5,8 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 public class PetTest
         implements WithAssertions {
@@ -16,12 +16,14 @@ public class PetTest
         //given
         final long id = 23L;
         final String name = "Name";
-        final ZonedDateTime dateOfBirth =
+        final LocalDate dateOfBirth =
                 Instant.now()
                         .atZone(ZoneId.systemDefault())
-                        .withFixedOffsetZone();
+                        .toLocalDate();
         final PetType type = PetType.DOG;
-        final Owner owner = new Owner();
+        final long ownerId = 83L;
+        final Owner owner = new Owner()
+                .withId(ownerId);
         //when
         final Pet allArgs =
                 new Pet(
@@ -37,16 +39,16 @@ public class PetTest
                         .withDateOfBirth(dateOfBirth)
                         .withType(type)
                         .withOwner(owner);
-        final Pet builder =
-                Pet.builder()
-                        .id(id)
-                        .name(name)
-                        .dateOfBirth(dateOfBirth)
-                        .type(type)
-                        .owner(owner)
-                        .build();
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
-        assertThat(allArgs).isEqualTo(builder);
+        assertThat(allArgs.getId()).isEqualTo(id);
+        assertThat(allArgs.getName()).isEqualTo(name);
+        assertThat(allArgs.getDateOfBirth()).isEqualTo(dateOfBirth);
+        assertThat(allArgs.getType()).isEqualTo(type);
+        assertThat(allArgs.getOwner()).isEqualTo(owner);
+        assertThat(allArgs.toString())
+                .isEqualTo(String.format(
+                        "Pet(id=%d, name=%s, dateOfBirth=%s, type=%s, owner=%s)",
+                        id, name, dateOfBirth, type, owner));
     }
 }

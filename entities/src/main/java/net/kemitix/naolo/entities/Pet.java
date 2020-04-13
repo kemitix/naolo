@@ -2,17 +2,33 @@ package net.kemitix.naolo.entities;
 
 import lombok.*;
 
-import java.time.ZonedDateTime;
+import javax.json.bind.annotation.JsonbDateFormat;
+import javax.persistence.*;
+import java.time.LocalDate;
 
+@Entity
+@NamedQuery(name = Pet.FIND_ALL,
+        query = "select p from Pet p order by p.name")
 @With
-@Builder
-@Value
-@NoArgsConstructor(force = true, access = AccessLevel.PACKAGE)
+@Getter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
-public class Pet {
-    Long id;
+public class Pet
+        implements HasId {
+
+    public static final String FIND_ALL = "Pet.FindAll";
+
+    @Id
+    @GeneratedValue
+    long id;
     String name;
-    ZonedDateTime dateOfBirth;
+    @JsonbDateFormat("yyyy-MM-dd")
+    LocalDate dateOfBirth;
     PetType type;
+
+    @ManyToOne
     Owner owner;
 }
+

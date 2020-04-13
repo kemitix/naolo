@@ -38,12 +38,9 @@ public class OwnerTest
         assertThat(allArgs.getStreet()).isEqualTo(street);
         assertThat(allArgs.getCity()).isEqualTo(city);
         assertThat(allArgs.toString())
-                .isEqualTo(
-                        "Owner(" +
-                                "id=23, " +
-                                "firstName=First Name, " +
-                                "lastName=Last Name, " +
-                                "street=Street, " +
-                                "city=City)");
+                .isEqualTo(String.format(
+                        "Owner(id=%d, firstName=%s, lastName=%s, street=%s, " +
+                                "city=%s)",
+                        id, firstName, lastName, street, city));
     }
 }

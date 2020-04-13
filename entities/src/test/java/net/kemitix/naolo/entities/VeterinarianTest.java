@@ -32,10 +32,8 @@ public class VeterinarianTest
         assertThat(allArgs.getName()).isEqualTo(name);
         assertThat(allArgs.getSpecialisations()).isEqualTo(specialisations);
         assertThat(allArgs.toString())
-                .isEqualTo(
-                        "Veterinarian(" +
-                                "id=23, " +
-                                "name=Name, " +
-                                "specialisations=[RADIOLOGY])");
+                .isEqualTo(String.format(
+                        "Veterinarian(id=%d, name=%s, specialisations=%s)",
+                        id, name, specialisations));
     }
 }

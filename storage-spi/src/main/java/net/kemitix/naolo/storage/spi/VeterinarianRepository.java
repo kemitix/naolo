@@ -23,40 +23,15 @@ package net.kemitix.naolo.storage.spi;
 
 import net.kemitix.naolo.entities.Veterinarian;
 
-import java.util.Optional;
-import java.util.stream.Stream;
-
 /**
  * Repository for {@link Veterinarian}.
  *
  * @author Paul Campbell (pcampbell@kemitix.net)
+ *
+ * @deprecated Use {@link EntityRepository<Veterinarian>}
  */
-public interface VeterinarianRepository {
+@Deprecated
+public interface VeterinarianRepository
+        extends EntityRepository<Veterinarian> {
 
-    /**
-     * Find all Veterinarians.
-     *
-     * @return a Stream of Veterinarians
-     */
-    Stream<Veterinarian> findAll();
-
-    /**
-     * Adds a new Veterinarian.
-     *
-     * @param veterinarian the vet to add
-     * @return the added vet
-     */
-    Veterinarian add(Veterinarian veterinarian);
-
-    /**
-     * Finds a Veterinarian for the id.
-     *
-     * @param id the id of the vet to find
-     * @return an Optional containing the vet if found, empty otherwise.
-     */
-    Optional<Veterinarian> find(long id);
-
-    Optional<Veterinarian> update(Veterinarian veterinarian);
-
-    Optional<Veterinarian> remove(long id);
 }

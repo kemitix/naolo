@@ -21,16 +21,14 @@
 
 package net.kemitix.naolo.api;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import net.kemitix.naolo.core.vets.*;
+import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.Veterinarian;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
 
 /**
  * REST Controller for Veterinarians.
@@ -38,99 +36,63 @@ import java.net.URI;
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
 @Log
-@Path("vets")
+@Path(VetResource.PATH)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
-@RequiredArgsConstructor
-public class VetResource {
+public class VetResource
+        extends EntityResource<Veterinarian> {
 
-    public static final Response NOT_FOUND =
-            Response.status(Response.Status.NOT_FOUND).build();
-    private final ListAllVets listAll;
-    private final AddVet addVet;
-    private final GetVet getVet;
-    private final UpdateVet updateVet;
-    private final RemoveVet removeVet;
+    public static final String PATH = "vets";
 
-    /**
-     * List all Veterinarians endpoint.
-     *
-     * @return the respone
-     */
+    public VetResource(
+            final ListEntityUseCase<Veterinarian> listAll,
+            final AddEntityUseCase<Veterinarian> addEntity,
+            final GetEntityUseCase<Veterinarian> getEntity,
+            final UpdateEntityUseCase<Veterinarian> updateEntity,
+            final RemoveEntityUseCase<Veterinarian> removeEntity
+    ) {
+        super(listAll, addEntity, getEntity, updateEntity, removeEntity);
+    }
+
     @GET
-    public Response allVets() {
-        log.info("GET /vets");
-        final ListAllVets.Request request = ListAllVets.request();
-        final ListAllVets.Response response = listAll.invoke(request);
-        return entityOk(response.getVeterinarians());
+    @Override
+    public Response all() {
+        return doAll();
     }
-
-    @POST
-    public Response add(final Veterinarian veterinarian) {
-        log.info(String.format("POST /vets (%s - %s)",
-                veterinarian.getId(), veterinarian.getName()));
-        final AddVet.Request request =
-                AddVet.Request.builder()
-                        .veterinarian(veterinarian)
-                        .build();
-        final AddVet.Response response = addVet.invoke(request);
-        final Long id =
-                response.getVeterinarian()
-                        .getId();
-        final URI location = URI.create(String.format(
-                "/vets/%d", id));
-        return Response.created(location).build();
-    }
-
 
     @GET
     @Path("{id}")
-    public Response get(@PathParam("id") final Long id) {
-        log.info(String.format("GET /vets/%d", id));
-        final GetVet.Request request =
-                GetVet.Request.builder()
-                        .id(id)
-                        .build();
-        final GetVet.Response response = getVet.invoke(request);
-        return response
-                .getVeterinarian()
-                .map(this::entityOk)
-                .orElse(NOT_FOUND);
+    @Override
+    public Response get(@PathParam("id") final long id) {
+        return doGet(id);
     }
 
-    private Response entityOk(final Object entity) {
-        return Response.ok().entity(entity).build();
+    @POST
+    @Override
+    public Response add(final Veterinarian entity) {
+        return doAdd(entity);
     }
 
     @PUT
     @Path("{id}")
+    @Override
     public Response update(
             @PathParam("id") final long id,
-            final Veterinarian veterinarian
+            final Veterinarian entity
     ) {
-        log.info(String.format("PUT /vets/%d", id));
-        final UpdateVet.Request request =
-                UpdateVet.Request.builder()
-                        .veterinarian(veterinarian)
-                        .build();
-        final UpdateVet.Response response = updateVet.invoke(request);
-        return response
-                .getVeterinarian()
-                .map(this::entityOk)
-                .orElse(NOT_FOUND);
+        return doUpdate(entity);
     }
 
     @DELETE
     @Path("{id}")
+    @Override
     public Response remove(@PathParam("id") final long id) {
-        log.info(String.format("DELETE /vets/%d", id));
-        final RemoveVet.Request request = RemoveVet.Request.builder()
-                .id(id).build();
-        final RemoveVet.Response response = removeVet.invoke(request);
-        return response
-                .getVeterinarian()
-                .map(e -> Response.ok().build())
-                .orElse(NOT_FOUND);
+        return doRemove(id);
+    }
+
+    @Override
+    protected String getPath() {
+        return PATH;
     }
 }

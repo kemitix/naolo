@@ -4,7 +4,7 @@ import net.kemitix.naolo.core.StreamZipper;
 import net.kemitix.naolo.core.Tuple;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.VeterinarianRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,18 +17,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static net.kemitix.naolo.core.vets.ListAllVets.request;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
-public class ListAllVetsTest implements WithAssertions {
+public class ListVetsTest implements WithAssertions {
 
-    private final VeterinarianRepository repository;
-    private final ListAllVets listAllVets;
+    private final EntityRepository<Veterinarian> repository;
+    private final ListVets listVets;
 
-    public ListAllVetsTest(@Mock final VeterinarianRepository repository) {
+    public ListVetsTest(@Mock final EntityRepository<Veterinarian> repository) {
         this.repository = repository;
-        listAllVets = new ListAllVets(repository);
+        listVets = new ListVets(repository);
     }
 
     @Test
@@ -47,12 +46,14 @@ public class ListAllVetsTest implements WithAssertions {
                         ))
                 );
         given(repository.findAll()).willReturn(vets.stream());
+        final var request = listVets.request();
         //when
-        final ListAllVets.Response response = listAllVets.invoke(request());
+        final var response = listVets.invoke(request);
         //then
         final Stream<Tuple<Veterinarian, Veterinarian>> zipped =
-                StreamZipper.zip(vets, response.getVeterinarians(), Tuple::of);
-        assertThat(zipped).hasSize(vets.size())
+                StreamZipper.zip(vets, response.getEntities(), Tuple::of);
+        assertThat(zipped)
+                .hasSize(vets.size())
                 .allSatisfy(t -> {
                     final Veterinarian expected = t.get1();
                     final Veterinarian result = t.get2();

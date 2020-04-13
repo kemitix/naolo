@@ -1,7 +1,7 @@
 package net.kemitix.naolo.core.vets;
 
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.VeterinarianRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,43 +20,35 @@ public class GetVetTest
 
     private final long id = new Random().nextLong();
     private final Veterinarian vet = new Veterinarian();
-    private final VeterinarianRepository repository;
-    private final GetVet useCase;
+    private final EntityRepository<Veterinarian> repository;
+    private final GetVet getVet;
 
-    public GetVetTest(@Mock final VeterinarianRepository repository) {
+    public GetVetTest(@Mock final EntityRepository<Veterinarian> repository) {
         this.repository = repository;
-        useCase = new GetVet(repository);
+        getVet = new GetVet(repository);
     }
 
     @Test
     @DisplayName("Get a Vet that exists")
     public void getExistingVet() {
         //given
-        given(repository.find(id))
-                .willReturn(Optional.of(vet));
-        final GetVet.Request request =
-                GetVet.Request.builder()
-                        .id(id)
-                        .build();
+        given(repository.find(id)).willReturn(Optional.of(vet));
+        final var request = getVet.request(id);
         //when
-        final GetVet.Response result =
-                useCase.invoke(request);
+        final var result = getVet.invoke(request);
         //then
-        assertThat(result.getVeterinarian())
-                .contains(vet);
+        assertThat(result.getEntity()).contains(vet);
     }
 
     @Test
     @DisplayName("Get a Vet that does not exist")
     public void getMissingVet() {
         //given
-        given(repository.find(id))
-                .willReturn(Optional.empty());
+        given(repository.find(id)).willReturn(Optional.empty());
+        final var request = getVet.request(id);
         //when
-        final GetVet.Response result =
-                useCase.invoke(GetVet.Request.builder().id(id).build());
+        final var result = getVet.invoke(request);
         //then
-        assertThat(result.getVeterinarian())
-                .isEmpty();
+        assertThat(result.getEntity()).isEmpty();
     }
 }

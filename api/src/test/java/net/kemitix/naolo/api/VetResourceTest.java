@@ -30,11 +30,13 @@ public class VetResourceTest implements WithAssertions {
     private final Long id = new Random().nextLong();
     private final VetResource resource;
 
-    public VetResourceTest(@Mock final VeterinarianRepository repository) {
+    public VetResourceTest(
+            @Mock final VeterinarianRepository repository
+    ) {
         this.repository = repository;
         resource =
                 new VetResource(
-                        new ListAllVets(repository),
+                        new ListVets(repository),
                         new AddVet(repository),
                         new GetVet(repository),
                         new UpdateVet(repository),
@@ -50,7 +52,7 @@ public class VetResourceTest implements WithAssertions {
                 new Veterinarian().withName("sam"));
         given(repository.findAll()).willReturn(vets.stream());
         //when
-        final Response response = resource.allVets();
+        final Response response = resource.all();
         //then
         assertThat(response.getEntity()).isEqualTo(vets);
     }

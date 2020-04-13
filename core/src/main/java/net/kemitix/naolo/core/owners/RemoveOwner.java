@@ -1,37 +1,25 @@
 package net.kemitix.naolo.core.owners;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.kemitix.naolo.core.UseCase;
+import net.kemitix.naolo.core.RemoveEntityRequest;
+import net.kemitix.naolo.core.RemoveEntityUseCase;
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.storage.spi.OwnerRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.Dependent;
-import java.util.Optional;
 
 @Dependent
 @RequiredArgsConstructor
 public class RemoveOwner
-        implements UseCase<RemoveOwner.Request, RemoveOwner.Response> {
-    private final OwnerRepository repository;
+        implements RemoveEntityUseCase<Owner> {
+
+    @Getter
+    private final EntityRepository<Owner> repository;
 
     @Override
-    public Response invoke(final Request request) {
-        return Response.builder()
-                .owner(
-                        repository.remove(request.id))
-                .build();
+    public RemoveEntityRequest<Owner> request(final long id) {
+        return RemoveEntityRequest.create(id);
     }
 
-    @Builder
-    public static class Request {
-        private final long id;
-    }
-
-    @Builder
-    @Getter
-    public static class Response {
-        private final Optional<Owner> owner;
-    }
 }

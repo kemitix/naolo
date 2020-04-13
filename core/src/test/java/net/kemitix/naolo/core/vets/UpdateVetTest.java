@@ -2,7 +2,7 @@ package net.kemitix.naolo.core.vets;
 
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.VeterinarianRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,10 +35,10 @@ public class UpdateVetTest
                             VetSpecialisation.DENTISTRY,
                             VetSpecialisation.SURGERY));
 
-    private final VeterinarianRepository repository;
+    private final EntityRepository<Veterinarian> repository;
     private final UpdateVet updateVet;
 
-    public UpdateVetTest(@Mock final VeterinarianRepository repository) {
+    public UpdateVetTest(@Mock final EntityRepository<Veterinarian> repository) {
         this.repository = repository;
         updateVet = new UpdateVet(repository);
     }
@@ -53,14 +53,10 @@ public class UpdateVetTest
         final Veterinarian updatedVet = originalVet
                 .withName(expectedVet.getName())
                 .withSpecialisations(expectedVet.getSpecialisations());
-        final UpdateVet.Response response =
-                updateVet.invoke(
-                        UpdateVet.Request.builder()
-                                .veterinarian(updatedVet)
-                                .build());
+        final var request = updateVet.request(updatedVet);
+        final var response = updateVet.invoke(request);
         //then
+        assertThat(response.getEntity()).contains(expectedVet);
         verify(repository).update(expectedVet);
-        assertThat(response.getVeterinarian())
-                .contains(expectedVet);
     }
 }

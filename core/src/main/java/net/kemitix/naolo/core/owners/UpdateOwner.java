@@ -1,37 +1,24 @@
 package net.kemitix.naolo.core.owners;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.kemitix.naolo.core.UseCase;
+import net.kemitix.naolo.core.UpdateEntityRequest;
+import net.kemitix.naolo.core.UpdateEntityUseCase;
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.storage.spi.OwnerRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.Dependent;
-import java.util.Optional;
 
 @Dependent
 @RequiredArgsConstructor
 public class UpdateOwner
-        implements UseCase<UpdateOwner.Request, UpdateOwner.Response> {
+        implements UpdateEntityUseCase<Owner> {
 
-    private final OwnerRepository repository;
+    @Getter
+    private final EntityRepository<Owner> repository;
 
     @Override
-    public Response invoke(final Request request) {
-        return Response.builder()
-                .owner(repository.update(request.owner))
-                .build();
-    }
-
-    @Builder
-    public static class Request {
-        private final Owner owner;
-    }
-
-    @Builder
-    @Getter
-    public static class Response {
-        private final Optional<Owner> owner;
+    public UpdateEntityRequest<Owner> request(final Owner owner) {
+        return UpdateEntityRequest.create(owner);
     }
 }

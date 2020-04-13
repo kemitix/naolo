@@ -1,6 +1,7 @@
 package net.kemitix.naolo.core.vets;
 
 import net.kemitix.naolo.entities.Veterinarian;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +20,7 @@ public class RemoveVetTest
         implements WithAssertions {
 
     private final long id = new Random().nextLong();
-    private final VeterinarianRepository repository;
+    private final EntityRepository<Veterinarian> repository;
     private final RemoveVet removeVet;
 
     public RemoveVetTest(@Mock final VeterinarianRepository repository) {
@@ -31,32 +32,24 @@ public class RemoveVetTest
     @DisplayName("Remove a Vet")
     public void removeVet() {
         //given
-        final RemoveVet.Request request=
-                RemoveVet.Request.builder()
-                        .id(id).build();
         final Veterinarian vet = new Veterinarian();
         given(repository.remove(id)).willReturn(Optional.of(vet));
+        final var request= removeVet.request(id);
         //when
-        final RemoveVet.Response response =
-                removeVet.invoke(request);
+        final var response = removeVet.invoke(request);
         //then
-        assertThat(response.getVeterinarian())
-                .contains(vet);
+        assertThat(response.getEntity()).contains(vet);
     }
 
     @Test
     @DisplayName("Remove a Vet that does not exist")
     public void removeMissingVet() {
         //given
-        final RemoveVet.Request request=
-                RemoveVet.Request.builder()
-                        .id(id).build();
         given(repository.remove(id)).willReturn(Optional.empty());
+        final var request= removeVet.request(id);
         //when
-        final RemoveVet.Response response =
-                removeVet.invoke(request);
+        final var response = removeVet.invoke(request);
         //then
-        assertThat(response.getVeterinarian())
-                .isEmpty();
+        assertThat(response.getEntity()).isEmpty();
     }
 }

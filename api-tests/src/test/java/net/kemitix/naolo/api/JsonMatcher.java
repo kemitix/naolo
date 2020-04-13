@@ -29,12 +29,12 @@ class JsonMatcher<T> extends CustomMatcher<T> {
         expectedArray = expected;
     }
 
-    public static JsonMatcher<Object> jsonArray(final JsonArray vetList) {
-        return new JsonMatcher<>(vetList);
+    public static JsonMatcher<Object> jsonArray(final JsonArray array) {
+        return new JsonMatcher<>(array);
     }
 
-    public static JsonMatcher<Object> jsonObject(final JsonObject addedVet) {
-        return new JsonMatcher<>(addedVet);
+    public static JsonMatcher<Object> jsonObject(final JsonObject object) {
+        return new JsonMatcher<>(object);
     }
 
     @Override
