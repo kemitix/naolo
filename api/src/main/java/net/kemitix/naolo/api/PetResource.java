@@ -5,7 +5,6 @@ import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.Pet;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -44,7 +43,6 @@ public class PetResource
     }
 
     @POST
-    @Transactional
     @Override
     public Response add(final Pet entity) {
         return doAdd(entity);
@@ -52,7 +50,6 @@ public class PetResource
 
     @PUT
     @Path("{id}")
-    @Transactional
     @Override
     public Response update(
             @PathParam("id") final long id,
@@ -63,7 +60,6 @@ public class PetResource
 
     @DELETE
     @Path("{id}")
-    @Transactional
     @Override
     public Response remove(@PathParam("id") final long id) {
         return doRemove(id);
