@@ -25,5 +25,28 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.tarket>${java.version}</maven.compiler.tarket>
         <maven.install.skip>true</maven.install.skip>
+        <maven-graph-plugin.version>1.45</maven-graph-plugin.version>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.fusesource.mvnplugins</groupId>
+                <artifactId>maven-graph-plugin</artifactId>
+                <version>${maven-graph-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>reactor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <hideTransitive>true</hideTransitive>
+                    <hideVersion>true</hideVersion>
+                    <target>${project.basedir}/doc/images/reactor-graph.png</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
