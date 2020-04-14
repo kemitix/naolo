@@ -35,4 +35,4 @@ jobs:
       - name: setup-native-image
         run: gu install native-image
       - name: build-native-image
-        run: mvn -B package -Pnative
+        run: mvn -B verify -Pnative
