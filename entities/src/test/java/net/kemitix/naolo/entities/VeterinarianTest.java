@@ -26,8 +26,13 @@ public class VeterinarianTest
                         .withId(id)
                         .withName(name)
                         .withSpecialisations(specialisations);
+        final Veterinarian noArgsSetters = new Veterinarian();
+        noArgsSetters.setId(id);
+        noArgsSetters.setName(name);
+        noArgsSetters.setSpecialisations(specialisations);
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
+        assertThat(allArgs).isEqualTo(noArgsSetters);
         assertThat(allArgs.getId()).isEqualTo(id);
         assertThat(allArgs.getName()).isEqualTo(name);
         assertThat(allArgs.getSpecialisations()).isEqualTo(specialisations);

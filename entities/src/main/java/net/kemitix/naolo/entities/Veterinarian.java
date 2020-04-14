@@ -12,6 +12,7 @@ import java.util.List;
 @NamedQuery(name = Veterinarian.FIND_ALL,
         query = "Select v From Veterinarian v Order By v.name")
 @With
+@Setter
 @Getter
 @ToString
 @EqualsAndHashCode

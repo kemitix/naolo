@@ -13,8 +13,8 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.jboss.resteasy.spi.HttpResponseCodes.SC_NOT_FOUND;
 
 @QuarkusTest
-public class PetsIT
-        extends AbstractIT {
+public class PetApiTest
+        extends AbstractApiTest {
 
     @Test
     @DisplayName("Pets lifecycle - add - list - update - remove")

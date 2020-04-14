@@ -12,6 +12,7 @@ import javax.persistence.*;
 @NamedQuery(name = Owner.FIND_ALL,
         query = "Select o from Owner o order by o.lastName, o.firstName")
 @With
+@Setter
 @Getter
 @ToString
 @EqualsAndHashCode

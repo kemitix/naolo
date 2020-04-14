@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @NamedQuery(name = Visit.FIND_ALL,
         query = "select v from Visit v order by v.dateTime")
 @With
+@Setter
 @Getter
 @ToString
 @EqualsAndHashCode

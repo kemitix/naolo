@@ -39,8 +39,15 @@ public class PetTest
                         .withDateOfBirth(dateOfBirth)
                         .withType(type)
                         .withOwner(owner);
+        final Pet noArgsSetters = new Pet();
+        noArgsSetters.setId(id);
+        noArgsSetters.setName(name);
+        noArgsSetters.setDateOfBirth(dateOfBirth);
+        noArgsSetters.setType(type);
+        noArgsSetters.setOwner(owner);
         //then
         assertThat(allArgs).isEqualTo(noArgsWith);
+        assertThat(allArgs).isEqualTo(noArgsSetters);
         assertThat(allArgs.getId()).isEqualTo(id);
         assertThat(allArgs.getName()).isEqualTo(name);
         assertThat(allArgs.getDateOfBirth()).isEqualTo(dateOfBirth);

@@ -12,7 +12,7 @@ import java.net.URI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
-public class AbstractIT {
+public class AbstractApiTest {
     protected ValidatableResponse deleteOwner(final long id) {
         return given()
                 .delete("/owners/" + id)

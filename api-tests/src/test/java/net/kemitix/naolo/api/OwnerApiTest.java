@@ -12,8 +12,8 @@ import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_OK;
 
 @QuarkusTest
-public class OwnersIT
-        extends AbstractIT {
+public class OwnerApiTest
+        extends AbstractApiTest {
 
     @Test
     @DisplayName("Owners lifecycle - add - list - update - remove")

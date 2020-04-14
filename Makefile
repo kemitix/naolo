@@ -1,4 +1,4 @@
-
+VERSION=DEV-SNAPSHOT
 GRAPH_VERSION=1.45
 
 graphs:
@@ -12,3 +12,9 @@ domain:
 
 run-dev:
 	mvn -pl runner-quarkus quarkus:dev
+
+native:
+	mvn package -Pnative
+
+run-native:
+	./runner-quarkus/target/naolo-runner-quarkus-${VERSION}-runner
