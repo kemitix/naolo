@@ -4,5 +4,5 @@ import io.quarkus.test.junit.NativeImageTest;
 
 @NativeImageTest
 public class NativeOwnersIT
-        extends OwnersIT {
+        extends OwnerApiTest {
 }

@@ -4,5 +4,5 @@ import io.quarkus.test.junit.NativeImageTest;
 
 @NativeImageTest
 public class NativePetsIT
-        extends PetsIT {
+        extends PetApiTest {
 }

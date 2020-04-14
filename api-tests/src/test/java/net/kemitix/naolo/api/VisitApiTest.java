@@ -13,8 +13,8 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.jboss.resteasy.spi.HttpResponseCodes.SC_NOT_FOUND;
 
 @QuarkusTest
-public class VisitsIT
-        extends AbstractIT {
+public class VisitApiTest
+        extends AbstractApiTest {
 
     @Test
     @DisplayName("Visit lifecycle - add - list - update - remove")
