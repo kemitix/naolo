@@ -30,6 +30,7 @@ jobs:
       postgres:
         image: postgres
         env:
+          POSTGRES_DB: naolo
           POSTGRES_PASSWORD: naolo
         options: >-
           --health-cmd pg_isready
