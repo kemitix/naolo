@@ -47,6 +47,12 @@
       <artifactId>naolo-storage-plugin</artifactId>
     </dependency>
 
+    <!-- lombok - to enable dev mode recompilation -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
     <!-- quarkus -->
     <dependency>
       <groupId>io.quarkus</groupId>
