@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
@@ -47,10 +48,9 @@ public class OwnerResourceTest
                         ().withFirstName("sam"));
         given(repository.findAll()).willReturn(owners.stream());
         //when
-        final Response response = resource.all();
+        final List<Owner> response = resource.all();
         //then
-        assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_OK);
-        assertThat(response.getEntity()).isEqualTo(owners);
+        assertThat(response).isEqualTo(owners);
     }
 
     @Test
@@ -79,10 +79,9 @@ public class OwnerResourceTest
         given(repository.find(id))
                 .willReturn(Optional.of(owner));
         //when
-        final Response response = resource.get(id);
+        final Owner response = resource.get(id);
         //then
-        assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_OK);
-        assertThat(response.getEntity()).isEqualTo(owner);
+        assertThat(response).isEqualTo(owner);
     }
 
     @Test
@@ -92,11 +91,10 @@ public class OwnerResourceTest
         final long id = new Random().nextLong();
         given(repository.find(id))
                 .willReturn(Optional.empty());
-        //when
-        final Response response = resource.get(id);
         //then
-        assertThat(response.getStatus())
-                .isEqualTo(HttpServletResponse.SC_NOT_FOUND);
+        assertThatExceptionOfType(NotFoundException.class)
+                .isThrownBy(() ->
+                        resource.get(id));
     }
 
     @Test
@@ -108,10 +106,9 @@ public class OwnerResourceTest
         given(repository.update(owner))
                 .willReturn(Optional.of(owner));
         //when
-        final Response response = resource.update(id, owner);
+        final Owner response = resource.update(id, owner);
         //then
-        assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_OK);
-        assertThat(response.getEntity()).isEqualTo(owner);
+        assertThat(response).isEqualTo(owner);
     }
 
     @Test
@@ -122,11 +119,10 @@ public class OwnerResourceTest
         final Owner owner = new Owner().withId(id);
         given(repository.update(owner))
                 .willReturn(Optional.empty());
-        //when
-        final Response response = resource.update(id, owner);
         //then
-        assertThat(response.getStatus())
-                .isEqualTo(HttpServletResponse.SC_NOT_FOUND);
+        assertThatExceptionOfType(NotFoundException.class)
+                .isThrownBy(() ->
+                        resource.update(id, owner));
     }
 
     @Test
@@ -137,9 +133,9 @@ public class OwnerResourceTest
         final Owner owner = new Owner().withId(id);
         given(repository.remove(id)).willReturn(Optional.of(owner));
         //when
-        final Response response = resource.remove(id);
+        final Owner response = resource.remove(id);
         //then
-        assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_OK);
+        assertThat(response).isEqualTo(owner);
     }
 
     @Test
@@ -148,11 +144,10 @@ public class OwnerResourceTest
         //given
         final long id = new Random().nextLong();
         given(repository.remove(id)).willReturn(Optional.empty());
-        //when
-        final Response response = resource.remove(id);
         //then
-        assertThat(response.getStatus())
-                .isEqualTo(HttpServletResponse.SC_NOT_FOUND);
+        assertThatExceptionOfType(NotFoundException.class)
+                .isThrownBy(() ->
+                        resource.remove(id));
     }
 
 }

@@ -9,6 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Log
 @Path(VisitResource.PATH)
@@ -32,14 +33,14 @@ public class VisitResource
 
     @GET
     @Override
-    public Response all() {
+    public List<Visit> all() {
         return doAll();
     }
 
     @GET
     @Path("{id}")
     @Override
-    public Response get(@PathParam("id") final long id) {
+    public Visit get(@PathParam("id") final long id) {
         return doGet(id);
     }
 
@@ -52,7 +53,7 @@ public class VisitResource
     @PUT
     @Path("{id}")
     @Override
-    public Response update(
+    public Visit update(
             @PathParam("id") final long id,
             final Visit entity
     ) {
@@ -62,7 +63,7 @@ public class VisitResource
     @DELETE
     @Path("{id}")
     @Override
-    public Response remove(@PathParam("id") final long id) {
+    public Visit remove(@PathParam("id") final long id) {
         return doRemove(id);
     }
 

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.*;
@@ -52,9 +52,9 @@ public class VetResourceTest implements WithAssertions {
                 new Veterinarian().withName("sam"));
         given(repository.findAll()).willReturn(vets.stream());
         //when
-        final Response response = resource.all();
+        final List<Veterinarian> response = resource.all();
         //then
-        assertThat(response.getEntity()).isEqualTo(vets);
+        assertThat(response).isEqualTo(vets);
     }
 
     @Test
@@ -89,17 +89,9 @@ public class VetResourceTest implements WithAssertions {
             //given
             given(repository.find(id)).willReturn(Optional.of(vet));
             //when
-            final Response response = resource.get(id);
+            final Veterinarian response = resource.get(id);
             //then
-            assertThat(response.getStatus())
-                    .as("Status Code 200")
-                    .isEqualTo(200);
-            assertThat(response.hasEntity())
-                    .as("Vet found")
-                    .isTrue();
-            final Veterinarian entity =
-                    (Veterinarian) response.getEntity();
-            assertThat(entity)
+            assertThat(response)
                     .as("Found the Veterinarian")
                     .isEqualTo(vet);
         }
@@ -109,12 +101,9 @@ public class VetResourceTest implements WithAssertions {
         public void getMissingVet() {
             //given
             given(repository.find(id)).willReturn(Optional.empty());
-            //when
-            final Response response = resource.get(id);
             //then
-            assertThat(response.getStatus())
-                    .as("Status Code 404")
-                    .isEqualTo(404);
+            assertThatExceptionOfType(NotFoundException.class)
+                    .isThrownBy(() -> resource.get(id));
         }
     }
     @Nested
@@ -134,21 +123,12 @@ public class VetResourceTest implements WithAssertions {
             given(repository.update(expectedVet))
                     .willReturn(Optional.of(expectedVet));
             //when
-            final Response response =
+            final Veterinarian response =
                     resource.update(id, expectedVet);
             //then
-            assertThat(response.getStatus())
-                    .as("Status Code 200")
-                    .isEqualTo(200);
-            assertThat(response.hasEntity())
-                    .as("Vet found")
-                    .isTrue();
-            final Veterinarian entity =
-                    (Veterinarian) response.getEntity();
-            assertThat(entity)
+            assertThat(response)
                     .as("Returned the Veterinarian")
                     .isEqualTo(expectedVet);
-
         }
 
         @Test
@@ -157,13 +137,10 @@ public class VetResourceTest implements WithAssertions {
             //given
             given(repository.update(expectedVet))
                     .willReturn(Optional.empty());
-            //when
-            final Response response =
-                    resource.update(id, expectedVet);
             //then
-            assertThat(response.getStatus())
-                    .as("Status Code 404")
-                    .isEqualTo(404);
+            assertThatExceptionOfType(NotFoundException.class)
+                    .isThrownBy(() ->
+                            resource.update(id, expectedVet));
         }
     }
     @Nested
@@ -177,12 +154,11 @@ public class VetResourceTest implements WithAssertions {
             given(repository.remove(id))
                     .willReturn(Optional.of(vet));
             //when
-            final Response response =
+            final Veterinarian response =
                     resource.remove(id);
             //then
-            assertThat(response.getStatus())
-                    .as("Status Code 200")
-                    .isEqualTo(HttpServletResponse.SC_OK);
+            assertThat(response)
+                    .isEqualTo(vet);
         }
 
         @Test
@@ -190,13 +166,10 @@ public class VetResourceTest implements WithAssertions {
         public void removeMissingVet() {
             //given
             given(repository.find(id)).willReturn(Optional.empty());
-            //when
-            final Response response =
-                    resource.remove(id);
             //then
-            assertThat(response.getStatus())
-                    .as("Status Code 404")
-                    .isEqualTo(HttpServletResponse.SC_NOT_FOUND);
+            assertThatExceptionOfType(NotFoundException.class)
+                    .isThrownBy(() ->
+                            resource.remove(id));
         }
     }
 }

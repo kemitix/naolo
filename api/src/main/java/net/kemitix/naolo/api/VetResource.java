@@ -29,6 +29,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * REST Controller for Veterinarians.
@@ -57,14 +58,14 @@ public class VetResource
 
     @GET
     @Override
-    public Response all() {
+    public List<Veterinarian> all() {
         return doAll();
     }
 
     @GET
     @Path("{id}")
     @Override
-    public Response get(@PathParam("id") final long id) {
+    public Veterinarian get(@PathParam("id") final long id) {
         return doGet(id);
     }
 
@@ -77,7 +78,7 @@ public class VetResource
     @PUT
     @Path("{id}")
     @Override
-    public Response update(
+    public Veterinarian update(
             @PathParam("id") final long id,
             final Veterinarian entity
     ) {
@@ -87,7 +88,7 @@ public class VetResource
     @DELETE
     @Path("{id}")
     @Override
-    public Response remove(@PathParam("id") final long id) {
+    public Veterinarian remove(@PathParam("id") final long id) {
         return doRemove(id);
     }
 

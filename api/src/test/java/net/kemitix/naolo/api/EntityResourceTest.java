@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public class EntityResourceTest
         implements WithAssertions {
@@ -20,12 +21,12 @@ public class EntityResourceTest
     private class FakeResource
             extends EntityResource<Entity> {
         @Override
-        Response all() {
+        List<Entity> all() {
             return null;
         }
 
         @Override
-        Response get(final long id) {
+        Entity get(final long id) {
             return null;
         }
 
@@ -40,12 +41,12 @@ public class EntityResourceTest
         }
 
         @Override
-        Response update(final long id, final Entity entity) {
+        Entity update(final long id, final Entity entity) {
             return null;
         }
 
         @Override
-        Response remove(final long id) {
+        Entity remove(final long id) {
             return null;
         }
     }

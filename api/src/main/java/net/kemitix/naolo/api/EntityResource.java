@@ -6,8 +6,11 @@ import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.HasId;
 
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.List;
+import java.util.function.Supplier;
 
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(force = true)
@@ -19,25 +22,21 @@ public abstract class EntityResource<T extends HasId> {
     private final UpdateEntityUseCase<T> updateEntity;
     private final RemoveEntityUseCase<T> removeEntity;
 
-    Response NOT_FOUND =
-            Response.status(Response.Status.NOT_FOUND).build();
+    abstract List<T> all();
 
-    abstract Response all();
-
-    protected Response doAll() {
+    protected List<T> doAll() {
         final ListEntityRequest<T> request = listAll.request();
         final ListEntityResponse<T> response = listAll.invoke(request);
-        return entityOk(response.getEntities());
+        return response.getEntities();
     }
 
-    abstract Response get(final long id);
+    abstract T get(final long id);
 
-    protected Response doGet(final long id) {
+    protected T doGet(final long id) {
         final GetEntityRequest<T> request = getEntity.request(id);
         final GetEntityResponse<T> response = getEntity.invoke(request);
         return response.getEntity()
-                .map(this::entityOk)
-                .orElse(NOT_FOUND);
+                .orElseThrow(ownerNotFound(id));
     }
 
     abstract Response add(T entity);
@@ -51,24 +50,30 @@ public abstract class EntityResource<T extends HasId> {
 
     abstract String getPath();
 
-    abstract Response update(final long id, final T entity);
+    abstract T update(final long id, final T entity);
 
-    protected Response doUpdate(final T entity) {
+    protected T doUpdate(final T entity) {
         final UpdateEntityRequest<T> request = updateEntity.request(entity);
         final UpdateEntityResponse<T> response = updateEntity.invoke(request);
         return response.getEntity()
-                .map(this::entityOk)
-                .orElse(NOT_FOUND);
+                .orElseThrow(ownerNotFound(entity.getId()));
     }
 
-    abstract Response remove(long id);
+    abstract T remove(long id);
 
-    protected Response doRemove(final long id) {
+    protected T doRemove(final long id) {
         final RemoveEntityRequest<T> request = removeEntity.request(id);
         final RemoveEntityResponse<T> response = removeEntity.invoke(request);
         return response.getEntity()
-                .map(this::entityOk)
-                .orElse(NOT_FOUND);
+                .orElseThrow(ownerNotFound(id));
+    }
+
+    private Supplier<NotFoundException> ownerNotFound(final long id) {
+        return () ->
+                new NotFoundException(String.format(
+                        "Owner with id %d not found",
+                        id
+                ));
     }
 
     protected URI location(
@@ -78,10 +83,6 @@ public abstract class EntityResource<T extends HasId> {
         final Long id = entity.getId();
         return URI.create(String.format(
                 path + "/%d", id));
-    }
-
-    protected Response entityOk(final Object entity) {
-        return Response.ok().entity(entity).build();
     }
 
 }
