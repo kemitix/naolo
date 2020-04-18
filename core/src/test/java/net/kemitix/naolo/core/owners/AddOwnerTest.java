@@ -1,7 +1,7 @@
 package net.kemitix.naolo.core.owners;
 
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.storage.spi.OwnerRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,10 +16,10 @@ import static org.mockito.Mockito.verify;
 public class AddOwnerTest
         implements WithAssertions {
 
-    private final OwnerRepository repository;
+    private final EntityRepository<Owner> repository;
     private final AddOwner addOwner;
 
-    public AddOwnerTest(@Mock final OwnerRepository repository) {
+    public AddOwnerTest(@Mock final EntityRepository<Owner> repository) {
         this.repository = repository;
         addOwner = new AddOwner(repository);
     }

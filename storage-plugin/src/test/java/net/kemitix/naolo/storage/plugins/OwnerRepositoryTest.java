@@ -18,24 +18,24 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class OwnerRepositoryImplTest
+public class OwnerRepositoryTest
         implements WithAssertions {
 
     private final EntityManager entityManager;
-    private final OwnerRepositoryImpl repository;
+    private final OwnerRepository repository;
     private final TypedQuery<Owner> allOwnersQuery;
     private final Stream<Owner> allOwnersStream;
     private final long id = new Random().nextLong();
     private final Owner managedOwner = new Owner();
     private final Owner unmanagedOwner = new Owner();
 
-    public OwnerRepositoryImplTest(
+    public OwnerRepositoryTest(
             @Mock final EntityManager entityManager,
             @Mock final TypedQuery<Owner> allOwnersQuery,
             @Mock final Stream<Owner> allOwnersStream
     ) {
         this.entityManager = entityManager;
-        repository = new OwnerRepositoryImpl(entityManager);
+        repository = new OwnerRepository(entityManager);
         this.allOwnersQuery = allOwnersQuery;
         this.allOwnersStream = allOwnersStream;
     }

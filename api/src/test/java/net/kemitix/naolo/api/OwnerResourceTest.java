@@ -2,7 +2,7 @@ package net.kemitix.naolo.api;
 
 import net.kemitix.naolo.core.owners.*;
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.storage.spi.OwnerRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,10 +23,10 @@ import static org.mockito.BDDMockito.given;
 public class OwnerResourceTest
         implements WithAssertions {
 
-    private final OwnerRepository repository;
+    private final EntityRepository<Owner> repository;
     private final OwnerResource resource;
 
-    public OwnerResourceTest(@Mock final OwnerRepository repository) {
+    public OwnerResourceTest(@Mock final EntityRepository<Owner> repository) {
         this.repository = repository;
         resource =
                 new OwnerResource(
