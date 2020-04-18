@@ -1,7 +1,7 @@
 package net.kemitix.naolo.storage.plugins;
 
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.VeterinarianRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ public class VeterinarianRepositoryImplTest
     private final Veterinarian managedVet = new Veterinarian();
     private final long id = new Random().nextLong();
     private final EntityManager entityManager;
-    private final VeterinarianRepository repository;
+    private final EntityRepository<Veterinarian> repository;
     private final TypedQuery<Veterinarian> allVetsQuery;
     private final Stream<Veterinarian> allVetsStream;
 

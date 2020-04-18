@@ -3,7 +3,7 @@ package net.kemitix.naolo.api;
 import net.kemitix.naolo.core.vets.*;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.VeterinarianRepository;
+import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -26,12 +26,12 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(MockitoExtension.class)
 public class VetResourceTest implements WithAssertions {
 
-    private final VeterinarianRepository repository;
+    private final EntityRepository<Veterinarian> repository;
     private final Long id = new Random().nextLong();
     private final VetResource resource;
 
     public VetResourceTest(
-            @Mock final VeterinarianRepository repository
+            @Mock final EntityRepository<Veterinarian> repository
     ) {
         this.repository = repository;
         resource =

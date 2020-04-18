@@ -2,7 +2,6 @@ package net.kemitix.naolo.core.vets;
 
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.EntityRepository;
-import net.kemitix.naolo.storage.spi.VeterinarianRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ public class RemoveVetTest
     private final EntityRepository<Veterinarian> repository;
     private final RemoveVet removeVet;
 
-    public RemoveVetTest(@Mock final VeterinarianRepository repository) {
+    public RemoveVetTest(@Mock final EntityRepository<Veterinarian> repository) {
         this.repository = repository;
         removeVet = new RemoveVet(repository);
     }
