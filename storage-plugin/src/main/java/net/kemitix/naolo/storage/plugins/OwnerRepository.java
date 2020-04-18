@@ -9,11 +9,11 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 @ApplicationScoped
-public class OwnerRepositoryImpl
+public class OwnerRepository
         extends AbstractEntityRepository<Owner>
         implements EntityRepository<Owner> {
 
-    public OwnerRepositoryImpl(final EntityManager entityManager) {
+    public OwnerRepository(final EntityManager entityManager) {
         super(entityManager);
     }
 

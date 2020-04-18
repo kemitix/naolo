@@ -19,7 +19,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class VeterinarianRepositoryImplTest
+public class VeterinarianRepositoryTest
         implements WithAssertions {
 
     private final Veterinarian unmanagedVet = new Veterinarian();
@@ -30,12 +30,12 @@ public class VeterinarianRepositoryImplTest
     private final TypedQuery<Veterinarian> allVetsQuery;
     private final Stream<Veterinarian> allVetsStream;
 
-    public VeterinarianRepositoryImplTest(
+    public VeterinarianRepositoryTest(
             @Mock final EntityManager entityManager,
             @Mock final TypedQuery<Veterinarian> allVetsQuery,
             @Mock final Stream<Veterinarian> allVetsStream) {
         this.entityManager = entityManager;
-        repository = new VeterinarianRepositoryImpl(entityManager);
+        repository = new VeterinarianRepository(entityManager);
         this.allVetsQuery = allVetsQuery;
         this.allVetsStream = allVetsStream;
     }

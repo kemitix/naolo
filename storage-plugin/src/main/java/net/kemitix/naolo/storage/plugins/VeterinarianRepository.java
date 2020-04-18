@@ -11,11 +11,11 @@ import java.util.stream.Stream;
 
 @Log
 @ApplicationScoped
-public class VeterinarianRepositoryImpl
+public class VeterinarianRepository
         extends AbstractEntityRepository<Veterinarian>
         implements EntityRepository<Veterinarian> {
 
-    public VeterinarianRepositoryImpl(final EntityManager entityManager) {
+    public VeterinarianRepository(final EntityManager entityManager) {
         super(entityManager);
     }
 
