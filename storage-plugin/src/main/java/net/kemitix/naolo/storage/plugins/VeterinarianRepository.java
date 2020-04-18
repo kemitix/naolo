@@ -1,6 +1,5 @@
 package net.kemitix.naolo.storage.plugins;
 
-import lombok.extern.java.Log;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
@@ -9,7 +8,6 @@ import javax.persistence.EntityManager;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-@Log
 @ApplicationScoped
 public class VeterinarianRepository
         extends AbstractEntityRepository<Veterinarian>
