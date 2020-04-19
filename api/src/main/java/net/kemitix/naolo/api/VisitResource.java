@@ -6,6 +6,7 @@ import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.Visit;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -21,6 +22,7 @@ public class VisitResource
 
     public static final String PATH = "visits";
 
+    @Inject
     public VisitResource(
             final ListEntityUseCase<Visit> listAll,
             final AddEntityUseCase<Visit> addEntity,
@@ -29,6 +31,14 @@ public class VisitResource
             final RemoveEntityUseCase<Visit> removeEntity
     ) {
         super(listAll, addEntity, getEntity, updateEntity, removeEntity);
+    }
+
+    public VisitResource() {
+        super(null,
+                null,
+                null,
+                null,
+                null);
     }
 
     @GET

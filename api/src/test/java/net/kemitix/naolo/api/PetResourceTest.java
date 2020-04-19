@@ -40,6 +40,13 @@ public class PetResourceTest
     }
 
     @Test
+    @DisplayName("Has a no-args constructor")
+    public void hasNoArgsConstructor() {
+        assertThatCode(PetResource::new)
+                .doesNotThrowAnyException();
+    }
+
+    @Test
     @DisplayName("get all pets - 200 ok")
     public void getAllPets() {
         //given

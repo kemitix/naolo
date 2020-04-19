@@ -40,6 +40,13 @@ public class VisitResourceTest
     }
 
     @Test
+    @DisplayName("Has a no-args constructor")
+    public void hasNoArgsConstructor() {
+        assertThatCode(VisitResource::new)
+                .doesNotThrowAnyException();
+    }
+
+    @Test
     @DisplayName("get all visits - 200 ok")
     public void getAllVisits() {
         //given

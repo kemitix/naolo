@@ -21,6 +21,14 @@ public class OwnerResource
 
     public static final String PATH = "owners";
 
+    public OwnerResource() {
+        super(null,
+                null,
+                null,
+                null,
+                null);
+    }
+
     @Inject
     public OwnerResource(
             final ListEntityUseCase<Owner> listAll,

@@ -5,6 +5,7 @@ import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.Pet;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -20,6 +21,7 @@ public class PetResource
 
     public static final String PATH = "pets";
 
+    @Inject
     protected PetResource(
             final ListEntityUseCase<Pet> listAll,
             final AddEntityUseCase<Pet> addEntity,
@@ -28,6 +30,14 @@ public class PetResource
             final RemoveEntityUseCase<Pet> removeEntity
     ) {
         super(listAll, addEntity, getEntity, updateEntity, removeEntity);
+    }
+
+    public PetResource() {
+        super(null,
+                null,
+                null,
+                null,
+                null);
     }
 
     @GET

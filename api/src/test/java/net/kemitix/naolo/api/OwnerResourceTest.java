@@ -39,6 +39,13 @@ public class OwnerResourceTest
     }
 
     @Test
+    @DisplayName("Has a no-args constructor")
+    public void hasNoArgsConstructor() {
+        assertThatCode(OwnerResource::new)
+                .doesNotThrowAnyException();
+    }
+
+    @Test
     @DisplayName("get all owners - 200 ok")
     public void getAllOwners() {
         //given

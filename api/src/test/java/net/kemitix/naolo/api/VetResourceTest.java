@@ -44,6 +44,13 @@ public class VetResourceTest implements WithAssertions {
     }
 
     @Test
+    @DisplayName("Has a no-args constructor")
+    public void hasNoArgsConstructor() {
+        assertThatCode(VetResource::new)
+                .doesNotThrowAnyException();
+    }
+
+    @Test
     @DisplayName("Get All Vets")
     public void canGetAllVets() {
         //given
