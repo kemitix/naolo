@@ -5,4 +5,5 @@ import javax.ws.rs.core.Application;
 
 @ApplicationPath("/naolo")
 public class NaoloApp extends Application {
+
 }
