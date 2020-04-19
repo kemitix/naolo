@@ -17,6 +17,10 @@ public class OwnerRepository
         super(entityManager);
     }
 
+    protected OwnerRepository() {
+        super(null);
+    }
+
     @Override
     public Stream<Owner> findAll() {
         return findAll(Owner.FIND_ALL, Owner.class);

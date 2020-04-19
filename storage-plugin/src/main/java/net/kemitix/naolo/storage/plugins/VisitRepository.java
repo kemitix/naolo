@@ -17,6 +17,10 @@ public class VisitRepository
         super(entityManager);
     }
 
+    protected VisitRepository() {
+        super(null);
+    }
+
     @Override
     public Stream<Visit> findAll() {
         return findAll(Visit.FIND_ALL, Visit.class);

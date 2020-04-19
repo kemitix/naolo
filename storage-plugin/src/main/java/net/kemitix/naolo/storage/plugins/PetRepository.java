@@ -17,6 +17,10 @@ public class PetRepository
         super(entityManager);
     }
 
+    protected PetRepository() {
+        super(null);
+    }
+
     @Override
     public Stream<Pet> findAll() {
         return findAll(Pet.FIND_ALL, Pet.class);

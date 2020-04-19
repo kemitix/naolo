@@ -17,6 +17,10 @@ public class VeterinarianRepository
         super(entityManager);
     }
 
+    protected VeterinarianRepository() {
+        super(null);
+    }
+
     @Override
     public Stream<Veterinarian> findAll() {
         return findAll(Veterinarian.FIND_ALL, Veterinarian.class);

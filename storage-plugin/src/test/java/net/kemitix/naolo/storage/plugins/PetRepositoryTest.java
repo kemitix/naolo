@@ -40,6 +40,13 @@ public class PetRepositoryTest
         this.allPetsStream = allPetsStream;
     }
 
+    @Test
+    @DisplayName("Has a no-args constructor")
+    public void hasNoArgsConstructor() {
+        assertThatCode(PetRepository::new)
+                .doesNotThrowAnyException();
+    }
+
 
     @Test
     @DisplayName("List All invokes named query")
