@@ -12,9 +12,7 @@ import org.testcontainers.junit.jupiter.Container;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
-import java.net.URI;
 
 @MicroShedTest
 public class OwnersIT
@@ -36,18 +34,11 @@ public class OwnersIT
         assertThat(ownerResource.all()).isEmpty();
 
         // add an Owner
-        final Owner newOwner = new Owner()
-                .withId(0)
-                .withFirstName("Owners First Name")
-                .withLastName("Owners Last Name")
-                .withStreet("Owners Street")
-                .withCity("Owners City");
+        final Owner newOwner = ObjectMother.getNewOwner();
         final Response added = ownerResource.add(newOwner);
         assertThat(added.getStatus()).isEqualTo(HttpServletResponse.SC_CREATED);
-        final long ownerId = Long.parseLong(
-                URI.create(added.getHeaderString(HttpHeaders.LOCATION))
-                        .getPath()
-                .split("/")[4]);
+
+        final long ownerId = ObjectMother.getEntityId(added);
         final Owner addedOwner = newOwner.withId(ownerId);
 
         // list all owners - we have one
@@ -78,4 +69,5 @@ public class OwnersIT
         // list all owners - none found
         assertThat(ownerResource.all()).isEmpty();
     }
+
 }
