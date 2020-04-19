@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.microshed.testing.jaxrs.RESTClient;
 import org.microshed.testing.jupiter.MicroShedTest;
 import org.microshed.testing.testcontainers.ApplicationContainer;
-import org.testcontainers.containers.wait.strategy.LogMessageWaitStrategy;
 import org.testcontainers.junit.jupiter.Container;
 
 @MicroShedTest
@@ -18,8 +17,7 @@ public class OwnersIT
     public static ApplicationContainer app =
             new ApplicationContainer()
                     .withAppContextRoot("/naolo-war-DEV-SNAPSHOT")
-                    .waitingFor(new LogMessageWaitStrategy()
-                            .withRegEx("Deployed \"naolo-war-DEV-SNAPSHOT.war\""));
+                    .withReadinessPath("/naolo-war-DEV-SNAPSHOT/naolo/owners");
 
     @RESTClient
     public static OwnerResource ownerResource;
