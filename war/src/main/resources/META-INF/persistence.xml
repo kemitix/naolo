@@ -4,6 +4,10 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <persistence-unit name="naolo" transaction-type="RESOURCE_LOCAL">
+        <class>net.kemitix.naolo.entities.Veterinarian</class>
+        <class>net.kemitix.naolo.entities.Owner</class>
+        <class>net.kemitix.naolo.entities.Pet</class>
+        <class>net.kemitix.naolo.entities.Visit</class>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
