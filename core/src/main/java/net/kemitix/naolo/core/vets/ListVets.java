@@ -22,13 +22,13 @@
 package net.kemitix.naolo.core.vets;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.ListEntityRequest;
 import net.kemitix.naolo.core.ListEntityUseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  * Use-case to list all {@link Veterinarian}s.
@@ -36,12 +36,16 @@ import javax.enterprise.context.ApplicationScoped;
  * @author Paul Campbell (pcampbell@kemitix.net)
  */
 @ApplicationScoped
-@RequiredArgsConstructor
 public class ListVets
         implements ListEntityUseCase<Veterinarian> {
 
     @Getter
     private final EntityRepository<Veterinarian> repository;
+
+    @Inject
+    public ListVets(final EntityRepository<Veterinarian> repository) {
+        this.repository = repository;
+    }
 
     @Override
     public ListEntityRequest<Veterinarian> request() {
