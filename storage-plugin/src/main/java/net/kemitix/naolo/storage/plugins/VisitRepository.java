@@ -3,6 +3,7 @@ package net.kemitix.naolo.storage.plugins;
 import net.kemitix.naolo.entities.Visit;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -11,6 +12,7 @@ import java.util.stream.Stream;
 public class VisitRepository
         extends AbstractEntityRepository<Visit> {
 
+    @Inject
     public VisitRepository(final EntityManager entityManager) {
         super(entityManager);
     }
