@@ -14,7 +14,7 @@
             <property name="javax.persistence.schema-generation.scripts.create-target" value="naolo-create.ddl"/>
             <property name="javax.persistence.schema-generation.scripts.drop-target" value="naolo-drop.ddl"/>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:naolo-db"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:."/>
             <property name="eclipselink.logging.level" value="INFO"/>
         </properties>
     </persistence-unit>
