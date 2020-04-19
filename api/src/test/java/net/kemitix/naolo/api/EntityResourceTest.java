@@ -1,25 +1,61 @@
 package net.kemitix.naolo.api;
 
+import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.HasId;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+@ExtendWith(MockitoExtension.class)
 public class EntityResourceTest
         implements WithAssertions {
+
+
+    private final ListEntityUseCase<Entity> listAll;
+    private final AddEntityUseCase<Entity> addEntity;
+    private final GetEntityUseCase<Entity> getEntity;
+    private final UpdateEntityUseCase<Entity> updateEntity;
+    private final RemoveEntityUseCase<Entity> removeEntity;
+
+    public EntityResourceTest(
+            @Mock final ListEntityUseCase<Entity> listAll,
+            @Mock final AddEntityUseCase<Entity> addEntity,
+            @Mock final GetEntityUseCase<Entity> getEntity,
+            @Mock final UpdateEntityUseCase<Entity> updateEntity,
+            @Mock final RemoveEntityUseCase<Entity> removeEntity
+    ) {
+        this.listAll = listAll;
+        this.addEntity = addEntity;
+        this.getEntity = getEntity;
+        this.updateEntity = updateEntity;
+        this.removeEntity = removeEntity;
+    }
+
     @Test
     @DisplayName("Has Required No-Args Constructor")
     public void hasRequiredNoArgsConstructor() {
-        assertThatCode(() ->
-                        new FakeResource()
-        ).doesNotThrowAnyException();
+        assertThatCode(FakeResource::new)
+                .doesNotThrowAnyException();
     }
 
     private class FakeResource
             extends EntityResource<Entity> {
+
+        protected FakeResource() {
+            super(
+                    listAll,
+                    addEntity,
+                    getEntity,
+                    updateEntity,
+                    removeEntity);
+        }
+
         @Override
         List<Entity> all() {
             return null;

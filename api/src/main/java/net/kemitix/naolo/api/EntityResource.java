@@ -1,8 +1,5 @@
 package net.kemitix.naolo.api;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.HasId;
 
@@ -12,8 +9,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.function.Supplier;
 
-@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-@NoArgsConstructor(force = true)
 public abstract class EntityResource<T extends HasId> {
 
     private final ListEntityUseCase<T> listAll;
@@ -21,6 +16,20 @@ public abstract class EntityResource<T extends HasId> {
     private final GetEntityUseCase<T> getEntity;
     private final UpdateEntityUseCase<T> updateEntity;
     private final RemoveEntityUseCase<T> removeEntity;
+
+    protected EntityResource(
+            final ListEntityUseCase<T> listAll,
+            final AddEntityUseCase<T> addEntity,
+            final GetEntityUseCase<T> getEntity,
+            final UpdateEntityUseCase<T> updateEntity,
+            final RemoveEntityUseCase<T> removeEntity
+    ) {
+        this.listAll = listAll;
+        this.addEntity = addEntity;
+        this.getEntity = getEntity;
+        this.updateEntity = updateEntity;
+        this.removeEntity = removeEntity;
+    }
 
     abstract List<T> all();
 

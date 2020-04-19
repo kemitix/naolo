@@ -5,6 +5,7 @@ import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.Owner;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -20,6 +21,7 @@ public class OwnerResource
 
     public static final String PATH = "owners";
 
+    @Inject
     public OwnerResource(
             final ListEntityUseCase<Owner> listAll,
             final AddEntityUseCase<Owner> addEntity,
