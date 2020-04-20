@@ -6,6 +6,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 
 public class ObjectMother {
@@ -42,5 +44,15 @@ public class ObjectMother {
                 .withSpecialisations(Collections.singletonList(
                         VetSpecialisation.SURGERY
                 ));
+    }
+
+    public static Visit getNewVisit(final Pet pet, final Veterinarian vet) {
+        return new Visit()
+                .withId(0)
+                .withDescription("Visit Description")
+                .withDateTime(LocalDateTime.now()
+                        .truncatedTo(ChronoUnit.MINUTES))
+                .withPet(pet)
+                .withVeterinarian(vet);
     }
 }
