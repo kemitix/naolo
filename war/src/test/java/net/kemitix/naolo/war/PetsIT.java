@@ -7,22 +7,17 @@ import net.kemitix.naolo.entities.Pet;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.microshed.testing.SharedContainerConfig;
 import org.microshed.testing.jaxrs.RESTClient;
 import org.microshed.testing.jupiter.MicroShedTest;
-import org.microshed.testing.testcontainers.ApplicationContainer;
-import org.testcontainers.junit.jupiter.Container;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 
 @MicroShedTest
+@SharedContainerConfig(AppContainerConfig.class)
 public class PetsIT
         implements WithAssertions {
-    @Container
-    public static ApplicationContainer app =
-            new ApplicationContainer()
-                    .withAppContextRoot("/naolo-war-DEV-SNAPSHOT")
-                    .withReadinessPath("/naolo-war-DEV-SNAPSHOT/naolo/pets");
 
     @RESTClient
     public static PetResource petResource;

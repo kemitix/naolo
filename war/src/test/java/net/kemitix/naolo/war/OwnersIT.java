@@ -5,24 +5,18 @@ import net.kemitix.naolo.entities.Owner;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.microshed.testing.SharedContainerConfig;
 import org.microshed.testing.jaxrs.RESTClient;
 import org.microshed.testing.jupiter.MicroShedTest;
-import org.microshed.testing.testcontainers.ApplicationContainer;
-import org.testcontainers.junit.jupiter.Container;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 
 @MicroShedTest
+@SharedContainerConfig(AppContainerConfig.class)
 public class OwnersIT
         implements WithAssertions {
-
-    @Container
-    public static ApplicationContainer app =
-            new ApplicationContainer()
-                    .withAppContextRoot("/naolo-war-DEV-SNAPSHOT")
-                    .withReadinessPath("/naolo-war-DEV-SNAPSHOT/naolo/owners");
 
     @RESTClient
     public static OwnerResource ownerResource;
