@@ -1,20 +1,24 @@
 package net.kemitix.naolo.storage.plugins;
 
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 @ApplicationScoped
 public class OwnerRepository
-        extends AbstractEntityRepository<Owner>
-        implements EntityRepository<Owner> {
+        extends AbstractEntityRepository<Owner> {
 
+    @Inject
     public OwnerRepository(final EntityManager entityManager) {
         super(entityManager);
+    }
+
+    protected OwnerRepository() {
+        super(null);
     }
 
     @Override

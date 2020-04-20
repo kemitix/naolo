@@ -5,9 +5,12 @@ import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.Owner;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Log
 @Path(OwnerResource.PATH)
@@ -19,6 +22,15 @@ public class OwnerResource
 
     public static final String PATH = "owners";
 
+    public OwnerResource() {
+        super(null,
+                null,
+                null,
+                null,
+                null);
+    }
+
+    @Inject
     public OwnerResource(
             final ListEntityUseCase<Owner> listAll,
             final AddEntityUseCase<Owner> addEntity,
@@ -31,37 +43,40 @@ public class OwnerResource
 
     @GET
     @Override
-    public Response all() {
+    public List<Owner> all() {
         return doAll();
     }
 
     @GET
     @Path("{id}")
     @Override
-    public Response get(@PathParam("id") final long id) {
+    public Owner get(@PathParam("id") final long id) {
         return doGet(id);
     }
 
+    @Transactional
     @POST
     @Override
     public Response add(final Owner entity) {
         return doAdd(entity);
     }
 
+    @Transactional
     @PUT
     @Path("{id}")
     @Override
-    public Response update(
+    public Owner update(
             @PathParam("id") final long id,
             final Owner entity
     ) {
         return doUpdate(entity);
     }
 
+    @Transactional
     @DELETE
     @Path("{id}")
     @Override
-    public Response remove(@PathParam("id") final long id) {
+    public Owner remove(@PathParam("id") final long id) {
         return doRemove(id);
     }
 

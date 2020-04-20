@@ -41,6 +41,13 @@ public class VeterinarianRepositoryTest
     }
 
     @Test
+    @DisplayName("Has a no-args constructor")
+    public void hasNoArgsConstructor() {
+        assertThatCode(VeterinarianRepository::new)
+                .doesNotThrowAnyException();
+    }
+
+    @Test
     @DisplayName("List All invokes named query")
     public void listAll() {
         //given

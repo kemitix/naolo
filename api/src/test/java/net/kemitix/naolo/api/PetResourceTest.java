@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +40,13 @@ public class PetResourceTest
     }
 
     @Test
+    @DisplayName("Has a no-args constructor")
+    public void hasNoArgsConstructor() {
+        assertThatCode(PetResource::new)
+                .doesNotThrowAnyException();
+    }
+
+    @Test
     @DisplayName("get all pets - 200 ok")
     public void getAllPets() {
         //given
@@ -47,10 +55,9 @@ public class PetResourceTest
                 new Pet().withName("dougal"));
         given(repository.findAll()).willReturn(pets.stream());
         //when
-        final Response response = resource.all();
+        final List<Pet> response = resource.all();
         //then
-        assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_OK);
-        assertThat(response.getEntity()).isEqualTo(pets);
+        assertThat(response).isEqualTo(pets);
     }
 
     @Test
@@ -78,10 +85,9 @@ public class PetResourceTest
         final Pet pet = new Pet().withId(id);
         given(repository.find(id)).willReturn(Optional.of(pet));
         //when
-        final Response response = resource.get(id);
+        final Pet response = resource.get(id);
         //then
-        assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_OK);
-        assertThat(response.getEntity()).isEqualTo(pet);
+        assertThat(response).isEqualTo(pet);
     }
 
     @Test
@@ -91,11 +97,10 @@ public class PetResourceTest
         final long id = new Random().nextLong();
         given(repository.find(id))
                 .willReturn(Optional.empty());
-        //when
-        final Response response = resource.get(id);
         //then
-        assertThat(response.getStatus())
-                .isEqualTo(HttpServletResponse.SC_NOT_FOUND);
+        assertThatExceptionOfType(NotFoundException.class)
+                .isThrownBy(() ->
+                        resource.get(id));
     }
 
     @Test
@@ -107,10 +112,9 @@ public class PetResourceTest
         given(repository.update(pet))
                 .willReturn(Optional.of(pet));
         //when
-        final Response response = resource.update(id, pet);
+        final Pet response = resource.update(id, pet);
         //then
-        assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_OK);
-        assertThat(response.getEntity()).isEqualTo(pet);
+        assertThat(response).isEqualTo(pet);
     }
 
     @Test
@@ -121,11 +125,10 @@ public class PetResourceTest
         final Pet pet = new Pet().withId(id);
         given(repository.update(pet))
                 .willReturn(Optional.empty());
-        //when
-        final Response response = resource.update(id, pet);
         //then
-        assertThat(response.getStatus())
-                .isEqualTo(HttpServletResponse.SC_NOT_FOUND);
+        assertThatExceptionOfType(NotFoundException.class)
+                .isThrownBy(() ->
+                        resource.update(id, pet));
     }
 
     @Test
@@ -136,9 +139,9 @@ public class PetResourceTest
         final Pet pet = new Pet().withId(id);
         given(repository.remove(id)).willReturn(Optional.of(pet));
         //when
-        final Response response = resource.remove(id);
+        final Pet response = resource.remove(id);
         //then
-        assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_OK);
+        assertThat(response).isEqualTo(pet);
     }
 
     @Test
@@ -147,11 +150,10 @@ public class PetResourceTest
         //given
         final long id = new Random().nextLong();
         given(repository.remove(id)).willReturn(Optional.empty());
-        //when
-        final Response response = resource.remove(id);
         //then
-        assertThat(response.getStatus())
-                .isEqualTo(HttpServletResponse.SC_NOT_FOUND);
+        assertThatExceptionOfType(NotFoundException.class)
+                .isThrownBy(() ->
+                        resource.remove(id));
     }
 
 }

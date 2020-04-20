@@ -6,9 +6,12 @@ import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.Visit;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Log
 @Path(VisitResource.PATH)
@@ -20,6 +23,7 @@ public class VisitResource
 
     public static final String PATH = "visits";
 
+    @Inject
     public VisitResource(
             final ListEntityUseCase<Visit> listAll,
             final AddEntityUseCase<Visit> addEntity,
@@ -30,39 +34,50 @@ public class VisitResource
         super(listAll, addEntity, getEntity, updateEntity, removeEntity);
     }
 
+    public VisitResource() {
+        super(null,
+                null,
+                null,
+                null,
+                null);
+    }
+
     @GET
     @Override
-    public Response all() {
+    public List<Visit> all() {
         return doAll();
     }
 
     @GET
     @Path("{id}")
     @Override
-    public Response get(@PathParam("id") final long id) {
+    public Visit get(@PathParam("id") final long id) {
         return doGet(id);
     }
 
+    @Transactional
     @POST
     @Override
     public Response add(final Visit entity) {
         return doAdd(entity);
     }
 
+    @Transactional
     @PUT
     @Path("{id}")
     @Override
-    public Response update(
+    public Visit update(
             @PathParam("id") final long id,
             final Visit entity
     ) {
         return doUpdate(entity);
     }
 
+    @Transactional
     @DELETE
     @Path("{id}")
     @Override
-    public Response remove(@PathParam("id") final long id) {
+    public Visit remove(@PathParam("id") final long id) {
         return doRemove(id);
     }
 

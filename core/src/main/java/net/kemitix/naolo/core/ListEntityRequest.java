@@ -1,9 +1,5 @@
 package net.kemitix.naolo.core;
 
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ListEntityRequest<T>
         implements EntityUseCaseRequest<T> {
 

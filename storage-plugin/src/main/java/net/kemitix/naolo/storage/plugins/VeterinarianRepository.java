@@ -1,20 +1,24 @@
 package net.kemitix.naolo.storage.plugins;
 
 import net.kemitix.naolo.entities.Veterinarian;
-import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 @ApplicationScoped
 public class VeterinarianRepository
-        extends AbstractEntityRepository<Veterinarian>
-        implements EntityRepository<Veterinarian> {
+        extends AbstractEntityRepository<Veterinarian> {
 
+    @Inject
     public VeterinarianRepository(final EntityManager entityManager) {
         super(entityManager);
+    }
+
+    protected VeterinarianRepository() {
+        super(null);
     }
 
     @Override

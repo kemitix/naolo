@@ -14,6 +14,7 @@
         <module>storage-plugin</module>
         <module>runner-quarkus</module>
         <module>api-tests</module>
+        <module>war</module>
     </modules>
 
     <groupId>net.kemitix.naolo</groupId>
