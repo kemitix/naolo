@@ -10,7 +10,7 @@ public class AppContainerConfig
     @Container
     public static ApplicationContainer app =
             new ApplicationContainer()
-                    .withAppContextRoot("/naolo-war-DEV-SNAPSHOT")
-                    .withReadinessPath("/naolo-war-DEV-SNAPSHOT/naolo/pets");
+                    .withAppContextRoot("/naolo")
+                    .withReadinessPath("/naolo/naolo/pets");
 
 }
