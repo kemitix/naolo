@@ -27,6 +27,7 @@ import net.kemitix.naolo.entities.Veterinarian;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -79,12 +80,14 @@ public class VetResource
         return doGet(id);
     }
 
+    @Transactional
     @POST
     @Override
     public Response add(final Veterinarian entity) {
         return doAdd(entity);
     }
 
+    @Transactional
     @PUT
     @Path("{id}")
     @Override
@@ -95,6 +98,7 @@ public class VetResource
         return doUpdate(entity);
     }
 
+    @Transactional
     @DELETE
     @Path("{id}")
     @Override

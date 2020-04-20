@@ -1,13 +1,12 @@
 package net.kemitix.naolo.war;
 
-import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.entities.Pet;
-import net.kemitix.naolo.entities.PetType;
+import net.kemitix.naolo.entities.*;
 
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.Collections;
 
 public class ObjectMother {
 
@@ -34,5 +33,14 @@ public class ObjectMother {
                 .withDateOfBirth(LocalDate.of(2020, 3, 24))
                 .withType(PetType.DOG)
                 .withOwner(owner);
+    }
+
+    public static Veterinarian getNewVet() {
+        return new Veterinarian()
+                .withId(0)
+                .withName("Vets Name")
+                .withSpecialisations(Collections.singletonList(
+                        VetSpecialisation.SURGERY
+                ));
     }
 }

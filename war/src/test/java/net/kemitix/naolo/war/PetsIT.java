@@ -45,7 +45,7 @@ public class PetsIT
         final long petId = ObjectMother.getEntityId(addPetResponse);
         final Pet addedPet = newPet.withId(petId);
 
-        // get the pat
+        // get the pet
         assertThat(petResource.get(petId)).isEqualTo(addedPet);
 
         // list all pets - we have one
