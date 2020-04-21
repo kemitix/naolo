@@ -31,10 +31,6 @@
         <!-- naolo -->
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
-            <artifactId>naolo-entities</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.kemitix.naolo</groupId>
             <artifactId>naolo-storage-spi</artifactId>
         </dependency>
 
@@ -59,6 +55,11 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.jqwik</groupId>
+            <artifactId>jqwik</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
