@@ -18,8 +18,6 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor(force = true)
-@AllArgsConstructor
 public class Visit
         implements HasId {
 
@@ -28,15 +26,28 @@ public class Visit
     @Id
     @GeneratedValue
     long id;
-
     @ManyToOne
     Pet pet;
-
     @ManyToOne
     Veterinarian veterinarian;
-
     @JsonbDateFormat("yyyy-MM-dd HH:mm")
     LocalDateTime dateTime;
-
     String description;
+
+    public Visit() {
+    }
+
+    public Visit(
+            final long id,
+            final Pet pet,
+            final Veterinarian veterinarian,
+            final LocalDateTime dateTime,
+            final String description
+    ) {
+        this.id = id;
+        this.pet = pet;
+        this.veterinarian = veterinarian;
+        this.dateTime = dateTime;
+        this.description = description;
+    }
 }

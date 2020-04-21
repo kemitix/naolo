@@ -16,8 +16,6 @@ import javax.persistence.*;
 @Getter
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor(force = true)
-@AllArgsConstructor
 public class Owner
         implements HasId {
 
@@ -30,4 +28,21 @@ public class Owner
     String lastName;
     String street;
     String city;
+
+    public Owner() {
+    }
+
+    public Owner(
+            final long id,
+            final String firstName,
+            final String lastName,
+            final String street,
+            final String city
+    ) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.street = street;
+        this.city = city;
+    }
 }

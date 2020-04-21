@@ -17,8 +17,6 @@ import java.time.LocalDate;
 @Getter
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor(force = true)
-@AllArgsConstructor
 public class Pet
         implements HasId {
 
@@ -31,8 +29,24 @@ public class Pet
     @JsonbDateFormat("yyyy-MM-dd")
     LocalDate dateOfBirth;
     PetType type;
-
     @ManyToOne
     Owner owner;
+
+    public Pet() {
+    }
+
+    public Pet(
+            final long id,
+            final String name,
+            final LocalDate dateOfBirth,
+            final PetType type,
+            final Owner owner
+    ) {
+        this.id = id;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.type = type;
+        this.owner = owner;
+    }
 }
 

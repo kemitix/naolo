@@ -16,8 +16,6 @@ import java.util.List;
 @Getter
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor(force = true)
-@AllArgsConstructor
 public class Veterinarian
         implements HasId {
 
@@ -35,4 +33,17 @@ public class Veterinarian
             joinColumns = @JoinColumn(name = "vet_id"))
     @Column(name = "specialisation_id")
     List<VetSpecialisation> specialisations;
+
+    public Veterinarian() {
+    }
+
+    public Veterinarian(
+            final long id,
+            final String name,
+            final List<VetSpecialisation> specialisations
+    ) {
+        this.id = id;
+        this.name = name;
+        this.specialisations = specialisations;
+    }
 }
