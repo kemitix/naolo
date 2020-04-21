@@ -1,9 +1,9 @@
 package net.kemitix.naolo.core.owners;
 
 import lombok.Getter;
-import net.kemitix.naolo.core.AddEntityRequest;
-import net.kemitix.naolo.core.AddEntityUseCase;
 import net.kemitix.naolo.entities.Owner;
+import net.kemitix.naolo.storage.spi.AddEntityRequest;
+import net.kemitix.naolo.storage.spi.AddEntityUseCase;
 import net.kemitix.naolo.storage.spi.EntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;

@@ -22,8 +22,8 @@
 package net.kemitix.naolo.api;
 
 import lombok.extern.java.Log;
-import net.kemitix.naolo.core.*;
 import net.kemitix.naolo.entities.Veterinarian;
+import net.kemitix.naolo.storage.spi.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

@@ -1,7 +1,6 @@
 package net.kemitix.naolo.api;
 
-import net.kemitix.naolo.core.*;
-import net.kemitix.naolo.entities.HasId;
+import net.kemitix.naolo.storage.spi.*;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;

@@ -1,4 +1,4 @@
-package net.kemitix.naolo.core;
+package net.kemitix.naolo.storage.spi;
 
 public class ListEntityRequest<T>
         implements EntityUseCaseRequest<T> {

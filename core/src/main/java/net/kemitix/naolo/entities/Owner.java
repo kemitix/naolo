@@ -2,6 +2,7 @@ package net.kemitix.naolo.entities;
 
 
 import lombok.*;
+import net.kemitix.naolo.storage.spi.HasId;
 
 import javax.persistence.*;
 

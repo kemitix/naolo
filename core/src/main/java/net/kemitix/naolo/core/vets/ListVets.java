@@ -22,10 +22,10 @@
 package net.kemitix.naolo.core.vets;
 
 import lombok.Getter;
-import net.kemitix.naolo.core.ListEntityRequest;
-import net.kemitix.naolo.core.ListEntityUseCase;
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.EntityRepository;
+import net.kemitix.naolo.storage.spi.ListEntityRequest;
+import net.kemitix.naolo.storage.spi.ListEntityUseCase;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

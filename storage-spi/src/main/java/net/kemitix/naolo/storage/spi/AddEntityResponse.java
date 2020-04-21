@@ -1,4 +1,4 @@
-package net.kemitix.naolo.core;
+package net.kemitix.naolo.storage.spi;
 
 @FunctionalInterface
 public interface AddEntityResponse<T>

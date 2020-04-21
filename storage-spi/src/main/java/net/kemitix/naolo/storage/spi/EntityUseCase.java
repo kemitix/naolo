@@ -1,7 +1,4 @@
-package net.kemitix.naolo.core;
-
-import net.kemitix.naolo.entities.HasId;
-import net.kemitix.naolo.storage.spi.EntityRepository;
+package net.kemitix.naolo.storage.spi;
 
 public interface EntityUseCase<
         T extends HasId,

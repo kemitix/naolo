@@ -1,7 +1,7 @@
 package net.kemitix.naolo.storage.plugins;
 
-import net.kemitix.naolo.entities.HasId;
 import net.kemitix.naolo.storage.spi.EntityRepository;
+import net.kemitix.naolo.storage.spi.HasId;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
