@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.api;
+package net.kemitix.naolo;
 
 import lombok.extern.java.Log;
 import net.kemitix.naolo.entities.Veterinarian;

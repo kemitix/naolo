@@ -1,7 +1,7 @@
 package net.kemitix.naolo.war;
 
-import net.kemitix.naolo.api.OwnerResource;
-import net.kemitix.naolo.api.PetResource;
+import net.kemitix.naolo.OwnerResource;
+import net.kemitix.naolo.PetResource;
 import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.entities.Pet;
 import org.assertj.core.api.WithAssertions;

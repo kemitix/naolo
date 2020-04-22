@@ -1,6 +1,6 @@
 package net.kemitix.naolo.war;
 
-import net.kemitix.naolo.api.VetResource;
+import net.kemitix.naolo.VetResource;
 import net.kemitix.naolo.entities.Veterinarian;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;

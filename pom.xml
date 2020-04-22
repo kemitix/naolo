@@ -8,7 +8,6 @@
     <modules>
         <module>parent</module>
         <module>core</module>
-        <module>api</module>
         <module>runner-quarkus</module>
         <module>api-tests</module>
         <module>war</module>

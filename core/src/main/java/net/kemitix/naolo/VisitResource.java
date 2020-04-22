@@ -1,4 +1,4 @@
-package net.kemitix.naolo.api;
+package net.kemitix.naolo;
 
 
 import lombok.extern.java.Log;
