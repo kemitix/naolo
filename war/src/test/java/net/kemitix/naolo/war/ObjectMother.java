@@ -1,6 +1,7 @@
 package net.kemitix.naolo.war;
 
 import net.kemitix.naolo.entities.*;
+import net.kemitix.naolo.plugin.visits.Visit;
 
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;

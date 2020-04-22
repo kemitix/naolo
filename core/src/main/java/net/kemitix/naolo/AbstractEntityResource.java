@@ -51,7 +51,7 @@ public abstract class AbstractEntityResource<T extends HasId>
         return Response.created(location).build();
     }
 
-    abstract String getPath();
+    abstract protected String getPath();
 
     protected T doUpdate(final T entity) {
         final UpdateEntityRequest<T> request = updateEntity.request(entity);

@@ -1,7 +1,6 @@
-package net.kemitix.naolo.core.visits;
+package net.kemitix.naolo.plugin.visits;
 
 import lombok.Getter;
-import net.kemitix.naolo.entities.Visit;
 import net.kemitix.naolo.storage.AddEntityRequest;
 import net.kemitix.naolo.storage.AddEntityUseCase;
 import net.kemitix.naolo.storage.EntityRepository;

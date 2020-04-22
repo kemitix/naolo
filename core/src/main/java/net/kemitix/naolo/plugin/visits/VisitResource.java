@@ -1,8 +1,8 @@
-package net.kemitix.naolo;
+package net.kemitix.naolo.plugin.visits;
 
 
 import lombok.extern.java.Log;
-import net.kemitix.naolo.entities.Visit;
+import net.kemitix.naolo.AbstractEntityResource;
 import net.kemitix.naolo.storage.*;
 
 import javax.enterprise.context.ApplicationScoped;

@@ -1,6 +1,6 @@
-package net.kemitix.naolo.storage;
+package net.kemitix.naolo.plugin.visits;
 
-import net.kemitix.naolo.entities.Visit;
+import net.kemitix.naolo.storage.AbstractEntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

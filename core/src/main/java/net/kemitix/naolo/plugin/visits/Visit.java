@@ -1,7 +1,10 @@
-package net.kemitix.naolo.entities;
+package net.kemitix.naolo.plugin.visits;
 
 
 import lombok.*;
+import net.kemitix.naolo.entities.JPAActivityListener;
+import net.kemitix.naolo.entities.Pet;
+import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.HasId;
 
 import javax.json.bind.annotation.JsonbDateFormat;

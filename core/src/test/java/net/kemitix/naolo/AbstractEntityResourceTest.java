@@ -71,7 +71,7 @@ public class AbstractEntityResourceTest
         }
 
         @Override
-        String getPath() {
+        protected String getPath() {
             return null;
         }
 

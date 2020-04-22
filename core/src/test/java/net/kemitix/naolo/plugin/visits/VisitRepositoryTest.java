@@ -1,6 +1,5 @@
-package net.kemitix.naolo.storage;
+package net.kemitix.naolo.plugin.visits;
 
-import net.kemitix.naolo.entities.Visit;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
