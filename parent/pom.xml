@@ -34,6 +34,8 @@
         <mockito.version>3.3.3</mockito.version>
         <jqwik.version>1.2.7</jqwik.version>
         <jersey.version>2.30.1</jersey.version>
+        <microshed.version>0.8</microshed.version>
+        <slf4j.version>1.7.30</slf4j.version>
     </properties>
 
     <dependencyManagement>
@@ -48,7 +50,7 @@
             <!-- naolo -->
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
-                <artifactId>naolo-entities</artifactId>
+                <artifactId>naolo-visits</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -58,27 +60,12 @@
             </dependency>
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
-                <artifactId>naolo-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.kemitix.naolo</groupId>
-                <artifactId>gateway-data-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.kemitix.naolo</groupId>
-                <artifactId>naolo-storage-spi</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.kemitix.naolo</groupId>
-                <artifactId>naolo-storage-plugin</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.kemitix.naolo</groupId>
                 <artifactId>naolo-runner-quarkus</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kemitix.naolo</groupId>
+                <artifactId>naolo-testing</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -131,6 +118,16 @@
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-common</artifactId>
                 <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.microshed</groupId>
+                <artifactId>microshed-testing-wildfly</artifactId>
+                <version>${microshed.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
             </dependency>
         </dependencies>
 
