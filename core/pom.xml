@@ -28,12 +28,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- naolo -->
-        <dependency>
-            <groupId>net.kemitix.naolo</groupId>
-            <artifactId>naolo-storage-spi</artifactId>
-        </dependency>
-
         <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>

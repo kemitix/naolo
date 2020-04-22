@@ -2,7 +2,7 @@ package net.kemitix.naolo.api;
 
 import lombok.extern.java.Log;
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.storage.spi.*;
+import net.kemitix.naolo.storage.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

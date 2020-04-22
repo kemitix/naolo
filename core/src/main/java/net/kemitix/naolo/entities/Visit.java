@@ -2,7 +2,7 @@ package net.kemitix.naolo.entities;
 
 
 import lombok.*;
-import net.kemitix.naolo.storage.spi.HasId;
+import net.kemitix.naolo.storage.HasId;
 
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;

@@ -1,7 +1,6 @@
 package net.kemitix.naolo.storage;
 
 import net.kemitix.naolo.entities.Pet;
-import net.kemitix.naolo.storage.spi.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

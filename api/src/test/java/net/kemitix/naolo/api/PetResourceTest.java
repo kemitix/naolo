@@ -2,7 +2,7 @@ package net.kemitix.naolo.api;
 
 import net.kemitix.naolo.core.pets.*;
 import net.kemitix.naolo.entities.Pet;
-import net.kemitix.naolo.storage.spi.EntityRepository;
+import net.kemitix.naolo.storage.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
