@@ -28,17 +28,7 @@
         </dependency>
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
-            <artifactId>naolo-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.projectlombok</groupId>
-                    <artifactId>lombok</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>net.kemitix.naolo</groupId>
-            <artifactId>naolo-storage-plugin</artifactId>
+            <artifactId>naolo-core</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.projectlombok</groupId>

@@ -1,13 +1,13 @@
 package net.kemitix.naolo.core.pets;
 
-import net.kemitix.naolo.core.ListEntityRequest;
-import net.kemitix.naolo.core.ListEntityResponse;
 import net.kemitix.naolo.core.StreamZipper;
 import net.kemitix.naolo.core.Tuple;
 import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.entities.Pet;
 import net.kemitix.naolo.entities.PetType;
-import net.kemitix.naolo.storage.spi.EntityRepository;
+import net.kemitix.naolo.storage.EntityRepository;
+import net.kemitix.naolo.storage.ListEntityRequest;
+import net.kemitix.naolo.storage.ListEntityResponse;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

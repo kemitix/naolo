@@ -1,6 +1,6 @@
 package net.kemitix.naolo.war;
 
-import net.kemitix.naolo.api.OwnerResource;
+import net.kemitix.naolo.OwnerResource;
 import net.kemitix.naolo.entities.Owner;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;

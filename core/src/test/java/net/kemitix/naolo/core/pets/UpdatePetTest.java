@@ -1,7 +1,7 @@
 package net.kemitix.naolo.core.pets;
 
 import net.kemitix.naolo.entities.Pet;
-import net.kemitix.naolo.storage.spi.EntityRepository;
+import net.kemitix.naolo.storage.EntityRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

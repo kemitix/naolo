@@ -40,11 +40,7 @@
     <!-- naolo -->
     <dependency>
       <groupId>net.kemitix.naolo</groupId>
-      <artifactId>naolo-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>net.kemitix.naolo</groupId>
-      <artifactId>naolo-storage-plugin</artifactId>
+      <artifactId>naolo-core</artifactId>
     </dependency>
 
     <!-- lombok - to enable dev mode recompilation -->

@@ -1,10 +1,10 @@
 package net.kemitix.naolo.core.visits;
 
 import lombok.Getter;
-import net.kemitix.naolo.core.ListEntityRequest;
-import net.kemitix.naolo.core.ListEntityUseCase;
 import net.kemitix.naolo.entities.Visit;
-import net.kemitix.naolo.storage.spi.EntityRepository;
+import net.kemitix.naolo.storage.EntityRepository;
+import net.kemitix.naolo.storage.ListEntityRequest;
+import net.kemitix.naolo.storage.ListEntityUseCase;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

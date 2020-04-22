@@ -1,10 +1,10 @@
 package net.kemitix.naolo.core.owners;
 
 import lombok.Getter;
-import net.kemitix.naolo.core.RemoveEntityRequest;
-import net.kemitix.naolo.core.RemoveEntityUseCase;
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.storage.spi.EntityRepository;
+import net.kemitix.naolo.storage.EntityRepository;
+import net.kemitix.naolo.storage.RemoveEntityRequest;
+import net.kemitix.naolo.storage.RemoveEntityUseCase;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
