@@ -56,17 +56,17 @@ public class AbstractEntityResourceTest
         }
 
         @Override
-        List<Entity> all() {
+        public List<Entity> all() {
             return null;
         }
 
         @Override
-        Entity get(final long id) {
+        public Entity get(final long id) {
             return null;
         }
 
         @Override
-        Response add(final Entity entity) {
+        public Response add(final Entity entity) {
             return null;
         }
 
@@ -76,12 +76,12 @@ public class AbstractEntityResourceTest
         }
 
         @Override
-        Entity update(final long id, final Entity entity) {
+        public Entity update(final long id, final Entity entity) {
             return null;
         }
 
         @Override
-        Entity remove(final long id) {
+        public Entity remove(final long id) {
             return null;
         }
     }

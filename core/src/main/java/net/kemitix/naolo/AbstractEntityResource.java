@@ -8,7 +8,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.function.Supplier;
 
-public abstract class AbstractEntityResource<T extends HasId> {
+public abstract class AbstractEntityResource<T extends HasId>
+        implements EntityResource<T> {
 
     private final ListEntityUseCase<T> listAll;
     private final AddEntityUseCase<T> addEntity;
@@ -30,15 +31,11 @@ public abstract class AbstractEntityResource<T extends HasId> {
         this.removeEntity = removeEntity;
     }
 
-    abstract List<T> all();
-
     protected List<T> doAll() {
         final ListEntityRequest<T> request = listAll.request();
         final ListEntityResponse<T> response = listAll.invoke(request);
         return response.getEntities();
     }
-
-    abstract T get(final long id);
 
     protected T doGet(final long id) {
         final GetEntityRequest<T> request = getEntity.request(id);
@@ -46,8 +43,6 @@ public abstract class AbstractEntityResource<T extends HasId> {
         return response.getEntity()
                 .orElseThrow(ownerNotFound(id));
     }
-
-    abstract Response add(T entity);
 
     protected Response doAdd(final T entity) {
         final AddEntityRequest<T> request = addEntity.request(entity);
@@ -58,16 +53,12 @@ public abstract class AbstractEntityResource<T extends HasId> {
 
     abstract String getPath();
 
-    abstract T update(final long id, final T entity);
-
     protected T doUpdate(final T entity) {
         final UpdateEntityRequest<T> request = updateEntity.request(entity);
         final UpdateEntityResponse<T> response = updateEntity.invoke(request);
         return response.getEntity()
                 .orElseThrow(ownerNotFound(entity.getId()));
     }
-
-    abstract T remove(long id);
 
     protected T doRemove(final long id) {
         final RemoveEntityRequest<T> request = removeEntity.request(id);
