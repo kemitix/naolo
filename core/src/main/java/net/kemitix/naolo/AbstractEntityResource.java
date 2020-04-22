@@ -8,7 +8,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.function.Supplier;
 
-public abstract class EntityResource<T extends HasId> {
+public abstract class AbstractEntityResource<T extends HasId> {
 
     private final ListEntityUseCase<T> listAll;
     private final AddEntityUseCase<T> addEntity;
@@ -16,7 +16,7 @@ public abstract class EntityResource<T extends HasId> {
     private final UpdateEntityUseCase<T> updateEntity;
     private final RemoveEntityUseCase<T> removeEntity;
 
-    protected EntityResource(
+    protected AbstractEntityResource(
             final ListEntityUseCase<T> listAll,
             final AddEntityUseCase<T> addEntity,
             final GetEntityUseCase<T> getEntity,

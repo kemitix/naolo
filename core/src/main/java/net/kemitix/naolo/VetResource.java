@@ -44,7 +44,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 public class VetResource
-        extends EntityResource<Veterinarian> {
+        extends AbstractEntityResource<Veterinarian> {
 
     public static final String PATH = "vets";
 

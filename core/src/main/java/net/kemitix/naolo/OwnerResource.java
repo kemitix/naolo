@@ -18,7 +18,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 public class OwnerResource
-        extends EntityResource<Owner> {
+        extends AbstractEntityResource<Owner> {
 
     public static final String PATH = "owners";
 

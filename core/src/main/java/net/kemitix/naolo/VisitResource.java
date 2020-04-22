@@ -19,7 +19,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 public class VisitResource
-        extends EntityResource<Visit> {
+        extends AbstractEntityResource<Visit> {
 
     public static final String PATH = "visits";
 

@@ -18,7 +18,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 public class PetResource
-        extends EntityResource<Pet> {
+        extends AbstractEntityResource<Pet> {
 
     public static final String PATH = "pets";
 

@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-public class EntityResourceTest
+public class AbstractEntityResourceTest
         implements WithAssertions {
 
 
@@ -22,7 +22,7 @@ public class EntityResourceTest
     private final UpdateEntityUseCase<Entity> updateEntity;
     private final RemoveEntityUseCase<Entity> removeEntity;
 
-    public EntityResourceTest(
+    public AbstractEntityResourceTest(
             @Mock final ListEntityUseCase<Entity> listAll,
             @Mock final AddEntityUseCase<Entity> addEntity,
             @Mock final GetEntityUseCase<Entity> getEntity,
@@ -44,7 +44,7 @@ public class EntityResourceTest
     }
 
     private class FakeResource
-            extends EntityResource<Entity> {
+            extends AbstractEntityResource<Entity> {
 
         protected FakeResource() {
             super(
