@@ -1,4 +1,4 @@
-package net.kemitix.naolo.storage.plugins;
+package net.kemitix.naolo.storage;
 
 import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.spi.EntityRepository;

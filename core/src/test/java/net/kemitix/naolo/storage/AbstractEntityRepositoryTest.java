@@ -1,4 +1,4 @@
-package net.kemitix.naolo.storage.plugins;
+package net.kemitix.naolo.storage;
 
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +31,7 @@ public class AbstractEntityRepositoryTest
     }
 
     private class FakeRepository
-            extends AbstractEntityRepository<Entity>{
+            extends AbstractEntityRepository<Entity> {
         private FakeRepository() {
             super(entityManager);
         }
