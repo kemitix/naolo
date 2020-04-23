@@ -9,6 +9,7 @@
         <module>parent</module>
         <module>testing</module>
         <module>core</module>
+        <module>visits</module>
         <module>runner-quarkus</module>
         <module>api-tests</module>
         <module>war</module>
