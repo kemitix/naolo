@@ -2,10 +2,10 @@ package net.kemitix.naolo.pets;
 
 import net.kemitix.naolo.core.StreamZipper;
 import net.kemitix.naolo.core.Tuple;
+import net.kemitix.naolo.core.jpa.EntityRepository;
+import net.kemitix.naolo.core.jpa.ListEntityRequest;
+import net.kemitix.naolo.core.jpa.ListEntityResponse;
 import net.kemitix.naolo.owners.Owner;
-import net.kemitix.naolo.storage.EntityRepository;
-import net.kemitix.naolo.storage.ListEntityRequest;
-import net.kemitix.naolo.storage.ListEntityResponse;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -22,8 +22,8 @@
 package net.kemitix.naolo.vets;
 
 import lombok.extern.java.Log;
-import net.kemitix.naolo.AbstractEntityResource;
-import net.kemitix.naolo.storage.*;
+import net.kemitix.naolo.core.AbstractEntityResource;
+import net.kemitix.naolo.core.jpa.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

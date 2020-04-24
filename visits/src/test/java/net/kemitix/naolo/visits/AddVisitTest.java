@@ -1,7 +1,7 @@
 package net.kemitix.naolo.visits;
 
+import net.kemitix.naolo.core.jpa.EntityRepository;
 import net.kemitix.naolo.pets.Pet;
-import net.kemitix.naolo.storage.EntityRepository;
 import net.kemitix.naolo.vets.Veterinarian;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;

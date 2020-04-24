@@ -1,9 +1,9 @@
 package net.kemitix.naolo.vets;
 
 import lombok.Getter;
-import net.kemitix.naolo.storage.AddEntityRequest;
-import net.kemitix.naolo.storage.AddEntityUseCase;
-import net.kemitix.naolo.storage.EntityRepository;
+import net.kemitix.naolo.core.jpa.AddEntityRequest;
+import net.kemitix.naolo.core.jpa.AddEntityUseCase;
+import net.kemitix.naolo.core.jpa.EntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

@@ -1,9 +1,9 @@
 package net.kemitix.naolo.pets;
 
 import lombok.Getter;
-import net.kemitix.naolo.storage.EntityRepository;
-import net.kemitix.naolo.storage.ListEntityRequest;
-import net.kemitix.naolo.storage.ListEntityUseCase;
+import net.kemitix.naolo.core.jpa.EntityRepository;
+import net.kemitix.naolo.core.jpa.ListEntityRequest;
+import net.kemitix.naolo.core.jpa.ListEntityUseCase;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

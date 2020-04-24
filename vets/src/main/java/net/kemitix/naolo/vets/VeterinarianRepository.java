@@ -1,6 +1,6 @@
 package net.kemitix.naolo.vets;
 
-import net.kemitix.naolo.storage.AbstractEntityRepository;
+import net.kemitix.naolo.core.jpa.AbstractEntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

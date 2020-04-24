@@ -1,9 +1,9 @@
 package net.kemitix.naolo.visits;
 
 import lombok.Getter;
-import net.kemitix.naolo.storage.EntityRepository;
-import net.kemitix.naolo.storage.RemoveEntityRequest;
-import net.kemitix.naolo.storage.RemoveEntityUseCase;
+import net.kemitix.naolo.core.jpa.EntityRepository;
+import net.kemitix.naolo.core.jpa.RemoveEntityRequest;
+import net.kemitix.naolo.core.jpa.RemoveEntityUseCase;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
