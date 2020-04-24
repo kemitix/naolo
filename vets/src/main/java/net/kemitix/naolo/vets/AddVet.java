@@ -1,7 +1,6 @@
-package net.kemitix.naolo.core.vets;
+package net.kemitix.naolo.vets;
 
 import lombok.Getter;
-import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.AddEntityRequest;
 import net.kemitix.naolo.storage.AddEntityUseCase;
 import net.kemitix.naolo.storage.EntityRepository;

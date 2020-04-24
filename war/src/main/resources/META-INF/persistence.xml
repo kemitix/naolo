@@ -4,7 +4,7 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <persistence-unit name="naolo" transaction-type="JTA">
-        <class>net.kemitix.naolo.entities.Veterinarian</class>
+        <class>net.kemitix.naolo.vets.Veterinarian</class>
         <class>net.kemitix.naolo.owners.Owner</class>
         <class>net.kemitix.naolo.pets.Pet</class>
         <class>net.kemitix.naolo.plugin.visits.Visit</class>

@@ -1,8 +1,5 @@
-package net.kemitix.naolo;
+package net.kemitix.naolo.vets;
 
-import net.kemitix.naolo.core.vets.*;
-import net.kemitix.naolo.entities.VetSpecialisation;
-import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.storage.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;

@@ -19,10 +19,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo;
+package net.kemitix.naolo.vets;
 
 import lombok.extern.java.Log;
-import net.kemitix.naolo.entities.Veterinarian;
+import net.kemitix.naolo.AbstractEntityResource;
 import net.kemitix.naolo.storage.*;
 
 import javax.enterprise.context.ApplicationScoped;

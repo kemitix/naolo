@@ -3,9 +3,9 @@ package net.kemitix.naolo.plugin.visits;
 
 import lombok.*;
 import net.kemitix.naolo.entities.JPAActivityListener;
-import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.pets.Pet;
 import net.kemitix.naolo.storage.HasId;
+import net.kemitix.naolo.vets.Veterinarian;
 
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
