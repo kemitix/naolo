@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>net.kemitix.naolo</groupId>
+        <artifactId>naolo-parent</artifactId>
+        <version>DEV-SNAPSHOT</version>
+        <relativePath>../parent</relativePath>
+    </parent>
+
+    <artifactId>naolo-vets</artifactId>
+
+    <properties>
+        <jacoco-class-instruction-covered-ratio>65%</jacoco-class-instruction-covered-ratio>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>naolo-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>naolo-testing</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
