@@ -1,4 +1,4 @@
-package net.kemitix.naolo.entities;
+package net.kemitix.naolo.owners;
 
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;

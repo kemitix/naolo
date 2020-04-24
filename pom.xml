@@ -11,6 +11,7 @@
         <module>core</module>
         <module>visits</module>
         <module>pets</module>
+        <module>owners</module>
         <module>runner-quarkus</module>
         <module>api-tests</module>
         <module>war</module>

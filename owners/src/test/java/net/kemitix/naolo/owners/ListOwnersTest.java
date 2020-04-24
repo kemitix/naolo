@@ -1,8 +1,7 @@
-package net.kemitix.naolo.core.owners;
+package net.kemitix.naolo.owners;
 
 import net.kemitix.naolo.core.StreamZipper;
 import net.kemitix.naolo.core.Tuple;
-import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.storage.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;

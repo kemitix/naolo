@@ -1,8 +1,8 @@
 package net.kemitix.naolo.war;
 
-import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.entities.VetSpecialisation;
 import net.kemitix.naolo.entities.Veterinarian;
+import net.kemitix.naolo.owners.Owner;
 import net.kemitix.naolo.pets.Pet;
 import net.kemitix.naolo.pets.PetType;
 import net.kemitix.naolo.plugin.visits.Visit;

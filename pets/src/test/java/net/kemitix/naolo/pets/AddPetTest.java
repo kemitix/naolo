@@ -1,6 +1,6 @@
 package net.kemitix.naolo.pets;
 
-import net.kemitix.naolo.entities.Owner;
+import net.kemitix.naolo.owners.Owner;
 import net.kemitix.naolo.storage.EntityRepository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;

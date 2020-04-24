@@ -1,9 +1,9 @@
 package net.kemitix.naolo.war;
 
-import net.kemitix.naolo.OwnerResource;
 import net.kemitix.naolo.VetResource;
-import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.entities.Veterinarian;
+import net.kemitix.naolo.owners.Owner;
+import net.kemitix.naolo.owners.OwnerResource;
 import net.kemitix.naolo.pets.Pet;
 import net.kemitix.naolo.pets.PetResource;
 import net.kemitix.naolo.plugin.visits.Visit;

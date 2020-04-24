@@ -1,7 +1,8 @@
-package net.kemitix.naolo.entities;
+package net.kemitix.naolo.owners;
 
 
 import lombok.*;
+import net.kemitix.naolo.entities.JPAActivityListener;
 import net.kemitix.naolo.storage.HasId;
 
 import javax.persistence.*;

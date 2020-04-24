@@ -34,6 +34,16 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>net.kemitix.naolo</groupId>
+            <artifactId>naolo-owners</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <!-- testing -->
         <dependency>

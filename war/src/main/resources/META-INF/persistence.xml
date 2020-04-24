@@ -5,7 +5,7 @@
              version="2.2">
     <persistence-unit name="naolo" transaction-type="JTA">
         <class>net.kemitix.naolo.entities.Veterinarian</class>
-        <class>net.kemitix.naolo.entities.Owner</class>
+        <class>net.kemitix.naolo.owners.Owner</class>
         <class>net.kemitix.naolo.pets.Pet</class>
         <class>net.kemitix.naolo.plugin.visits.Visit</class>
         <properties>

@@ -1,7 +1,6 @@
-package net.kemitix.naolo.core.owners;
+package net.kemitix.naolo.owners;
 
 import lombok.Getter;
-import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.storage.AddEntityRequest;
 import net.kemitix.naolo.storage.AddEntityUseCase;
 import net.kemitix.naolo.storage.EntityRepository;

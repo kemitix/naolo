@@ -1,6 +1,6 @@
-package net.kemitix.naolo.storage;
+package net.kemitix.naolo.owners;
 
-import net.kemitix.naolo.entities.Owner;
+import net.kemitix.naolo.storage.AbstractEntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -17,7 +17,7 @@ public class OwnerRepository
         super(entityManager);
     }
 
-    protected OwnerRepository() {
+    public OwnerRepository() {
         super(null);
     }
 

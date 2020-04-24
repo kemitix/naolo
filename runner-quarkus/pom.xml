@@ -42,6 +42,10 @@
       <groupId>net.kemitix.naolo</groupId>
       <artifactId>naolo-visits</artifactId>
     </dependency>
+    <dependency>
+      <groupId>net.kemitix.naolo</groupId>
+      <artifactId>naolo-owners</artifactId>
+    </dependency>
 
     <!-- lombok - to enable dev mode recompilation -->
     <dependency>

@@ -4,15 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>naolo-parent</artifactId>
         <groupId>net.kemitix.naolo</groupId>
+        <artifactId>naolo-parent</artifactId>
         <version>DEV-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
+        <relativePath>../parent</relativePath>
     </parent>
-    <artifactId>naolo-visits</artifactId>
+
+    <artifactId>naolo-owners</artifactId>
 
     <properties>
-        <jacoco-class-instruction-covered-ratio>67%</jacoco-class-instruction-covered-ratio>
+        <jacoco-class-instruction-covered-ratio>66%</jacoco-class-instruction-covered-ratio>
     </properties>
 
     <dependencies>
@@ -23,11 +24,7 @@
         </dependency>
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
-            <artifactId>naolo-pets</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.kemitix.naolo</groupId>
-            <artifactId>naolo-owners</artifactId>
+            <artifactId>naolo-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -35,7 +32,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Testing -->
+        <!-- testing -->
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>naolo-testing</artifactId>
