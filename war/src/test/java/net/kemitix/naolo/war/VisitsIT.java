@@ -1,13 +1,13 @@
 package net.kemitix.naolo.war;
 
-import net.kemitix.naolo.VetResource;
-import net.kemitix.naolo.entities.Veterinarian;
 import net.kemitix.naolo.owners.Owner;
 import net.kemitix.naolo.owners.OwnerResource;
 import net.kemitix.naolo.pets.Pet;
 import net.kemitix.naolo.pets.PetResource;
-import net.kemitix.naolo.plugin.visits.Visit;
-import net.kemitix.naolo.plugin.visits.VisitResource;
+import net.kemitix.naolo.vets.VetResource;
+import net.kemitix.naolo.vets.Veterinarian;
+import net.kemitix.naolo.visits.Visit;
+import net.kemitix.naolo.visits.VisitResource;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

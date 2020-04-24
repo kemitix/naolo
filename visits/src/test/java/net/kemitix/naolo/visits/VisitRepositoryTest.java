@@ -1,4 +1,4 @@
-package net.kemitix.naolo.plugin.visits;
+package net.kemitix.naolo.visits;
 
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;

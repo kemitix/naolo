@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
-            <artifactId>naolo-owners</artifactId>
+            <artifactId>naolo-vets</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

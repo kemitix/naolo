@@ -1,5 +1,4 @@
-package net.kemitix.naolo.plugin.visits;
-
+package net.kemitix.naolo.visits;
 
 import lombok.*;
 import net.kemitix.naolo.entities.JPAActivityListener;

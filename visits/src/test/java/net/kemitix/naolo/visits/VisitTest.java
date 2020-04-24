@@ -1,4 +1,4 @@
-package net.kemitix.naolo.plugin.visits;
+package net.kemitix.naolo.visits;
 
 import net.kemitix.naolo.pets.Pet;
 import net.kemitix.naolo.vets.Veterinarian;
