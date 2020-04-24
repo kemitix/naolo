@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.kemitix.naolo.entities;
+package net.kemitix.naolo.pets;
 
 /**
  * The type of Pet.
@@ -31,6 +31,6 @@ public enum PetType {
     DOG,
     CAT,
     SNAKE,
-    OTHER;
+    OTHER
 
 }

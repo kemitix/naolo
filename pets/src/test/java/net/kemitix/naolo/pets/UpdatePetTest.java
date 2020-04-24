@@ -1,6 +1,5 @@
-package net.kemitix.naolo.core.pets;
+package net.kemitix.naolo.pets;
 
-import net.kemitix.naolo.entities.Pet;
 import net.kemitix.naolo.storage.EntityRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

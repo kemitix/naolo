@@ -1,6 +1,10 @@
 package net.kemitix.naolo.war;
 
-import net.kemitix.naolo.entities.*;
+import net.kemitix.naolo.entities.Owner;
+import net.kemitix.naolo.entities.VetSpecialisation;
+import net.kemitix.naolo.entities.Veterinarian;
+import net.kemitix.naolo.pets.Pet;
+import net.kemitix.naolo.pets.PetType;
 import net.kemitix.naolo.plugin.visits.Visit;
 
 import javax.ws.rs.core.HttpHeaders;

@@ -6,7 +6,7 @@
     <persistence-unit name="naolo" transaction-type="JTA">
         <class>net.kemitix.naolo.entities.Veterinarian</class>
         <class>net.kemitix.naolo.entities.Owner</class>
-        <class>net.kemitix.naolo.entities.Pet</class>
+        <class>net.kemitix.naolo.pets.Pet</class>
         <class>net.kemitix.naolo.plugin.visits.Visit</class>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

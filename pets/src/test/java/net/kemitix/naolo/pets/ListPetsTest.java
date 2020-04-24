@@ -1,10 +1,8 @@
-package net.kemitix.naolo.core.pets;
+package net.kemitix.naolo.pets;
 
 import net.kemitix.naolo.core.StreamZipper;
 import net.kemitix.naolo.core.Tuple;
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.entities.Pet;
-import net.kemitix.naolo.entities.PetType;
 import net.kemitix.naolo.storage.EntityRepository;
 import net.kemitix.naolo.storage.ListEntityRequest;
 import net.kemitix.naolo.storage.ListEntityResponse;

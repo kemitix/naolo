@@ -1,7 +1,7 @@
-package net.kemitix.naolo;
+package net.kemitix.naolo.pets;
 
 import lombok.extern.java.Log;
-import net.kemitix.naolo.entities.Pet;
+import net.kemitix.naolo.AbstractEntityResource;
 import net.kemitix.naolo.storage.*;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -23,7 +23,7 @@ public class PetResource
     public static final String PATH = "pets";
 
     @Inject
-    protected PetResource(
+    public PetResource(
             final ListEntityUseCase<Pet> listAll,
             final AddEntityUseCase<Pet> addEntity,
             final GetEntityUseCase<Pet> getEntity,

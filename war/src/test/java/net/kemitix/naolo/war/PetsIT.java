@@ -1,9 +1,9 @@
 package net.kemitix.naolo.war;
 
 import net.kemitix.naolo.OwnerResource;
-import net.kemitix.naolo.PetResource;
 import net.kemitix.naolo.entities.Owner;
-import net.kemitix.naolo.entities.Pet;
+import net.kemitix.naolo.pets.Pet;
+import net.kemitix.naolo.pets.PetResource;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

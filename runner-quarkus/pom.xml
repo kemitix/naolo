@@ -40,10 +40,6 @@
     <!-- naolo -->
     <dependency>
       <groupId>net.kemitix.naolo</groupId>
-      <artifactId>naolo-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>net.kemitix.naolo</groupId>
       <artifactId>naolo-visits</artifactId>
     </dependency>
 

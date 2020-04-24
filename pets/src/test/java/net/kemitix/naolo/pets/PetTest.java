@@ -1,5 +1,6 @@
-package net.kemitix.naolo.entities;
+package net.kemitix.naolo.pets;
 
+import net.kemitix.naolo.entities.Owner;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

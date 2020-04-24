@@ -1,6 +1,8 @@
-package net.kemitix.naolo.entities;
+package net.kemitix.naolo.pets;
 
 import lombok.*;
+import net.kemitix.naolo.entities.JPAActivityListener;
+import net.kemitix.naolo.entities.Owner;
 import net.kemitix.naolo.storage.HasId;
 
 import javax.json.bind.annotation.JsonbDateFormat;

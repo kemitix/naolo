@@ -1,7 +1,6 @@
-package net.kemitix.naolo.core.pets;
+package net.kemitix.naolo.pets;
 
 import lombok.Getter;
-import net.kemitix.naolo.entities.Pet;
 import net.kemitix.naolo.storage.EntityRepository;
 import net.kemitix.naolo.storage.RemoveEntityRequest;
 import net.kemitix.naolo.storage.RemoveEntityUseCase;

@@ -55,6 +55,11 @@
             </dependency>
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
+                <artifactId>naolo-pets</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kemitix.naolo</groupId>
                 <artifactId>naolo-core</artifactId>
                 <version>${project.version}</version>
             </dependency>

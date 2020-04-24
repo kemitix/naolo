@@ -1,6 +1,6 @@
-package net.kemitix.naolo.storage;
+package net.kemitix.naolo.pets;
 
-import net.kemitix.naolo.entities.Pet;
+import net.kemitix.naolo.storage.AbstractEntityRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -10,14 +10,14 @@ import java.util.stream.Stream;
 
 @ApplicationScoped
 public class PetRepository
-        extends AbstractEntityRepository<Pet>{
+        extends AbstractEntityRepository<Pet> {
 
     @Inject
     public PetRepository(final EntityManager entityManager) {
         super(entityManager);
     }
 
-    protected PetRepository() {
+    public PetRepository() {
         super(null);
     }
 
