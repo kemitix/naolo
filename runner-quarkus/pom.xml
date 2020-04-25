@@ -40,7 +40,7 @@
     <!-- naolo -->
     <dependency>
       <groupId>net.kemitix.naolo</groupId>
-      <artifactId>naolo-visits</artifactId>
+      <artifactId>naolo-webui</artifactId>
     </dependency>
 
     <!-- lombok - to enable dev mode recompilation -->

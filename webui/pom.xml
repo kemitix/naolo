@@ -16,6 +16,12 @@
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>naolo-visits</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
