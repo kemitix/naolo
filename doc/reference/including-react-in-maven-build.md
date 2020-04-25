@@ -56,10 +56,12 @@ We need to tell Maven to do two things for us:
 In your pom.xml locate or create the project > properties section and add the following properties:
 
 ```xml
-<frontend-src-dir>${project.basedir}/src/main/app</frontend-src-dir>
-<node.version>v12.3.1</node.version>
-<yarn.version>v1.16.0</yarn.version>
-<frontend-maven-plugin.version>1.7.6</frontend-maven-plugin.version>
+<properties>
+    <frontend-src-dir>${project.basedir}/src/main/app</frontend-src-dir>
+    <node.version>v12.3.1</node.version>
+    <yarn.version>v1.16.0</yarn.version>
+    <frontend-maven-plugin.version>1.7.6</frontend-maven-plugin.version>
+</properties>
 ```
 > **NOTE**: Be sure to use the latest version of each item listed above since the versions shown here are only for example purposes.
 
