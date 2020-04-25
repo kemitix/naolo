@@ -170,6 +170,7 @@
                         <tile>net.kemitix.tiles:coverage:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.tiles:pitest:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.checkstyle:tile:${kemitix-checkstyle.version}</tile>
+                        <tile>net.kemitix.naolo:naolo-tile-webui:${project.version}</tile>
                     </tiles>
                 </configuration>
             </plugin>
