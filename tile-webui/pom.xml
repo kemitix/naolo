@@ -3,12 +3,8 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>net.kemitix.naolo</groupId>
-        <artifactId>naolo-parent</artifactId>
-        <version>DEV-SNAPSHOT</version>
-        <relativePath>../parent</relativePath>
-    </parent>
+    <groupId>net.kemitix.naolo</groupId>
+    <version>DEV-SNAPSHOT</version>
 
     <artifactId>naolo-tile-webui</artifactId>
     <packaging>tile</packaging>

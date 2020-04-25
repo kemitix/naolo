@@ -19,6 +19,8 @@
         <pitest.skip>true</pitest.skip>
         <jacoco-class-instruction-covered-ratio>0</jacoco-class-instruction-covered-ratio>
         <jacoco-class-line-covered-ratio>0.66</jacoco-class-line-covered-ratio>
+        <skip.npm>false</skip.npm>
+        <skip.yarn>false</skip.yarn>
     </properties>
 
     <dependencies>
