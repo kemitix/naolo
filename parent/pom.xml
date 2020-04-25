@@ -36,9 +36,6 @@
         <jersey.version>2.30.1</jersey.version>
         <microshed.version>0.8</microshed.version>
         <slf4j.version>1.7.30</slf4j.version>
-
-        <skip.npm>true</skip.npm>
-        <skip.yarn>true</skip.yarn>
     </properties>
 
     <dependencyManagement>
@@ -84,11 +81,6 @@
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
                 <artifactId>naolo-testing</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.kemitix.naolo</groupId>
-                <artifactId>naolo-tile-webui</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -173,7 +165,6 @@
                         <tile>net.kemitix.tiles:coverage:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.tiles:pitest:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.checkstyle:tile:${kemitix-checkstyle.version}</tile>
-                        <tile>net.kemitix.naolo:naolo-tile-webui:${project.version}</tile>
                     </tiles>
                 </configuration>
             </plugin>
