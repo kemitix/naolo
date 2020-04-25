@@ -83,6 +83,11 @@
                 <artifactId>naolo-testing</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>net.kemitix.naolo</groupId>
+                <artifactId>naolo-tile-webui</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- lombok -->
             <dependency>
