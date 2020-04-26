@@ -11,6 +11,6 @@ public class AppContainerConfig
     public static ApplicationContainer app =
             new ApplicationContainer()
                     .withAppContextRoot("/naolo")
-                    .withReadinessPath("/naolo/pets");
+                    .withReadinessPath("/naolo/api/pets");
 
 }
