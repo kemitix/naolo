@@ -7,19 +7,27 @@ interface NavItemProps {
 }
 
 const NavItem = (props: NavItemProps) => {
+
+    const navItemStyle = "f4 fw7 dib pa2 no-underline";
+    const enabledStyle = "bg-animate bg-white hover-bg-light-blue black";
+    const disabledStyle = "bg-near-white gray";
+
     const enabledItem = (
-        <a href={props.uri} className="f4 fw7 dib pa2 no-underline bg-animate bg-white hover-bg-light-blue black">
+        <a href={props.uri} className={enabledStyle + " " + navItemStyle}>
             {props.label}
         </a>);
     const disabledItem = (
-        <span className="f4 fw7 dib pa2 no-underline bg-near-white gray">
+        <span className={disabledStyle + " " + navItemStyle}>
             {props.label}
         </span>
     );
-    return(
+    return (
         <li className="pa4 lh-copy">
-            {props.enabled ? enabledItem : disabledItem }
+            {props.enabled
+                ? enabledItem
+                : disabledItem}
         </li>
-    )};
+    );
+};
 
 export default NavItem;
