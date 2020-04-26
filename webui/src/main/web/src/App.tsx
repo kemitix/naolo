@@ -7,14 +7,14 @@ import Footer from "./components/Footer";
 import "tachyons/css/tachyons.min.css";
 
 const App = () => (
-  <div className="App">
-    <Header />
-    <div className="cf">
-        <Navigation />
-        <MainBody />
+    <div className="App">
+        <Header/>
+        <div className="cf">
+            <Navigation/>
+            <MainBody/>
+        </div>
+        <Footer/>
     </div>
-    <Footer />
-  </div>
 );
 
 export default App;
