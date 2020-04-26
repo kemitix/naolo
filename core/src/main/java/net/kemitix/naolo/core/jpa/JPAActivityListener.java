@@ -36,7 +36,7 @@ public class JPAActivityListener {
     }
     @PostRemove
     public void postRemove(final Object object) {
-        log.info("PostRemvoe: " + object);
+        log.info("PostRemove: " + object);
     }
     @PostLoad
     public void postLoad(final Object object) {
