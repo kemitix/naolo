@@ -4,3 +4,4 @@
 /yarn.lock
 /dist
 /node
+/tools/db.json
