@@ -1,8 +1,8 @@
 import React from "react";
+import {NavigationItem} from "./Navigation";
 
 interface NavItemProps {
-    label: string;
-    enabled: boolean;
+    item: NavigationItem;
     uri: string
 }
 
@@ -14,19 +14,21 @@ const NavItem = (props: NavItemProps) => {
 
     const enabledItem = (
         <a href={props.uri} className={enabledStyle + " " + navItemStyle}>
-            {props.label}
+            <img src={props.item.enabledIcon} alt=""/>
+            {props.item.name}
         </a>);
     const disabledItem = (
         <span className={disabledStyle + " " + navItemStyle}>
-            {props.label}
+            <img src={props.item.disabledIcon}/>
+            {props.item.name}
         </span>
     );
     return (
-        <li className="pa4 lh-copy">
-            {props.enabled
+        <div className="pa4 lh-copy">
+            {props.item.enabled
                 ? enabledItem
                 : disabledItem}
-        </li>
+        </div>
     );
 };
 

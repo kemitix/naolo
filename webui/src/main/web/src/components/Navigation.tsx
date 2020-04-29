@@ -1,15 +1,47 @@
 import React from "react";
 import NavItem from "./NavItem";
 
-const Navigation = () => (
-    <nav className="fl w-20 bg-near-white tc">
-        <div>Navigation side bar</div>
-        <ul>
-            <NavItem key={1} label="item 1" enabled={true} uri="/item1/"/>
-            <NavItem key={2} label="item 2" enabled={false} uri="/item2/"/>
-            <NavItem key={3} label="item 3" enabled={true} uri="/item3/"/>
-        </ul>
-    </nav>
-);
+export interface NavigationItem {
+    description: string,
+    disabledIcon: string,
+    enabled: boolean,
+    enabledIcon: string,
+    name: string,
+    slug: string,
+    weight: number
+}
+
+interface Feature {
+    description: string,
+    name: string,
+    slug: string,
+    weight: number,
+    navigationItems: Array<NavigationItem>
+}
+
+export interface NavigationProps {
+    features: Array<Feature>,
+    api: string
+}
+
+const Navigation = (props: NavigationProps) => {
+    return (
+        <nav className="fl w-20 bg-near-white tc">
+            <div>Navigation side bar</div>
+            {props.features.map(feature =>
+                feature.navigationItems.map(item => {
+                    const slug = feature.slug + '/' + item.slug;
+                    const uri = [props.api, slug].join('/');
+                    return (
+                        <NavItem key={slug}
+                                 item={item}
+                                 uri={uri}
+                        />
+                    );
+                })
+            )}
+        </nav>
+    );
+};
 
 export default Navigation;
