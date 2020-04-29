@@ -38,6 +38,13 @@ public class FeatureResourceTest
     }
 
     @Test
+    @DisplayName("Has a no-args constructor")
+    public void hasNoArgsConstructor() {
+        assertThatCode(FeatureResource::new)
+                .doesNotThrowAnyException();
+    }
+
+    @Test
     @DisplayName("Get a list of features")
     public void getListOfFeatures() {
         //given
