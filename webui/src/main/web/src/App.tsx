@@ -6,7 +6,7 @@ import MainBody from "./components/MainBody";
 import Footer from "./components/Footer";
 import "tachyons/css/tachyons.min.css";
 
-const API_SERVER = "http://localhost:8080";
+const API_SERVER = "http://localhost:8080/naolo/api";
 
 const App = () => {
     const [features, setFeatures] = useState([]);
