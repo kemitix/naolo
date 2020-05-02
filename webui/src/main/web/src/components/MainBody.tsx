@@ -1,12 +1,12 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-import FeatureItem from "./FeatureItem";
+import ManageItems from "./ManageItems";
 
 const MainBody = () => (
     <div className="fl w-80 bg-light-gray tc">
         <Switch>
-            <Route path="/:feature/:item">
-                <FeatureItem/>
+            <Route path="/:feature/manage">
+                <ManageItems/>
             </Route>
         </Switch>
     </div>

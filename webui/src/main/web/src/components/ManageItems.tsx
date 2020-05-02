@@ -1,14 +1,14 @@
 import React from "react";
 import {useParams} from "react-router-dom";
 
-const FeatureItem = () => {
-    const {feature, item} = useParams();
+const ManageItems = () => {
+    const {feature} = useParams();
     return (
         <>
             <p>feature: {feature}</p>
-            <p>item: {item}</p>
+            <p>item: manage</p>
         </>
     );
 };
 
-export default FeatureItem;
+export default ManageItems;
