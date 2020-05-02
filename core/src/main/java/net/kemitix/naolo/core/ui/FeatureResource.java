@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,9 @@ public class FeatureResource {
     public FeatureResource(
             final Instance<Feature> features
     ) {
-        this.features = features.stream().collect(Collectors.toList());
+        this.features = features.stream()
+                .sorted(Comparator.comparingInt(Feature::getWeight))
+                .collect(Collectors.toList());
     }
 
     @GET
