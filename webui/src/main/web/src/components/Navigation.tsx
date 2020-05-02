@@ -28,7 +28,6 @@ export interface NavigationProps {
 const Navigation = (props: NavigationProps) => {
     return (
         <nav className="fl w-20 bg-near-white tc">
-            <div>Navigation side bar</div>
             {props.features.map(feature =>
                 feature.navigationItems.map(item => {
                     const slug = feature.slug + '/' + item.slug;
