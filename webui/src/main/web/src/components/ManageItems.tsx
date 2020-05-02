@@ -1,66 +1,54 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link, Route, Switch, useParams, useRouteMatch} from "react-router-dom";
+import ItemList from "./ItemList";
 
+const SERVER_URI = "http://localhost:8080/naolo";
+
+const DUMMY_FIELDS = [
+    {label: "Name", key: "name"},
+    {label: "Other", key: "other"}
+];
+const DUMMY_DATA = [
+    {id: 1, values: {name: "Bob", other: 34}},
+    {id: 2, values: {name: "Adam", other: 42}}
+];
+const BUTTON_STYLE = "w-25 f6 link dim ph3 pv2 mb2 dib white bg-near-black";
 const ManageItems = () => {
-    const {feature} = useParams();
     const {path, url} = useRouteMatch();
-    const buttonStyle = "w-25 f6 link dim ph3 pv2 mb2 dib white bg-near-black";
-    const tableStyle = "f6 w-100 mw8 center";
-    const thStyle = "fw6 tl pa3 bg-white";
-    const fields = [
-        {label: "Name", key: "name"},
-        {label: "Other", key: "other"}
-    ];
-    const data = [
-        {id: 1, name: "Bob", other: 34},
-        {id: 2, name: "Adam", other: 42}
-    ];
+    const {feature} = useParams();
 
-    function propValue(obj: object, property: string) {
-        return Object.entries(obj)
-            .filter((v, i, a) =>
-                v[0] == property)
-            .map((v, i, a) =>
-                v[1]);
-    }
+    const [fields, setFields] = useState(DUMMY_FIELDS);
+    const [data, setData] = useState(DUMMY_DATA);
+
+    useEffect(() => {
+        fetch(`${SERVER_URI}/api/${feature}/fields`)
+            .then(response => response.json())
+            .then(_fields => setFields(_fields));
+        fetch(`${SERVER_URI}/api/${feature}`)
+            .then(response => response.json())
+            .then(rows => {
+                const d = [];
+                let id = 0;
+                for (let rowsKey in rows) {
+                    d.push({id: id, values: rows[rowsKey]});
+                }
+                return d;
+            })
+            .then(_data => setData(_data));
+    }, [feature]);
 
     return (
-        <>
-            <Switch>
-                <Route exact path={path}>
-                    <div className="cf">
-                        <Link to={`${url}/new`}
-                              className={buttonStyle}>New</Link>
-                    </div>
-                    <div className="pa4">
-                        <div className="overflow-auto">
-                            <table className={tableStyle}>
-                                <thead>
-                                <tr className="stripe-dark">
-                                    {fields.map(field => (
-                                        <th className={thStyle}>
-                                            {field.label}
-                                        </th>
-                                    ))}
-                                </tr>
-                                </thead>
-                                <tbody className="lh-copy">
-                                {data.map(row => (
-                                    <tr key={row.id}>
-                                        {fields.map(field => (
-                                            <td className="pa3">
-                                                {propValue(row, field.key)}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </Route>
-            </Switch>
-        </>
+        <Switch>
+            <Route exact path={path}>
+                <div className="cf">
+                    <Link to={`${url}/new`}
+                          className={BUTTON_STYLE}>New</Link>
+                </div>
+                <ItemList fields={fields}
+                          data={data}
+                />
+            </Route>
+        </Switch>
     );
 };
 
