@@ -29,4 +29,21 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.repaint.maven</groupId>
+                <artifactId>tiles-maven-plugin</artifactId>
+                <version>${tiles-maven-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <tiles>
+                        <tile>
+                            net.kemitix.tiles:frontend:${kemitix-maven-tiles.version}
+                        </tile>
+                    </tiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
