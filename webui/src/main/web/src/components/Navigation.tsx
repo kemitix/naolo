@@ -21,8 +21,7 @@ interface Feature {
 
 export interface NavigationProps {
     features: Array<Feature>,
-    apiUri: string,
-    baseUri: string
+    serverUri: string
 }
 
 const Navigation = (props: NavigationProps) => {
@@ -30,13 +29,12 @@ const Navigation = (props: NavigationProps) => {
         <nav className="fl w-20 bg-near-white tc">
             {props.features.map(feature =>
                 feature.navigationItems.map(item => {
-                    const slug = feature.slug + '/' + item.slug;
-                    const uri = [props.baseUri, slug].join('/');
+                    const itemUri = [feature.slug, item.slug].join('/');
                     return (
-                        <NavItem key={slug}
+                        <NavItem key={itemUri}
                                  item={item}
-                                 uri={uri}
-                                 baseUri={props.baseUri}
+                                 itemUri={itemUri}
+                                 serverUri={props.serverUri}
                         />
                     );
                 })

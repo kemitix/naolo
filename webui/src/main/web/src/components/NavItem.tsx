@@ -3,8 +3,8 @@ import {NavigationItem} from "./Navigation";
 
 interface NavItemProps {
     item: NavigationItem,
-    uri: string,
-    baseUri: string
+    itemUri: string,
+    serverUri: string
 }
 
 const NavItem = (props: NavItemProps) => {
@@ -13,14 +13,20 @@ const NavItem = (props: NavItemProps) => {
     const enabledStyle = "bg-animate bg-white hover-bg-light-blue black";
     const disabledStyle = "bg-near-white gray";
 
+    function resourceUri(path: string) {
+        return [props.serverUri, path].join("/");
+    }
+
     const enabledItem = (
-        <a href={props.uri} className={enabledStyle + " " + navItemStyle}>
-            <img src={props.baseUri + props.item.enabledIcon} alt=""/>
+        <a href={props.itemUri} className={enabledStyle + " " + navItemStyle}>
+            <img src={resourceUri(props.item.enabledIcon)}
+                 alt=""/>
             {props.item.name}
         </a>);
     const disabledItem = (
         <span className={disabledStyle + " " + navItemStyle}>
-            <img src={props.baseUri + props.item.disabledIcon} alt=""/>
+            <img src={resourceUri(props.item.disabledIcon)}
+                 alt=""/>
             {props.item.name}
         </span>
     );

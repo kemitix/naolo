@@ -6,13 +6,12 @@ import MainBody from "./components/MainBody";
 import Footer from "./components/Footer";
 import "tachyons/css/tachyons.min.css";
 
-const BASE_URI = "http://localhost:8080/naolo/";
-const API_SERVER = "http://localhost:8080/naolo/api";
+const SERVER_URI = "http://localhost:8080/naolo";
 
 const App = () => {
     const [features, setFeatures] = useState([]);
     useEffect(() => {
-        fetch(API_SERVER + "/ui/features")
+        fetch(SERVER_URI + "/api/ui/features")
             .then(response => response.json())
             .then(_features => setFeatures(_features));
     }, []);
@@ -21,8 +20,7 @@ const App = () => {
             <Header/>
             <div className="cf">
                 <Navigation features={features}
-                            baseUri={BASE_URI}
-                            apiUri={API_SERVER}/>
+                            serverUri={SERVER_URI}/>
                 <MainBody/>
             </div>
             <Footer/>
