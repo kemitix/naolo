@@ -2,8 +2,9 @@ import React from "react";
 import {NavigationItem} from "./Navigation";
 
 interface NavItemProps {
-    item: NavigationItem;
-    uri: string
+    item: NavigationItem,
+    uri: string,
+    baseUri: string
 }
 
 const NavItem = (props: NavItemProps) => {
@@ -14,12 +15,12 @@ const NavItem = (props: NavItemProps) => {
 
     const enabledItem = (
         <a href={props.uri} className={enabledStyle + " " + navItemStyle}>
-            <img src={props.item.enabledIcon} alt=""/>
+            <img src={props.baseUri + props.item.enabledIcon} alt=""/>
             {props.item.name}
         </a>);
     const disabledItem = (
         <span className={disabledStyle + " " + navItemStyle}>
-            <img src={props.item.disabledIcon}/>
+            <img src={props.baseUri + props.item.disabledIcon} alt=""/>
             {props.item.name}
         </span>
     );

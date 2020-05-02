@@ -37,6 +37,7 @@ const Navigation = (props: NavigationProps) => {
                         <NavItem key={slug}
                                  item={item}
                                  uri={uri}
+                                 baseUri={props.baseUri}
                         />
                     );
                 })

@@ -6,7 +6,7 @@ import MainBody from "./components/MainBody";
 import Footer from "./components/Footer";
 import "tachyons/css/tachyons.min.css";
 
-const BASE_URI = "http://localhost:8080/naolo";
+const BASE_URI = "http://localhost:8080/naolo/";
 const API_SERVER = "http://localhost:8080/naolo/api";
 
 const App = () => {
