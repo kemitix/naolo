@@ -6,6 +6,7 @@ import MainBody from "./components/MainBody";
 import Footer from "./components/Footer";
 import "tachyons/css/tachyons.min.css";
 
+const BASE_URI = "http://localhost:8080/naolo";
 const API_SERVER = "http://localhost:8080/naolo/api";
 
 const App = () => {
@@ -19,7 +20,9 @@ const App = () => {
         <div className="App">
             <Header/>
             <div className="cf">
-                <Navigation features={features} api={API_SERVER}/>
+                <Navigation features={features}
+                            baseUri={BASE_URI}
+                            apiUri={API_SERVER}/>
                 <MainBody/>
             </div>
             <Footer/>

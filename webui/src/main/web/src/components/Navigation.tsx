@@ -21,7 +21,8 @@ interface Feature {
 
 export interface NavigationProps {
     features: Array<Feature>,
-    api: string
+    apiUri: string,
+    baseUri: string
 }
 
 const Navigation = (props: NavigationProps) => {
@@ -31,7 +32,7 @@ const Navigation = (props: NavigationProps) => {
             {props.features.map(feature =>
                 feature.navigationItems.map(item => {
                     const slug = feature.slug + '/' + item.slug;
-                    const uri = [props.api, slug].join('/');
+                    const uri = [props.baseUri, slug].join('/');
                     return (
                         <NavItem key={slug}
                                  item={item}
