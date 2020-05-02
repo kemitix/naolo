@@ -1,10 +1,5 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    useParams
-} from "react-router-dom";
+import {HashRouter as Router, Route, Switch, useParams} from "react-router-dom";
 
 export const FeatureItem = () => {
     const {feature, item} = useParams();
