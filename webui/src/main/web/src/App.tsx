@@ -6,7 +6,8 @@ import MainBody from "./components/MainBody";
 import Footer from "./components/Footer";
 import "tachyons/css/tachyons.min.css";
 
-const SERVER_URI = "http://localhost:8080/naolo";
+const HOME_PATH = "/naolo";
+const SERVER_URI = "http://localhost:8080" + HOME_PATH;
 
 const App = () => {
     const [features, setFeatures] = useState([]);
@@ -17,7 +18,7 @@ const App = () => {
     }, []);
     return (
         <div className="App">
-            <Header/>
+            <Header homePath={HOME_PATH}/>
             <div className="cf">
                 <Navigation features={features}
                             serverUri={SERVER_URI}/>
