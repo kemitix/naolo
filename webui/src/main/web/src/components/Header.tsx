@@ -5,10 +5,10 @@ interface HeaderProps {
     homePath: string
 }
 
-const Header = (props: HeaderProps) => (
+const Header = () => (
     <div className="flex items-center justify-center pa4 bg-lightest-blue navy">
         <p className="lh-title ml3">
-            <Link to={"/" + props.homePath + "/"}>Naolo - Pet Clinic</Link>
+            <Link to="/">Naolo - Pet Clinic</Link>
         </p>
     </div>);
 

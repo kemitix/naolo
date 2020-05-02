@@ -1,5 +1,5 @@
 import React from "react";
-import {HashRouter as Router, Route, Switch, useParams} from "react-router-dom";
+import {Route, Switch, useParams} from "react-router-dom";
 
 export const FeatureItem = () => {
     const {feature, item} = useParams();
@@ -12,15 +12,13 @@ export const FeatureItem = () => {
 };
 
 const MainBody = () => (
-    <Router>
-        <div className="fl w-80 bg-light-gray tc">
-            <Switch>
-                <Route path="/:feature/:item">
-                    <FeatureItem/>
-                </Route>
-            </Switch>
-        </div>
-    </Router>
+    <div className="fl w-80 bg-light-gray tc">
+        <Switch>
+            <Route path="/:feature/:item">
+                <FeatureItem/>
+            </Route>
+        </Switch>
+    </div>
 );
 
 export default MainBody;

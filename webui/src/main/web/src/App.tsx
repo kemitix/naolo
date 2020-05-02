@@ -5,9 +5,9 @@ import Navigation from "./components/Navigation";
 import MainBody from "./components/MainBody";
 import Footer from "./components/Footer";
 import "tachyons/css/tachyons.min.css";
+import {HashRouter as Router} from "react-router-dom";
 
-const HOME_PATH = "/naolo";
-const SERVER_URI = "http://localhost:8080" + HOME_PATH;
+const SERVER_URI = "http://localhost:8080/naolo";
 
 const App = () => {
     const [features, setFeatures] = useState([]);
@@ -17,15 +17,17 @@ const App = () => {
             .then(_features => setFeatures(_features));
     }, []);
     return (
-        <div className="App">
-            <Header homePath={HOME_PATH}/>
-            <div className="cf">
-                <Navigation features={features}
-                            serverUri={SERVER_URI}/>
-                <MainBody/>
+        <Router>
+            <div className="App">
+                <Header/>
+                <div className="cf">
+                    <Navigation features={features}
+                                serverUri={SERVER_URI}/>
+                    <MainBody/>
+                </div>
+                <Footer/>
             </div>
-            <Footer/>
-        </div>
+        </Router>
     );
 };
 

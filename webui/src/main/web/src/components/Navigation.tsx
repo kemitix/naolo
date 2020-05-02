@@ -29,7 +29,7 @@ const Navigation = (props: NavigationProps) => {
         <nav className="fl w-20 bg-near-white tc">
             {props.features.map(feature =>
                 feature.navigationItems.map(item => {
-                    const itemUri = [feature.slug, item.slug].join('/');
+                    const itemUri = "/" + [feature.slug, item.slug].join('/');
                     return (
                         <NavItem key={itemUri}
                                  item={item}

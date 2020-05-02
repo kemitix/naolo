@@ -1,5 +1,6 @@
 import React from "react";
 import {NavigationItem} from "./Navigation";
+import {Link} from "react-router-dom";
 
 interface NavItemProps {
     item: NavigationItem,
@@ -18,11 +19,13 @@ const NavItem = (props: NavItemProps) => {
     }
 
     const enabledItem = (
-        <a href={props.itemUri} className={enabledStyle + " " + navItemStyle}>
+        <Link to={props.itemUri}
+              className={enabledStyle + " " + navItemStyle}>
             <img src={resourceUri(props.item.enabledIcon)}
                  alt=""/>
             {props.item.name}
-        </a>);
+        </Link>
+    );
     const disabledItem = (
         <span className={disabledStyle + " " + navItemStyle}>
             <img src={resourceUri(props.item.disabledIcon)}
