@@ -13,10 +13,14 @@ public class ManageOwnersTest
         final ManageOwners manageOwners = new ManageOwners();
         //then
         assertThat(manageOwners)
-                .extracting("name", "description", "slug",
-                        "weight", "enabled", "enabledIcon", "disabledIcon")
+                .extracting("name",
+                        "description", "slug",
+                        "weight", "enabled",
+                        "enabledIcon",
+                        "disabledIcon")
                 .containsExactly("Manage Owners",
-                        "Add, update, remove Owners", "owners", 30, true,
+                        "Add, update, remove Owners", "manage",
+                        30, true,
                         "owners/manage-enabled.png",
                         "owners/manage-disabled.png");
     }

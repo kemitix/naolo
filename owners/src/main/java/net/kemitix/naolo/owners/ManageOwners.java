@@ -20,7 +20,7 @@ public class ManageOwners
 
     @Override
     public String getSlug() {
-        return "owners";
+        return "manage";
     }
 
     @Override
