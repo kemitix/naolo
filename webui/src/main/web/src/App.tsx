@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Navigation, {Feature} from "./components/Navigation";
 import MainBody from "./components/MainBody";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./dashboard.css";
 import {HashRouter as Router} from "react-router-dom";
 
 // TODO: remove this or get it from environment
@@ -24,10 +25,13 @@ const AppPage = (props: AppPageProps) => {
         )
     }
     return(
-        <>
-            <Navigation features={props.features} serverUri={SERVER_URI}/>
-            <MainBody/>
-        </>
+        <div className="container-fluid">
+            <div className="row">
+                <Navigation features={props.features}
+                            serverUri={SERVER_URI}/>
+                <MainBody/>
+            </div>
+        </div>
     );
 }
 
@@ -51,9 +55,7 @@ const App = () => {
         <Router>
             <div className="App">
                 <Header/>
-                <div className="cf">
-                    <AppPage features={features}/>
-                </div>
+                <AppPage features={features}/>
             </div>
         </Router>
     );

@@ -11,6 +11,7 @@ const Header = () => (
             to="/">
             Naolo - Pet Clinic
         </Link>
-    </nav>);
+    </nav>
+);
 
 export default Header;

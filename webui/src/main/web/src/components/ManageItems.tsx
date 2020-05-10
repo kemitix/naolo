@@ -12,7 +12,6 @@ const DUMMY_DATA = [
     {id: 1, values: {name: "Bob", other: 34}},
     {id: 2, values: {name: "Adam", other: 42}}
 ];
-const BUTTON_STYLE = "w-25 f6 link dim ph3 pv2 mb2 dib white bg-near-black";
 const ManageItems = () => {
     const {path, url} = useRouteMatch();
     const {feature} = useParams();
@@ -23,7 +22,7 @@ const ManageItems = () => {
     useEffect(() => {
         fetch(`${SERVER_URI}/api/${feature}/fields`)
             .then(response => response.json())
-            .then(_fields => setFields(_fields));
+            .then(_fields => setFields(DUMMY_FIELDS));
         fetch(`${SERVER_URI}/api/${feature}`)
             .then(response => response.json())
             .then(rows => {
@@ -34,15 +33,18 @@ const ManageItems = () => {
                 }
                 return d;
             })
-            .then(_data => setData(_data));
+            .then(_data => setData(DUMMY_DATA));
     }, [feature]);
 
     return (
         <Switch>
             <Route exact path={path}>
-                <div className="cf">
-                    <Link to={`${url}/new`}
-                          className={BUTTON_STYLE}>New</Link>
+                <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 className="h2">{feature}</h1>
+                    <div className="btn-toolbar mb-2 mb-md-0">
+                        <Link to={`${url}/new`}
+                              className="btn btn-sm btn-outline-secondary">New</Link>
+                    </div>
                 </div>
                 <ItemList fields={fields}
                           data={data}
