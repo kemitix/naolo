@@ -28,7 +28,11 @@
             <groupId>net.kemitix.naolo</groupId>
             <artifactId>naolo-webui</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.airhacks</groupId>
+            <artifactId>jaxrs-cors</artifactId>
+            <version>0.0.2</version>
+        </dependency>
         <!-- testing -->
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
