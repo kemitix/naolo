@@ -10,9 +10,9 @@ interface NavItemProps {
 
 const NavItem = (props: NavItemProps) => {
 
-    const navItemStyle = "f4 fw7 dib pa2 no-underline";
-    const enabledStyle = "bg-animate bg-white hover-bg-light-blue black";
-    const disabledStyle = "bg-near-white gray";
+    const navItemStyle = "nav-link";
+    const enabledStyle = "active";
+    const disabledStyle = "";
 
     function resourceUri(path: string) {
         return [props.serverUri, path].join("/");
@@ -22,6 +22,8 @@ const NavItem = (props: NavItemProps) => {
         <Link to={props.itemUri}
               className={enabledStyle + " " + navItemStyle}>
             <img src={resourceUri(props.item.enabledIcon)}
+                 className="feather feather-home"
+                 width="24"
                  alt=""/>
             {props.item.name}
         </Link>
@@ -29,16 +31,18 @@ const NavItem = (props: NavItemProps) => {
     const disabledItem = (
         <span className={disabledStyle + " " + navItemStyle}>
             <img src={resourceUri(props.item.disabledIcon)}
+                 className="feather feather-home"
+                 width="24"
                  alt=""/>
             {props.item.name}
         </span>
     );
     return (
-        <div className="pa4 lh-copy">
+        <li className="nav-item">
             {props.item.enabled
                 ? enabledItem
                 : disabledItem}
-        </div>
+        </li>
     );
 };
 

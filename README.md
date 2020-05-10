@@ -49,6 +49,8 @@ The PetClinic has the following domain:
 * Quarkus Dev: port 8080
 * Npm Dev: port 3000
 
+Remember to install npm modules first: `make npm-install`
+
 To start the Quarkus run-time in dev mode and the webui module on port 3000:
 `make start-dev` This will launch Quarkus in the background in dev-mode. Changes
  to Java code will be picked up automatically. I will also launch a copy of the
