@@ -10,6 +10,9 @@ domain:
 run-dev:
 	mvn -pl runner-quarkus quarkus:dev
 
+run-webui:
+	(cd webui/src/main/web ; npm run start)
+
 native:
 	mvn verify -Pnative
 
