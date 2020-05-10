@@ -7,6 +7,15 @@ graphs:
 domain:
 	dot -T png doc/entities.dot > doc/images/entities.png
 
+clean: stop-dev
+	mvn clean
+
+install: npm-install
+	mvn install
+
+quick-install:
+	mvn install -DskipTests -DskipITs -Dpitest.skip
+
 start-dev: server.PID run-webui
 
 server.PID:
@@ -15,7 +24,7 @@ server.PID:
 	sleep 5
 
 stop-dev:
-	kill `cat server.PID` && rm server.PID
+	if [ -f server.PID ]; then kill `cat server.PID` ; rm server.PID ; fi
 
 run-dev:
 	mvn -pl runner-quarkus quarkus:dev
