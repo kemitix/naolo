@@ -34,11 +34,10 @@ const AppPage = (props: AppPageProps) => {
 const App = () => {
     const [features, setFeatures] = useState([]);
     useEffect(() => {
-        (async function () {
+        (async () =>
             (await fetch(FEATURES_URI))
                 .json()
-                .then(res => setFeatures(res));
-        })();
+                .then(res => setFeatures(res)))();
     }, []);
     return (
         <Router>
