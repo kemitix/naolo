@@ -11,7 +11,7 @@ export interface NavigationItem {
     weight: number
 }
 
-interface Feature {
+export interface Feature {
     description: string,
     name: string,
     slug: string,
