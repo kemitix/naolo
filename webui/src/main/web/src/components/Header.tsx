@@ -6,10 +6,11 @@ interface HeaderProps {
 }
 
 const Header = () => (
-    <div className="flex items-center justify-center pa4 bg-lightest-blue navy">
-        <p className="lh-title ml3">
-            <Link to="/">Naolo - Pet Clinic</Link>
-        </p>
-    </div>);
+    <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <Link className="navbar-brand col-sm-3 col-md-2 mr-0"
+            to="/">
+            Naolo - Pet Clinic
+        </Link>
+    </nav>);
 
 export default Header;
