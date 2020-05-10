@@ -20,6 +20,9 @@ stop-dev:
 run-dev:
 	mvn -pl runner-quarkus quarkus:dev
 
+npm-install:
+	(cd webui/src/main/web/ && npm install)
+
 run-webui:
 	(cd webui/src/main/web ; npm run start)
 
