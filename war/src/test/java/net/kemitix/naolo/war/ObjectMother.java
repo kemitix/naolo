@@ -30,7 +30,7 @@ public class ObjectMother {
         return Long.parseLong(
                 URI.create(added.getHeaderString(HttpHeaders.LOCATION))
                         .getPath()
-                        .split("/")[3]);
+                        .split("/")[4]);
     }
 
     public static Pet getNewPet(final Owner owner) {

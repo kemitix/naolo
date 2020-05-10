@@ -10,12 +10,41 @@ import org.hamcrest.Matcher;
 import java.net.URI;
 
 import static io.restassured.RestAssured.given;
+import static net.kemitix.naolo.api.AbstractApiTest.Fragment.OWNERS;
+import static net.kemitix.naolo.api.AbstractApiTest.Fragment.PETS;
+import static net.kemitix.naolo.api.AbstractApiTest.Fragment.VETS;
+import static net.kemitix.naolo.api.AbstractApiTest.Fragment.VISITS;
 import static org.hamcrest.Matchers.is;
 
 public class AbstractApiTest {
+    enum Fragment {
+        OWNERS("owners"),
+        PETS("pets"),
+        VETS("vets"),
+        VISITS("visits");
+
+        private final String fragment;
+
+        Fragment(String fragment) {
+            this.fragment = fragment;
+        }
+
+        String path() {
+            String path = String.format("/%s/", fragment);
+            System.out.println("path = " + path);
+            return path;
+        }
+
+        String path(long id) {
+            String path = path() + id;
+            System.out.println("path = " + path);
+            return path;
+        }
+    }
+
     protected ValidatableResponse deleteOwner(final long id) {
         return given()
-                .delete("/owners/" + id)
+                .delete(OWNERS.path(id))
                 .then();
     }
 
@@ -26,7 +55,7 @@ public class AbstractApiTest {
         return given()
                 .contentType(ContentType.JSON)
                 .body(updatedOwner.encode())
-                .put("/owners/" + id)
+                .put(OWNERS.path(id))
                 .then();
     }
 
@@ -34,19 +63,19 @@ public class AbstractApiTest {
         return given()
                 .contentType(ContentType.JSON)
                 .body(newOwner.encode())
-                .post("/owners")
+                .post(OWNERS.path())
                 .then();
     }
 
     protected ValidatableResponse getOwner(final long id) {
         return given()
-                .get("/owners/" + id)
+                .get(OWNERS.path(id))
                 .then();
     }
 
     protected ValidatableResponse deletePet(final long id) {
         return given()
-                .delete("/pets/" + id)
+                .delete(PETS.path(id))
                 .then();
     }
 
@@ -57,7 +86,7 @@ public class AbstractApiTest {
         return given()
                 .contentType(ContentType.JSON)
                 .body(pet.encode())
-                .put("/pets/" + id)
+                .put(PETS.path(id))
                 .then();
     }
 
@@ -65,13 +94,13 @@ public class AbstractApiTest {
         return given()
                 .contentType(ContentType.JSON)
                 .body(pet.encode())
-                .post("/pets")
+                .post(PETS.path())
                 .then();
     }
 
     protected ValidatableResponse getPet(final long id) {
         return given()
-                .get("/pets/" + id)
+                .get(PETS.path(id))
                 .then();
     }
 
@@ -81,12 +110,14 @@ public class AbstractApiTest {
 
     protected ValidatableResponse listAllOwners() {
         return given()
-                .get("/owners").then();
+                .get(OWNERS.path())
+                .then();
     }
 
     protected ValidatableResponse listAllVisits() {
         return given()
-                .get("/visits").then();
+                .get(VISITS.path())
+                .then();
     }
 
     protected long getIdFromLocationHeader(final ValidatableResponse addResponse) {
@@ -144,13 +175,13 @@ public class AbstractApiTest {
 
     protected ValidatableResponse deleteVet(final long id) {
         return given()
-                .when().delete("/vets/" + id)
+                .when().delete(VETS.path(id))
                 .then();
     }
 
     protected ValidatableResponse deleteVisit(final long id) {
         return given()
-                .when().delete("/visits/" + id)
+                .when().delete(VISITS.path(id))
                 .then();
     }
 
@@ -162,7 +193,7 @@ public class AbstractApiTest {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(updatedVet.encode())
-                .put("/vets/" + id)
+                .put(VETS.path(id))
                 .then();
     }
 
@@ -174,20 +205,20 @@ public class AbstractApiTest {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(updatedVisit.encode())
-                .put("/visits/" + id)
+                .put(VISITS.path(id))
                 .then();
     }
 
     protected ValidatableResponse getVet(final long id) {
         return given()
-                .when().get("/vets/" + id)
+                .when().get(VETS.path(id))
                 .then();
     }
 
 
     protected ValidatableResponse getVisit(final long id) {
         return given()
-                .when().get("/visits/" + id)
+                .when().get(VISITS.path(id))
                 .then();
     }
 

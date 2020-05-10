@@ -19,7 +19,7 @@
 
     <properties>
         <tiles-maven-plugin.version>2.16</tiles-maven-plugin.version>
-        <kemitix-maven-tiles.version>2.5.0</kemitix-maven-tiles.version>
+        <kemitix-maven-tiles.version>2.6.0</kemitix-maven-tiles.version>
         <kemitix-checkstyle.version>5.4.0</kemitix-checkstyle.version>
 
         <jakartaee-api.version>8.0.0</jakartaee-api.version>
@@ -81,6 +81,11 @@
             <dependency>
                 <groupId>net.kemitix.naolo</groupId>
                 <artifactId>naolo-testing</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kemitix.naolo</groupId>
+                <artifactId>naolo-webui</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -164,6 +169,7 @@
                         <tile>net.kemitix.tiles:testing:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.tiles:coverage:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.tiles:pitest:${kemitix-maven-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:frontend:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.checkstyle:tile:${kemitix-checkstyle.version}</tile>
                     </tiles>
                 </configuration>

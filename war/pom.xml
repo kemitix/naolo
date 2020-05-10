@@ -26,15 +26,13 @@
         </dependency>
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
-            <artifactId>naolo-visits</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.projectlombok</groupId>
-                    <artifactId>lombok</artifactId>
-                </exclusion>
-            </exclusions>
+            <artifactId>naolo-webui</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.airhacks</groupId>
+            <artifactId>jaxrs-cors</artifactId>
+            <version>0.0.2</version>
+        </dependency>
         <!-- testing -->
         <dependency>
             <groupId>net.kemitix.naolo</groupId>
