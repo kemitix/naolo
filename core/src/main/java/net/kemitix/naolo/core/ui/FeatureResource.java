@@ -1,6 +1,5 @@
 package net.kemitix.naolo.core.ui;
 
-
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -11,7 +10,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,10 +23,9 @@ public class FeatureResource {
 
     public static final String PATH = "ui/features";
 
-    private final List<Feature> features;
+    private List<Feature> features;
 
     public FeatureResource() {
-        features = Collections.emptyList();
     }
 
     @Inject
