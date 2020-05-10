@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Navigation, {Feature} from "./components/Navigation";
 import MainBody from "./components/MainBody";
 import Footer from "./components/Footer";
-import "tachyons/css/tachyons.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {HashRouter as Router} from "react-router-dom";
 
 // TODO: remove this or get it from environment
