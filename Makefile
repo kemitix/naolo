@@ -7,6 +7,16 @@ graphs:
 domain:
 	dot -T png doc/entities.dot > doc/images/entities.png
 
+start-dev: server.PID run-webui
+
+server.PID:
+	{ mvn -pl runner-quarkus quarkus:dev & echo $$! > $@; }
+	@echo Server started: $(cat $@)
+	sleep 5
+
+stop-dev:
+	kill `cat server.PID` && rm server.PID
+
 run-dev:
 	mvn -pl runner-quarkus quarkus:dev
 
