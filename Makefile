@@ -24,7 +24,7 @@ run-webui:
 	(cd webui/src/main/web ; npm run start)
 
 native:
-	mvn verify -Pnative
+	mvn verify -Pnative -DskipTests -DskipITs -Dpitest.skip
 
 run-native:
 	./runner-quarkus/target/naolo-runner-quarkus-${VERSION}-runner
