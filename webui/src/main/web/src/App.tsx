@@ -31,13 +31,22 @@ const AppPage = (props: AppPageProps) => {
         </>
     );
 }
+
+function fetchUri(uri: string) {
+    console.log(`GET ${uri}`);//non-production
+    return fetch(uri);
+}
+
 const App = () => {
     const [features, setFeatures] = useState([]);
     useEffect(() => {
         (async () =>
-            (await fetch(FEATURES_URI))
+            (await fetchUri(FEATURES_URI))
                 .json()
-                .then(res => setFeatures(res)))();
+                .then(res => {
+                    console.log(`Got ${res.length} features`); //non-production
+                    setFeatures(res);
+                }))();
     }, []);
     return (
         <Router>
