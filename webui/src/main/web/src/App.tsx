@@ -7,30 +7,35 @@ import Footer from "./components/Footer";
 import "tachyons/css/tachyons.min.css";
 import {HashRouter as Router} from "react-router-dom";
 
+// TODO: remove this or get it from environment
 const SERVER_URI = "http://localhost:8080/naolo";
 
-const ServerError = () =>
-    <>
-        <h1>Server Error</h1>
-        <br/>
-        <p>Error connecting to server.</p>
-    </>;
-
 const App = () => {
+    const [hasError, setErrors] = useState({});
     const [features, setFeatures] = useState([]);
-    const [serverOkay, setServerOkay] = useState(false);//until proven otherwise
     useEffect(() => {
-        fetch(SERVER_URI + "/api/ui/features")
-            .then(response => response.json())
-            .then(_features => {
-                setFeatures(_features);
-                setServerOkay(true);
-            })
-            .catch(reason => setServerOkay(false));
+        (async function () {
+            (await fetch(SERVER_URI + "/api/ui/features"))
+                .json()
+                .then(res => setFeatures(res))
+                .catch(err => setErrors(err));
+        })();
     }, []);
     const AppPage = () => {
-        if (serverOkay) return (<><Navigation features={features} serverUri={SERVER_URI}/><MainBody/></>);
-        return <ServerError/>
+        if (features.length === 0) {
+            return (
+                <>
+                    <h1>Server Error</h1>
+                    <p>There are no features enabled in the server.</p>
+                </>
+            )
+        }
+        return(
+            <>
+                <Navigation features={features} serverUri={SERVER_URI}/>
+                <MainBody/>
+            </>
+        );
     }
     return (
         <Router>
