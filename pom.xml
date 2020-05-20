@@ -47,6 +47,8 @@
                 <configuration>
                     <hideTransitive>true</hideTransitive>
                     <hideVersion>true</hideVersion>
+                    <hideOptional>true</hideOptional>
+                    <hideScopes>test</hideScopes>
                     <target>${project.basedir}/doc/images/reactor-graph.png</target>
                 </configuration>
             </plugin>
