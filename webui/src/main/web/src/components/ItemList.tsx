@@ -9,18 +9,27 @@ function propValue(obj: object, property: string) {
 }
 
 interface Field {
-    key: string,
-    label: string
+    name: string;
+    label: string;
+    type: string;
+    hidden: boolean;
+    order: number;
 }
 
-interface Row {
-    id: number
-    values: object
+export interface FieldsMeta {
+    name: string;
+    fields: Array<Field>;
+    endpoint: string;
+}
+
+export interface Row {
+    id: number;
+    values: object;
 }
 
 interface ItemListProps {
-    fields: Array<Field>,
-    data: Array<Row>
+    meta: FieldsMeta;
+    rows: Array<Row>;
 }
 
 const ItemList = (props: ItemListProps) => {
@@ -29,19 +38,18 @@ const ItemList = (props: ItemListProps) => {
             <table className={"table table-striped table-sm"}>
                 <thead>
                 <tr>
-                    {props.fields.map(field => (
-                        <th key={field.key}>
-                            {field.label}
-                        </th>
-                    ))}
+                    {props.meta.fields.sort((a,b) => a.order - b.order)
+                        .map(field =>
+                        field.hidden || (<th key={field.name}>{field.label}</th>)
+                    )}
                 </tr>
                 </thead>
                 <tbody>
-                {props.data.map(row => (
+                {props.rows.map(row => (
                     <tr key={row.id}>
-                        {props.fields.map(field => (
-                            <td key={field.key}>
-                                {propValue(row.values, field.key)}
+                        {props.meta.fields.map(field => (
+                            <td key={field.name}>
+                                {propValue(row.values, field.name)}
                             </td>
                         ))}
                     </tr>

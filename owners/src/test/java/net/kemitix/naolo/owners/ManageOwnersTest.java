@@ -18,7 +18,7 @@ public class ManageOwnersTest
                         "weight", "enabled",
                         "enabledIcon",
                         "disabledIcon")
-                .containsExactly("Manage Owners",
+                .containsExactly("Owners",
                         "Add, update, remove Owners", "manage",
                         30, true,
                         "owners/manage-enabled.png",

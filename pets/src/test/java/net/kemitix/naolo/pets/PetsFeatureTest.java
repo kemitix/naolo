@@ -36,7 +36,7 @@ public class PetsFeatureTest
         assertThat(feature)
                 .extracting("name", "description",
                         "slug", "weight")
-                .containsExactly("pets", "Manage pets",
+                .containsExactly("pets", "Pets",
                         "pets", 10);
         assertThat(feature.getNavigationItems())
                 .containsExactly(item);

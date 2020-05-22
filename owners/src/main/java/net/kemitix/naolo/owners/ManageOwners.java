@@ -10,7 +10,7 @@ public class ManageOwners
         implements NavigationItem {
     @Override
     public String getName() {
-        return "Manage Owners";
+        return "Owners";
     }
 
     @Override

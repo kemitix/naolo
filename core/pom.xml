@@ -18,7 +18,8 @@
     <properties>
         <pitest.skip>true</pitest.skip>
         <jacoco-class-instruction-covered-ratio>0</jacoco-class-instruction-covered-ratio>
-        <jacoco-class-line-covered-ratio>0.66</jacoco-class-line-covered-ratio>
+        <jacoco-class-line-covered-ratio>0</jacoco-class-line-covered-ratio>
+        <jacoco-class-missed-count-maximum>10</jacoco-class-missed-count-maximum>
     </properties>
 
     <dependencies>

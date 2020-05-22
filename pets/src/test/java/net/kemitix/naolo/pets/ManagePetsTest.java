@@ -18,7 +18,7 @@ public class ManagePetsTest
                         "weight", "enabled",
                         "enabledIcon",
                         "disabledIcon")
-                .containsExactly("Manage Pets",
+                .containsExactly("Pets",
                         "Add, update, remove Pets", "manage",
                         10, true,
                         "pets/manage-enabled.png",

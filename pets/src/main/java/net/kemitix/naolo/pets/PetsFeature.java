@@ -29,7 +29,7 @@ public class PetsFeature
 
     @Override
     public String getDescription() {
-        return "Manage pets";
+        return "Pets";
     }
 
     @Override

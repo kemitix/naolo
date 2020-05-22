@@ -1,28 +1,23 @@
 import React, {useEffect, useState} from "react";
 import {Link, Route, Switch, useParams, useRouteMatch} from "react-router-dom";
-import ItemList from "./ItemList";
+import ItemList, {Row, FieldsMeta} from "./ItemList";
 
 const SERVER_URI = "http://localhost:8080/naolo";
 
-const DUMMY_FIELDS = [
-    {label: "Name", key: "name"},
-    {label: "Other", key: "other"}
-];
-const DUMMY_DATA = [
-    {id: 1, values: {name: "Bob", other: 34}},
-    {id: 2, values: {name: "Adam", other: 42}}
-];
-const ManageItems = () => {
+const EMPTY_FIELDS: FieldsMeta  = {endpoint: "", name: "", fields: []};
+const EMPTY_ROWS: Array<Row> = [];
+
+const ListItems = () => {
     const {path, url} = useRouteMatch();
     const {feature} = useParams();
 
-    const [fields, setFields] = useState(DUMMY_FIELDS);
-    const [data, setData] = useState(DUMMY_DATA);
+    const [meta, setMeta] = useState(EMPTY_FIELDS);
+    const [rows, setRows] = useState(EMPTY_ROWS);
 
     useEffect(() => {
-        fetch(`${SERVER_URI}/api/${feature}/fields`)
+        fetch(`${SERVER_URI}/api/${feature}/meta`)
             .then(response => response.json())
-            .then(_fields => setFields(DUMMY_FIELDS));
+            .then(_meta => setMeta(_meta));
         fetch(`${SERVER_URI}/api/${feature}`)
             .then(response => response.json())
             .then(rows => {
@@ -33,25 +28,25 @@ const ManageItems = () => {
                 }
                 return d;
             })
-            .then(_data => setData(DUMMY_DATA));
+            .then(_rows => setRows(_rows));
     }, [feature]);
 
     return (
         <Switch>
             <Route exact path={path}>
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 className="h2">{feature}</h1>
+                    <h1 className="h2">{meta.name}</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
-                        <Link to={`${url}/new`}
+                        <Link to="new"
                               className="btn btn-sm btn-outline-secondary">New</Link>
                     </div>
                 </div>
-                <ItemList fields={fields}
-                          data={data}
+                <ItemList meta={meta}
+                          rows={rows}
                 />
             </Route>
         </Switch>
     );
 };
 
-export default ManageItems;
+export default ListItems;

@@ -10,7 +10,7 @@ public class ManagePets
         implements NavigationItem {
     @Override
     public String getName() {
-        return "Manage Pets";
+        return "Pets";
     }
 
     @Override
