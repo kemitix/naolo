@@ -8,7 +8,7 @@ const EMPTY_FIELDS: FieldsMeta  = {endpoint: "", name: "", fields: []};
 const EMPTY_ROWS: Array<Row> = [];
 
 const ListItems = () => {
-    const {path, url} = useRouteMatch();
+    const {path} = useRouteMatch();
     const {feature} = useParams();
 
     const [meta, setMeta] = useState(EMPTY_FIELDS);
