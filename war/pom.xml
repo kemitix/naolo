@@ -14,10 +14,6 @@
 
     <artifactId>naolo-war</artifactId>
 
-    <properties>
-        <pitest.skip>true</pitest.skip>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>jakarta.platform</groupId>

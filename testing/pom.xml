@@ -13,7 +13,6 @@
 
     <properties>
         <skip.tests>true</skip.tests>
-        <pitest.skip>true</pitest.skip>
     </properties>
 
     <dependencies>

@@ -12,10 +12,6 @@
 
     <artifactId>naolo-owners</artifactId>
 
-    <properties>
-        <jacoco-class-instruction-covered-ratio>66%</jacoco-class-instruction-covered-ratio>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>jakarta.platform</groupId>

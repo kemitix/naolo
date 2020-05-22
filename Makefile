@@ -14,7 +14,7 @@ install: npm-install
 	mvn install
 
 quick-install:
-	mvn install -DskipTests -DskipITs -Dpitest.skip
+	mvn install -DskipTests -DskipITs
 
 start-dev: server.PID run-webui
 
@@ -36,7 +36,7 @@ run-webui:
 	(cd webui/src/main/web ; npm run start)
 
 native:
-	mvn verify -Pnative -DskipTests -DskipITs -Dpitest.skip
+	mvn verify -Pnative -DskipTests -DskipITs
 
 run-native:
 	./runner-quarkus/target/naolo-runner-quarkus-${VERSION}-runner

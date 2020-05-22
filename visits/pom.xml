@@ -11,10 +11,6 @@
     </parent>
     <artifactId>naolo-visits</artifactId>
 
-    <properties>
-        <jacoco-class-instruction-covered-ratio>67%</jacoco-class-instruction-covered-ratio>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>jakarta.platform</groupId>
