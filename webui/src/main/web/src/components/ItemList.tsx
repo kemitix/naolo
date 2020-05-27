@@ -8,12 +8,14 @@ function propValue(obj: object, property: string) {
             v[1]);
 }
 
-interface Field {
+export interface Field {
     name: string;
     label: string;
     type: string;
     hidden: boolean;
     order: number;
+    required: boolean;
+    defaultValue: string;
 }
 
 export interface FieldsMeta {
