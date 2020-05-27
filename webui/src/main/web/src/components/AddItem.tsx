@@ -1,7 +1,13 @@
 import React, {ChangeEvent, useState} from "react";
 import {useParams} from "react-router-dom";
+import {FieldsMeta} from "./ItemList";
 
-const AddItem = () => {
+interface AddItemProps {
+    feature: string;
+    meta: FieldsMeta
+}
+
+const AddItem = (props: AddItemProps) => {
     const {feature} = useParams();
 
     const [textValue, setTextValue] = useState("");

@@ -29,7 +29,10 @@ const MainBody = (props: MainBodyProps) => {
                                meta={meta}
                                serverUri={SERVER_URI}/>
                 </Route>
-                <Route path="/:feature/new"><AddItem/></Route>
+                <Route path="/:feature/new">
+                    <AddItem feature={props.feature}
+                             meta={meta}/>
+                </Route>
             </Switch>
         </main>
     );
