@@ -5,7 +5,7 @@ import Navigation, {Feature} from "./components/Navigation";
 import MainBody from "./components/MainBody";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./dashboard.css";
-import {HashRouter as Router} from "react-router-dom";
+import {HashRouter as Router, Switch, Route, useParams} from "react-router-dom";
 
 // TODO: remove this or get it from environment
 const SERVER_URI = "http://localhost:8080/naolo";
@@ -16,6 +16,8 @@ interface AppPageProps {
 }
 
 const AppPage = (props: AppPageProps) => {
+    const {feature} = useParams();
+
     if (props.features.length === 0) {
         return (
             <>
@@ -28,8 +30,9 @@ const AppPage = (props: AppPageProps) => {
         <div className="container-fluid">
             <div className="row">
                 <Navigation features={props.features}
+                            feature={feature}
                             serverUri={SERVER_URI}/>
-                <MainBody/>
+                <MainBody feature={feature}/>
             </div>
         </div>
     );
@@ -55,7 +58,11 @@ const App = () => {
         <Router>
             <div className="App">
                 <Header/>
-                <AppPage features={features}/>
+                <Switch>
+                    <Route path="/:feature">
+                        <AppPage features={features}/>
+                    </Route>
+                </Switch>
             </div>
         </Router>
     );

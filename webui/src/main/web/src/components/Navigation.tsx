@@ -2,26 +2,27 @@ import React from "react";
 import NavItem from "./NavItem";
 
 export interface NavigationItem {
-    description: string,
-    disabledIcon: string,
-    enabled: boolean,
-    enabledIcon: string,
-    name: string,
-    slug: string,
-    weight: number
+    description: string;
+    disabledIcon: string;
+    enabled: boolean;
+    enabledIcon: string;
+    name: string;
+    slug: string;
+    weight: number;
 }
 
 export interface Feature {
-    description: string,
-    name: string,
-    slug: string,
-    weight: number,
-    navigationItems: Array<NavigationItem>
+    description: string;
+    name: string;
+    slug: string;
+    weight: number;
+    navigationItems: Array<NavigationItem>;
 }
 
 export interface NavigationProps {
-    features: Array<Feature>,
-    serverUri: string
+    features: Array<Feature>;
+    feature: string;
+    serverUri: string;
 }
 
 const Navigation = (props: NavigationProps) => {
