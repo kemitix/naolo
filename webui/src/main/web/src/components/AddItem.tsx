@@ -1,5 +1,4 @@
 import React, {ChangeEvent, useState} from "react";
-import {useParams} from "react-router-dom";
 import {FieldsMeta} from "./ItemList";
 import TextField from "./TextField";
 
@@ -9,8 +8,6 @@ interface AddItemProps {
 }
 
 const AddItem = (props: AddItemProps) => {
-    const {feature} = useParams();
-
     const [values, setValues] = useState({});
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Route, Switch} from "react-router-dom";
 import ListItems from "./ListItems";
 import AddItem from "./AddItem";
-import {FieldsMeta, Row} from "./ItemList";
+import {FieldsMeta} from "./ItemList";
 
 const SERVER_URI = "http://localhost:8080/naolo";
 
@@ -19,7 +19,7 @@ const MainBody = (props: MainBodyProps) => {
         fetch(`${SERVER_URI}/api/${props.feature}/meta`)
             .then(response => response.json())
             .then(_meta => setMeta(_meta));
-    }, []);
+    }, [props.feature]);
 
     return (
         <main className="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">

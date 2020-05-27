@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, Route, Switch, useParams, useRouteMatch} from "react-router-dom";
+import {Link, Route, Switch, useRouteMatch} from "react-router-dom";
 import ItemList, {Row, FieldsMeta} from "./ItemList";
 
 const EMPTY_ROWS: Array<Row> = [];
@@ -27,7 +27,7 @@ const ListItems = (props: ListItemsProps) => {
                 return d;
             })
             .then(_rows => setRows(_rows));
-    }, []);
+    }, [props.serverUri, props.feature]);
 
     return (
         <Switch>
