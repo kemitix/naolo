@@ -30,18 +30,18 @@ const Navigation = (props: NavigationProps) => {
         <nav className="col-md-2 d-none d-md-block bg-light sidebar">
             <div className="sidebar-sticky">
                 <ul className="nav flex-column">
-            {props.features.map(feature =>
-                feature.navigationItems.map(item => {
-                    const itemUri = "/" + [feature.slug, item.slug].join('/');
-                    return (
-                        <NavItem key={itemUri}
-                                 item={item}
-                                 itemUri={itemUri}
-                                 serverUri={props.serverUri}
-                        />
-                    );
-                })
-            )}
+                    {props.features.map(feature =>
+                        feature.navigationItems.map(item => {
+                            const itemUri = "/" + [feature.slug, item.slug].join('/');
+                            return (
+                                <NavItem key={itemUri}
+                                         item={item}
+                                         itemUri={itemUri}
+                                         serverUri={props.serverUri}
+                                />
+                            );
+                        })
+                    )}
                 </ul>
             </div>
         </nav>
