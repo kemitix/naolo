@@ -24,6 +24,7 @@ const AddItem = (props: AddItemProps) => {
             <h3>Add {props.meta.name}</h3>
             {props.meta.fields
                 .sort(((a, b) => a.order - b.order))
+                .filter(a => !a.generated)
                 .map(field => {
                 //TODO: handle when field should be field.hidden
                 switch (field.type) {
