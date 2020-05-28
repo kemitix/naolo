@@ -26,7 +26,9 @@ const AddItem = (props: AddItemProps) => {
                 //TODO: handle when field should be field.hidden
                 switch (field.type) {
                     case "text":
-                        return <TextField meta={field} onChange={handleChange} />;
+                        return <TextField key={field.name}
+                                          meta={field}
+                                          onChange={handleChange} />;
                     // case "number":
                     //     //TODO: create a custom NumberField
                     //     return <TextField meta={field} onChange={handleChange} />;
