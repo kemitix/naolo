@@ -59,6 +59,9 @@ const App = () => {
             <div className="App">
                 <Header/>
                 <Switch>
+                    <Route path="/" exact>
+                        <AppPage features={features}/>
+                    </Route>
                     <Route path="/:feature">
                         <AppPage features={features}/>
                     </Route>
