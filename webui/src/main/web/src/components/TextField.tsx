@@ -8,13 +8,16 @@ interface TextFieldProps {
 
 const TextField = (props: TextFieldProps) => {
     return (
-        <>
+        <div className="form-group">
             <label htmlFor={props.meta.name}>{props.meta.label}</label>
-            <input type="text" name={props.meta.name} id={props.meta.name}
+            <input className="form-control"
+                   type="text"
+                   name={props.meta.name}
+                   id={props.meta.name}
                    onChange={props.onChange}
                    value={props.meta.defaultValue}/>
             <br/>
-        </>
+        </div>
     );
 }
 
