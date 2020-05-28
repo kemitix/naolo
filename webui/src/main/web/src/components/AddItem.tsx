@@ -45,7 +45,9 @@ const AddItem = (props: AddItemProps) => {
                     //     //TODO: create a custom KeyField
                     //     return <TextField meta={field} onChange={handleChange} />;
                     default: // unsupported
-                        return <div>Unknown Field Type: {field.type}</div>
+                        return <div>
+                            {field.label}: Unknown Field Type "{field.type}"
+                        </div>
                 }
             })}
             <input type="submit" value="Save" />
