@@ -27,11 +27,14 @@ public interface FeatureMeta<T> {
     @Getter @SuperBuilder
     class NumberField extends Field<Integer> {
         final FieldType type = FieldType.number;
+        final int min;
+        final int max;
     }
 
     @Getter @SuperBuilder
     class TextField extends Field<String> {
         final FieldType type = FieldType.text;
+        final int minLength;
         final int maxLength;
         final String regex;
     }
