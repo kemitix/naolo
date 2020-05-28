@@ -18,7 +18,7 @@ public class OwnersFeatureMeta
             NumberField.builder()
                     .name("id")
                     .label("Id")
-                    .hidden(true)
+                    .generated(true)
                     .build(),
             TextField.builder()
                     .name("surname")

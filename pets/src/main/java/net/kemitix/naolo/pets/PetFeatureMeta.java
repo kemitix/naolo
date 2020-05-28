@@ -18,7 +18,7 @@ public class PetFeatureMeta
             NumberField.builder()
                     .name("id")
                     .label("Id")
-                    .hidden(true)
+                    .generated(true)
                     .build(),
             TextField.builder()
                     .name("name")

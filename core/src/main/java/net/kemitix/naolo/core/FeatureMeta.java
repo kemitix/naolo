@@ -19,7 +19,7 @@ public interface FeatureMeta<T> {
         final String label;
         final int order;
         abstract FieldType getType();
-        final boolean hidden;
+        final boolean generated;
         final boolean required;
         final T defaultValue;
     }

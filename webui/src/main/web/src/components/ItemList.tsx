@@ -12,7 +12,7 @@ export interface Field {
     name: string;
     label: string;
     type: string;
-    hidden: boolean;
+    generated: boolean;
     order: number;
     required: boolean;
     defaultValue: string;
@@ -50,7 +50,7 @@ const ItemList = (props: ItemListProps) => {
                 <tr>
                     {props.meta.fields.sort((a,b) => a.order - b.order)
                         .map(field =>
-                            field.hidden || (<th key={field.name}>{field.label}</th>)
+                            field.generated || (<th key={field.name}>{field.label}</th>)
                         )}
                 </tr>
                 </thead>
