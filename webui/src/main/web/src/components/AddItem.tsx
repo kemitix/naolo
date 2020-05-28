@@ -22,8 +22,9 @@ const AddItem = (props: AddItemProps) => {
         <form>
             <h2>{props.meta.name}</h2>
             <h3>Add {props.meta.name}</h3>
-            {props.meta.fields.map(field => {
-                //TODO: handle sorting fields by field.order
+            {props.meta.fields
+                .sort(((a, b) => a.order - b.order))
+                .map(field => {
                 //TODO: handle when field should be field.hidden
                 switch (field.type) {
                     case "text":
