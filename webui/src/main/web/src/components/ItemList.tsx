@@ -46,8 +46,8 @@ const ItemList = (props: ItemListProps) => {
                 <tr>
                     {props.meta.fields.sort((a,b) => a.order - b.order)
                         .map(field =>
-                        field.hidden || (<th key={field.name}>{field.label}</th>)
-                    )}
+                            field.hidden || (<th key={field.name}>{field.label}</th>)
+                        )}
                 </tr>
                 </thead>
                 <tbody>
