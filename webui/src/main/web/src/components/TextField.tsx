@@ -16,7 +16,6 @@ const TextField = (props: TextFieldProps) => {
                    id={props.meta.name}
                    onChange={props.onChange}
                    value={props.meta.defaultValue}/>
-            <br/>
         </div>
     );
 }
