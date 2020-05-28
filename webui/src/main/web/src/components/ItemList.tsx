@@ -16,10 +16,14 @@ export interface Field {
     order: number;
     required: boolean;
     defaultValue: string;
-    min: number;
-    max: number;
+    minMax: MinMax;
     minLength: number;
     maxLength: number;
+}
+
+interface MinMax {
+    min: number;
+    max: number;
 }
 
 export interface FieldsMeta {

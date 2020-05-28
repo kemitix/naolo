@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import {FieldsMeta} from "./ItemList";
 import TextField from "./TextField";
+import NumberField from "./NumberField";
 
 interface AddItemProps {
     feature: string;
@@ -29,9 +30,10 @@ const AddItem = (props: AddItemProps) => {
                         return <TextField key={field.name}
                                           meta={field}
                                           onChange={handleChange} />;
-                    // case "number":
-                    //     //TODO: create a custom NumberField
-                    //     return <TextField meta={field} onChange={handleChange} />;
+                    case "number":
+                        return <NumberField key={field.name}
+                                            meta={field}
+                                            onChange={handleChange} />;
                     // case "date":
                     //     //TODO: create a custom DateField
                     //     return <TextField meta={field} onChange={handleChange} />;

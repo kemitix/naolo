@@ -27,6 +27,11 @@ public interface FeatureMeta<T> {
     @Getter @SuperBuilder
     class NumberField extends Field<Integer> {
         final FieldType type = FieldType.number;
+        final MinMax minMax;
+    }
+
+    @Getter @SuperBuilder
+    class MinMax {
         final int min;
         final int max;
     }
