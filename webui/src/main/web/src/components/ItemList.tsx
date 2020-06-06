@@ -19,6 +19,7 @@ export interface Field {
     minMax: MinMax;
     minLength: number;
     maxLength: number;
+    values: Array<string>;
 }
 
 interface MinMax {

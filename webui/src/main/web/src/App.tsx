@@ -38,7 +38,7 @@ const AppPage = (props: AppPageProps) => {
     );
 }
 
-function fetchUri(uri: string) {
+export const fetchUri = (uri: string) => {
     console.log(`GET ${uri}`);//non-production
     return fetch(uri);
 }
