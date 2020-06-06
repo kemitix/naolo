@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, FormEvent, useState} from "react";
 import {FieldsMeta} from "./ItemList";
 import TextField from "./TextField";
 import NumberField from "./NumberField";
@@ -6,6 +6,7 @@ import EnumerationField from "./EnumerationField";
 import FieldValues from "../FieldValues";
 
 interface AddItemProps {
+    onSubmit: (event: FormEvent<HTMLFormElement>) => void;
     feature: string;
     meta: FieldsMeta;
     initialValues: FieldValues;
@@ -25,7 +26,7 @@ const AddItem = (props: AddItemProps) => {
         updateFieldValue(event.currentTarget.name, event.currentTarget.value)
 
     return (
-        <form>
+        <form onSubmit={props.onSubmit}>
             <h2>{props.meta.name}</h2>
             <h3>Add {props.meta.name}</h3>
             {props.meta.fields

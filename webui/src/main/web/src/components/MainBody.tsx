@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import {Route, Switch} from "react-router-dom";
 import ListItems from "./ListItems";
 import AddItem from "./AddItem";
@@ -29,6 +29,11 @@ const MainBody = (props: MainBodyProps) => {
                 }))();
     }, [props.feature]);
 
+    const onSubmitAddItem = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log("submit:");
+    };
+
     return (
         <main className="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
             <Switch>
@@ -40,7 +45,8 @@ const MainBody = (props: MainBodyProps) => {
                 <Route path="/:feature/new">
                     <AddItem feature={props.feature}
                              meta={meta}
-                             initialValues={fieldValues(meta.fields)}/>
+                             initialValues={fieldValues(meta.fields)}
+                             onSubmit={onSubmitAddItem}/>
                 </Route>
             </Switch>
         </main>
