@@ -18,6 +18,10 @@ At this point, I wouldn't advocate using anything here are any suggestion of
 how to do 'it'. I'm liable to refactor anything simply to explore how something
 might work. As such, there may be some over-engineering as a result.
 
+## Requirements
+
+* JDK 11+
+
 ## Dependencies
 
 Naolo uses Jarakta-EE 8.0 and as such the main business modules have that
